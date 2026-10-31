@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>情报报告索引</title><style>
+body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.7; max-width: 860px; margin: 0 auto; padding: 24px 20px 64px; }
+a { color: #0969da; }
+.filters { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+.filters input, .filters select { font-size: 1em; padding: 6px 8px; }
+.row { padding: 10px 0; border-bottom: 1px solid #e5e5e5; }
+.row .d { color: #656d76; font-size: .9em; }
+.tag { display: inline-block; background: #eef; border-radius: 4px; padding: 0 6px; font-size: .85em; margin-left: 8px; }
+</style></head>
+<body>
+<h1>情报报告索引</h1>
+<p>共 43 份，按日期倒序。用下面的筛选按 topic / 日期 / 关键词找报告。</p>
+<div class="filters">
+<label>Topic <select id="topic"><option value="">全部</option><option value="aifrontier">aifrontier</option><option value="ashare">ashare</option><option value="autonet">autonet</option><option value="claude-code">claude-code</option><option value="claude-code_gap-supplement">claude-code_gap-supplement</option><option value="codex">codex</option><option value="codex-vs-claude-code_harness-decision">codex-vs-claude-code_harness-decision</option><option value="her">her</option><option value="rea">rea</option><option value="selfevolution">selfevolution</option><option value="shipbuilding-2026">shipbuilding-2026</option><option value="shipbuilding-stocks-2026">shipbuilding-stocks-2026</option><option value="temples">temples</option><option value="temples-rerun">temples-rerun</option><option value="temples-trial">temples-trial</option></select></label>
+<label>日期/关键词 <input id="q" placeholder="如 2026-10 或 ashare"></label>
+</div>
+<div id="list">
+<div class="row" data-topic="ashare"><span class="d">2026-10-30</span><span class="tag">ashare</span> <a href="reports/2026-10-30_ashare.html">A股 · 韦青式专题研究（2026-10-30)</a> <span class="d">313 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-10-26</span><span class="tag">temples</span> <a href="reports/2026-10-26_temples.html">TEMPLES · 韦青式专题研究（2026-10-26)</a> <span class="d">198 KB</span></div>
+<div class="row" data-topic="selfevolution"><span class="d">2026-10-26</span><span class="tag">selfevolution</span> <a href="reports/2026-10-26_selfevolution.html">智能体自主进化 · 韦青式专题研究（2026-10-26)</a> <span class="d">65 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-10-26</span><span class="tag">her</span> <a href="reports/2026-10-26_her.html">HER · 韦青式专题研究（2026-10-26)</a> <span class="d">67 KB</span></div>
+<div class="row" data-topic="autonet"><span class="d">2026-10-26</span><span class="tag">autonet</span> <a href="reports/2026-10-26_autonet.html">自智网络 · 韦青式专题研究（2026-10-26)</a> <span class="d">70 KB</span></div>
+<div class="row" data-topic="aifrontier"><span class="d">2026-10-25</span><span class="tag">aifrontier</span> <a href="reports/2026-10-25_aifrontier.html">AI 前沿 · 韦青式专题研究（2026-10-25)</a> <span class="d">97 KB</span></div>
+<div class="row" data-topic="shipbuilding-stocks-2026"><span class="d">2026-10-24</span><span class="tag">shipbuilding-stocks-2026</span> <a href="reports/2026-10-24_shipbuilding-stocks-2026.html">中国造船数据与表现是否已在股票市场得到反馈：以提前信息链为核心检验 · 韦青式专题研究（2026-10-24)</a> <span class="d">151 KB</span></div>
+<div class="row" data-topic="shipbuilding-2026"><span class="d">2026-10-24</span><span class="tag">shipbuilding-2026</span> <a href="reports/2026-10-24_shipbuilding-2026.html">中国造船业2026年1—9月三指标全球领跑：成因与影响 · 韦青式专题研究（2026-10-24)</a> <span class="d">150 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-10-23</span><span class="tag">ashare</span> <a href="reports/2026-10-23_ashare.html">A股 · 韦青式专题研究（2026-10-23)</a> <span class="d">319 KB</span></div>
+<div class="row" data-topic="codex-vs-claude-code_harness-decision"><span class="d">2026-10-21</span><span class="tag">codex-vs-claude-code_harness-decision</span> <a href="reports/2026-10-21_codex-vs-claude-code_harness-decision.html">Codex 与 Claude Code 对照决策页：Harness 共识与分歧（2026-10-21）</a> <span class="d">8 KB</span></div>
+<div class="row" data-topic="codex"><span class="d">2026-10-21</span><span class="tag">codex</span> <a href="reports/2026-10-21_codex.html">OpenAI Codex 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</a> <span class="d">195 KB</span></div>
+<div class="row" data-topic="claude-code_gap-supplement"><span class="d">2026-10-21</span><span class="tag">claude-code_gap-supplement</span> <a href="reports/2026-10-21_claude-code_gap-supplement.html">Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</a> <span class="d">8 KB</span></div>
+<div class="row" data-topic="claude-code"><span class="d">2026-10-21</span><span class="tag">claude-code</span> <a href="reports/2026-10-21_claude-code.html">Claude Code 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</a> <span class="d">211 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-10-19</span><span class="tag">temples</span> <a href="reports/2026-10-19_temples.html">TEMPLES · 韦青式专题研究（2026-10-19)</a> <span class="d">221 KB</span></div>
+<div class="row" data-topic="selfevolution"><span class="d">2026-10-19</span><span class="tag">selfevolution</span> <a href="reports/2026-10-19_selfevolution.html">智能体自主进化 · 韦青式专题研究（2026-10-19)</a> <span class="d">82 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-10-19</span><span class="tag">her</span> <a href="reports/2026-10-19_her.html">HER · 韦青式专题研究（2026-10-19)</a> <span class="d">85 KB</span></div>
+<div class="row" data-topic="autonet"><span class="d">2026-10-19</span><span class="tag">autonet</span> <a href="reports/2026-10-19_autonet.html">自智网络 · 韦青式专题研究（2026-10-19)</a> <span class="d">87 KB</span></div>
+<div class="row" data-topic="aifrontier"><span class="d">2026-10-18</span><span class="tag">aifrontier</span> <a href="reports/2026-10-18_aifrontier.html">AI 前沿 · 韦青式专题研究（2026-10-18)</a> <span class="d">125 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-10-16</span><span class="tag">ashare</span> <a href="reports/2026-10-16_ashare.html">A股 · 韦青式专题研究（2026-10-16)</a> <span class="d">364 KB</span></div>
+<div class="row" data-topic="rea"><span class="d">2026-10-14</span><span class="tag">rea</span> <a href="reports/2026-10-14_rea.html">REA（Reverse Engineer Anything）项目专题研究 · 韦青式专题研究（2026-10-14)</a> <span class="d">202 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-10-12</span><span class="tag">temples</span> <a href="reports/2026-10-12_temples.html">TEMPLES · 韦青式专题研究（2026-10-12)</a> <span class="d">231 KB</span></div>
+<div class="row" data-topic="selfevolution"><span class="d">2026-10-12</span><span class="tag">selfevolution</span> <a href="reports/2026-10-12_selfevolution.html">智能体自主进化 · 韦青式专题研究（2026-10-12)</a> <span class="d">83 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-10-12</span><span class="tag">her</span> <a href="reports/2026-10-12_her.html">HER · 韦青式专题研究（2026-10-12)</a> <span class="d">102 KB</span></div>
+<div class="row" data-topic="autonet"><span class="d">2026-10-12</span><span class="tag">autonet</span> <a href="reports/2026-10-12_autonet.html">自智网络 · 韦青式专题研究（2026-10-12)</a> <span class="d">88 KB</span></div>
+<div class="row" data-topic="aifrontier"><span class="d">2026-10-11</span><span class="tag">aifrontier</span> <a href="reports/2026-10-11_aifrontier.html">AI 前沿 · 韦青式专题研究（2026-10-11)</a> <span class="d">91 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-10-09</span><span class="tag">ashare</span> <a href="reports/2026-10-09_ashare.html">A股 · 韦青式专题研究（2026-10-09)</a> <span class="d">325 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-10-05</span><span class="tag">temples</span> <a href="reports/2026-10-05_temples.html">TEMPLES · 韦青式专题研究（2026-10-05)</a> <span class="d">241 KB</span></div>
+<div class="row" data-topic="selfevolution"><span class="d">2026-10-05</span><span class="tag">selfevolution</span> <a href="reports/2026-10-05_selfevolution.html">智能体自主进化 · 韦青式专题研究（2026-10-05)</a> <span class="d">82 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-10-05</span><span class="tag">her</span> <a href="reports/2026-10-05_her.html">HER · 韦青式专题研究（2026-10-05)</a> <span class="d">93 KB</span></div>
+<div class="row" data-topic="autonet"><span class="d">2026-10-05</span><span class="tag">autonet</span> <a href="reports/2026-10-05_autonet.html">自智网络 · 韦青式专题研究（2026-10-05)</a> <span class="d">85 KB</span></div>
+<div class="row" data-topic="aifrontier"><span class="d">2026-10-04</span><span class="tag">aifrontier</span> <a href="reports/2026-10-04_aifrontier.html">AI 前沿 · 韦青式专题研究（2026-10-04)</a> <span class="d">98 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-10-02</span><span class="tag">ashare</span> <a href="reports/2026-10-02_ashare.html">A股 · 韦青式专题研究（2026-10-02)</a> <span class="d">296 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-09-28</span><span class="tag">temples</span> <a href="reports/2026-09-28_temples.html">TEMPLES · 韦青式专题研究（2026-09-28)</a> <span class="d">232 KB</span></div>
+<div class="row" data-topic="selfevolution"><span class="d">2026-09-28</span><span class="tag">selfevolution</span> <a href="reports/2026-09-28_selfevolution.html">智能体自主进化 · 韦青式专题研究（2026-09-28)</a> <span class="d">93 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-09-28</span><span class="tag">her</span> <a href="reports/2026-09-28_her.html">HER · 韦青式专题研究（2026-09-28)</a> <span class="d">84 KB</span></div>
+<div class="row" data-topic="autonet"><span class="d">2026-09-28</span><span class="tag">autonet</span> <a href="reports/2026-09-28_autonet.html">自智网络 · 韦青式专题研究（2026-09-28)</a> <span class="d">89 KB</span></div>
+<div class="row" data-topic="aifrontier"><span class="d">2026-09-27</span><span class="tag">aifrontier</span> <a href="reports/2026-09-27_aifrontier.html">AI 前沿 · 韦青式专题研究（2026-09-27)</a> <span class="d">58 KB</span></div>
+<div class="row" data-topic="temples-trial"><span class="d">2026-09-25</span><span class="tag">temples-trial</span> <a href="reports/2026-09-25_temples-trial.html">TEMPLES 试运行 · 韦青式专题研究（2026-09-25)</a> <span class="d">138 KB</span></div>
+<div class="row" data-topic="temples-rerun"><span class="d">2026-09-25</span><span class="tag">temples-rerun</span> <a href="reports/2026-09-25_temples-rerun.html">TEMPLES 补跑（Technology / Politics / Law） · 韦青式专题研究（2026-09-25)</a> <span class="d">82 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-09-25</span><span class="tag">ashare</span> <a href="reports/2026-09-25_ashare.html">A股九大板块及ETF成分股周报（2026-09-25）</a> <span class="d">62 KB</span></div>
+<div class="row" data-topic="temples"><span class="d">2026-09-24</span><span class="tag">temples</span> <a href="reports/2026-09-24_temples.html">TEMPLES 综合分析报告（2026-09-24）</a> <span class="d">60 KB</span></div>
+<div class="row" data-topic="her"><span class="d">2026-09-24</span><span class="tag">her</span> <a href="reports/2026-09-24_her.html">HER 综合分析报告（2026-09-24）</a> <span class="d">22 KB</span></div>
+<div class="row" data-topic="ashare"><span class="d">2026-09-24</span><span class="tag">ashare</span> <a href="reports/2026-09-24_ashare.html">A股 综合分析报告（2026-09-24）</a> <span class="d">146 KB</span></div>
+
+</div>
+<script>
+const t = document.getElementById('topic'), q = document.getElementById('q');
+function apply() {
+  const tv = t.value, qv = q.value.trim().toLowerCase();
+  document.querySelectorAll('#list .row').forEach(r => {
+    const okT = !tv || r.dataset.topic === tv;
+    const okQ = !qv || r.textContent.toLowerCase().includes(qv);
+    r.style.display = (okT && okQ) ? '' : 'none';
+  });
+}
+t.addEventListener('change', apply); q.addEventListener('input', apply);
+</script>
+</body></html>
