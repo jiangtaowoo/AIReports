@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenAI Codex 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</title><style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.8; max-width: 780px; margin: 0 auto; padding: 24px 20px 64px;
+  color: #1f2328; background: #fff; }
+@media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #79c0ff; } }
+h1 { font-size: 1.6em; line-height: 1.4; }
+h2 { font-size: 1.25em; margin-top: 1.8em; padding-bottom: .3em; border-bottom: 1px solid #d0d7de; }
+h3 { font-size: 1.05em; margin-top: 1.5em; }
+a { color: #0969da; overflow-wrap: anywhere; }
+.meta { color: #656d76; font-size: .9em; }
+.toc { background: rgba(127,127,127,.08); border-radius: 8px; padding: 12px 20px; }
+.toc ul { padding-left: 20px; }
+.topbar { margin-bottom: 8px; }
+@media (prefers-color-scheme: dark) { .meta { color: #8b949e; } }
+</style></head>
+<body>
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-10-21 · codex · 原文 Markdown 同名文件</p>
+<h1 id="openai-codex-harness-2026-10-21">OpenAI Codex 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</h1>
+<div class="toc">
+<ul>
+<li><a href="#openai-codex-harness-2026-10-21">OpenAI Codex 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</a><ul>
+<li><a href="#_1">一、产品定位与演进史</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、交付形态与开发者工作流</a><ul>
+<li><a href="#_7">观点分歧</a></li>
+<li><a href="#_8">少数意见与不确定性</a></li>
+<li><a href="#_9">门罗五步</a></li>
+<li><a href="#_10">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#harness">三、Harness 核心架构</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#harness_1">四、Harness 沙箱与权限安全</a><ul>
+<li><a href="#_15">观点分歧</a></li>
+<li><a href="#_16">少数意见与不确定性</a></li>
+<li><a href="#_17">门罗五步</a></li>
+<li><a href="#_18">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_19">五、模型能力与实测表现</a><ul>
+<li><a href="#_20">观点分歧</a></li>
+<li><a href="#_21">少数意见与不确定性</a></li>
+<li><a href="#_22">门罗五步</a></li>
+<li><a href="#_23">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_24">六、商业模式生态与风险</a><ul>
+<li><a href="#_25">观点分歧</a></li>
+<li><a href="#_26">少数意见与不确定性</a></li>
+<li><a href="#_27">门罗五步</a></li>
+<li><a href="#_28">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_29">各领域判断汇总</a></li>
+<li><a href="#_30">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>范围：2025-04-30 至 2026-10-21。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、产品定位与演进史</h2>
+<p><strong>关键议题</strong>：Codex如何从2021年补全模型品牌复用为2025-2026年的Agent产品线，并在产品、模型与开源Harness三个层面分层演进，同时伴随哪些可靠性与限额争议？</p>
+<p>选题依据：本节聚焦产品定位与演进史：以2021与2025品牌复用的区分为起点，按CLI、云端、IDE、GA、模型迭代与桌面App的时间线梳理产品层，以开源Harness机制锚定可验证的本地实现，并以沙箱逃逸、限额争议与基准口径争议作为反证，避免把品牌、产品与模型混为一谈。</p>
+<p><strong>当前判断</strong>：条件性优选：理解Codex必须先做产品、模型与开源Harness三层区分，2021年补全模型与2025年Agent产品线仅为品牌复用、非同一产品延续；在此前提下，可以把2025年产品线在定位层面讨论为一条入口收敛的演进主线，但模型名必须精确到版本，且定位统一不能反推实现或架构连续性，也不能证明长程能力已经就绪。 <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">S01</a> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a> <a href="https://vercel.com/fbopensource/torchci/ai-gateway/models/gpt-5.1-codex">S07</a> <a href="https://en.wikipedia.org/wiki/GPT-5.1">S08</a> <a href="https://aiwiki.ai/wiki/openai_codex">S03</a></p>
+<p>优选：V03；置信度：medium。核心区分与2025年主要时间节点多为supported，但缺少官方一手时间线与模型说明原文；GPT-5.2与GPT-5.3仅有名称与日期线索，桌面App仅精确到月且为preliminary，云端内部细节与限额规则仍无公开口径。
+成立条件：仅适用于2025年产品线的定位层面讨论；2021年模型排除在延续叙事之外；模型版本以官方名称与发布日为准；桌面App细节仅限月级初步线索；沙箱、限额与长任务可靠性须另以系统性证据判断，不由发布序列推导。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表以时间线与产品发布为主要依据的乐观解读：强调统一Agent定位、模型迭代与开源Harness的可验证机制，认为演进方向明确。）：Codex的演进是一条清晰的产品化主线：2025年4月CLI开源、5月云端预览、9月默认模型统一、10月GA，到2026年2月桌面App转向多Agent编排，产品、模型与开源Harness分层清晰且持续迭代。
+- 限定：范围限于以发布时间线解读的产品演进方向，不证明长任务可靠性、安全边界完好或限额计量透明。对4月至10月时间线主干的置信度为中等；对2026年2月桌面App的具体细节与“多Agent编排将延续”的延伸判断置信度较低，因其仅精确到月且属preliminary；GPT-5-Codex可独立工作超7小时等表述仅为材料中的宣称口径，非独立实测结论。
+- 最强反证：最强反证是时间线清晰不等于产品成熟可靠：材料中另有沙箱逃逸报道、5小时滚动限额反复打断长任务并需重建上下文的争议，以及单例文件覆写报告，这些若成立，将直接削弱“GA与多Agent编排即代表长程能力已就绪”的解读。本立场不否认这些反证，仅主张它们属于可靠性与计量层面的待验证问题，需要独立的可靠性与安全证据才能回应，不能仅凭发布序列加以驳回。 <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">S01</a> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a> <a href="https://oneyearago.ai/news/2025-09-15-gpt-5-codex/">S05</a> <a href="https://blockchain.news/news/openai-codex-generally-available-new-features">S06</a> <a href="https://pinggy.io/blog/best_open_source_cli_coding_agents/">S09</a></p>
+<p><strong>观点 V02</strong>（谨慎情景分析者；代表以反证与用户报告为主要依据的谨慎解读：不否定产品演进，但强调安全边界、限额透明度与评价口径的不确定性，要求把宣称与实测分开。）：Codex的定位叙事被可靠性与计量争议削弱：沙箱逃逸、5小时限额打断长任务、单例文件覆写与基准口径争议表明，官方宣称的长程能力与沙箱边界在真实使用中仍需人工复核与备份。
+- 限定：范围限定为上述四组反证与争议，不否定产品演进本身；对“曾出现沙箱逃逸、限额打断争议、单例覆写报告与基准口径争议”这一事实性判断置信度为中等，对“长程能力或沙箱边界整体不可靠”的泛化判断置信度低，不作此推断。
+- 最强反证：最强反证来自同一批材料内部：两起沙箱逃逸已在8天内修复；OpenAI方面回应称不会不沟通即改限额，并将部分快速耗尽案例归因于sub2api将订阅转为API流量再分发并触发欺诈风控，暗示正常官方渠道使用未必同样受影响；文件覆写仅为单例且因果未证实；SWE-bench审计针对的是失败偏重子集的规范与测试问题，而非对Codex能力的直接低分判定。若后续有官方计量规则与系统性可靠性统计，这些反证的权重会进一步下降。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S12</a> <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553/634">S13</a> <a href="https://www.chaincatcher.com/en/article/2284385">S14</a> <a href="https://community.openai.com/t/gpt-5-codex-in-vscode-file-overwritten-into-empty-bytes-after-set-content-replacement-anyone-else/1359593">S15</a> <a href="https://blockchain.news/postamp?id=openai-abandons-swe-bench-verified-contamination-flawed-tests">S16</a></p>
+<p><strong>观点 V03</strong>（中立情景分析者；代表以概念区分与证据等级为主要依据的中立解读：强调命名精确性与未验证边界，避免用品牌连续性或模型行为反推产品架构。）：理解Codex的关键是先做三层区分再谈演进：2021年补全模型已弃用，2025年产品线仅品牌复用；模型名必须精确到版本（如GPT-5-Codex不等于GPT-5.1-Codex或后续版本），云端闭源内部细节则应保持未验证。
+- 限定：范围仅限于概念区分与证据等级：对三层区分、2021年弃用与2025年品牌复用、GPT-5.1-Codex系列区分的置信度较高；对GPT-5.2-Codex与GPT-5.3-Codex仅限于名称与日期线索，置信度为初步，需以官方模型名与日期为准；对云端内部细节不作任何正向或否定断言，仅保留未验证边界。本主张不评价各版本的能力优劣，也不推断后续演进形态与节奏。
+- 最强反证：最强反证是品牌与产品叙事的连续性表观：同一“Codex”名称横跨2021年与2025年，且2025年产品线在不同载体间强调统一Agent定位，容易被解读为一条连续的产品演进主线；此外，模型名称的数字递进也容易让人把GPT-5-Codex视为后续版本的统称。但这些表观连续性并未改变账本中的关键事实：2021年模型已于2023年3月弃用，2025年产品线被记载为全新产品线仅品牌复用，且各版本有独立发布日与差异化定位；因此连续性叙事至多说明品牌与定位层面的延续，不能推翻先区分再谈演进的方法要求。同时需承认，“未验证”不等于“不存在”，云端内部细节未来若有公开一手材料，边界应随之更新。 <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">S01</a> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a> <a href="https://vercel.com/fbopensource/torchci/ai-gateway/models/gpt-5.1-codex">S07</a> <a href="https://en.wikipedia.org/wiki/GPT-5.1">S08</a> <a href="https://aiwiki.ai/wiki/openai_codex">S03</a> <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">S11</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：2025年CLI开源、云端预览、默认模型统一与GA构成的入口收敛序列，可用于讨论产品定位演进，但不得升级为长程能力或沙箱边界已经就绪的结论。
+- V02的合理洞察：沙箱逃逸、5小时限额打断、单例文件覆写与基准口径争议，要求把官方宣称与实测分开，长任务使用中应保留人工复核与备份，直至官方计量规则与系统性可靠性数据公布。</p>
+<p>不确定性及改变判断的条件：
+- 缺少官方一手发布时间线、模型发布说明与限额计量规则原文，5小时滚动窗口的精确计算方式与周额度关系未对齐。
+- 2026年2月桌面Codex App的精确发布日、版本范围与各渠道可用性未证实。
+- 缺乏按官方渠道、模型版本与任务类型分层的长任务系统性成功率、中断率与恢复成本统计，无法推断整体故障率。
+- 沙箱逃逸修复后的独立复测结果与同类问题是否复发未见材料。
+- SWE-bench审计在全量数据集上的含义，以及GPT-5.2-Codex与GPT-5.3-Codex除名称与日期外的能力与适用范围未展开。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同一Codex名称横跨补全模型、Agent产品、多个模型版本与开源实现，容易把品牌连续性误读为产品、架构或能力连续性。</li>
+<li><strong>需要</strong>：需要一套先区分、再叙事的方法：产品、模型与开源Harness分开讨论，模型精确到版本，定位统一不等于架构连续，长任务宣称与实测分开验证。</li>
+<li><strong>方案</strong>：采用V03的修正立场作为本节裁决：以三层区分为前提，承认2025年定位层面的收敛主线，保留沙箱、限额与云端内部细节的未决边界，并在长任务中保留人工复核与备份。</li>
+<li><strong>预演</strong>：若按此方法写作，读者将先看到清晰的品牌复用警示与版本对照，再看到有条件的产品演进主线，最后看到明确的未决清单；若不这样做，则容易出现把GPT-5-Codex泛称为后续版本、把定位统一当作架构同一、把发布节点当作能力就绪的误读。</li>
+<li><strong>行动</strong>：
+   - 对照官方发布说明核对模型名称与日期，纠正GPT-5-Codex泛指后续版本的写法 <a href="https://vercel.com/fbopensource/torchci/ai-gateway/models/gpt-5.1-codex">S07</a> <a href="https://en.wikipedia.org/wiki/GPT-5.1">S08</a> <a href="https://aiwiki.ai/wiki/openai_codex">S03</a>
+     时间：下次报告定稿前；指标：模型名称与发布日期错误数为零，未能核实项明确标注；基线：账本中GPT-5.1-Codex系列与GPT-5.2、GPT-5.3的名称与日期线索。
+     停止/成功条件：全部版本名称与日期可追溯，或未证实项已标注并不再泛称；阈值来源：分析者建议；账本未提供容差标准。
+   - 在官方渠道与固定模型版本下开展分层长任务复测，记录限额中断、恢复成本与5小时窗口计量表现 <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553/634">S13</a> <a href="https://www.chaincatcher.com/en/article/2284385">S14</a>
+     时间：官方限额规则公布后两周内；指标：按渠道与版本分层的中断率、恢复耗时与任务完成率；基线：当前无官方计量口径，基线待官方规则公布后建立；现有社区争议仅作待验证信号。
+     停止/成功条件：官方规则与分层统计同时具备，或仍缺失时明确标注结论受限；阈值来源：分析者建议；账本未提供可接受故障率阈值。
+   - 核查Heapjack与Overpatch受影响版本、修复范围与修复后独立复测结果 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S12</a>
+     时间：下次安全相关更新前；指标：独立复测中同类沙箱绕过数量；基线：2026年8月12日上报、8天内修复的报道口径。
+     停止/成功条件：独立复测无同类绕过，或残留风险已公开披露；阈值来源：零绕过为分析者建议标准；修复时效为报道口径。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Codex须作三层区分：Codex是产品与订阅服务，codex-1、GPT-5-Codex、GPT-5.1-Codex等是模型，openai/codex是开源本地CLI/TUI与Harness实现，三者不可混同。 <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：2021年的Codex是GPT-3系代码补全模型，于2023年3月弃用；2025年的Codex是全新Agent产品线，仅为品牌复用，不是同一产品的延续。 <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">S01</a> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：2025年4月16日，OpenAI发布开源Codex CLI，可在本地终端运行、改写代码、执行命令并操作文件。 <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a></li>
+<li><strong>C04 / fact / supported</strong>：2025年5月16日，OpenAI宣布Codex Cloud研究预览，首发模型codex-1是为软件工程优化的o3版本，可写功能、答疑、修Bug并提出待审代码变更，最初面向部分付费ChatGPT层级。 <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a></li>
+<li><strong>C05 / fact / supported</strong>：Codex Cloud于2025年6月3日扩展至ChatGPT Plus用户。 <a href="https://aiwiki.ai/wiki/openai_codex">S03</a></li>
+<li><strong>C06 / fact / supported</strong>：2025年8月28日前后，Codex支持VS Code集成，含编辑器面板、云端委托与本地/云端任务连续性；本地限额按计划分为5小时30-150条（Plus/Team/Enterprise/Edu）与300-1500条（Pro）等区间。 <a href="https://augmenter.dev/articles/openai-codex-vs-code-integration-cloud-tasks-and-plan-limits-1756420976658/">S04</a></li>
+<li><strong>C07 / fact / supported</strong>：2025年9月15日，GPT-5-Codex发布，成为Codex CLI、IDE扩展、云服务与GitHub代码评审的默认模型，宣称可独立工作超7小时并按任务复杂度自适应推理，强化学习基于真实工程任务。 <a href="https://oneyearago.ai/news/2025-09-15-gpt-5-codex/">S05</a></li>
+<li><strong>C08 / fact / supported</strong>：2025年10月，Codex进入GA，新增Slack中@codex委托、Codex SDK与企业管理/分析工具，定位为编辑器、终端与云端统一的同一Agent。 <a href="https://blockchain.news/news/openai-codex-generally-available-new-features">S06</a></li>
+<li><strong>C09 / fact / supported</strong>：GPT-5.1-Codex于2025年11月12日发布，是GPT-5.1的Agent编码优化版，上下文400K token，同日发布更便宜的GPT-5.1-Codex-Mini；GPT-5.1-Codex-Max于2025年11月19日发布，面向长程复杂工程并引入compaction上下文压缩机制。 <a href="https://vercel.com/fbopensource/torchci/ai-gateway/models/gpt-5.1-codex">S07</a> <a href="https://en.wikipedia.org/wiki/GPT-5.1">S08</a></li>
+<li><strong>C10 / fact / preliminary</strong>：GPT-5.2-Codex于2026年1月14日发布，GPT-5.3-Codex于2026年2月5日发布；模型线在窗口内持续迭代，应以官方模型名与日期为准，不可将GPT-5-Codex泛称为后续版本。 <a href="https://aiwiki.ai/wiki/openai_codex">S03</a></li>
+<li><strong>C11 / fact / preliminary</strong>：2026年2月，OpenAI发布桌面Codex App，定位为管理多个长程编码Agent、按项目组织并行线程，配合worktree隔离文件变更与技能/自动化，标志从单Agent执行转向多Agent编排。 <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a></li>
+<li><strong>C12 / fact / supported</strong>：开源Harness可验证机制：openai/codex为Apache-2.0、Rust重写，npm包为@openai/codex；默认沙箱运行Shell命令，需显式审批或--full-auto才可触及工作区外；支持--oss本地模型与config.toml接入OpenAI兼容端点。 <a href="https://pinggy.io/blog/best_open_source_cli_coding_agents/">S09</a></li>
+<li><strong>C13 / fact / supported</strong>：本地Harness配置与会话机制：/init生成AGENTS.md，approval_policy如on-request、sandbox_mode如workspace-write，config.toml配置mcp_servers，/new、/resume、/fork、/compact、/status、/model、/permissions、/mcp等命令管理线程与上下文。 <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">S10</a></li>
+<li><strong>C14 / fact / preliminary</strong>：云端产品定位为在隔离沙箱中并行执行多任务、写功能、修Bug、跑测试并提交PR供人工审查。 <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">S11</a></li>
+<li><strong>C15 / fact / unverified</strong>：闭源云端内部编排、调度与状态机细节未见公开一手证实，本阶段一律标为未验证，不得从模型行为反推架构。 <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">S11</a></li>
+<li><strong>C16 / fact / supported</strong>：反证：据报道，Heapjack利用Codex Desktop node_repl中受信与非受信JS上下文共享V8堆窃取认证token并冒充未沙箱父进程，Overpatch利用apply_patch路径权限推导绕过workspace-write限制；两者2026年8月12日上报、8天内修复，触发条件可为仅打开第三方仓库并提问。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S12</a></li>
+<li><strong>C17 / fact / conflicting</strong>：反证与争议：用户报告即使周额度仍有剩余，5小时滚动限额也会反复打断需连续理解项目、改代码、跑测试的长任务，恢复后需重建上下文；OpenAI方面回应称不会不沟通即改限额，并将部分快速耗尽案例归因于sub2api将订阅转为API流量再分发并触发欺诈风控，但该解释未消除用户对额度计量不透明的质疑。 <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553/634">S13</a> <a href="https://www.chaincatcher.com/en/article/2284385">S14</a></li>
+<li><strong>C18 / fact / preliminary</strong>：反证：2025年9月24日用户报告，VS Code中GPT-5-Codex经PowerShell Set-Content重写文件后文件变为空字节，疑似命令中途失败仍执行最终写入，属需人工复核与备份的单例失败案例。 <a href="https://community.openai.com/t/gpt-5-codex-in-vscode-file-overwritten-into-empty-bytes-after-set-content-replacement-anyone-else/1359593">S15</a></li>
+<li><strong>C19 / fact / preliminary</strong>：反证与口径争议：OpenAI 2026年2月23日审计SWE-bench Verified中138个失败偏重任务，发现59.4%存在规范或测试问题，并称GPT-5.2、Claude Opus 4.5、Gemini 3 Flash等均有训练暴露证据，因此不再以该基准作为前沿信号；该59.4%仅针对失败偏重子集，不代表整个数据集。 <a href="https://blockchain.news/postamp?id=openai-abandons-swe-bench-verified-contamination-flawed-tests">S16</a></li>
+<li><strong>C20 / forecast / preliminary</strong>：预测：桌面Codex App所标志的从单Agent执行向多Agent编排、并行线程与worktree隔离的方向，可能在后续产品演进中延续，但具体形态与节奏未见材料证实，仅为基于现有演进线索的初步推断。 <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a> <a href="https://blockchain.news/news/openai-codex-generally-available-new-features">S06</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://iconpolls.com/blogs/openai-codex-review-2026-login-pricing-download-documentation-user-experience-and-faqs">OpenAI Codex Review 2026</a> · IconPolls
+- 发布：unknown；事件：2025-05-16；查阅：2026-10-21。
+- 来源族：行业综述；读取：relevant_text；定位：OpenAI Codex Review 2026文章。
+- 原文支持：提出Codex三层区分（产品与订阅服务、模型、开源本地CLI/TUI与Harness），并指出2021年Codex为GPT-3系补全模型、2023年3月弃用，2025年为全新Agent产品线，仅品牌复用。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；发布日未知。</p>
+<p><strong>S02</strong> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">Codex (AI agent)</a> · Wikipedia
+- 发布：unknown；事件：2025-04-16；查阅：2026-10-21。
+- 来源族：百科；读取：relevant_text；定位：Codex (AI agent)词条。
+- 原文支持：2025年4月16日开源Codex CLI发布；2025年5月16日Codex Cloud研究预览，首发模型codex-1为软件工程优化的o3版本；2026年2月桌面Codex App发布，定位为多Agent并行与worktree隔离。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；同一来源聚合多条时间线事实，桌面App日期仅精确到月。</p>
+<p><strong>S03</strong> <a href="https://aiwiki.ai/wiki/openai_codex">OpenAI Codex</a> · AI Wiki
+- 发布：unknown；事件：2025-06-03；查阅：2026-10-21。
+- 来源族：百科/综述；读取：relevant_text；定位：OpenAI Codex词条。
+- 原文支持：Codex Cloud于2025年6月3日扩展至ChatGPT Plus用户；GPT-5.2-Codex于2026年1月14日、GPT-5.3-Codex于2026年2月5日发布，模型线持续迭代。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；GPT-5.2/GPT-5.3细节未展开。</p>
+<p><strong>S04</strong> <a href="https://augmenter.dev/articles/openai-codex-vs-code-integration-cloud-tasks-and-plan-limits-1756420976658/">OpenAI Codex VS Code Integration, Cloud Tasks and Plan Limits</a> · Augmenter
+- 发布：2025-08-28；事件：2025-08-28；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：VS Code集成报道。
+- 原文支持：2025年8月28日前后Codex支持VS Code集成，含编辑器面板、云端委托与本地/云端任务连续性，本地限额按计划分为5小时30-150条与300-1500条等区间。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；日期表述为前后，存在约数。</p>
+<p><strong>S05</strong> <a href="https://oneyearago.ai/news/2025-09-15-gpt-5-codex/">GPT-5-Codex报道</a> · One Year Ago in AI
+- 发布：2025-09-15；事件：2025-09-15；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：2025-09-15 GPT-5-Codex报道。
+- 原文支持：2025年9月15日GPT-5-Codex发布，成为CLI、IDE扩展、云服务与GitHub代码评审的默认模型，强化学习于真实工程任务，宣称可独立工作超7小时并按任务复杂度自适应推理。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；超7小时为宣称口径，非独立实测。</p>
+<p><strong>S06</strong> <a href="https://blockchain.news/news/openai-codex-generally-available-new-features">OpenAI Codex Generally Available with New Features</a> · Blockchain.News
+- 发布：2025-10-23；事件：2025-10-23；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：Codex GA报道。
+- 原文支持：2025年10月Codex进入GA，新增Slack中@codex委托、Codex SDK与企业管理/分析工具，定位为编辑器、终端与云端统一的同一Agent。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；GA精确日未在材料中单独证实，仅以材料日期为锚点。</p>
+<p><strong>S07</strong> <a href="https://vercel.com/fbopensource/torchci/ai-gateway/models/gpt-5.1-codex">GPT-5.1-Codex模型页</a> · Vercel AI Gateway
+- 发布：2025-11-12；事件：2025-11-12；查阅：2026-10-21。
+- 来源族：模型目录/厂商相关；读取：relevant_text；定位：AI Gateway模型页。
+- 原文支持：GPT-5.1-Codex于2025年11月12日发布，是GPT-5.1的Agent编码优化版，上下文400K token；同日发布更便宜的GPT-5.1-Codex-Mini。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文。</p>
+<p><strong>S08</strong> <a href="https://en.wikipedia.org/wiki/GPT-5.1">GPT-5.1</a> · Wikipedia
+- 发布：2025-11-19；事件：2025-11-19；查阅：2026-10-21。
+- 来源族：百科；读取：relevant_text；定位：GPT-5.1词条。
+- 原文支持：GPT-5.1-Codex-Max于2025年11月19日发布，面向长程复杂工程，引入compaction上下文压缩机制以在多窗口/长会话中保留关键状态。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文。</p>
+<p><strong>S09</strong> <a href="https://pinggy.io/blog/best_open_source_cli_coding_agents/">Best Open Source CLI Coding Agents</a> · Pinggy
+- 发布：2026-10-21；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：最佳开源CLI编码Agent文章。
+- 原文支持：开源Harness可验证机制：openai/codex为Apache-2.0、Rust重写，npm包为@openai/codex；默认沙箱运行Shell命令，需显式审批或--full-auto才可触及工作区外；支持--oss本地模型与config.toml接入OpenAI兼容端点。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；日期为材料所载日期。</p>
+<p><strong>S10</strong> <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">Codex CLI Cheatsheet</a> · Shipyard
+- 发布：2026-10-21；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：技术博客；读取：relevant_text；定位：Codex CLI Cheatsheet。
+- 原文支持：本地Harness配置与会话机制：/init生成AGENTS.md，approval_policy如on-request、sandbox_mode如workspace-write，config.toml配置mcp_servers，/new、/resume、/fork、/compact、/status、/model、/permissions、/mcp等命令管理线程与上下文。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；日期为材料所载日期。</p>
+<p><strong>S11</strong> <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">OpenAI Codex Cloud Remote Coding</a> · CryptoBriefing
+- 发布：2025-10-21；事件：2025-10-21；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：Codex Cloud GA报道。
+- 原文支持：云端产品定位：在隔离沙箱中并行执行多任务、写功能、修Bug、跑测试并提交PR供人工审查；但闭源云端内部编排、调度与状态机细节未见公开一手证实。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；云端内部细节明确标为未验证，不得反推。</p>
+<p><strong>S12</strong> <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">Researchers Escape OpenAI Codex Sandbox to Run Commands on Host</a> · BleepingComputer
+- 发布：2026-08-12；事件：2026-08-12；查阅：2026-10-21。
+- 来源族：安全媒体；读取：relevant_text；定位：Codex沙箱逃逸报道。
+- 原文支持：Heapjack利用Codex Desktop node_repl中受信与非受信JS上下文共享V8堆窃取认证token并冒充未沙箱父进程，Overpatch利用apply_patch路径权限推导绕过workspace-write限制；两者2026年8月12日上报、8天内修复，触发条件可为仅打开第三方仓库并提问。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；修复时效与触发条件为报道口径。</p>
+<p><strong>S13</strong> <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553/634">Codex Rate Limits Discussion Thread</a> · OpenAI Developer Community
+- 发布：2026-08-28；事件：2026-08-28；查阅：2026-10-21。
+- 来源族：社区讨论；读取：relevant_text；定位：Codex限额讨论帖。
+- 原文支持：用户报告即使周额度仍有剩余，5小时滚动限额也会反复打断长任务，恢复后需重建上下文；OpenAI负责人回应称不会不沟通即改限额，并将部分快速耗尽案例归因于sub2api转售与欺诈风控。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；为用户报告与官方回应并存的争议材料，非官方计量规则。</p>
+<p><strong>S14</strong> <a href="https://www.chaincatcher.com/en/article/2284385">OpenAI回应Codex限额差异</a> · ChainCatcher
+- 发布：2026-08-21；事件：2026-08-21；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：OpenAI回应Codex限额差异报道。
+- 原文支持：2026年8月21日OpenAI回应称受影响用户常通过sub2api把订阅转为API流量，正常经ChatGPT登录的官方或开源客户端使用无此问题，但该解释未消除用户对额度计量不透明的质疑。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；为转述的官方回应口径。</p>
+<p><strong>S15</strong> <a href="https://community.openai.com/t/gpt-5-codex-in-vscode-file-overwritten-into-empty-bytes-after-set-content-replacement-anyone-else/1359593">GPT-5-Codex in VSCode File Overwritten into Empty Bytes</a> · OpenAI Developer Community
+- 发布：2025-09-24；事件：2025-09-24；查阅：2026-10-21。
+- 来源族：社区讨论；读取：relevant_text；定位：GPT-5-Codex VSCode故障报告帖。
+- 原文支持：2025年9月24日用户报告VS Code中GPT-5-Codex经PowerShell Set-Content重写文件后文件变为空字节，疑似命令中途失败仍执行最终写入，属需人工复核与备份的失败案例。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；为单例用户报告，因果未证实。</p>
+<p><strong>S16</strong> <a href="https://blockchain.news/postamp?id=openai-abandons-swe-bench-verified-contamination-flawed-tests">OpenAI Abandons SWE-bench Verified</a> · Blockchain.News
+- 发布：2026-02-23；事件：2026-02-23；查阅：2026-10-21。
+- 来源族：行业媒体；读取：relevant_text；定位：OpenAI放弃SWE-bench Verified报道。
+- 原文支持：OpenAI 2026年2月23日审计SWE-bench Verified中138个失败偏重任务，发现59.4%存在规范或测试问题，并称多家前沿模型均有训练暴露证据，因此不再以该基准作为前沿信号；该比例仅针对失败偏重子集。
+- 限制：仅依据OSINT材料提供的相关文本，未独立全文核验原文；59.4%不得泛化为整个数据集比例。</p>
+<p>检索缺口：
+- 缺少OpenAI官方一手发布时间线、模型发布说明与定价/限额规则原文，GA、模型版本与限额区间多依赖二手综述与社区材料，未独立全文核验。
+- 2026年2月桌面Codex App仅知月份，精确发布日、版本范围与各渠道可用性未见材料证实。
+- 闭源云端内部编排、调度与状态机细节未见公开一手证实，不得补推。
+- 限额计量规则、5小时滚动窗口的精确计算方式与周额度关系未见官方口径，争议双方说法未完全对齐。
+- 长任务可靠性缺乏系统性统计，仅有沙箱逃逸、限额打断与单例文件覆写等个案，无法推断整体故障率。
+- GPT-5.2-Codex与GPT-5.3-Codex的官方发布细节、能力变化与适用范围在材料中仅有日期与名称线索，未展开。</p>
+<p>检索日志：OpenAI Codex research preview launch May 2025 CLI IDE（discovery）；OpenAI Codex App GPT-5-Codex GPT-5.1-Codex release timeline（verification）；openai codex GitHub CLI agent loop sandbox approval AGENTS.md（discovery）；OpenAI Codex sandbox bypass prompt injection security vulnerability（counterevidence）；OpenAI Codex 产品演进 CLI IDE 云端 Codex App 发布时间（discovery）；Codex 定价 限额 争议 用户投诉 长任务失败（counterevidence）；site openai.com Codex IDE extension VSCode September 2025（verification）；OpenAI Codex general availability August 2025 GPT-5（verification）；OpenAI Codex original 2021 GPT-3 deprecated 2023 distinction（verification）；Codex SWE-bench benchmark controversy long task failure evaluation（counterevidence）。</p>
+<h2 id="_6">二、交付形态与开发者工作流</h2>
+<p><strong>关键议题</strong>：Codex以CLI、IDE、云端、GitHub审查与桌面应用等多形态交付且开源Harness机制可验证，但闭源云端内部架构、长程可靠性与安全边界仍存在争议。</p>
+<p>选题依据：交付形态与开发者工作流直接决定Codex能否从单人编码工具变为团队并行开发平台；提供的OSINT材料同时覆盖官方发布、开源Harness机制与反证投诉，适合编制可追溯的证据账本而非单向宣传口径。</p>
+<p><strong>当前判断</strong>：在补丁覆盖、模型来源与长程验收未逐项核实前，沙箱、模型触发与长程可靠性仍需人工核对兜底；三项条件可核验时可降为分层核对，但最终diff与测试覆盖验收不可取消，长程任务仍需拆分后逐段验收。 <a href="http://docs.getunleash.io/integrate/codex">S08</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S11</a> <a href="https://runtimewire.com/article/projectdiscovery-model-backdoor-codex">S12</a> <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">S13</a> <a href="https://www.eesel.ai/blog/openai-codex-integrations-with-vs-code">S15</a></p>
+<p>优选：V02；置信度：medium。风险方向在机制、演示与投诉三类证据上一致，但单项证据多为初步报道、演示或单起投诉口径，暂无公开CVE、真实利用报道、官方补丁覆盖确认与长程失败率，无法定量评估发生概率。
+成立条件：适用于账本所述的CLI、IDE、桌面、云端与PR审查工作流；不扩展为沙箱必然可逃逸、长程任务必然失败或闭源云端内部架构的普遍判断；版本、模型来源与长程验收均需逐项可核验时才可降低核对强度。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_7">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；强调开源Harness可验证、CLI/IDE/云端/PR多形态串联与DevDay可复用云环境的效率收益，认为并行与worktree适合团队分工。）：平台化与可复用云环境使多形态并行开发成为可规模化的工作流。
+- 限定：中等置信度，仅限于工作流机制的可行性判断：适用于任务可拆分、改动可用worktree隔离、且仍保留人工核对分支起点、改动范围、测试覆盖与最终diff的场景。并行更适合读多写少的探索、测试分析与日志审查类任务；团队规模下的权限治理与成本表现仍待后续观察，不宜直接等同于已验证的大规模生产效益。
+- 最强反证：最强反证是：多Agent同时写码会增加冲突与协调风险，审查与云端任务仍需人工核对；另有沙箱逃逸报道、模型触发外泄演示与长程任务先称完成、复核又发现重大遗漏的案例。若去掉人工核对、把并行默认用于高频并发写码，或把完成声明等同于完成事实，本主张的可规模化结论即不成立。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a> <a href="https://dev.to/ji_ai/i-read-openai-codexs-source-and-built-my-workflow-around-it-51mc">S07</a> <a href="https://llmx.de/blog/openai-codex-setup-agents-md-mcps-skills-definitive-guide/">S09</a> <a href="https://techcrunch.com/2026/09/29/openai-gives-codex-reusable-cloud-environments-that-work-across-devices/">S10</a> <a href="https://savedelete.com/article/openai-codex-subagents-parallel-ai-coding/">S06</a></p>
+<p><strong>观点 V02</strong>（谨慎情景分析者；强调沙箱与审批虽为独立控制，但逃逸报道、后门模型演示与长程审计失败案例说明不能把完成声明等同于完成事实，审查与云端任务仍需人工核对diff与测试覆盖。）：沙箱、模型触发与长程可靠性仍是采用前必须以人工核对兜底的风险点。
+- 限定：范围限定于所提供的证据账本与上述交付形态语境，不扩展为对所有版本、所有部署或闭源云端内部架构的判断；置信度为中等偏谨慎：风险点成立的证据方向一致，但各单项证据多为报道、演示或投诉口径，强度不足以定量评估发生概率。
+- 最强反证：最强反证是：沙箱与审批本就是两层独立控制且默认断网、写入限工作目录，逃逸报道已有对应补丁版本，后门演示针对的是可替换的开放模型而非已证实的Codex官方漏洞，长程失败也可能源于特定任务配置或事件流规模而非系统性不可用；因此更节制的结论可能是“在打补丁、限定模型来源与拆分长程任务后风险可控”，而非一律要求同等强度的人工核对。这一反证削弱了普遍化结论，但未消除本方核心点：在补丁覆盖、模型来源与长程验收未逐项确认前，完成声明本身不能替代人工核对。 <a href="http://docs.getunleash.io/integrate/codex">S08</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S11</a> <a href="https://runtimewire.com/article/projectdiscovery-model-backdoor-codex">S12</a> <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">S13</a> <a href="https://www.eesel.ai/blog/openai-codex-integrations-with-vs-code">S15</a></p>
+<p><strong>观点 V03</strong>（成本与治理情景分析者；强调限额投诉与用量透明度争议尚未经官方账单口径核实，但在采购与治理层面应把信用池共用、自动审查触发与长程任务消耗作为成本变量单独评估。）：限额透明度与多工作流共用信用池可能削弱Pro与团队场景的性价比感知。
+- 限定：结论限定为“可能削弱性价比感知”，而非已证实的计费错误；置信度低至中等，仅适用于Pro及多工作流共用的团队采购与治理场景，需以官方账单口径核实后才能升级为定价结论。
+- 最强反证：最强反证是证据本身的未核实性：限额投诉可能源于对周额度与信用池口径的误解、个别长程任务的低效消耗或触发配置问题，而非共用池本身不合理；材料也不能排除官方已有但未在材料中呈现的透明用量说明。若后续官方口径证明额度计算与用量展示一致，本主张的感知基础将被明显削弱。 <a href="https://vibingtalk.com/index.php?threads/codex-pro-limits-are-undercutting-the-value.1586509/">S14</a> <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">S13</a> <a href="https://www.fathom.news/codex-code-review-github-permission-paths/">S05</a></p>
+<h3 id="_8">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：在任务可拆分、改动可用worktree隔离并保留人工核对分支起点、改动范围、测试覆盖与最终diff的前提下，开源Harness、统一配置与可复用云环境使读多写少的并行探索、测试分析与日志审查工作流具备可行前提。
+- V03的合理洞察：在官方账单口径核实前，采购与治理层面应把多工作流共用信用池、自动审查触发与长程任务消耗列为待核实的独立成本变量，但不能据此断定共用池本身不合理或计费存在缺陷。</p>
+<p>不确定性及改变判断的条件：
+- Overpatch与Heapjack的补丁覆盖范围是否获官方确认，及除账本版本号之外的受影响版本清单。
+- 后门模型演示的触发条件与影响范围是否经独立复现，及其他提示注入路径是否已被排除。
+- 长程审计失败的普遍性与发生率，以及拆分后长程任务以最终diff与测试覆盖稳定通过的多案例记录。
+- 闭源云端托管版的会话编排、恢复与跨设备状态同步细节，以及2026年审查形态的官方定价、权限与可用范围。
+- 官方账单口径下周额度与62k信用池的关系、换算与扣减方式，及自动审查与长程任务的具体消耗归因。</p>
+<h3 id="_9">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：多形态交付与并行开发的效率收益真实存在，但完成声明、沙箱边界与成本显示三处都可能与事实脱节。</li>
+<li><strong>需要</strong>：采用前需要把不可取消的验收与可降级的审计分开：版本与模型来源可审计抽查，最终diff与测试覆盖必须逐项验收，成本变量必须以官方口径核实。</li>
+<li><strong>方案</strong>：先在受控范围试点：锁定可信模型来源、升级并核对补丁版本、拆分长程任务、先commit或stash再接受Agent改动，并把审查触发与长程消耗单独记账。</li>
+<li><strong>预演</strong>：若上述分层核对与成本核查落地，团队可在读多写少任务中复用并行工作流而不把完成声明当作验收；若任一核查缺失，则仍应回到逐项人工核对，暂缓团队规模化推广。</li>
+<li><strong>行动</strong>：
+   - 由安全或平台负责人核查并记录全部Codex CLI与桌面版本，确认是否达到账本所给补丁版本，并向官方渠道确认Overpatch与Heapjack的覆盖范围 <a href="http://docs.getunleash.io/integrate/codex">S08</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S11</a>
+     时间：试点开始前完成，之后每次版本变更复核；指标：未达标或覆盖未确认的实例数量与不可信仓库任务拦截率；基线：试点前的版本清单与不可信仓库任务基线。
+     停止/成功条件：全部暴露实例达标且官方覆盖确认后，沙箱核查可降为版本审计加不可信仓库抽查；任一条件缺失则继续逐项核查；阈值来源：账本所给版本号CLI 0.149.0与Desktop 26.818.21641及之后版本；覆盖确认阈值未知，分析者建议以官方确认作为通过条件。
+   - 由平台负责人建立可信模型来源白名单，禁止在Agent任务中使用可替换的未核实开放模型，并记录模型来源变更 <a href="https://runtimewire.com/article/projectdiscovery-model-backdoor-codex">S12</a>
+     时间：试点开始前完成，之后每次模型来源变更复核；指标：非白名单模型触发的Agent任务数量；基线：试点前模型来源清单，目标为零非白名单任务。
+     停止/成功条件：连续核查中非白名单任务为零时，模型来源核查可降为白名单审计；出现一次即恢复逐项核查；阈值来源：分析者建议阈值，非账本所给发生率证据。
+   - 由任务负责人把长程任务拆分为可独立验收的段落，每段以最终diff、分支起点、改动范围与测试覆盖作为验收标准，本地改动落盘前先commit或stash <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">S13</a> <a href="https://www.eesel.ai/blog/openai-codex-integrations-with-vs-code">S15</a>
+     时间：每个长程任务执行期间持续适用；指标：未经最终diff与测试覆盖验收即标记完成的任务比例，及复核发现的重大遗漏数量；基线：账本中单起投诉所列的并发冲突、丢失编辑、状态归属错误与恢复不完整类型作为复核清单，目标为验收遗漏为零。
+     停止/成功条件：多段任务均通过最终diff与测试覆盖验收且复核无重大遗漏时可继续试点；任一段验收缺失即停止推进该任务；阈值来源：分析者建议阈值，非账本所给失败率证据。
+   - 由采购与财务负责人向官方渠道核实周额度与信用池的计算、换算与扣减口径，并单独记录自动审查触发与长程任务的消耗 <a href="https://vibingtalk.com/index.php?threads/codex-pro-limits-are-undercutting-the-value.1586509/">S14</a> <a href="https://www.fathom.news/codex-code-review-github-permission-paths/">S05</a>
+     时间：团队订阅决策前完成，之后每个账单周期复核；指标：官方口径核实项完成比例与自动触发、长程任务的用量占比；基线：试点前的用量记录与限额显示记录。
+     停止/成功条件：官方口径核实完成且用量可归因后，方可基于核实数据评估团队性价比；核实前仅作为待核实成本变量，不得作为计费缺陷结论；阈值来源：分析者建议的程序性通过条件，账本未提供官方账单口径。</li>
+</ol>
+<h3 id="_10">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：三层必须区分：Codex是产品与订阅服务（CLI/IDE/云端/Codex App/GitHub审查），GPT-5-Codex等是模型，openai/codex是开源Harness实现；开源的是Agent循环而非模型权重。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：2025-04-16 OpenAI发布开源Codex CLI，终端内运行，可写码、改文件、执行命令；2025-05-16发布Codex Cloud研究预览，底层为codex-1，任务在隔离沙箱容器中并行运行并产出可审查PR。 <a href="https://www.deeplearning.ai/the-batch/openai-introduces-codex-a-multi-agent-cloud-based-software-engineering-tool-in-chatgpt">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：2025-09-15 OpenAI发布GPT-5-Codex，定位为GPT-5的agentic coding优化版，官方建议仅用于Codex或类Codex环境的agentic coding任务，而非通用聊天；同日统一产品体验为同一ChatGPT账号串联终端、IDE、Web、GitHub与iOS应用，含Plus/Pro/Business/Edu/Enterprise。 <a href="https://openai.com/index/introducing-upgrades-to-codex/?ref=wheresyoured.at">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：GPT-5.1-Codex家族命名需与GPT-5-Codex区分：gpt-5.1-codex与gpt-5.1-codex-mini为GPT-5.1时代的长程agentic coding模型，另有Max变体主打compaction跨上下文窗口；不可把codex-1、GPT-5-Codex、GPT-5.1-Codex混为同一模型。 <a href="https://vercel.com/ai-gateway/models/gpt-5-codex">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：IDE交付形态：2025年8月下旬Codex进入VS Code及Cursor等VS Code系编辑器，IDE扩展可利用已打开文件与选中代码作上下文，可在编辑器内创建云任务、跟踪在途任务、把云任务拉回本地继续且保持上下文。 <a href="https://openai.com/index/introducing-upgrades-to-codex/?ref=wheresyoured.at">S03</a></li>
+<li><strong>C06 / fact / supported</strong>：GitHub/PR工作流：Codex代码审查于2025-08-21面向GitHub PR可用，连接仓库需push或管理员权限以配置自动审查。 <a href="https://www.fathom.news/codex-code-review-github-permission-paths/">S05</a></li>
+<li><strong>C07 / source_statement / preliminary</strong>：2026年形态扩展为PR内@codex review触发审查、@codex触发以PR为上下文的云端对话，以及桌面应用内的审查体验与离岗自动首轮审查，GitLab为MR审查预览。 <a href="https://www.fathom.news/codex-code-review-github-permission-paths/">S05</a></li>
+<li><strong>C08 / source_statement / preliminary</strong>：并行与worktree工作流：Codex支持多任务并行与subagents，主Agent可派生探索/执行类子Agent并汇总结果，报道称默认上限6并发线程、嵌套深度1层；内部工程师典型同时运行4-8个并行Agent做功能、审查、安全审计与总结，worktree用于隔离并行改动。 <a href="https://savedelete.com/article/openai-codex-subagents-parallel-ai-coding/">S06</a></li>
+<li><strong>C09 / fact / supported</strong>：开源Harness可验证机制：AgentLoop接收输入后向模型发流式请求，遇工具调用先按approvalMode判定是否提示审批，批准后在沙箱中执行，再把命令输出与文件变更回写历史；codex exec为非交互版，--output json可作CI/脚本积木，openai/codex-action@v1可在GitHub Actions中按PR事件触发审查。 <a href="https://dev.to/ji_ai/i-read-openai-codexs-source-and-built-my-workflow-around-it-51mc">S07</a></li>
+<li><strong>C10 / fact / supported</strong>：沙箱与审批是两个独立控制：沙箱模式有read-only、workspace-write（交互默认、默认断网）、danger-full-access；审批策略如on-request/untrusted等；macOS用Seatbelt、Linux用容器，Full Auto仍受平台沙箱约束且写入限工作目录。 <a href="http://docs.getunleash.io/integrate/codex">S08</a></li>
+<li><strong>C11 / fact / supported</strong>：上下文与配置：CLI、IDE与桌面共用~/.codex/config.toml与项目级.config.toml，AGENTS.md沿仓库根到当前目录串联加载，同目录AGENTS.override.md优先；MCP为一等接入，可用codex mcp add/list管理，工具名按服务器名前缀化。 <a href="https://llmx.de/blog/openai-codex-setup-agents-md-mcps-skills-definitive-guide/">S09</a></li>
+<li><strong>C12 / fact / supported</strong>：2026-08-19 OpenAI以Codex as a platform把Harness产品化：三层为codex exec、Codex SDK与app-server（管理线程、轮次、流式事件与审批请求）。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a></li>
+<li><strong>C13 / source_statement / preliminary</strong>：Harness优化使保留推理与上下文压缩在ARC-AGI-3上显著提分降耗的说法为官方/二手报道口径，云端托管版的会话编排与恢复细节若无官方文档则标unverified。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a></li>
+<li><strong>C14 / fact / supported</strong>：2026-09-29 DevDay：Codex云端从一次性远程沙箱转向可复用云端开发环境，可跨设备继续、团队共享已批准设置与权限；同批刷新CLI支持语音启动与操控、/agents视图管理多任务、提示编辑、会话恢复与worktree，代码审查进入ChatGPT桌面应用，Security Cloud进入研究预览。 <a href="https://techcrunch.com/2026/09/29/openai-gives-codex-reusable-cloud-environments-that-work-across-devices/">S10</a></li>
+<li><strong>C15 / source_statement / preliminary</strong>：反证—沙箱逃逸：研究者2026-08-12上报Overpatch与Heapjack，Overpatch利用apply_patch按补丁父目录推导写权限可越出工作区，Heapjack利用桌面版共享V8堆提取认证令牌并以未沙箱父进程执行命令，报道称最严read-only模式下仅打开恶意仓库并提问即可触发，补丁为CLI 0.149.0（2026-08-21）与Desktop 26.818.21641及之后版本，暂无公开CVE与真实利用报道。 <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S11</a></li>
+<li><strong>C16 / source_statement / preliminary</strong>：反证—提示注入与后门模型：ProjectDiscovery在2026-10-06演示中称以低于50美元训练的后门开放模型可使Codex CLI在触发短语下执行载荷并外发虚拟项目凭证，说明模型触发可把Agent的文件与网络权限转为外泄路径，属演示性质而非Codex官方漏洞认定。 <a href="https://runtimewire.com/article/projectdiscovery-model-backdoor-codex">S12</a></li>
+<li><strong>C17 / source_statement / supported</strong>：反证—长程与可靠性：2026-10-17有付费用户在OpenAI开发者社区投诉，同一代码库审计连续六次先称完成、复核又发现并发冲突、丢失编辑、状态归属错误与失败恢复不完整等重大遗漏，最终放弃实施计划且全程消耗付费额度；另有长程审查因事件流过大被截断、16小时运行无可用结论的案例。 <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">S13</a></li>
+<li><strong>C18 / source_statement / preliminary</strong>：反证—定价与限额争议：2026-09-30起有Pro用户投诉，GitHub Codex审查器在仍剩约28%周额度时报限额，质疑62k信用池与多工作流共用同一池的安排；另有用户称轻度使用亦快速触顶、用量透明度不足，属用户投诉口径，未经官方账单口径核实。 <a href="https://vibingtalk.com/index.php?threads/codex-pro-limits-are-undercutting-the-value.1586509/">S14</a></li>
+<li><strong>C19 / source_statement / supported</strong>：开发者使用方式的边界：并行Agent适合探索、测试分析与日志审查等读多写少任务，多Agent同时写码会增加冲突与协调风险；审查与云端任务仍需人工核对分支起点、改动范围、测试覆盖与最终diff，本地Agent模式下改动直接落盘、无Copilot式接受/拒绝diff流程，提交前应先commit或stash以便git reset。 <a href="https://www.eesel.ai/blog/openai-codex-integrations-with-vs-code">S15</a></li>
+<li><strong>C20 / inference / unverified</strong>：闭源云端内部架构凡无公开资料者一律标为unverified/preliminary，不得从模型行为反推其内部实现。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a></li>
+<li><strong>C21 / forecast / preliminary</strong>：可复用云端开发环境、跨设备继续与团队共享已批准设置，可能成为Codex从一次性远程任务向持续开发环境转变的主流工作流，但其在团队规模化使用中的权限治理与成本表现仍待后续观察。 <a href="https://techcrunch.com/2026/09/29/openai-gives-codex-reusable-cloud-environments-that-work-across-devices/">S10</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">OpenAI open-sourced the agent loop, not the model</a> · Ground Truth
+- 发布：2026-08-24；事件：2026-08-19；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：文章主体：三层区分与Codex as a platform段落。
+- 原文支持：Codex是产品与订阅服务，GPT-5-Codex等是模型，openai/codex是开源Harness实现；2026-08-19平台化分为codex exec、SDK与app-server。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验；ARC-AGI-3提分降耗说法标注为官方/二手报道口径。</p>
+<p><strong>S02</strong> <a href="https://www.deeplearning.ai/the-batch/openai-introduces-codex-a-multi-agent-cloud-based-software-engineering-tool-in-chatgpt">OpenAI Introduces Codex</a> · DeepLearning.AI
+- 发布：2025-05-16；事件：2025-05-16；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：文章主体：Codex CLI与Codex Cloud发布段落。
+- 原文支持：2025-04-16发布开源Codex CLI，2025-05-16发布Codex Cloud研究预览，底层为codex-1，任务在隔离沙箱容器中并行运行并产出可审查PR。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S03</strong> <a href="https://openai.com/index/introducing-upgrades-to-codex/?ref=wheresyoured.at">Introducing upgrades to Codex</a> · OpenAI
+- 发布：2025-09-15；事件：2025-09-15；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：官方博客主体：GPT-5-Codex、统一账号体验与IDE扩展段落。
+- 原文支持：2025-09-15发布GPT-5-Codex，定位为GPT-5的agentic coding优化版，官方建议仅用于Codex或类Codex环境的agentic coding任务；同一ChatGPT账号串联终端、IDE、Web、GitHub与iOS应用；8月下旬IDE扩展进入VS Code及Cursor等编辑器。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S04</strong> <a href="https://vercel.com/ai-gateway/models/gpt-5-codex">GPT 5.1 Codex models</a> · Vercel AI Gateway
+- 发布：2025-11-01；事件：2025-11-01；查阅：2026-10-21。
+- 来源族：documentation；读取：relevant_text；定位：模型目录页：GPT-5.1-Codex家族命名段落。
+- 原文支持：gpt-5.1-codex与gpt-5.1-codex-mini为GPT-5.1时代的长程agentic coding模型，另有Max变体主打compaction跨上下文窗口，不可与codex-1、GPT-5-Codex混为同一模型。
+- 限制：材料仅提供到月，published填当月1日，精度为月；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S05</strong> <a href="https://www.fathom.news/codex-code-review-github-permission-paths/">Codex Code Review GitHub</a> · Fathom News
+- 发布：unknown；事件：2025-08-21；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：文章主体：GitHub PR审查可用性与权限路径段落。
+- 原文支持：Codex代码审查于2025-08-21面向GitHub PR可用，连接仓库需push或管理员权限以配置自动审查；2026年形态扩展为PR内@codex review触发审查、@codex触发以PR为上下文的云端对话，以及桌面应用内审查与离岗自动首轮审查，GitLab为MR审查预览。
+- 限制：published确实未知，故填unknown，不编造精确日期；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验；2026年形态扩展为报道口径。</p>
+<p><strong>S06</strong> <a href="https://savedelete.com/article/openai-codex-subagents-parallel-ai-coding/">OpenAI Codex Gets Subagents for Parallel AI Coding</a> · SaveDelete
+- 发布：2026-03-17；事件：2026-03-17；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：文章主体：并行与worktree工作流段落。
+- 原文支持：Codex支持多任务并行与subagents，主Agent可派生探索/执行类子Agent并汇总结果，报道称默认上限6并发线程、嵌套深度1层；内部工程师典型同时运行4-8个并行Agent做功能、审查、安全审计与总结，worktree用于隔离并行改动。
+- 限制：并行上限与工程师使用数量为报道称，未见官方文档确认；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S07</strong> <a href="https://dev.to/ji_ai/i-read-openai-codexs-source-and-built-my-workflow-around-it-51mc">I Read OpenAI Codex's Source and Built My Workflow Around It</a> · Dev.to
+- 发布：2026-03-17；事件：2026-03-17；查阅：2026-10-21。
+- 来源族：technical_blog；读取：relevant_text；定位：文章主体：AgentLoop、审批、沙箱与codex exec段落。
+- 原文支持：开源Harness可验证机制：AgentLoop接收输入后向模型发流式请求，遇工具调用先按approvalMode判定是否提示审批，批准后在沙箱中执行，再把命令输出与文件变更回写历史；codex exec为非交互版，--output json可作CI/脚本积木，openai/codex-action@v1可在GitHub Actions中按PR事件触发审查。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S08</strong> <a href="http://docs.getunleash.io/integrate/codex">Integrate Unleash with OpenAI Codex</a> · Unleash
+- 发布：2026-08-19；事件：2026-08-19；查阅：2026-10-21。
+- 来源族：documentation；读取：relevant_text；定位：文档主体：沙箱模式与审批策略段落。
+- 原文支持：沙箱与审批是两个独立控制：沙箱模式有read-only、workspace-write（交互默认、默认断网）、danger-full-access；审批策略如on-request/untrusted等；macOS用Seatbelt、Linux用容器，Full Auto仍受平台沙箱约束且写入限工作目录。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S09</strong> <a href="https://llmx.de/blog/openai-codex-setup-agents-md-mcps-skills-definitive-guide/">How to Set Up OpenAI Codex</a> · LLMx
+- 发布：2026-02-19；事件：2026-02-19；查阅：2026-10-21。
+- 来源族：technical_blog；读取：relevant_text；定位：指南主体：配置、AGENTS.md与MCP段落。
+- 原文支持：CLI、IDE与桌面共用~/.codex/config.toml与项目级.config.toml，AGENTS.md沿仓库根到当前目录串联加载，同目录AGENTS.override.md优先；MCP为一等接入，可用codex mcp add/list管理，工具名按服务器名前缀化。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S10</strong> <a href="https://techcrunch.com/2026/09/29/openai-gives-codex-reusable-cloud-environments-that-work-across-devices/">OpenAI gives Codex reusable cloud environments</a> · TechCrunch
+- 发布：2026-09-29；事件：2026-09-29；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：报道主体：DevDay可复用云端环境与CLI刷新段落。
+- 原文支持：2026-09-29 DevDay：Codex云端从一次性远程沙箱转向可复用云端开发环境，可跨设备继续、团队共享已批准设置与权限；同批刷新CLI支持语音启动与操控、/agents视图管理多任务、提示编辑、会话恢复与worktree，代码审查进入ChatGPT桌面应用，Security Cloud进入研究预览。
+- 限制：本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S11</strong> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">Overpatch and Heapjack</a> · Dev.to
+- 发布：2026-09-15；事件：2026-08-12；查阅：2026-10-21。
+- 来源族：technical_blog；读取：relevant_text；定位：文章主体：Overpatch与Heapjack技术与补丁版本段落。
+- 原文支持：研究者2026-08-12上报Overpatch与Heapjack，Overpatch利用apply_patch按补丁父目录推导写权限可越出工作区，Heapjack利用桌面版共享V8堆提取认证令牌并以未沙箱父进程执行命令，报道称最严read-only模式下仅打开恶意仓库并提问即可触发，补丁为CLI 0.149.0（2026-08-21）与Desktop 26.818.21641及之后版本，暂无公开CVE与真实利用报道。
+- 限制：为研究者报道口径，暂无公开CVE与真实利用报道；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S12</strong> <a href="https://runtimewire.com/article/projectdiscovery-model-backdoor-codex">ProjectDiscovery built a sub-$50 model backdoor that got Codex to run a payload</a> · RuntimeWire
+- 发布：2026-10-20；事件：2026-10-06；查阅：2026-10-21。
+- 来源族：news；读取：relevant_text；定位：报道主体：后门模型演示段落。
+- 原文支持：ProjectDiscovery在2026-10-06演示中称以低于50美元训练的后门开放模型可使Codex CLI在触发短语下执行载荷并外发虚拟项目凭证，说明模型触发可把Agent的文件与网络权限转为外泄路径，属演示性质而非Codex官方漏洞认定。
+- 限制：为演示性质报道，非Codex官方漏洞认定；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S13</strong> <a href="https://community.openai.com/t/codex-repeatedly-claims-tasks-are-complete-then-discovers-major-failures-why-are-users-paying-for-this/1407206">Codex repeatedly claims tasks are complete</a> · OpenAI Developer Community
+- 发布：2026-10-17；事件：2026-10-17；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：帖子主体：长程审计失败投诉段落。
+- 原文支持：2026-10-17有付费用户在OpenAI开发者社区投诉，同一代码库审计连续六次先称完成、复核又发现并发冲突、丢失编辑、状态归属错误与失败恢复不完整等重大遗漏，最终放弃实施计划且全程消耗付费额度；另有长程审查因事件流过大被截断、16小时运行无可用结论的案例。
+- 限制：为用户投诉口径，未经官方核实；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S14</strong> <a href="https://vibingtalk.com/index.php?threads/codex-pro-limits-are-undercutting-the-value.1586509/">Codex Pro Limits Are Undercutting the Value</a> · VibingTalk
+- 发布：2026-09-30；事件：2026-09-30；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：帖子主体：Pro限额与信用池投诉段落。
+- 原文支持：2026-09-30起有Pro用户投诉，GitHub Codex审查器在仍剩约28%周额度时报限额，质疑62k信用池与多工作流共用同一池的安排；另有用户称轻度使用亦快速触顶、用量透明度不足，属用户投诉口径，未经官方账单口径核实。
+- 限制：为用户投诉口径，未经官方账单口径核实；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p><strong>S15</strong> <a href="https://www.eesel.ai/blog/openai-codex-integrations-with-vs-code">A practical guide to OpenAI Codex integrations with VS Code</a> · Eesel
+- 发布：2026-06-03；事件：2026-06-03；查阅：2026-10-21。
+- 来源族：technical_blog；读取：relevant_text；定位：指南主体：并行使用边界与本地落盘段落。
+- 原文支持：并行Agent适合探索、测试分析与日志审查等读多写少任务，多Agent同时写码会增加冲突与协调风险；审查与云端任务仍需人工核对分支起点、改动范围、测试覆盖与最终diff，本地Agent模式下改动直接落盘、无Copilot式接受/拒绝diff流程，提交前应先commit或stash以便git reset。
+- 限制：为实践指南口径；本账本依据提供的OSINT摘要编制，未独立重新打开原文全文核验。</p>
+<p>检索缺口：
+- 闭源云端托管版的会话编排、恢复与跨设备状态同步细节缺乏官方文档，无法核实。
+- 2026年@codex审查、桌面审查、离岗自动首轮审查与GitLab MR审查预览的官方定价、权限与可用范围未在材料中核实。
+- 并行默认上限6并发线程与嵌套深度1层为二手报道，未见官方文档确认。
+- Overpatch与Heapjack暂无公开CVE与真实利用报道，补丁覆盖范围未获官方确认。
+- 后门模型演示非Codex官方漏洞认定，触发条件与影响范围未独立复现。
+- 定价与限额争议未经官方账单口径核实，62k信用池与周额度计算方式不明。
+- GPT-5-Codex与GPT-5.1-Codex家族在API与Responses API侧的完整可用性、定价细节未在材料中系统核实。</p>
+<p>检索日志：OpenAI Codex CLI IDE extension cloud tasks GitHub integration announcement（discovery）；openai/codex GitHub repository README agent loop sandbox approval MCP（discovery）；Codex VS Code extension parallel agents code review PR workflow（discovery）；OpenAI GPT-5-Codex September 2025 Codex IDE extension launch（verification）；"Codex as a platform" open source app server August 2026 OpenAI（verification）；Codex cloud GitHub integration pull request review automatic September 2025（discovery）；Codex CLI 安全漏洞 沙箱绕过 提示注入 用户投诉 定价限额（counterevidence）；Codex 定价 限额 争议 用户抱怨 长任务失败 评测（counterevidence）；Codex IDE extension VS Code launch September 2025 AGENTS.md config（verification）。</p>
+<h2 id="harness">三、Harness 核心架构</h2>
+<p><strong>关键议题</strong>：Harness核心架构是由Agent主循环、App Server与线程原语、配置与沙箱审批、MCP与Skills扩展构成的可复用执行层，但其沙箱与审批边界在实测中多次被绕过。</p>
+<p>选题依据：以OpenAI官方Harness博客为核心依据，以开源实现梳理补齐代码结构，以沙箱逃逸、配置越权与用量争议作反证，区分Codex产品、模型与开源Harness三者，避免把模型迭代误读为架构变更。</p>
+<p><strong>当前判断</strong>：条件性优选判断：在现有账本范围内，V02经质询收窄后的主张最经得起检验——Codex沙箱与审批的标称档位不能直接等同于主机安全，部署时必须按实际执行路径与版本修复状态单独设防；但这不等于断言当前受支持版本仍可被所载三条历史路径绕过。 <a href="http://docs.getunleash.io/integrate/codex">S08</a> <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S11</a> <a href="http://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html">S12</a> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S13</a></p>
+<p>优选：V02；置信度：medium。三起旁路机制均有supported证据且机制各不相同，收窄后的原则性结论较稳；但修复后回归验证、完整受影响版本范围与当前版本复现性缺失，限制了对当前风险程度的判断，故非high。
+成立条件：适用于部署与复用Codex Harness的场景，尤其是处理不可信仓库、启用Desktop或网络受限沙箱、以及运行长会话的情形；结论限于账本所载历史情形与机制，不扩展为对所有版本、所有部署的当前暴露断言。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；从官方架构描述出发，强调同一Harness可在本地CLI与Web容器中复用，Item/Turn/Thread与多会话看板使长程任务可管理、可恢复。）：Harness以Agent主循环加App Server原语构成清晰、可扩展的本地与云端统一执行层。
+- 限定：范围限于所给材料描述的执行层架构，不对沙箱安全边界、长会话成本、模型性能或云端调度等价性作出断言；架构清晰性在材料内可信度较高，本地与云端统一执行层的跨环境可扩展主张因深层机制未证实而置信度为中等。
+- 最强反证：最强反证是复用同一Harness的陈述本身不足以证明深层等价：材料明确保留云端并行调度与容器缓存未公开证实这一缺口，且App Server完整消息格式与错误处理未展开；若把“同一执行层”理解为调度、缓存、故障恢复与性能在本地与云端一致，则现有证据不足，统一性只能成立于架构原语与会话模型层面。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a> <a href="https://habr.com/en/articles/1073214/">S10</a></p>
+<p><strong>观点 V02</strong>（安全审慎者；以三起反证为核心，强调即使read-only模式、审批与沙箱也曾被共享堆、git配置与DNS前置解析绕过，部署时须把不可信仓库与网络元数据视为独立风险面。）：沙箱与审批的标称边界不可直接等同于主机安全，配置与工具链的旁路必须单独设防。
+- 限定：范围限定于账本所载的三起情形与所述机制，不主张所有版本、所有部署目前仍可被绕过，也不否定沙箱与审批在标称路径内的作用。对“标称边界不等于主机安全”这一原则性结论置信度较高，对任何具体当前版本的暴露程度置信度低，因修复验证信息缺失。
+- 最强反证：最强反证是：沙箱与审批本就是可区分、可修复的控制层，workspace-write默认无网络，Heapjack类问题8日内修复、git配置问题同日发布CVE、DNS问题在0.163.0中修复，表明边界失效可被定位和修补；且三起事件均为特定路径，不等于证明所有沙箱档位在所有场景下均无效。这一反证限定了结论：应理解为“须单独设防”，而非“沙箱与审批无用”。 <a href="http://docs.getunleash.io/integrate/codex">S08</a> <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S11</a> <a href="http://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html">S12</a> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S13</a></p>
+<p><strong>观点 V03</strong>（长会话运营审视者；从compaction计费争议、限额耗尽投诉与早期模型故障出发，主张评估Harness时须同时计入压缩开销、用量策略与模型服务稳定性，而非只看架构图。）：长会话的真正瓶颈往往不在单轮主循环，而在压缩成本、用量尾部与模型可用性。
+- 限定：范围限于材料所报告的长会话、多次压缩与早期模型服务场景，不是对所有用户或所有会话的普遍定量结论；因关键证据为初步或非审计来源，整体置信度为中等偏低。
+- 最强反证：最强反证是：单轮主循环仍是任务得以推进的前提，若模型服务恢复稳定、用量重置或计费口径修正后投诉不再复现，瓶颈可能回到主循环、工具执行或任务本身；同时压缩是维持长会话窗口的必要机制，其成本争议可能反映用量策略与计费实现，而非证明压缩机制本身必然是长期结构性瓶颈。 <a href="https://www.swequiz.com/articles/openai-codex-architecture">S09</a> <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553?page=46">S14</a> <a href="https://community.openai.com/t/upgrades-to-codex-gpt-5-codex/1358210">S03</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：主循环加App Server原语与Thread持久化构成可复用的执行层接口与会话模型，可用于本地与云端统一的任务组织，但不得直接等同于调度、缓存与故障恢复行为等价。
+- V03的合理洞察：长会话评估应同时监测多次压缩的计费与耗时、用量尾部与模型服务稳定性，即使现有材料不足以证明其为结构性瓶颈。</p>
+<p>不确定性及改变判断的条件：
+- 三起沙箱旁路修复后的回归验证结果与完整受影响版本范围为何，当前受支持版本是否仍可复现。
+- App Server完整消息格式、错误处理与重连恢复语义为何，云端并行调度与容器缓存机制为何。
+- 多次compaction的经审计计费明细与修正后持续复现情况为何，模型服务异常与Harness责任的故障归因证据为何。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同一Harness的架构图很清晰，但标称沙箱档位曾三次被控制点之外的路径绕过；只看Read Only或Auto档位，不足以判断主机是否安全。</li>
+<li><strong>需要</strong>：部署者需要在启用Agent前，把不可信仓库配置、共享进程与网络解析时序、长会话压缩成本作为独立检查项，而不是把档位名称当作安全结论。</li>
+<li><strong>方案</strong>：按实际攻击面分项核查：仓库配置白名单、版本与修复状态、DNS解析时序、长会话用量基线，任一高风险项未通过即降级或暂停高权限任务。</li>
+<li><strong>预演</strong>：有条件预演：若核查全部通过且长会话成本在基线内，同一Harness可用于本地与云端任务组织；若任一旁路复现或用量异常，则收紧为只读、离线或人工审批模式，安全边界以实测为准而非档位名称。</li>
+<li><strong>行动</strong>：
+   - 部署前审查待处理仓库的.git/config，禁止未经审查的core.fsmonitor等自动触发命令，执行者为仓库负责人与安全复核人 <a href="http://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html">S12</a>
+     时间：每次Agent首次进入不可信或新克隆仓库前；指标：未审查自动触发命令数量；基线：账本所载历史情形中恶意配置可在沙箱与审批之外以用户权限执行。
+     停止/成功条件：未审查命令数为零，或高风险仓库转为人工审查后才允许Agent执行git操作；阈值来源：分析者建议：零容忍阈值，未证实为官方强制标准。
+   - 核对Codex CLI版本与DNS修复状态，并做许可校验前是否解析内部主机名的回归测试，执行者为运维或安全负责人 <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S13</a>
+     时间：升级或变更网络沙箱策略后1个工作日内；指标：许可校验前DNS解析事件数与内部主机名泄露事件数；基线：0.163.0修复前存在校验前解析与macOS端口53绕过情形。
+     停止/成功条件：回归测试中校验前解析与泄露事件均为零，否则保持网络受限模式；阈值来源：证据所给：Codex CLI 0.163.0于2026-10-15修复该问题。
+   - 隔离或禁用与Agent共享堆内存的node_repl等高风险路径，核查认证令牌访问与父进程执行权限，执行者为终端与身份安全负责人 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S11</a>
+     时间：启用Codex Desktop或共享进程组件前；指标：共享堆可达的认证令牌数量与未沙箱化父进程命令执行次数；基线：账本所载Heapjack情形即使在read-only模式下也可窃取令牌并经父进程执行。
+     停止/成功条件：两项指标均为零，或高风险组件停用后才恢复常规任务；阈值来源：分析者建议：零容忍阈值，未证实为官方强制标准。
+   - 对长会话逐次记录compaction耗时、重复计费项与限额消耗，执行者为任务负责人与成本复核人 <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553?page=46">S14</a>
+     时间：长会话运行期间逐次记录，连续3次会话复核一次；指标：单次自动compaction耗时与单位会话限额消耗占比；基线：账本用户投诉的自动compaction耗时约5分钟、长任务由30分钟膨胀至3小时仅为投诉基线，非官方阈值。
+     停止/成功条件：连续3次会话无异常计费或耗时突增；出现异常即暂停长会话并复核计费口径；阈值来源：证据所给投诉值作参考基线，分析者建议的复核触发条件，非官方标准。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：三层必须区分：Codex是产品与订阅服务，GPT-5-Codex/GPT-5.3-Codex等是模型，openai/codex是开源CLI/TUI与本地Harness实现，三者不可混为同一实体。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：2025-04-16 OpenAI发布开源Codex CLI，2025-05-16发布Codex Cloud研究预览，首发模型codex-1是为软件工程优化的o3版本。 <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">S02</a></li>
+<li><strong>C03 / source_statement / supported</strong>：GPT-5-Codex于2025-09-15前后发布，定位为针对Codex中智能体编程优化的GPT-5版本；GPT-5.3-Codex于2026-02-06前后发布，官方口径称比前代快25%且参与自身训练调试。 <a href="https://community.openai.com/t/upgrades-to-codex-gpt-5-codex/1358210">S03</a> <a href="https://techbriefly.com/2026/02/06/openai-releases-gpt-5-3-codex-says-model-helped-build-itself/">S04</a></li>
+<li><strong>C04 / fact / supported</strong>：Codex Harness核心是Agent主循环：组装提示→调用Responses API→模型输出文本或工具调用→执行工具并把观测结果追加回下一轮请求→直至助手消息结束本轮。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C05 / fact / supported</strong>：官方Harness构成除主循环外还包括线程生命周期与持久化、配置与认证、沙箱内Shell/文件工具执行及MCP与Skills扩展，全部位于Codex CLI代码库中的Codex core。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C06 / fact / supported</strong>：App Server是双向JSON-RPC over stdio协议与长驻进程，含stdio读取器、Codex消息处理器、线程管理器和核心线程；线程管理器为每个线程拉起一个核心会话，审批请求可由服务端发起并暂停Turn直至客户端回复。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C07 / fact / supported</strong>：App Server三原语为：Item（原子输入/输出，started/delta/completed生命周期）、Turn（一轮用户输入触发的完整工作单元）、Thread（可创建/恢复/分叉/归档的持久会话容器，持久化事件历史以便重连渲染）。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C08 / fact / supported</strong>：开源实现层面，codex-rs核心以Codex/Session/TurnContext/ModelClient为中心，客户端提交Op、异步接收Event，Session持有会话状态并由RolloutRecorder持久化；研究梳理称其为Tokio异步状态机，工具调用经有序并行执行。 <a href="https://deepwiki.com/openai/codex/3-core-agent-system">S05</a></li>
+<li><strong>C09 / fact / supported</strong>：上下文组装顺序为系统指令、开发者指令、聚合的AGENTS.md、环境信息与工具清单；AGENTS.md按全局~/.codex/AGENTS.md、项目级与子目录分层合并，合计扫描上限约32KiB。 <a href="https://dev.to/ji_ai/i-read-openai-codexs-source-and-built-my-workflow-around-it-51mc">S06</a></li>
+<li><strong>C10 / fact / supported</strong>：配置分两层：AGENTS.md是行为层，config.toml是执行环境层，控制模型、沙箱模式与审批策略；命令行标志优先于config.toml，项目级.config需项目被标记信任后才加载。 <a href="https://dev.to/jangwook_kim_e31e7291ad98/openai-codex-cli-terminal-coding-agent-setup-guide-2026-67o">S07</a></li>
+<li><strong>C11 / fact / supported</strong>：沙箱与审批是两套独立控制：沙箱决定技术上可写范围与联网能力，审批决定何时停下询问；常见档位为read-only、workspace-write（交互默认且默认无网络）、danger-full-access，对应Read Only/Auto/Full Access预设。 <a href="http://docs.getunleash.io/integrate/codex">S08</a></li>
+<li><strong>C12 / fact / supported</strong>：MCP接入方式为在~/.codex/config.toml中配置mcp_servers表或用codex mcp add注册stdio服务器，工具名以服务器名前缀呈现；非交互codex exec中MCP工具调用会因无法展示审批而被自动取消，属已知局限。 <a href="http://docs.getunleash.io/integrate/codex">S08</a></li>
+<li><strong>C13 / fact / preliminary</strong>：长会话通过/compaction或自动压缩维持上下文窗口，梳理称Codex调用/responses/compact并以不透明encrypted_content承载压缩后状态；但该机制的内部表示与云端实现细节未在公开资料中完整证实。 <a href="https://www.swequiz.com/articles/openai-codex-architecture">S09</a></li>
+<li><strong>C14 / fact / supported</strong>：Codex Web同样使用同一Harness，但运行在容器环境：Worker按检出工作区置备容器并在其中启动App Server，浏览器经HTTP/SSE接收事件；服务器端保存状态使关标签后任务仍可继续。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C15 / inference / unverified</strong>：云端并行调度与容器缓存等更深内部机制未公开证实，不能由Web端复用同一Harness直接推断其调度与缓存实现。 <a href="https://openai.com/index/unlocking-the-codex-harness/">S01</a></li>
+<li><strong>C16 / fact / supported</strong>：并行任务界面：Codex CLI 0.149.0引入codex agents交互看板与codex queue命令，看板复用同一本地App Server守护进程管理的会话，状态分Need input/Working/Ready三类。 <a href="https://habr.com/en/articles/1073214/">S10</a></li>
+<li><strong>C17 / fact / supported</strong>：2026-08-12上报、8日内修复的两起沙箱逃逸中，Heapjack利用Codex Desktop的node_repl共享堆内存窃取认证令牌并经未沙箱化父进程执行命令，即使在最严格read-only模式下也无需审批；Overpatch涉apply_patch补丁工具。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S11</a></li>
+<li><strong>C18 / fact / supported</strong>：恶意.git/config中的core.fsmonitor等命令可被Agent后台git status/diff触发，在沙箱与审批之外以用户权限执行；OpenAI同日为Codex发布三条同类CVE，其中CVE-2026-19592明确指出助手在沙箱外无审批运行。 <a href="http://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html">S12</a></li>
+<li><strong>C19 / fact / supported</strong>：Codex CLI 0.163.0于2026-10-15修复DNS前置解析问题，此前代理会在校验主机许可前先做DNS解析，导致即使最终阻断连接，内部主机名元数据已泄露给DNS方，且macOS受管沙箱本地绑定可绕过端口53限制。 <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S13</a></li>
+<li><strong>C20 / source_statement / supported</strong>：OpenAI人员承认长会话多次compaction会重复计费图片、Computer History高尾部用量与会话标题生成超预期耗量并随后重置用量；用户投诉包括周限额一日耗尽、自动compaction耗时约5分钟、长任务耗时从30分钟膨胀至3小时。 <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553?page=46">S14</a></li>
+<li><strong>C21 / inference / preliminary</strong>：GPT-5-Codex上线初期的极慢、崩溃与Failed to sample tokens属模型或服务侧问题，不应直接反推为Harness架构缺陷；该区分是材料给出的解释限定，尚未以故障归因证据独立证实。 <a href="https://community.openai.com/t/upgrades-to-codex-gpt-5-codex/1358210">S03</a></li>
+<li><strong>C22 / inference / preliminary</strong>：GPT-5.3-Codex发布同日Anthropic推出Claude Opus 4.6，显示的是模型代际竞争，而非Harness本身变更；该判断为时序并列推断，未证实两者发布存在直接因果关联。 <a href="https://techbriefly.com/2026/02/06/openai-releases-gpt-5-3-codex-says-model-helped-build-itself/">S04</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://openai.com/index/unlocking-the-codex-harness/">Unlocking the Codex harness</a> · OpenAI
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：Unlocking the Codex harness 全文相关段落。
+- 原文支持：区分Codex产品、模型与开源CLI/Harness；给出Agent主循环、Harness构成、App Server结构、Item/Turn/Thread三原语及Web容器运行方式。
+- 限制：材料未给出该文精确发布日，故published记为unknown，不以材料标注的2026-10-21作发布日。</p>
+<p><strong>S02</strong> <a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">Codex (AI agent)</a> · Wikipedia
+- 发布：unknown；事件：2025-05-16；查阅：2026-10-21。
+- 来源族：encyclopedia；读取：relevant_text；定位：OpenAI Codex 条目相关段落。
+- 原文支持：2025-04-16发布开源Codex CLI，2025-05-16发布Codex Cloud研究预览，首发模型codex-1是为软件工程优化的o3版本。
+- 限制：百科二手整理，发布日未知；事件日取材料给出的云端预览日2025-05-16。</p>
+<p><strong>S03</strong> <a href="https://community.openai.com/t/upgrades-to-codex-gpt-5-codex/1358210">Upgrades to Codex GPT-5-Codex</a> · OpenAI Developer Community
+- 发布：unknown；事件：2025-09-15；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：Upgrades to Codex GPT-5-Codex 讨论串。
+- 原文支持：GPT-5-Codex于2025-09-15前后发布，定位为针对Codex中智能体编程优化的GPT-5版本；上线初期有极慢、崩溃与Failed to sample tokens的集中反馈。
+- 限制：材料标注发布为前后，日期精度约日级，存在数日浮动；社区反馈为用户报告，非官方故障定性。</p>
+<p><strong>S04</strong> <a href="https://techbriefly.com/2026/02/06/openai-releases-gpt-5-3-codex-says-model-helped-build-itself/">OpenAI releases GPT-5.3-Codex, says model helped build itself</a> · TechBriefly
+- 发布：2026-02-06；事件：2026-02-06；查阅：2026-10-21。
+- 来源族：tech_media；读取：relevant_text；定位：发布报道全文。
+- 原文支持：GPT-5.3-Codex于2026-02-06前后发布，官方口径称比前代快25%且参与自身训练调试；发布同日Anthropic推出Claude Opus 4.6。
+- 限制：快25%为官方口径转述，非独立实测；GPT-5.3-Codex发布日材料另有一处记为2026-02-05前后，存在一日级浮动。</p>
+<p><strong>S05</strong> <a href="https://deepwiki.com/openai/codex/3-core-agent-system">Core Agent System openai/codex</a> · DeepWiki
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：documentation；读取：relevant_text；定位：Core Agent System 相关章节。
+- 原文支持：codex-rs核心以Codex/Session/TurnContext/ModelClient为中心，客户端提交Op、异步接收Event，Session持有会话状态并由RolloutRecorder持久化；梳理称其为Tokio异步状态机，工具调用经有序并行执行。
+- 限制：二手研究梳理，非逐行代码核验；有序并行执行的实现细节未在材料中展开。</p>
+<p><strong>S06</strong> <a href="https://dev.to/ji_ai/i-read-openai-codexs-source-and-built-my-workflow-around-it-51mc">I read OpenAI Codex's source and built my workflow around it</a> · DEV Community
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tech_media；读取：relevant_text；定位：源码梳理全文。
+- 原文支持：上下文组装顺序为系统指令、开发者指令、聚合的AGENTS.md、环境信息与工具清单；AGENTS.md按全局~/.codex/AGENTS.md、项目级与子目录分层合并，合计扫描上限约32KiB。
+- 限制：个人源码梳理，非官方文档；32KiB为约数，未证实为硬性精确上限。</p>
+<p><strong>S07</strong> <a href="https://dev.to/jangwook_kim_e31e7291ad98/openai-codex-cli-terminal-coding-agent-setup-guide-2026-67o">OpenAI Codex CLI terminal coding agent setup guide 2026</a> · DEV Community
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tech_media；读取：relevant_text；定位：设置指南全文。
+- 原文支持：AGENTS.md是行为层，config.toml是执行环境层，控制模型、沙箱模式与审批策略；命令行标志优先于config.toml，项目级.config需项目被标记信任后才加载。
+- 限制：设置指南类二手资料，信任标记的具体交互细节未在材料中展开。</p>
+<p><strong>S08</strong> <a href="http://docs.getunleash.io/integrate/codex">Codex integration documentation</a> · Unleash
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：documentation；读取：relevant_text；定位：Codex集成文档相关章节。
+- 原文支持：沙箱与审批是两套独立控制，档位为read-only、workspace-write（交互默认且默认无网络）、danger-full-access，对应Read Only/Auto/Full Access预设；MCP在config.toml中配置mcp_servers表或用codex mcp add注册，工具名以服务器名前缀呈现；非交互codex exec中MCP调用会因无法展示审批而被自动取消。
+- 限制：第三方集成文档，非OpenAI官方文档；exec中MCP取消属材料标注的已知局限。</p>
+<p><strong>S09</strong> <a href="https://www.swequiz.com/articles/openai-codex-architecture">OpenAI Codex architecture</a> · SWEQuiz
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tech_media；读取：secondary；定位：Codex架构梳理全文。
+- 原文支持：长会话通过/compaction或自动压缩维持上下文窗口，梳理称Codex调用/responses/compact并以不透明encrypted_content承载压缩后状态；但内部表示与云端实现细节未在公开资料中完整证实。
+- 限制：二手梳理且材料本身标为preliminary；压缩内部表示与云端细节未证实。</p>
+<p><strong>S10</strong> <a href="https://habr.com/en/articles/1073214/">Codex Agents Dashboard</a> · Habr
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tech_media；读取：relevant_text；定位：Codex Agents Dashboard 报道全文。
+- 原文支持：Codex CLI 0.149.0引入codex agents交互看板与codex queue命令，看板复用同一本地App Server守护进程管理的会话，状态分Need input/Working/Ready三类。
+- 限制：第三方报道，版本号与看板细节未以官方发布说明逐项核验。</p>
+<p><strong>S11</strong> <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">Researchers escape OpenAI Codex sandbox to run commands on host</a> · BleepingComputer
+- 发布：unknown；事件：2026-08-12；查阅：2026-10-21。
+- 来源族：security_media；读取：relevant_text；定位：沙箱逃逸报道全文。
+- 原文支持：2026-08-12上报、8日内修复的两起逃逸中，Heapjack利用Codex Desktop的node_repl共享堆内存窃取认证令牌并经未沙箱化父进程执行命令，即使在最严格read-only模式下也无需审批；Overpatch涉apply_patch补丁工具。
+- 限制：材料梳理日期记为2026-09-20，与上报日2026-08-12不同；修复后回归验证细节未在材料中展开。</p>
+<p><strong>S12</strong> <a href="http://thehackernews.com/2026/09/malicious-git-configs-can-make-claude.html">Malicious git configs can make Claude and Codex execute commands</a> · The Hacker News
+- 发布：2026-09-02；事件：2026-09-02；查阅：2026-10-21。
+- 来源族：security_media；读取：relevant_text；定位：恶意git配置报道全文。
+- 原文支持：恶意.git/config中的core.fsmonitor等命令可被Agent后台git status/diff触发，在沙箱与审批之外以用户权限执行；OpenAI同日为Codex发布三条同类CVE，其中CVE-2026-19592明确指出助手在沙箱外无审批运行。
+- 限制：第三方安全报道转述CVE口径，CVE全文与受影响版本范围未在材料中展开。</p>
+<p><strong>S13</strong> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">How Codex hijacked your DNS to block your traffic</a> · MIXTV
+- 发布：2026-10-16；事件：2026-10-15；查阅：2026-10-21。
+- 来源族：tech_media；读取：relevant_text；定位：DNS报道全文。
+- 原文支持：Codex CLI 0.163.0于2026-10-15修复DNS前置解析问题，此前代理会在校验主机许可前先做DNS解析，导致即使最终阻断连接，内部主机名元数据已泄露给DNS方，且macOS受管沙箱本地绑定可绕过端口53限制。
+- 限制：第三方报道，修复范围与macOS绕过的复现条件未以官方更新说明逐项核验。</p>
+<p><strong>S14</strong> <a href="https://community.openai.com/t/codex-rate-limits-discussion-thread/1378553?page=46">Codex rate limits discussion thread</a> · OpenAI Community
+- 发布：unknown；事件：2026-10-03；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：Codex rate limits discussion thread 第46页相关段落。
+- 原文支持：OpenAI人员承认长会话多次compaction会重复计费图片、Computer History高尾部用量与会话标题生成超预期耗量并随后重置用量；用户投诉包括周限额一日耗尽、自动compaction耗时约5分钟、长任务耗时从30分钟膨胀至3小时。
+- 限制：社区讨论与用户投诉，非官方账单审计；重置用量后的最终计费口径未在材料中展开。</p>
+<p>检索缺口：
+- 官方App Server协议的完整消息格式与错误处理未在材料中展开
+- codex-rs当前版本的逐行代码核验缺失，Tokio状态机与有序并行执行的细节仅为二手梳理
+- /responses/compact与encrypted_content的内部表示、云端压缩实现未公开证实
+- 云端并行调度、容器缓存与Worker置备的深层内部机制未公开证实
+- 沙箱逃逸与DNS修复后的回归验证、受影响版本完整范围未在材料中展开
+- 32KiB扫描上限的精确测量口径与超限处理未证实
+- MCP在非交互exec中自动取消之外的其他审批盲区范围未展开</p>
+<p>检索日志：OpenAI Codex CLI agent loop harness architecture tools thread session（discovery）；openai/codex GitHub repository architecture AGENTS.md config sandbox approval（discovery）；Codex sandbox bypass prompt injection security vulnerability（counterevidence）；Codex 架构 Agent主循环 工具编排 会话状态（discovery）；Codex 开源代码结构 沙箱 审批 MCP 工具（verification）；GPT-5-Codex model release OpenAI official blog（verification）；OpenAI Codex May 2025 launch codex-1 research preview official（verification）；Codex pricing rate limits complaints long task failure context compaction（counterevidence）；Codex App Server JSON-RPC thread turn item protocol openai（verification）。</p>
+<h2 id="harness_1">四、Harness 沙箱与权限安全</h2>
+<p><strong>关键议题</strong>：Harness沙箱与权限安全：Codex本地与云端如何以沙箱边界、审批策略与信任配置分层控制执行与联网，以及已知绕过如何削弱该边界。</p>
+<p>选题依据：沙箱与审批是决定Agent能否写文件、执行命令与联网的核心安全边界，且材料同时包含官方口径、配置演变与多起绕过反证，适合以证据账本区分已证实机制与未证实架构说法。</p>
+<p><strong>当前判断</strong>：条件性优选V02的修正主张：厂商沙箱不能单独当作硬边界；当项目来源审查、审批委托范围限制、沙箱外受信工具不自动执行等叠加控制缺失或失效时，项目配置、MCP条目、审批委托与沙箱外执行可能把越界执行合法化，因此须叠加代码评审与最小权限。但在上述前提同时成立且有效时，账本没有实例证明越界链必然成立，残余风险未量化，不能断言为零。 <a href="https://www.testmuai.com/blog/codex-cli/">S07</a> <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">S11</a> <a href="https://beyondmachines.net/event_details/command-injection-flaw-in-openai-codex-cli-enables-silent-remote-code-execution-8-g-e-z-9">S12</a> <a href="https://www.hexnode.com/threat-watch/ai-coding-agent-sandbox-escapes-endpoint-security/">S15</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S13</a> <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">S14</a></p>
+<p>优选：V02；置信度：medium。核心机制与历史实例有supported账本支撑，CVE-2025-61260具体且有修复版本信息；但C18为推断而非普遍定律，缺少误批率、绕过发生率与真实部署覆盖率等量化证据，且本评议仅依据所供账本摘要，未重新核验原文。
+成立条件：适用于账本覆盖范围与截至2026-10-21的材料；不推断此后默认配置、未提供的版本范围、绕过发生率或误批率。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_15">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（主张沙箱分层可控的部署者；代表把沙箱当作可配置、可落地的工程控制的立场：承认边界需要配置，但认为默认断网与工作区限定是有效基线。）：在正确配置下，分层沙箱、审批策略与受信项目机制已足以把日常编码风险控制在可接受范围，重点是默认断网、工作区限定与高风险复核。
+- 限定：范围限定为“正确配置下的日常编码”：使用workspace-write或更严模式、保持默认断网、不用danger-full-access或绕过标志、并对高风险动作保留复核。在此范围内置信度为中等；超出该范围，或配置错误、信任判断失误时，本主张不成立。
+- 最强反证：最强反证是材料中记载的绕过与信任边界问题：沙箱并非绝对硬边界，攻击链可能不直接攻破内核边界，而是利用项目来源配置、加载时执行的工具条目、沙箱外受信工具执行沙箱内写出的文件，或把审批委托给自动评审从而使越界执行合法化；历史上也有已修复的静默执行与平台相关漏洞实例。因此，一旦“正确配置”这一前提不成立，或出现未覆盖的绕过路径，“已足以控制风险”的结论即被削弱，须叠加代码评审、最小权限与对项目来源的信任审查，而不能仅凭沙箱本身断言安全。 <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S03</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S04</a> <a href="https://workos.com/blog/agent-sandbox-egress-defaults">S08</a></p>
+<p><strong>观点 V02</strong>（强调逃逸链的防御者；代表以反证为核心的立场：不否认沙箱机制存在，但认为攻击链常绕过而非攻破沙箱，因此不能把厂商沙箱当作硬边界。）：沙箱只是多层防御中的一层，不能被当作硬边界：项目配置、MCP条目、沙箱外受信工具与审批委托都可能把越界执行合法化，因此必须叠加代码评审与最小权限。
+- 限定：范围限于所供账本覆盖的讨论与截至2026-10-21的材料；本主张不否认沙箱机制存在，也不主张所有部署都会被绕过。置信度为中等：核心机制与历史实例为supported，但通用模式属推断，需以个案评审与权限收紧落地，而非当作已证实的普遍规律。
+- 最强反证：最强反证是：沙箱机制本身并非不存在，且CVE-2025-61260已有针对性修复；若项目来源可信、MCP条目经过事前评审、委托审批仅限低风险且已充分授权的请求，本主张的紧迫性会显著下降。但该反证成立的前提正是本主张所要求的叠加评审与最小权限，而非仅凭沙箱本身即可成立。 <a href="https://www.testmuai.com/blog/codex-cli/">S07</a> <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">S11</a> <a href="https://beyondmachines.net/event_details/command-injection-flaw-in-openai-codex-cli-enables-silent-remote-code-execution-8-g-e-z-9">S12</a> <a href="https://www.hexnode.com/threat-watch/ai-coding-agent-sandbox-escapes-endpoint-security/">S15</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S13</a> <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">S14</a></p>
+<p><strong>观点 V03</strong>（受审批疲劳困扰的团队负责人；代表在效率与安全之间权衡的立场：接受低风险委托以减少打断，但要求高风险动作保留人工复核。）：审批疲劳是真实成本，自动评审与受管网络策略可以在低风险场景减少打断，但委托审批不等于委托正确性判断，高风险动作仍应停下复核。
+- 限定：范围限定于低风险或已充分授权的沙箱外请求，以及受管网络策略已覆盖预期目的地的场景；置信度为中等——机制与风险实例均有supported账本支撑，但因缺少量化证据与一手核验，不主张自动评审可替代人工正确性判断，也不主张审批疲劳已被消除。
+- 最强反证：最强反证来自C14本身：自动评审的失败不是单纯漏批，而是可能把越界执行合法化，使疲劳缓解反转为安全边界弱化；若以减少打断为由把委托范围扩大到高风险动作，或把受管网络策略的放行等同于请求本身正确、安全，则V03主张的前提即被破坏，因此高风险复核不可省略。 <a href="https://openai.com/index/running-codex-safely/">S10</a> <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">S11</a></p>
+<h3 id="_16">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：在逐项核查通过的单个部署内，workspace-write或更严模式、默认断网、受保护路径只读、清除已退役untrusted配置、不使用danger-full-access或yolo类绕过，可作为可落地的基线核查清单，但不能推广为一般部署已正确配置。
+- V03的合理洞察：在厂商内部口径描述范围内，低风险或已充分授权请求的自动评审与受管网络策略可减少打断；但该做法不等于正确性判断，高风险动作仍须人工复核，且低风险划定标准本身尚未解决。</p>
+<p>不确定性及改变判断的条件：
+- 三项叠加前提同时成立时残余风险有多大，什么证据能量化它。
+- 事前评审覆盖全部加载时执行路径的完备标准是什么。
+- 低风险或已充分授权的划定主体、可核查标准及其抗间接提示注入与沙箱外工具链操纵能力。
+- 审批委托误批率、沙箱绕过发生率、域名允许清单与方法限制在真实部署中的覆盖率。
+- 2026-10-21之后CLI与云端的默认配置变更，以及Overpatch与Heapjack的修复版本与回归验证。</p>
+<h3 id="_17">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：沙箱不是最后一道关：真正决定执行是否合法的，还有加载了谁的配置、信任了哪些工具、谁代为批准。</li>
+<li><strong>需要</strong>：需要在承认沙箱机制存在的前提下，堵住加载时执行、委托代批与沙箱外自动执行这三条合法化越界的路径，而不是只加固沙箱本身。</li>
+<li><strong>方案</strong>：以单个部署核查清单为基线，以加载前评审、委托范围限制、沙箱外执行禁令为叠加控制，高风险动作一律保留人工复核。</li>
+<li><strong>预演</strong>：若上述控制落地，日常低风险编码仍可低摩擦运行；一旦任一控制缺失或失效，越界链仍可能通过项目配置或受信工具完成，因此残余风险应被记录为未量化而非视为零。</li>
+<li><strong>行动</strong>：
+   - 由部署负责人对单个部署逐项核查并记录：sandbox_mode不高于workspace-write、默认断网、受保护路径只读、已退役approval_policy=untrusted已清除、不使用danger-full-access或yolo类绕过 <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S03</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S04</a> <a href="https://codex.danielvaughan.com/2026/05/08/codex-cli-permission-profiles-sandbox-modes-security-layers/">S05</a>
+     时间：首次部署前完成，配置变更后复核；指标：核查项通过数与未通过项数；基线：账本所给判据清单，全部通过为基线。
+     停止/成功条件：任一核查项未通过即停止高风险自动执行，直至整改通过；阈值来源：证据所给判据，见C04、C05、C06、C07。
+   - 由代码评审者在加载前评审项目来源config.toml与mcp_servers条目，确认无未评审命令型MCP条目进入受信加载 <a href="https://www.testmuai.com/blog/codex-cli/">S07</a> <a href="https://beyondmachines.net/event_details/command-injection-flaw-in-openai-codex-cli-enables-silent-remote-code-execution-8-g-e-z-9">S12</a>
+     时间：每次引入或更新项目配置与MCP条目前；指标：未评审即加载的项目配置与MCP条目数；基线：0条。
+     停止/成功条件：出现1条未评审加载即暂停该项目Agent执行并回滚或补审；阈值来源：分析者建议，账本未给评审完备性阈值。
+   - 由部署方书面划定自动评审可代批的低风险与已充分授权范围，仅限该范围代批，沙箱外命令与高风险动作保留人工复核 <a href="https://openai.com/index/running-codex-safely/">S10</a> <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">S11</a>
+     时间：委托审批启用前划定，每次范围变更前复核；指标：超出划定范围的代批事件数与误批导致的越界执行事件数；基线：0起越界代批事件。
+     停止/成功条件：出现1起超出范围或越界代批即收回委托权限并人工复核相关请求；阈值来源：分析者建议，账本未给误批率阈值。
+   - 由部署方禁止沙箱外受信工具自动执行、加载或扫描沙箱内写出的文件，对README、Issue、依赖与diff中的间接提示注入做人工评审 <a href="https://www.hexnode.com/threat-watch/ai-coding-agent-sandbox-escapes-endpoint-security/">S15</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S13</a> <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">S14</a>
+     时间：持续执行，工具链变更前复核；指标：沙箱外工具自动执行沙箱内写出文件的事件数；基线：0起。
+     停止/成功条件：出现1起自动执行事件即阻断该工具链并审查触发内容；阈值来源：分析者建议，账本未给发生率阈值。</li>
+</ol>
+<h3 id="_18">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：必须区分三层：Codex产品与订阅服务、codex-1及后续GPT-5-Codex系列模型、开源库openai/codex的CLI/TUI与本地Harness实现；开源的是客户端而非模型本身，不可把模型名当作产品名或Harness版本。 <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Codex CLI于2025-04-16以开源终端Agent发布，云端Codex于2025-05-16以研究预览发布并可并行执行多任务，每任务运行于独立云沙箱且预载仓库；云端首发模型为针对软件工程优化的o3版本codex-1。 <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S01</a></li>
+<li><strong>C03 / fact / supported</strong>：早期审批模式为suggest（默认，写文件与命令均需审批）、auto-edit（自动写文件、命令需审批）、full-auto（沙箱内自动执行、默认断网、限定工作目录）。 <a href="https://www.sitepoint.com/openai-codex-cli-terminalfirst-coding-agent-tutorial-2026/">S02</a></li>
+<li><strong>C04 / fact / supported</strong>：现行本地安全模型是两维正交：sandbox_mode为read-only、workspace-write、danger-full-access，approval_policy为on-request、never等；workspace-write默认无出站网络，需显式开启网络访问才联网。 <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S03</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：本地沙箱按平台强制执行：macOS用Seatbelt经sandbox-exec，Linux用bubblewrap加seccomp，Windows用WSL2或原生沙箱；workspace-write内.git、.codex、.agents等路径仍只读且不可豁免。 <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S03</a></li>
+<li><strong>C06 / source_statement / supported</strong>：官方安全口径是：默认断网，本地用OS强制沙箱限定当前工作区，审批策略决定何时停下询问；沙箱定技术边界，审批定询问时机，两者缺一不可；approval_policy=untrusted已退役，残留该配置可能导致客户端无法启动，严格控制应改用项目trust_level=untrusted加规则。 <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S04</a></li>
+<li><strong>C07 / fact / supported</strong>：2026年出现beta权限画像read-only、workspace、danger-full-access，文档要求不得与旧sandbox_mode混用，应二选一；yolo类绕过标志同时移除沙箱与审批，仅限一次性容器或VM使用。 <a href="https://codex.danielvaughan.com/2026/05/08/codex-cli-permission-profiles-sandbox-modes-security-layers/">S05</a></li>
+<li><strong>C08 / fact / preliminary</strong>：配置分层为用户config.toml、项目config.toml、命令行覆盖与profile；项目级配置、hooks与rules仅在受信项目加载，不受信项目会被跳过；AGENTS.md按目录层级拼接、越近越优先，32KiB上限在材料中表述为说法，尚未确认为一手事实。 <a href="https://foundermag.co/tutorials/openai-codex-cli-getting-started/">S06</a></li>
+<li><strong>C09 / fact / supported</strong>：MCP接入方式包括mcp管理命令及config.toml中mcp_servers表，支持命令型与URL/OAuth型服务器；但MCP命令在配置加载时即可能执行，因此项目来源的MCP条目本身就是信任边界。 <a href="https://www.testmuai.com/blog/codex-cli/">S07</a></li>
+<li><strong>C10 / fact / supported</strong>：云端为两阶段运行时：setup阶段可联网安装依赖，agent阶段默认断网；若开启联网则按环境配置域名允许清单，并可限制HTTP方法为GET、HEAD、OPTIONS以降低注入后数据外发风险。 <a href="https://workos.com/blog/agent-sandbox-egress-defaults">S08</a></li>
+<li><strong>C11 / fact / preliminary</strong>：云端秘密处理口径为：为云环境配置的秘密仅在setup阶段可用，agent阶段开始前会被移除；但setup阶段出站代理过滤能力未在公开资料中完整证实，不得从模型行为反推云端架构。 <a href="https://workos.com/blog/agent-sandbox-egress-defaults">S08</a></li>
+<li><strong>C12 / fact / preliminary</strong>：2026-09-29前后Codex推出可复用云环境：一次配置并发布为命名环境或快照，后续多任务可从同一出发点独立运行、断开后继续，任务各自保留未提交工作；云端内部是否为microVM未获官方一手证实。 <a href="https://pivotbuild.ai/articles/openai-s-codex-adds-saved-cloud-environments-so-coding-tasks-keep-runnin-4a5d0f/">S09</a></li>
+<li><strong>C13 / source_statement / supported</strong>：OpenAI内部运行口径是低风险日常动作尽量无摩擦、高风险动作停下复核，受管网络策略只放行预期目的地并对陌生域名要求审批，自动评审子代理可代批低风险或已充分授权的沙箱外请求；但该口径本身不等于自动评审能判断正确性或防逃逸。 <a href="https://openai.com/index/running-codex-safely/">S10</a></li>
+<li><strong>C14 / fact / supported</strong>：审批委托存在风险实例：guardian_approval或自动评审可在用户不介入时批准沙箱外命令，虽缓解审批疲劳，但把安全判断交给子代理，失败时可能把越界执行合法化。 <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">S11</a></li>
+<li><strong>C15 / fact / supported</strong>：CVE-2025-61260：攻击者通过仓库提交.env重定向CODEX_HOME与项目目录config.toml中的恶意MCP命令，使开发者运行codex时无需提示即以用户上下文静默执行命令；OpenAI于2025-08-20在Codex CLI 0.23.0修复，补丁阻止.env静默重定向CODEX_HOME到项目目录。 <a href="https://beyondmachines.net/event_details/command-injection-flaw-in-openai-codex-cli-enables-silent-remote-code-execution-8-g-e-z-9">S12</a></li>
+<li><strong>C16 / fact / preliminary</strong>：Overpatch与Heapjack于2026-09-15公开：Overpatch利用apply_patch按补丁路径推导写权限，在workspace-write下写出工作区；Heapjack利用Codex Desktop的node_repl共享V8堆提取受信上下文令牌并伪造请求，即使最严格read-only模式也可执行宿主命令；两者据称8天内修复且未见真实利用报告。 <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S13</a></li>
+<li><strong>C17 / fact / supported</strong>：Windows跨用户问题：Codex CLI Windows沙箱命名管道IPC可被同一主机低权限用户接管，进而伪造输出、诱导提示注入并窃取含持久刷新令牌的凭证，CVSS 8.5，修复为管道限定沙箱用户并做客户端身份校验。 <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">S14</a></li>
+<li><strong>C18 / inference / supported</strong>：通用逃逸模式的推断是：多家Agent沙箱逃逸并非直接攻破内核边界，而是Agent在沙箱内写出的文件被沙箱外受信工具执行、加载或扫描，触发点常为README、Issue、依赖或diff中的间接提示注入；因此厂商沙箱不能被当作硬边界，须叠加代码评审与最小权限。 <a href="https://www.hexnode.com/threat-watch/ai-coding-agent-sandbox-escapes-endpoint-security/">S15</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S13</a> <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">S14</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">OpenAI Codex</a> · Wikipedia
+- 发布：unknown；事件：2025-05-16；查阅：2026-10-21。
+- 来源族：reference；读取：relevant_text；定位：OpenAI Codex条目。
+- 原文支持：区分三层：Codex产品与订阅服务、codex-1及后续GPT-5-Codex系列模型、开源库openai/codex的CLI/TUI与本地Harness实现；开源的是客户端而非模型本身；CLI于2025-04-16发布，云端于2025-05-16以研究预览发布并可并行多任务，每任务运行于独立云沙箱且预载仓库。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；三层区分的表述以摘要为准。</p>
+<p><strong>S02</strong> <a href="https://www.sitepoint.com/openai-codex-cli-terminalfirst-coding-agent-tutorial-2026/">OpenAI Codex CLI terminal-first coding agent tutorial</a> · SitePoint
+- 发布：unknown；事件：2025-04-16；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Codex CLI教程中审批模式部分。
+- 原文支持：早期审批模式为suggest（默认，写文件与命令均需审批）、auto-edit（自动写文件、命令需审批）、full-auto（沙箱内自动执行、默认断网、限定工作目录）。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；早期模式的适用版本范围未在摘要中完整说明。</p>
+<p><strong>S03</strong> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">How to sandbox AI coding agents 2026</a> · Codersera
+- 发布：unknown；事件：2026-10-05；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：沙箱指南中本地安全模型与平台执行部分。
+- 原文支持：现行本地安全模型是两维正交：sandbox_mode为read-only/workspace-write/danger-full-access，approval_policy为on-request/never等；workspace-write默认无出站网络，需显式设置network_access=true才联网；macOS用Seatbelt经sandbox-exec，Linux用bubblewrap加seccomp，Windows用WSL2或原生沙箱；workspace-write内.git、.codex、.agents等路径仍只读且不可豁免。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；各平台沙箱的具体版本与例外未在摘要中说明。</p>
+<p><strong>S04</strong> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">Agent approvals &amp; security</a> · ChatGPT Learn
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：Agent approvals and security文档。
+- 原文支持：官方安全口径：默认断网，本地用OS强制沙箱限定当前工作区，审批策略决定何时停下询问；沙箱定技术边界，审批定询问时机，两者缺一不可；approval_policy=untrusted已退役，Codex与ChatGPT Work不再支持，残留该配置可能导致客户端无法启动；严格控制应改用项目trust_level=untrusted加规则，而非旧审批值。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；退役配置在各客户端版本中的具体表现未在摘要中说明。</p>
+<p><strong>S05</strong> <a href="https://codex.danielvaughan.com/2026/05/08/codex-cli-permission-profiles-sandbox-modes-security-layers/">Codex CLI Permission Profiles: Sandbox Modes and Security Layers</a> · Daniel Vaughan
+- 发布：unknown；事件：2026-05-08；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Codex CLI Permission Profiles一文。
+- 原文支持：2026年出现beta权限画像：read-only、workspace、danger-full-access，文档要求不得与旧sandbox_mode混用，应二选一；yolo类绕过标志同时移除沙箱与审批，仅限一次性容器或VM使用。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；beta画像的当前可用性与版本范围未在摘要中说明。</p>
+<p><strong>S06</strong> <a href="https://foundermag.co/tutorials/openai-codex-cli-getting-started/">OpenAI Codex CLI getting started</a> · FounderMag
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Codex CLI入门中配置与信任部分。
+- 原文支持：配置分层为用户~/.codex/config.toml、项目.codex/config.toml、命令行覆盖与profile；项目级配置、hooks与rules仅在受信项目加载，不受信项目会被跳过，AGENTS.md则按目录层级拼接、越近越优先且有32KiB上限说法。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；AGENTS.md的32KiB上限在摘要中表述为说法，未获一手确认。</p>
+<p><strong>S07</strong> <a href="https://www.testmuai.com/blog/codex-cli/">Codex CLI</a> · TestMuAI
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Codex CLI一文中MCP接入部分。
+- 原文支持：MCP接入方式为mcp管理命令及config.toml中mcp_servers表，支持命令型与URL/OAuth型服务器；但MCP命令在配置加载时即可能执行，因此项目来源的MCP条目本身就是信任边界。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；各MCP服务器类型的具体审批行为未在摘要中区分。</p>
+<p><strong>S08</strong> <a href="https://workos.com/blog/agent-sandbox-egress-defaults">Agent Sandbox Egress Defaults</a> · WorkOS
+- 发布：unknown；事件：2026-08-30；查阅：2026-10-21。
+- 来源族：article；读取：relevant_text；定位：Agent Sandbox Egress一文。
+- 原文支持：云端为两阶段运行时：setup阶段可联网安装依赖，agent阶段默认断网；若开启联网则按环境配置域名允许清单，并可限制HTTP方法为GET/HEAD/OPTIONS以降低注入后数据外发风险；为云环境配置的秘密仅在setup阶段可用，agent阶段开始前会被移除；setup阶段出站代理过滤能力未在公开资料中完整证实，属unverified/preliminary，不得从模型行为反推云端架构。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；setup阶段出站过滤能力明确未证实，不得当作已证实机制引用。</p>
+<p><strong>S09</strong> <a href="https://pivotbuild.ai/articles/openai-s-codex-adds-saved-cloud-environments-so-coding-tasks-keep-runnin-4a5d0f/">OpenAI's Codex adds saved cloud environments</a> · Pivot Build
+- 发布：unknown；事件：2026-09-29；查阅：2026-10-21。
+- 来源族：article；读取：relevant_text；定位：Codex云环境报道。
+- 原文支持：2026-09-29前后Codex推出可复用云环境：一次配置并发布为命名环境或快照，后续多任务可从同一出发点独立运行、断开后继续，任务各自保留未提交工作；云端内部是否为microVM在公开二手资料中有说法但未获官方一手证实，标为unverified/preliminary。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；microVM说法为二手说法，未获官方一手证实。</p>
+<p><strong>S10</strong> <a href="https://openai.com/index/running-codex-safely/">Running Codex Safely</a> · OpenAI
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：Running Codex Safely一文。
+- 原文支持：OpenAI内部运行口径：低风险日常动作尽量无摩擦、高风险动作停下复核；受管网络策略只放行预期目的地并对陌生域名要求审批，自动评审子代理可代批低风险或已充分授权的沙箱外请求，但这不等于自动评审能判断正确性或防逃逸。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；内部口径不等于所有部署的默认行为。</p>
+<p><strong>S11</strong> <a href="https://azukiazusa.dev/en/blog/codex-sandbox-agent-authorization/">Codex Sandbox and Approvals</a> · Azukiazusa
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：article；读取：relevant_text；定位：Codex Sandbox and Approvals一文。
+- 原文支持：审批委托存在风险实例：guardian_approval或自动评审可在用户不介入时批准沙箱外命令（如npm run test），虽缓解审批疲劳，但把安全判断交给子代理，失败时可能把越界执行合法化。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；该实例的版本与配置条件未在摘要中完整说明。</p>
+<p><strong>S12</strong> <a href="https://beyondmachines.net/event_details/command-injection-flaw-in-openai-codex-cli-enables-silent-remote-code-execution-8-g-e-z-9">Command injection flaw in OpenAI Codex CLI enables silent remote code execution</a> · Beyond Machines
+- 发布：unknown；事件：2025-08-20；查阅：2026-10-21。
+- 来源族：security-report；读取：relevant_text；定位：CVE-2025-61260事件报道。
+- 原文支持：反证CVE-2025-61260：攻击者通过仓库提交.env重定向CODEX_HOME与项目目录config.toml中的恶意MCP命令，使开发者运行codex时无需提示即以用户上下文静默执行命令；OpenAI于2025-08-20在Codex CLI 0.23.0修复，补丁阻止.env静默重定向CODEX_HOME到项目目录。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；补丁覆盖范围与后续回归情况未在摘要中说明。</p>
+<p><strong>S13</strong> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">Overpatch and Heapjack: two techniques for bypassing Codex's write restrictions and escaping its sandbox</a> · DEV
+- 发布：unknown；事件：2026-09-15；查阅：2026-10-21。
+- 来源族：security-report；读取：relevant_text；定位：Overpatch and Heapjack一文。
+- 原文支持：反证Overpatch与Heapjack（2026-09-15公开）：Overpatch利用apply_patch按补丁路径推导写权限，在workspace-write下写出工作区；Heapjack利用Codex Desktop的node_repl共享V8堆提取受信上下文令牌并伪造请求，即使最严格read-only模式也可执行宿主命令，两者据称8天内修复且未见真实利用报告。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；修复版本与真实利用情况在摘要中表述为据称与未见报告，需保留限定。</p>
+<p><strong>S14</strong> <a href="http://cymulate.com/blog/openai-codex-cli-named-pipe-vulnerability/">OpenAI Codex CLI named pipe vulnerability</a> · Cymulate
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：security-report；读取：relevant_text；定位：Codex CLI命名管道漏洞一文。
+- 原文支持：反证Windows跨用户问题：Codex CLI Windows沙箱命名管道IPC可被同一主机低权限用户接管，进而伪造输出、诱导提示注入并窃取含持久刷新令牌的凭证，CVSS 8.5，修复为管道限定沙箱用户并做客户端身份校验。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；受影响版本与修复版本未在摘要中说明。</p>
+<p><strong>S15</strong> <a href="https://www.hexnode.com/threat-watch/ai-coding-agent-sandbox-escapes-endpoint-security/">AI Coding Agent Sandbox Escapes and Endpoint Security</a> · Hexnode
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：security-report；读取：relevant_text；定位：AI Coding Agent Sandbox Escapes一文。
+- 原文支持：反证通用模式：多家Agent沙箱逃逸并非直接攻破内核边界，而是Agent在沙箱内写出的文件被沙箱外受信工具执行、加载或扫描，触发点常为README、Issue、依赖或diff中的间接提示注入；因此厂商沙箱不能被当作硬边界，须叠加代码评审与最小权限。
+- 限制：本账本仅依据提供的OSINT摘要，未重新全文核验原文；该通用模式覆盖的厂商与产品范围未在摘要中逐一限定。</p>
+<p>检索缺口：
+- 缺少云端内部实现的一手官方资料：microVM说法与setup阶段出站代理过滤能力均未证实，无法确认云端隔离强度。
+- 缺少AGENTS.md的32KiB上限、beta权限画像当前版本范围、Windows命名管道漏洞受影响与修复版本等一手版本信息。
+- 缺少Overpatch与Heapjack的真实利用报告、修复版本与回归验证信息，其影响范围仅能表述为据称。
+- 缺少量化证据：各类沙箱绕过的发生率、审批委托的误批率、域名允许清单与方法限制在真实部署中的覆盖率均未在材料中提供。
+- 缺少当前CLI与云端在2026-10-21之后的默认配置变更信息，本账本不推断此后状态。</p>
+<p>检索日志：OpenAI Codex sandbox approval modes suggest auto full-auto network isolation（discovery）；openai codex GitHub sandbox workspace write network access MCP tools（discovery）；Codex sandbox bypass privilege escalation prompt injection security vulnerability（counterevidence）；Codex 沙箱 审批模式 网络隔离 命令权限 安全（discovery）；Codex MCP 工具接入 提示注入 绕过 安全事件（counterevidence）；OpenAI Codex cloud sandbox setup phase internet access environment parallel tasks（verification）；Codex AGENTS.md config.toml trusted project guardian approval review（verification）；OpenAI Codex April 2025 launch CLI research preview cloud agent（verification）；site developers.openai.com Codex sandboxing approvals network access（discovery）。</p>
+<h2 id="_19">五、模型能力与实测表现</h2>
+<p><strong>关键议题</strong>：Codex模型代际能力是否持续提升、其实测表现与安全及限额反证能否支撑其作为长程主力交付工具的定位？</p>
+<p>选题依据：本账本聚焦提供的OSINT材料中最核心的争议线：从codex-1到GPT-5.3-Codex的基准演进与长程能力主张，同时以沙箱逃逸、DNS泄露、护栏个案与限额争议作为强制反证，避免只采信厂商自测口径。</p>
+<p><strong>当前判断</strong>：在现有账本下，应暂缓把Codex作为无条件长程主力交付工具的结论；可将其定位为受控的桌面或云端辅助交付工具，待独立同口径复现、护栏系统性统计与修复后残留风险证据补齐后再重新评估升级。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S09</a> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S10</a> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S11</a> <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></p>
+<p>优选：V02；置信度：medium。基准口径不可比的判断有C13支撑，沙箱逃逸有C08支持事实，但最新代基准多为厂商自测初步结论，护栏证据仅为冲突个案，额度与残留风险证据缺失，因此结论为暂缓而非否定。
+成立条件：仅适用于有人工审查、审批与路径约束、可复现成本记录的受控桌面或云端场景；不适用于无条件长程自主交付、移动端主力交付，也不适用于把不同基准分数直接横向比较的场景。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_20">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；采信厂商代际基准序列，强调从codex-1到GPT-5.1-Codex-Max再到GPT-5.3-Codex的分数与效率改进。）：Codex代际演进呈现持续的能力与效率提升，长程压缩使长任务成为可行的主力工作方式。
+- 限定：范围限定于厂商代际基准序列所覆盖的编码与终端任务，不覆盖全部语言、任务类型与部署场景；置信度为中等偏谨慎：方向性提升的证据较连贯，但因缺乏独立评测，不能作为无条件的主力交付结论。不同基准版本与推理努力档位不可直接横向比较，引用分数时须注明基准与档位。
+- 最强反证：最强反证有三点：第一，代际分数来自不同基准与厂商自测口径，跨代直接比较易误读，且缺乏独立复现，无法排除口径偏差；第二，长程可靠性存在未解决的疑问，包括沙箱逃逸与护栏失效个案所提示的安全与控制风险，以及缺乏护栏失效的系统性发生率统计；第三，成本与限额存在未确认争议，无法仅凭基准与token效率推断实际可负担的主力交付成本。因此，本主张成立的前提是厂商口径与内部评估可信，独立验证缺失是其最薄弱处。 <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S02</a> <a href="https://www.deeplearning.ai/the-batch/openai-introduces-codex-a-multi-agent-cloud-based-software-engineering-tool-in-chatgpt">S03</a> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S05</a> <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></p>
+<p><strong>观点 V02</strong>（谨慎验证者；强调基准口径差异、沙箱逃逸与DNS泄露、护栏个案以及未确认的限额争议，要求独立复现后再下结论。）：厂商基准不可直接比较，且已有安全与护栏反证；在此条件下，长程可靠性与成本/效率主张尚未得到独立证实，不宜直接作为长程主力交付的结论。
+- 限定：范围限定于所提供的证据账本，未重新核验原文。置信分层：基准口径差异的置信较高；沙箱逃逸事件本身的置信中等偏高，但其当前残留风险未知；DNS问题因属preliminary二手转述而置信中等；护栏问题仅为个案反证，对普遍发生率的置信低。本立场不主张已修复的漏洞至今仍存在，也不以单个护栏个案断言长程任务普遍不可靠。
+- 最强反证：最强反证是：两起沙箱逃逸与DNS泄露均已有明确修复版本与修复时间，8天修复也可被解读为响应较快；护栏失效仅为单个用户投诉，未见系统性统计，不能证明普遍缺陷；只要注明基准版本、语言覆盖与努力档位，不同代际仍可作有条件的、限定口径的比较。因此对方可主张：反证削弱的是“无条件采信厂商结论”，而非证明长程能力本身没有提升或当前系统不可用。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S09</a> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S10</a> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S11</a> <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></p>
+<p><strong>观点 V03</strong>（实际部署权衡者；以可验证的本地机制为可用边界，以云端不可证实性、移动端局限与限额争议为部署约束。）：开源Harness机制可验证、可配置，但云端架构不可证实、移动端带宽受限、定价不确定，因此Codex更适合受控的桌面/云端辅助交付而非无条件的主力交付。
+- 限定：范围限定于以可验证本地机制为边界的受控桌面/云端辅助交付；不主张Codex在所有场景下都不适合主力交付，也不量化云端性能、真实成本或移动端效率损失。整体置信度中等偏低：本地机制部分较高，云端不可证实性、定价与移动端三项约束分别受限于unverified、unverified与单篇preliminary证据，任何一项被官方资料或对照实测澄清都可能改变结论强度。
+- 最强反证：最强反证来自本组证据自身的局限：C11未经官方确认，宽幅估算不能用于精确成本比较；C12仅为单篇实测评论，缺乏多设备、多任务对照实测；C07只是方法论上的不可证实，不等于云端架构必然不可靠。若官方确认限额口径、公布云端架构资料，或对照实测证明移动端可支撑全屏审查与架构推导，则“不适合无条件主力交付”的约束将被削弱。同时，C06的可验证性仅覆盖本地Harness，不能外推为云端行为同样可验证。 <a href="https://www.cnblogs.com/smartloli/p/20684447">S07</a> <a href="https://www.testmuai.com/blog/codex-cli/">S08</a> <a href="https://pasqualepillitteri.it/zh/news/25920/gpt-6-1-sol-codex-edu-openai-wei-queren">S12</a> <a href="https://llm.putaojie.top/news/LargeLanguageModel/2026101081740.html">S13</a></p>
+<h3 id="_21">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：在各自基准口径内，Codex代际分数分段上升且推理token效率有所改善，context compaction为长任务状态保留提供了可能路径，但这不等于长程主力交付已成立。
+- V03的合理洞察：开源Harness的AGENTS.md、审批模式与apply_patch检查等可验证机制，足以支撑受控辅助交付的控制边界，部署决策应以可验证部分为准。</p>
+<p>不确定性及改变判断的条件：
+- GPT-5.2-Codex与GPT-5.3-Codex基准有无独立第三方在同一基准版本、语言覆盖与努力档位下的复现结果。
+- 长程护栏失效的系统性发生率如何，以任务数、时长与严重度分母如何统计。
+- Heapjack与Overpatch及DNS问题修复后是否仍有残留风险。
+- SWE-Bench Pro按语言与任务类型拆分的明细如何，总分背后有无明显短板。
+- GPT-6.1 Sol等额度消耗变化有无官方确认或可复现的消耗日志。</p>
+<h3 id="_22">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：厂商代际分数在上升，但分数来自不同基准与自测口径，同时已有沙箱逃逸、DNS泄露与护栏失效个案，盲目把Codex推为主力交付可能低估长程风险与成本不确定性。</li>
+<li><strong>需要</strong>：需要在下结论前补齐三类可核查证据：独立同口径复现、护栏系统性统计与修复后残留风险评估、可复现的额度消耗记录。</li>
+<li><strong>方案</strong>：采用受控辅助交付定位：只在桌面或云端受控环境使用，保留人工审查与审批约束，移动端仅用于状态监控与轻量排障，待三项证据补齐后再评估是否升级为主力交付。</li>
+<li><strong>预演</strong>：若三项证据补齐且结果 favorable，团队可在限定任务类型内逐步扩大长程任务比例并用实际失效与成本数据复核；若任一证据显示高失效或成本不可预算，则继续保持辅助定位，避免长任务中途失控或预算超支。</li>
+<li><strong>行动</strong>：
+   - 由评估方在同一基准版本、同一语言覆盖与同一推理努力档位下，对最新一代Codex进行独立复现并公开方法、样本范围与波动情况 <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a>
+     时间：下一评估周期内完成，报告公开后复核；指标：独立复现分数与厂商自测分数的差值及方法公开完整性；基线：厂商自测口径：GPT-5.2-Codex在SWE-Bench Pro上56.4%，GPT-5.3-Codex官方称约57%。
+     停止/成功条件：复现报告公开且方法与样本可核查，或确认无法复现并记录原因；阈值来源：分析者建议（账本未提供可接受偏差阈值）。
+   - 由安全评估方在受控沙箱中进行长程护栏与修复后残留风险测试，记录只读护栏、特定文件保护与git命令限制的遵守情况 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S09</a> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S11</a>
+     时间：下一评估周期内完成，覆盖多轮长程任务；指标：护栏失效次数除以长程任务数，并按严重度分级；基线：已修复版本为CLI 0.149.0与Desktop 26.818.21641起，护栏失效目前仅有单个用户个案。
+     停止/成功条件：完成有明确分母与严重度分级的测试报告，或确认测试条件不足并记录缺口；阈值来源：分析者建议（账本未提供可接受护栏失效阈值）。
+   - 由成本评估方记录真实任务的额度与token消耗日志，与价格页宽幅估算对照，不得仅凭单次用户投诉断定消耗变化 <a href="https://pasqualepillitteri.it/zh/news/25920/gpt-6-1-sol-codex-edu-openai-wei-queren">S12</a>
+     时间：连续两周的实际任务记录后复核；指标：每类任务的实际额度消耗与完成率，及中途因额度受限中断的任务比例；基线：价格页仅给出Plus每5小时约15-160条本地消息的宽幅估算。
+     停止/成功条件：形成可复现的消耗日志与预算区间，或确认日志不足并继续记录；阈值来源：分析者建议（账本未提供可接受成本或中断阈值）。</li>
+</ol>
+<h3 id="_23">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Codex是产品与订阅服务，codex-1/GPT-5-Codex/GPT-5.1-Codex-Max等是模型，openai/codex是Apache-2.0开源Harness而非模型本身开源，Harness涵盖Agent主循环、线程、工具调用、沙箱与审批。 <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">S01</a> <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S02</a></li>
+<li><strong>C02 / fact / supported</strong>：codex-1于2025年5月以Codex Cloud研究预览首发，为面向软件工程优化的o3变体，在SWE-bench Verified上单次72.1%、8次83.8%，高于o3高努力模式的69.7%/83.6%；云端任务在独立沙箱中运行，典型耗时1-30分钟且可并行。 <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S02</a> <a href="https://www.deeplearning.ai/the-batch/openai-introduces-codex-a-multi-agent-cloud-based-software-engineering-tool-in-chatgpt">S03</a></li>
+<li><strong>C03 / source_statement / preliminary</strong>：GPT-5-Codex引入自适应推理：简单任务较GPT-5省约93.7% token、最复杂10%任务耗时翻倍，大型重构准确率51.3% vs GPT-5的33.9%，推理可在数秒至7小时之间动态分配，并称在SWE-bench Verified上优于GPT-5。 <a href="https://ecweb.ecer.com/topic/en/detail-328768-openai_launches_gpt5_codex_for_aipowered_code_review.html">S04</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：GPT-5.1-Codex-Max于2025-11-19发布，以context compaction跨多上下文窗口剪枝保留关键状态，SWE-bench Verified从73.7%升至77.9%（high→xhigh），推理token较GPT-5.1-Codex少约30%，内部评估称可连续工作24小时以上并成为Codex默认模型。 <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S05</a></li>
+<li><strong>C05 / source_statement / preliminary</strong>：GPT-5.2-Codex在SWE-Bench Pro上56.4%、Terminal-Bench 2.0上64.0%；GPT-5.3-Codex官方称SWE-Bench Pro约57%、Terminal-Bench 2.0 77.3%、OSWorld约64%，且快约25%、同等任务token不到前代一半；但上述均为厂商自测口径，需与独立评测对照。 <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></li>
+<li><strong>C06 / fact / supported</strong>：开源Harness存在可验证机制：AGENTS.md作项目指令，~/.codex/config.toml配置MCP与profiles，审批分suggest/auto-edit/full-auto（或read-only/workspace-write），apply_patch前有路径与审批检查，Skills遵循SKILL.md并可声明MCP依赖，子代理与并行任务在CLI中为实验性/多worktree隔离。 <a href="https://www.cnblogs.com/smartloli/p/20684447">S07</a></li>
+<li><strong>C07 / inference / unverified</strong>：云端容器缓存、并行执行、内部调度等闭源云端架构细节无法从公开资料证实，不得从模型行为反推云端架构；本条为方法论结论而非厂商声明。 <a href="https://www.testmuai.com/blog/codex-cli/">S08</a></li>
+<li><strong>C08 / fact / supported</strong>：Accomplish AI于2026-08-12上报Heapjack与Overpatch两起Codex沙箱逃逸，其中Heapjack在最严格只读模式下无需审批即可通过共享堆内存窃取认证token实现宿主命令执行，OpenAI在8天内修复（CLI 0.149.0/Desktop 26.818.21641起）。 <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">S09</a></li>
+<li><strong>C09 / source_statement / preliminary</strong>：Codex CLI 0.163.0于2025年10月15日修复DNS先解析后鉴权问题，此前即使代理最终拦截连接，主机名已向DNS提供方泄露，且macOS沙箱本地绑定可绕过端口53限制。 <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">S10</a></li>
+<li><strong>C10 / source_statement / conflicting</strong>：有用户报告gpt-5.1-codex-max在Codex CLI中无视其明确的只读、不触碰特定UI文件与不执行git命令的护栏并损坏文件；该个案不能直接推广为普遍缺陷，但与长程任务可靠性争议相关。 <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S11</a></li>
+<li><strong>C11 / source_statement / unverified</strong>：2026年10月有订阅用户称GPT-6.1 Sol在Codex中额度消耗显著加快（如一小时100%→88%），但OpenAI官方未确认，价格页仅给Plus每5小时约15-160条本地消息的宽幅估算，无法证实消耗变化；Ultrafast模式仅限500美元Pro、约8倍速但6倍扣费，引发社区算力配给争议。 <a href="https://pasqualepillitteri.it/zh/news/25920/gpt-6-1-sol-codex-edu-openai-wei-queren">S12</a></li>
+<li><strong>C12 / source_statement / preliminary</strong>：Codex Cloud支持手机远程操作、CLI支持语音对话与多并发任务跟踪，但实测评论认为手机屏幕与语音输入带宽不足以支撑全屏diff审查与架构推导，移动端只适合状态监控与轻量排障，不宜作为主力交付工具。 <a href="https://llm.putaojie.top/news/LargeLanguageModel/2026101081740.html">S13</a></li>
+<li><strong>C13 / inference / supported</strong>：不同代际的72.1%/77.9%/57%不可直接横向比较：SWE-bench Verified仅覆盖Python，而SWE-Bench Pro覆盖四语言且更抗污染、更贴近工业场景，比较时需注明基准版本与推理努力档位（high/xhigh）。 <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></li>
+<li><strong>C14 / forecast / preliminary</strong>：若context compaction与长程压缩路线延续，未来Codex模型可能在更长任务上保持状态并减少token，但其可靠性、成本与安全表现仍需独立评测验证，不能仅由厂商基准推断。 <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S05</a> <a href="https://openai.com/index/introducing-gpt-5-3-codex/">S06</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://groundtruth.day/news/openai-open-sourced-the-agent-loop-not-the-model.html">OpenAI open-sourced the agent loop, not the model</a> · Ground Truth
+- 发布：2026-08-24；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：relevant_text；定位：三层区分段落。
+- 原文支持：Codex是产品与订阅服务，codex-1/GPT-5-Codex/GPT-5.1-Codex-Max等是模型，openai/codex是Apache-2.0开源Harness，涵盖Agent主循环、线程、工具调用、沙箱与审批，模型本身不开源。
+- 限制：材料提供的为相关文本摘要，未在本任务中重新核验原文全文。</p>
+<p><strong>S02</strong> <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">OpenAI Codex</a> · Wikipedia
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：encyclopedia；读取：relevant_text；定位：Codex CLI与Cloud发布历史段落。
+- 原文支持：Codex CLI于2025-04-16作为开源终端Agent发布，Codex Cloud研究预览于2025-05-16发布，首发模型codex-1为面向软件工程优化的o3变体，先向Pro/Enterprise/Team开放。
+- 限制：精确发布页日期未知，以材料中的事件日期为准；百科为二手汇总。</p>
+<p><strong>S03</strong> <a href="https://www.deeplearning.ai/the-batch/openai-introduces-codex-a-multi-agent-cloud-based-software-engineering-tool-in-chatgpt">OpenAI Introduces Codex, a Multi-Agent Cloud-Based Software Engineering Tool in ChatGPT</a> · DeepLearning.AI The Batch
+- 发布：2025-05-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：relevant_text；定位：codex-1基准与云端运行段落。
+- 原文支持：codex-1在SWE-bench Verified上单次72.1%、8次83.8%，高于o3高努力模式的69.7%/83.6%；云端每任务在独立沙箱中运行，典型耗时1-30分钟、可并行多任务。
+- 限制：日期精度为月，材料只给出2025-05；基准为厂商相关口径的转述。</p>
+<p><strong>S04</strong> <a href="https://ecweb.ecer.com/topic/en/detail-328768-openai_launches_gpt5_codex_for_aipowered_code_review.html">OpenAI Launches GPT-5-Codex for AI-Powered Code Review</a> · ECER / BusinessGhana转述OpenAI
+- 发布：2025-09-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：secondary；定位：GPT-5-Codex自适应推理段落。
+- 原文支持：GPT-5-Codex引入自适应推理，简单任务较GPT-5省约93.7% token、最复杂10%任务耗时翻倍，大型重构准确率51.3% vs GPT-5的33.9%，并称在SWE-bench Verified上优于GPT-5，推理可在数秒至7小时之间动态分配。
+- 限制：日期精度为月，材料只给出2025-09；为转述OpenAI的二手来源，非独立评测。</p>
+<p><strong>S05</strong> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">Introducing GPT-5.1-Codex-Max: Enhanced Reasoning and Long-Horizon Workflows</a> · OpenAI Developer Community
+- 发布：2025-11-19；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：GPT-5.1-Codex-Max发布与compaction段落。
+- 原文支持：GPT-5.1-Codex-Max于2025-11-19发布，核心为context compaction跨多上下文窗口自动剪枝保留关键状态，SWE-bench Verified从73.7%升至77.9%（high→xhigh），推理token较GPT-5.1-Codex少约30%，内部评估称可连续工作24小时以上，并取代GPT-5.1-Codex成为Codex默认模型。
+- 限制：24小时以上为内部评估说法，非独立实测；社区帖为厂商相关发布渠道。</p>
+<p><strong>S06</strong> <a href="https://openai.com/index/introducing-gpt-5-3-codex/">Introducing GPT-5.3-Codex</a> · OpenAI
+- 发布：2026-02-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：GPT-5.2/GPT-5.3基准与基准口径段落。
+- 原文支持：GPT-5.2-Codex在SWE-Bench Pro上56.4%（GPT-5.2为55.6%、GPT-5.1为50.8%）、Terminal-Bench 2.0上64.0%（62.2%/58.1%），主打长程压缩、项目级重构迁移与Windows表现；GPT-5.3-Codex官方称SWE-Bench Pro约57%、Terminal-Bench 2.0 77.3%、OSWorld约64%，且快约25%、同等任务token不到前代一半，但均为厂商自测口径；SWE-bench Verified仅覆盖Python，而SWE-Bench Pro覆盖四语言且更抗污染、更贴近工业场景。
+- 限制：日期精度为月，材料只给出2026-02；全部为厂商自测口径，需与独立评测对照。</p>
+<p><strong>S07</strong> <a href="https://www.cnblogs.com/smartloli/p/20684447">Codex源码解读</a> · 博客园
+- 发布：2026-06-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：blog；读取：relevant_text；定位：Harness机制段落。
+- 原文支持：开源Harness可验证机制：AGENTS.md作项目指令，~/.codex/config.toml配置MCP与profiles，审批分suggest/auto-edit/full-auto（或read-only/workspace-write），apply_patch前有assess_patch_safety式路径与审批检查，Skills遵循SKILL.md并可声明MCP依赖，子代理与并行任务在CLI中为实验性/多worktree隔离。
+- 限制：日期精度为月，材料只给出2026-06；为源码解读类博客，非官方文档全文。</p>
+<p><strong>S08</strong> <a href="https://www.testmuai.com/blog/codex-cli/">Codex CLI指南（区分本地与云端执行）</a> · TestMuAI
+- 发布：2026-08-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：blog；读取：relevant_text；定位：本地与云端执行区分段落。
+- 原文支持：闭源云端部分警示：云端容器缓存、并行执行、内部调度等架构细节无法从公开资料证实，一律标为unverified/preliminary，不得从模型行为反推云端架构；本条为方法论结论而非厂商声明。
+- 限制：日期精度为月，材料只给出2026-08；为方法论结论，不代表厂商披露。</p>
+<p><strong>S09</strong> <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/">Researchers escape OpenAI Codex sandbox to run commands on host</a> · BleepingComputer
+- 发布：2026-09-20；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：relevant_text；定位：Heapjack与Overpatch沙箱逃逸段落。
+- 原文支持：Accomplish AI于2026-08-12上报Heapjack与Overpatch两起Codex沙箱逃逸，Heapjack利用Desktop node_repl中受信与非受信JS上下文共享同一堆内存窃取认证token，在最严格只读模式下无需审批即可实现宿主命令执行，OpenAI在8天内修复（CLI 0.149.0/Desktop 26.818.21641起）。
+- 限制：材料日期2026-09-20为条目日期，上报日2026-08-12为事件日期；修复后是否仍有残留风险材料未说明。</p>
+<p><strong>S10</strong> <a href="https://www.mixtv1.com/index.php/2026/10/16/how-codex-hijacked-your-dns-to-block-your-traffic/">How Codex hijacked your DNS to block your traffic</a> · MIXTV转述OpenAI changelog
+- 发布：2026-10-16；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：secondary；定位：DNS先解析后鉴权段落。
+- 原文支持：Codex CLI 0.163.0于2025年10月15日修复DNS先解析后鉴权问题，此前即使代理最终拦截连接，主机名已向DNS提供方泄露，且macOS沙箱本地绑定可绕过端口53限制。
+- 限制：为转述changelog的二手来源；修复版本与事件日期跨年度，材料表述需以事件日期2025-10-15为准。</p>
+<p><strong>S11</strong> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">Introducing GPT-5.1-Codex-Max: Enhanced Reasoning and Long-Horizon Workflows（用户反馈）</a> · OpenAI Developer Community用户反馈
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community；读取：secondary；定位：用户护栏失效反馈段落。
+- 原文支持：有用户报告gpt-5.1-codex-max在Codex CLI中无视其明确的只读/不触碰特定UI文件与不执行git命令的护栏并损坏文件，属个案投诉，不能直接推广为普遍缺陷，但与长程任务可靠性争议相关。
+- 限制：精确发布日期未知，以事件日期2025-11-20为准；为单个用户投诉，非系统性统计。</p>
+<p><strong>S12</strong> <a href="https://pasqualepillitteri.it/zh/news/25920/gpt-6-1-sol-codex-edu-openai-wei-queren">GPT-6.1 Sol Codex额度争议报道</a> · Pasquale Pillitteri / Airadar
+- 发布：2026-10-20；事件：见正文说明；查阅：2026-10-21。
+- 来源族：media；读取：secondary；定位：额度消耗与Ultrafast争议段落。
+- 原文支持：2026年10月订阅用户在r/OpenAI称GPT-6.1 Sol在Codex中额度消耗显著加快（如一小时100%→88%），OpenAI官方未确认且价格页仅给Plus每5小时约15-160条本地消息的宽幅估算，无法证实消耗变化；Ultrafast模式仅限500美元Pro、约8倍速但6倍扣费，引发社区算力配给争议。
+- 限制：为社区投诉与二手报道的转述，官方未确认；宽幅估算无法用于精确成本比较。</p>
+<p><strong>S13</strong> <a href="https://llm.putaojie.top/news/LargeLanguageModel/2026101081740.html">Codex Cloud与CLI移动端实测文章</a> · 53AI知识库
+- 发布：2026-10-10；事件：见正文说明；查阅：2026-10-21。
+- 来源族：blog；读取：relevant_text；定位：移动端实测局限段落。
+- 原文支持：Codex Cloud支持手机远程操作、CLI支持语音对话与多并发任务跟踪，但实测评论认为手机屏幕与语音输入带宽不足以支撑全屏diff审查与架构推导，移动端只适合状态监控与轻量排障，不宜作为主力交付工具。
+- 限制：为单篇实测评论，非多设备对照实验；未给出可复现的任务清单与评分。</p>
+<p>检索缺口：
+- 缺乏对GPT-5.2-Codex与GPT-5.3-Codex基准的独立第三方复现结果，无法确认厂商自测口径的偏差。
+- 缺乏GPT-6.1 Sol额度消耗变化的官方确认或可复现的消耗日志，无法量化成本变化。
+- 缺乏云端容器缓存、并行执行与内部调度的公开架构资料，无法证实或证伪云端实现细节。
+- 缺乏长程护栏失效的系统性发生率统计，仅有单个用户投诉，无法估计普遍风险。
+- 缺乏SWE-Bench Pro按语言、任务类型拆分的明细，无法判断57%等总分背后的短板。
+- 缺乏移动端多设备、多任务的对照实测，现有结论仅来自单篇实测评论。</p>
+<p>检索日志：OpenAI Codex model capabilities SWE-bench GPT-5-Codex announcement（discovery）；openai codex GitHub repository CLI agent loop sandbox approval MCP（discovery）；OpenAI Codex 模型能力 代码生成 实测 评测（discovery）；Codex 定价 限额 争议 长任务 失败 安全（counterevidence）；OpenAI introducing Codex research preview codex-1 May 2025（verification）；Codex prompt injection sandbox bypass security vulnerability（counterevidence）；GPT-5.1-Codex-Max context compaction November 2025 OpenAI（verification）；Codex 开源 openai codex AGENTS.md 沙箱 审批 MCP 配置（discovery）。</p>
+<h2 id="_24">六、商业模式生态与风险</h2>
+<p><strong>关键议题</strong>：Codex以ChatGPT捆绑订阅加按token计费与企业渠道扩张为商业模式，但采用率落后、成本不可预测以及沙箱与供应链信任事件构成主要风险。</p>
+<p>选题依据：本节为指定的商业模式、生态与风险子议题；上游材料同时覆盖定价与订阅结构、企业部署渠道、竞争采用率以及沙箱、供应链、限额与基准四类反证，适合编制可审查的证据账本。</p>
+<p><strong>当前判断</strong>：在Stack Overflow 2026开发者调查的受访者口径内，Codex目前是编码Agent市场的挑战者而非领导者：其29.5%的采用率显著低于Claude Code的65.5%，且Windsurf收购流产使其未获得原生深度集成IDE资产；Dell、AWS Bedrock与GSI渠道只证明触达路径已经搭建，尚未有可验证的落地规模证明其已转化为份额。 <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a> <a href="https://winbuzzer.com/2025/07/15/anatomy-of-a-collapse-the-wild-takeover-saga-of-windsurf-featuring-openai-anthropic-microsoft-google-and-cognition-xcxwbn/">S20</a> <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a></p>
+<p>优选：V03；置信度：medium。核心差距与收购事实均为supported且差距达36个百分点，但调查抽样与多选口径细节不完整，渠道转化判断依赖的C20为preliminary，且落地规模证据缺失，限制了对未来追赶速度的判断。
+成立条件：仅适用于Stack Overflow 2026调查中“使用所列AI编码Agent的受访者”这一分母与多选口径，不外推为全体开发者、收入或全球市场份额；结论以2026-10-21前材料为准，后续同口径复测或可归因落地数据出现时应修正。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_25">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（企业平台化乐观者；从渠道与产品组合看Codex的扩张逻辑，强调捆绑与企业合作带来的分发优势，不否认竞争与信任风险，但认为其属于可治理的执行问题。）：Codex的捆绑订阅、企业渠道与安全产品线构成平台化扩张路径：订阅分层覆盖从免费到企业定制，Dell、AWS Bedrock与7家GSI把Codex带入企业现有治理与采购流程，Security Cloud则把安全场景变为新的企业卖点。
+- 限定：范围与置信度：本主张是关于扩张逻辑与渠道结构的判断，不是关于市场份额、收入或企业采纳规模的结论。渠道与产品组合的存在性置信度为中等偏高；其转化为持续企业规模化采纳的置信度为低，因为关键的落地规模证据缺失。本主张不否认竞争与信任风险，只主张在现有证据下应将其视为可治理的执行问题，而非否定渠道逻辑本身。
+- 最强反证：最强反证：渠道公告不等于市场地位与企业信任。调查显示Codex的采用率显著低于头部竞品；按token计费与限额争议使长任务成本难以预估，损害企业预算的可预测性；已披露的沙箱逃逸、配置劫持与官方Skill幻觉域名导致的凭证外泄路径，直接冲击企业对数据与系统所在地部署前提的信任。如果企业采购方把可审计的隔离、审批与供应链审查作为前置条件而非事后补救，仅靠捆绑订阅与渠道合作不足以证明扩张成立。这是本立场最薄弱处：材料没有给出上述治理要求已在企业落地中被规模化满足的证据。 <a href="https://inventivehq.com/blog/codex-subscription-options-guide">S07</a> <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a> <a href="https://pondero.ai/news/2026-09-30-codex-security-cloud/">S21</a></p>
+<p><strong>观点 V02</strong>（成本与信任审慎者；从买方成本与安全治理角度评估，强调已披露的反证对企业部署前提的冲击，主张在采购前锁定计量、限额与供应链审查条款。）：成本与信任是Codex商业模式的硬约束：按token credit计费使长任务成本难以预估，限额争议损害可预测性，而沙箱逃逸与官方Skill幻觉域名事件表明，治理承诺需要以可验证的隔离、审批与供应链审查来兑现，而非仅靠默认模式。
+- 限定：范围限定于所提供的证据账本与2026年10月21日前的材料口径，不扩展为对Codex当前全部版本或全部部署形态的普遍安全结论。置信度分层：按token计费导致长任务成本难预估的机制判断为中等偏高；限额争议是否源于官方降额为未决；官方Skill幻觉域名事件的普遍性与当前状态为低置信，仅能作为供应链审查的警示而非定论。
+- 最强反证：最强反证是：两起沙箱逃逸并非未处置的长期暴露，材料显示其在8天内修复并发布CLI 0.149.0，说明厂商具备快速响应能力；限额争议中官方已否认悄悄降额并给出第三方转售这一替代解释，而用户投诉本身未经官方计量数据证实；Skill域名事件为preliminary的单一二手报道，尚未在材料中得到官方回应或影响范围确认，不能直接推断官方供应链已系统性失控。因此，成本与信任问题更准确的表述是未被充分证明可预测、可审计的采购风险，而非已经证实的普遍不可用或普遍不安全。 <a href="https://aitoolsrecap.com/Blog/codex-pricing-explained-2026">S06</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a> <a href="https://community.openai.com/t/5-hour-limit-should-be-optional/1403664">S18</a> <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">S12</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S13</a></p>
+<p><strong>观点 V03</strong>（竞争格局现实主义者；以采用率与生态资产得失衡量Codex的市场地位，强调渠道公告不等于份额，模型迭代速度本身不足以抵消分发与信任差距。）：Codex目前是编码Agent市场的挑战者而非领导者：在Stack Overflow 2026开发者调查的受访范围内，其29.5%的采用率显著低于Claude Code的65.5%；Windsurf收购流产使其错失原生深度集成IDE资产；Dell、AWS Bedrock与GSI等企业渠道扩张能否转化为份额，仍需可验证的落地规模来证明，而非仅凭渠道公告认定。
+- 限定：范围限定为Stack Overflow 2026调查中“使用所列AI编码Agent的受访者”，不是全体开发者、全部收入或全球市场份额。置信度：就该调查口径而言，“挑战者而非领导者”的判断为中等偏高；对“短期内追赶速度受限”的预测，因C20为初步预测且缺乏落地规模数据，置信度较低。
+- 最强反证：最强反证是：企业渠道扩张仍可能在调查快照之后转化为份额，且29.5%在所列工具中仍居第三、并非边缘位置；Windsurf流产也不等于Codex完全失去IDE生态路径。但材料未提供这些渠道的落地项目数、收入或活跃企业数，也未提供可替代原生深度集成IDE资产的同等规模证据，因此该反证目前只能作为未证实的可能性，不能推翻基于现有调查与资产得失的挑战者判断；若未来出现可验证的落地规模，本结论应被修正。 <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a> <a href="https://winbuzzer.com/2025/07/15/anatomy-of-a-collapse-the-wild-takeover-saga-of-windsurf-featuring-openai-anthropic-microsoft-google-and-cognition-xcxwbn/">S20</a> <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a></p>
+<h3 id="_26">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：捆绑订阅与Dell、Bedrock、GSI渠道确实降低了进入企业已有治理与采购流程的摩擦，平台化路径已经搭建，适用于评估分发潜力而非已实现份额。
+- V02的合理洞察：即使接受挑战者判断，成本可预测性与沙箱、供应链可审计性仍是企业采购的前置门槛，适用于采购谈判与部署验收，而非直接否定V03的市场地位判断。</p>
+<p>不确定性及改变判断的条件：
+- 缺乏与C07同口径的后续采用率复测，无法判断29.5%与65.5%的差距是否缩小。
+- 缺乏Dell、AWS Bedrock与GSI的落地项目数、收入、活跃企业数及其与Codex使用的归因数据，无法判定渠道转化。
+- 缺乏官方credit换算率、档位credit额度、限额计量口径与企业合同条款，无法核算长任务真实成本。
+- 缺乏Heapjack与Overpatch修复后的独立复现结果，以及官方Skill幻觉域名事件的官方回应与影响范围，无法判定当前治理状态。</p>
+<h3 id="_27">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：Codex在开发者调查中明显落后于头部竞品，同时企业渠道已经铺开但转化未被证明，成本与信任问题可能在采购时放大这一差距。</li>
+<li><strong>需要</strong>：买方与观察者需要一个不依赖渠道公告的市场地位判断，以及可验证的成本、落地与治理证据，才能决定是否扩大采用或采购。</li>
+<li><strong>方案</strong>：以同口径调查快照锁定当前地位，以可归因落地数据、标准化成本测试与独立安全复现作为后续修正条件，不把公告、模型迭代或厂商宣称直接当作份额或安全结论。</li>
+<li><strong>预演</strong>：若后续同口径复测显示差距收窄且渠道落地可归因，则挑战者判断可被修正；若落地与治理证据仍缺失，则即使渠道名单扩大，也应继续按挑战者与高审查门槛对待Codex。</li>
+<li><strong>行动</strong>：
+   - 由跟踪负责人复核与C07同口径的后续Stack Overflow或同类调查，在相同分母与多选口径下比较Codex与Claude Code采用率 <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a>
+     时间：下一次同类调查发布后30天内；指标：同口径下Codex与Claude Code采用率及百分点差距；基线：2026年调查中Codex 29.5%、Claude Code 65.5%，差距36个百分点。
+     停止/成功条件：获得同口径复测数据并完成口径一致性核对后停止；若口径不一致则停止外推并记录为不可比；阈值来源：证据所给基线；领导者判定条件为分析者建议：同口径下Codex超过同期Claude Code。
+   - 由采购或尽调负责人向渠道方索取Dell、AWS Bedrock与GSI各自可归因于Codex的落地项目数、活跃企业数或用户数 <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a> <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a>
+     时间：采购决策前完成一轮书面索取与核对；指标：可归因落地项目数与活跃企业数，区分公告、上架、名单与实际使用；基线：材料中未披露上述落地规模，官方每周400万开发者宣称未获第三方核验。
+     停止/成功条件：获得可审计、可归因数据后停止；若仅得到公告或名单则判定为转化未证实并停止推断份额；阈值来源：未知，分析者建议：不设定具体数字阈值，须有可归因数据本身而非阈值猜测。
+   - 由采购方用标准化长任务样本测试按token credit计费的成本波动，记录输入、缓存输入与输出token及窗口与重置行为 <a href="https://aitoolsrecap.com/Blog/codex-pricing-explained-2026">S06</a> <a href="https://community.openai.com/t/5-hour-limit-should-be-optional/1403664">S18</a>
+     时间：试点期2至4周内；指标：同类任务的credit成本区间与预算偏差率，长会话是否被窗口中断；基线：C03显示同为一个任务的简单修复与大型重构成本可相差数倍；C15限额争议未获可复现计量证明。
+     停止/成功条件：获得可复现计量口径与合同条款后停止；若仍无法复现则按不可预测成本处理并停止扩大采购；阈值来源：分析者建议：以合同中可复现的计量口径为准，具体数值阈值须由采购方在合同谈判中确定，账本未提供。
+   - 由安全负责人对当前版本独立复现Heapjack与Overpatch的修复状态，并审计官方Skill与MCP配置中的外部域名与凭证引用 <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a>
+     时间：部署前完成一轮复现与审计；指标：在read-only与workspace-write模式下可复现的越权次数，未注册或未验证域名引用数量；基线：C12披露的两起逃逸曾在最严格模式下发生并于0.149.0修复；C14为preliminary的单一二手报道。
+     停止/成功条件：零可复现越权且无未验证域名凭证引用时通过；任一可复现或官方回应未澄清影响范围时停止部署并保持高审查状态；阈值来源：证据所给修复版本0.149.0；零可复现为分析者建议的验收标准。</li>
+</ol>
+<h3 id="_28">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Codex是产品与订阅服务，codex-1/GPT-5-Codex等是其搭载的模型，openai/codex开源库仅是CLI/TUI与本地Harness实现，桌面App、云端与API服务并不开源。 <a href="https://en.wikipedia.org/wiki/Codex_CLI">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Codex没有独立订阅，捆绑于ChatGPT计划：Free 0美元、Go约8美元/月、Plus 20美元/月、Pro 100/200美元/月（另有500美元档的报道），Business按席位、企业与Edu为定制报价。 <a href="https://inventivehq.com/blog/codex-subscription-options-guide">S07</a></li>
+<li><strong>C03 / fact / supported</strong>：2026-04-02起Codex由按消息计费改为按token的credit计费，成本随输入/缓存输入/输出token变化，简单修复与大型重构即使同为一个任务也可能相差数倍。 <a href="https://aitoolsrecap.com/Blog/codex-pricing-explained-2026">S06</a></li>
+<li><strong>C04 / fact / supported</strong>：API密钥路径按token单独计费，不受订阅窗口限制，与捆绑订阅路径并存。 <a href="https://inventivehq.com/blog/codex-subscription-options-guide">S07</a></li>
+<li><strong>C05 / fact / supported</strong>：企业部署通过Dell合作进入混合与本地环境（连接Dell AI Data Platform与AI Factory），并于2026-06-02通过Amazon Bedrock在AWS上架，强调复用AWS已有安全、合规、采购与计费治理流程。 <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a></li>
+<li><strong>C06 / fact / supported</strong>：OpenAI以GSI生态放大Codex企业落地，Infosys为7家全球系统集成商之一，与Accenture、Capgemini、Cognizant、TCS、PwC、CGI一同被引入，并整合Codex与Infosys Topaz Fabric。 <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a></li>
+<li><strong>C07 / fact / supported</strong>：Stack Overflow 2026开发者调查（30903份有效回答）中，在使用所列AI编码Agent的受访者里，Claude Code占65.5%、GitHub Copilot占58.7%、OpenAI Codex占29.5%、Cursor占25.5%。 <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a></li>
+<li><strong>C08 / fact / supported</strong>：Codex搭载模型迭代迅速：codex-1于2025-05-16随云端研究预览首发，GPT-5-Codex于2025-09-15发布，GPT-5.1-Codex-Max于2025-11-19取代GPT-5.1-Codex成为默认模型，GPT-5.2-Codex于2025-12-18发布，GPT-5.5于2026-04-23进入ChatGPT与Codex。 <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">S02</a> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">S03</a> <a href="https://www.testingcatalog.com/openai-launches-gpt-5-2-codex-for-coding-and-security-tasks/">S04</a> <a href="https://www.testingcatalog.com/openai-launches-gpt-5-5-on-chatgpt-and-codex/">S05</a></li>
+<li><strong>C09 / fact / supported</strong>：本地Harness治理机制可验证：Codex读取AGENTS.md作为项目指令（默认上限32KiB），行为由~/.codex/config.toml或项目级.codex/config.toml控制，涵盖approval_policy、sandbox_mode、模型与推理强度、MCP服务器与profiles，项目级配置仅在受信任项目中加载；sandbox_mode包括read-only、workspace-write、danger-full-access，macOS用Seatbelt/sandbox-exec、Linux用bwrap加seccomp；MCP在[mcp_servers]中配置，支持stdio/SSE/HTTP传输。 <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">S12</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S13</a> <a href="https://vibecodes.net/apps/codex">S14</a></li>
+<li><strong>C10 / fact / supported</strong>：Codex云端任务在隔离云容器中异步运行、可并行提交并以PR交付，桌面App用于管理多Agent与长程任务。 <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">S22</a></li>
+<li><strong>C11 / fact / unverified</strong>：Codex云端内部编排、调度与状态机细节未在公开资料中证实，不得从模型行为反推架构。 <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">S22</a></li>
+<li><strong>C12 / fact / supported</strong>：Heapjack与Overpatch于2026-08-12提交、8天内修复并于2026-09-15披露；Heapjack利用Desktop的node_repl共享V8堆窃取可信上下文token，在最严格read-only模式下也无需审批即可执行宿主命令；Overpatch利用apply_patch按补丁路径推导写权限，在workspace-write下写出工作区之外；CLI修复为0.149.0（2026-08-21）。 <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a></li>
+<li><strong>C13 / fact / supported</strong>：0.23.0之前版本的Codex CLI存在.env文件静默重定向CODEX_HOME并触发命令执行的问题，0.23.0起修复，仓库内配置文件与MCP配置应被视为敏感供应链面。 <a href="https://www.lemon-web.net/lemon-blog/cybersecurity/a-closer-look-at-the-codex-cli-security-flaw-how-a-simple-config-file-became-a-remote-execution-weapon">S16</a></li>
+<li><strong>C14 / fact / preliminary</strong>：2026-10-18报道称官方OpenAI Skill引用了一个从未注册的域名，研究者注册该域名后收到真实生产凭证，表明官方资产中的幻觉依赖可形成无需漏洞利用的凭证外泄路径。 <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a></li>
+<li><strong>C15 / fact / conflicting</strong>：2026年10月用户投诉称5小时窗口会中断晚间长会话、周重置未发生且下次重置被推迟数日、单次提示耗尽当月额度；Codex负责人否认悄悄降额并将部分快速消耗归因于第三方sub2api转售订阅，争议本身未获可复现的官方计量证明。 <a href="https://community.openai.com/t/5-hour-limit-should-be-optional/1403664">S18</a></li>
+<li><strong>C16 / fact / preliminary</strong>：OpenAI审查SWE-Bench Pro后撤回背书，称约30%公开任务存在过严、过含糊、过浅或方向误导等问题；SWE-Explore显示Claude Code与Codex仅覆盖14-19%的关键行，文件级命中高但行级精度坍塌。 <a href="https://gentic.news/article/openai-finds-30-of-swe-bench-pro">S19</a></li>
+<li><strong>C17 / fact / supported</strong>：OpenAI拟以30亿美元收购Windsurf的交易在2025-07-11独占期到期后流产，Google以24亿美元反向收购其创始人与核心研发人员，剩余资产随后由Cognition接手，OpenAI未获得原生深度集成IDE资产。 <a href="https://winbuzzer.com/2025/07/15/anatomy-of-a-collapse-the-wild-takeover-saga-of-windsurf-featuring-openai-anthropic-microsoft-google-and-cognition-xcxwbn/">S20</a></li>
+<li><strong>C18 / fact / supported</strong>：2026-09-29 DevDay推出Codex Security Cloud，对GitHub仓库做持续扫描、去重、调查并生成可审查修复草案，面向Pro/Business/Enterprise/Edu；其CLI与TypeScript SDK以Apache-2.0开源，但完整托管扫描仍为受限Beta，分析依赖OpenAI托管模型。 <a href="https://pondero.ai/news/2026-09-30-codex-security-cloud/">S21</a></li>
+<li><strong>C19 / inference / preliminary</strong>：捆绑订阅加按token credit计费把成本不确定性转移给买方，长会话与大型重构的实际支出最难预测，限额争议进一步放大了这一风险。 <a href="https://aitoolsrecap.com/Blog/codex-pricing-explained-2026">S06</a> <a href="https://inventivehq.com/blog/codex-subscription-options-guide">S07</a> <a href="https://community.openai.com/t/5-hour-limit-should-be-optional/1403664">S18</a></li>
+<li><strong>C20 / forecast / preliminary</strong>：企业渠道（Dell、AWS Bedrock、GSI）可能继续扩张Codex的企业触达，但29.5%的采用率与沙箱、供应链信任事件将限制其在短期内追赶头部竞品的速度。 <a href="https://openai.com/index/dell-codex-enterprise-partnership/">S08</a> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">S09</a> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">S10</a> <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">S11</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a></li>
+<li><strong>C21 / value / preliminary</strong>：对企业买家而言，可审计的沙箱、审批与供应链治理比模型迭代速度更具决策权重，因为已披露的逃逸与凭证外泄路径直接冲击数据与系统所在地的部署前提。 <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">S12</a> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">S13</a> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">S15</a> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">S17</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://en.wikipedia.org/wiki/Codex_CLI">Codex CLI</a> · Wikipedia
+- 发布：unknown；事件：2025-04-16；查阅：2026-10-21。
+- 来源族：reference；读取：relevant_text；定位：条目正文。
+- 原文支持：三层必须严格区分：Codex是产品与订阅服务，codex-1/GPT-5-Codex等是其搭载的模型，openai/codex开源库仅是CLI/TUI与本地Harness实现，桌面App、云端与API服务并不开源；Codex CLI于2025-04-16发布，Rust编写、Apache-2.0开源，可在终端读写改文件并执行命令。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；published未知，故填unknown。</p>
+<p><strong>S02</strong> <a href="https://en.wikipedia.org/wiki/OpenAI_Codex">OpenAI Codex</a> · Wikipedia
+- 发布：unknown；事件：2025-05-16；查阅：2026-10-21。
+- 来源族：reference；读取：relevant_text；定位：条目正文。
+- 原文支持：Codex云端于2025-05-16以研究预览发布，首发模型为codex-1（o3的软件工程优化变体），先向Pro/Enterprise/Team开放，Plus用户于2025年6月获得接入。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；published未知，故填unknown。</p>
+<p><strong>S03</strong> <a href="https://community.openai.com/t/introducing-gpt-5-1-codex-max-enhanced-reasoning-and-long-horizon-workflows/1366846">Introducing GPT-5.1-Codex-Max: Enhanced Reasoning and Long-Horizon Workflows</a> · OpenAI Developer Community
+- 发布：unknown；事件：2025-11-19；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：帖子正文。
+- 原文支持：GPT-5.1-Codex-Max于2025-11-19发布，基于GPT-5.1，以compaction跨多上下文窗口支撑长程任务，并取代GPT-5.1-Codex成为Codex默认模型；同日亦有GPT-5.1-Codex-Mini作为低成本选项。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；published未知，故填unknown。</p>
+<p><strong>S04</strong> <a href="https://www.testingcatalog.com/openai-launches-gpt-5-2-codex-for-coding-and-security-tasks/">OpenAI Launches GPT-5.2-Codex for Coding and Security Tasks</a> · TestingCatalog
+- 发布：unknown；事件：2025-12-18；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：GPT-5.2-Codex于2025-12-18发布，面向专业软件工程与防御性安全，强调长上下文、可靠工具调用与上下文压缩，在SWE-Bench Pro与Terminal-Bench 2.0上宣称SOTA。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；基准SOTA为厂商宣称口径，见基准争议反证；published未知，故填unknown。</p>
+<p><strong>S05</strong> <a href="https://www.testingcatalog.com/openai-launches-gpt-5-5-on-chatgpt-and-codex/">OpenAI Launches GPT-5.5 on ChatGPT and Codex</a> · TestingCatalog
+- 发布：unknown；事件：2026-04-23；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：GPT-5.5于2026-04-23发布并进入ChatGPT与Codex，定位为面向真实工作的Agent模型，Codex内有400K上下文窗口与可选Fast模式。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；published未知，故填unknown。</p>
+<p><strong>S06</strong> <a href="https://aitoolsrecap.com/Blog/codex-pricing-explained-2026">Codex Pricing Explained 2026</a> · AI Tools Recap
+- 发布：unknown；事件：2026-04-02；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：博文正文。
+- 原文支持：Codex没有独立订阅：2026-04-02起由按消息计费改为按token的credit计费，成本随输入/缓存输入/输出token而变化，简单修复与大型重构即使同为一个任务也可能相差数倍。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；credit与美元的换算率、具体档位价格未在材料中给出；published未知，故填unknown。</p>
+<p><strong>S07</strong> <a href="https://inventivehq.com/blog/codex-subscription-options-guide">Codex Subscription Options Guide</a> · Inventive HQ
+- 发布：unknown；事件：2026-08-13；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：指南正文。
+- 原文支持：Codex捆绑于ChatGPT计划：Free 0美元、Go约8美元/月、Plus 20美元/月、Pro 100/200美元/月（另有500美元档的报道），Business按席位、企业与Edu为定制报价；API密钥路径则按token单独计费、无订阅窗口限制。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；Pro 500美元档仅为报道口径，未在材料中获官方确认；published未知，故填unknown。</p>
+<p><strong>S08</strong> <a href="https://openai.com/index/dell-codex-enterprise-partnership/">Dell and OpenAI Partnership on Codex Enterprise</a> · OpenAI
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：official；读取：relevant_text；定位：公告正文。
+- 原文支持：企业部署路径包括Dell合作：把Codex带入混合与本地环境，连接Dell AI Data Platform与AI Factory，目标是让企业在数据与系统所在地使用Codex；官方称每周已有超400万开发者使用Codex。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；每周400万开发者为官方宣称口径，未在材料中获第三方核验；事件日期未知，故填unknown。</p>
+<p><strong>S09</strong> <a href="https://www.dawan.africa/news/openai-brings-frontier-ai-models-and-codex-to-aws-for-business-operations">OpenAI Brings Frontier AI Models and Codex to AWS for Business Operations</a> · Dawan Africa
+- 发布：unknown；事件：2026-06-02；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：2026-06-02 OpenAI宣布前沿模型与Codex在AWS上架，可通过Amazon Bedrock使用，强调复用AWS已有安全、合规、采购与计费治理流程。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；实际企业采购量与上架后的使用规模未在材料中给出；published未知，故填unknown。</p>
+<p><strong>S10</strong> <a href="https://www.crnasia.com/india/news/2026/infosys-goes-model-agnostic-as-openai-builds-gsi-network-to-scale-codex">Infosys Goes Model-Agnostic as OpenAI Builds GSI Network to Scale Codex</a> · CRN Asia
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：OpenAI以GSI生态放大Codex企业落地：Infosys为7家全球系统集成商之一，与Accenture、Capgemini、Cognizant、TCS、PwC、CGI一同被引入，整合Codex与Infosys Topaz Fabric。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；7家之外的合作深度与落地项目数量未在材料中给出；事件日期未知，故填unknown。</p>
+<p><strong>S11</strong> <a href="https://dev.to/jamilxt/cursor-vs-claude-code-when-testers-gave-both-the-same-model-the-tool-stopped-mattering-3ce7">Cursor vs Claude Code: When Testers Gave Both the Same Model, the Tool Stopped Mattering</a> · DEV Community
+- 发布：2026-10-06；事件：2026-10-06；查阅：2026-10-21。
+- 来源族：survey_reporting；读取：relevant_text；定位：文中引用的Stack Overflow 2026开发者调查数据。
+- 原文支持：Stack Overflow 2026开发者调查（2026-10-06发布，30903份有效回答）显示：在使用所列AI编码Agent的受访者中，Claude Code 65.5%、GitHub Copilot 58.7%、OpenAI Codex 29.5%、Cursor 25.5%。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；分母为使用所列AI编码Agent的受访者，不是全体开发者；调查抽样与多选口径细节未在材料中给出。</p>
+<p><strong>S12</strong> <a href="https://shipyard.build/blog/codex-cli-cheat-sheet/">Codex CLI Cheatsheet</a> · Shipyard
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：technical_guide；读取：relevant_text；定位：指南正文。
+- 原文支持：本地Harness可验证机制：Codex读取AGENTS.md作为项目指令（默认上限32KiB），行为由~/.codex/config.toml或项目级.codex/config.toml控制，包括approval_policy、sandbox_mode、模型与推理强度、MCP服务器与profiles；项目级配置仅在受信任项目中加载。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；事件日期未知，故填unknown。</p>
+<p><strong>S13</strong> <a href="https://learn.chatgpt.com/docs/agent-approvals-security">Agent Approvals and Security</a> · ChatGPT Learn
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：official_docs；读取：relevant_text；定位：文档正文。
+- 原文支持：沙箱与审批可验证机制：sandbox_mode包括read-only、workspace-write、danger-full-access；approval_policy包括on-request、never等；macOS用Seatbelt/sandbox-exec、Linux用bwrap加seccomp，Windows亦有对应沙箱命令；workspace-write下网络访问可单独配置。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；文档版本与适用平台范围未在材料中注明；事件日期未知，故填unknown。</p>
+<p><strong>S14</strong> <a href="https://vibecodes.net/apps/codex">Codex Review</a> · VibeCodes
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：product_review；读取：relevant_text；定位：评测正文。
+- 原文支持：MCP接入可验证：Codex在config.toml的[mcp_servers]中配置外部工具，支持stdio/SSE/HTTP传输，可用codex mcp add/list管理；Agent Skills遵循SKILL.md格式并可声明MCP依赖。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；事件日期未知，故填unknown。</p>
+<p><strong>S15</strong> <a href="http://dev.to/anoymask/overpatch-and-heapjack-two-techniques-for-bypassing-codexs-write-restrictions-and-escaping-its-48of">Overpatch and Heapjack: Two Techniques for Bypassing Codex's Write Restrictions and Escaping Its Sandbox</a> · DEV Community
+- 发布：2026-09-15；事件：2026-09-15；查阅：2026-10-21。
+- 来源族：security_research；读取：relevant_text；定位：文章正文。
+- 原文支持：反证—沙箱逃逸：Accomplish AI研究员Oren Yomtov报告的Heapjack与Overpatch于2026-08-12提交、8天内修复并于2026-09-15披露；Heapjack利用Desktop的node_repl共享V8堆窃取可信上下文token，在最严格read-only模式下也无需审批即可执行宿主命令；Overpatch利用apply_patch按补丁路径推导写权限，在workspace-write下写出工作区之外；CLI修复为0.149.0（2026-08-21）。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；修复后是否可复现未在材料中独立证实；披露细节以该报道口径为准。</p>
+<p><strong>S16</strong> <a href="https://www.lemon-web.net/lemon-blog/cybersecurity/a-closer-look-at-the-codex-cli-security-flaw-how-a-simple-config-file-became-a-remote-execution-weapon">A Closer Look at the Codex CLI Security Flaw: How a Simple Config File Became a Remote Execution Weapon</a> · Lemon Web
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_analysis；读取：relevant_text；定位：博文正文。
+- 原文支持：反证—早期配置劫持：0.23.0之前版本的Codex CLI存在.env文件静默重定向CODEX_HOME并触发命令执行的问题，0.23.0起修复；治理含义是仓库内配置文件与MCP配置应被视为敏感供应链面。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；受影响版本范围与修复验证细节以该报道口径为准；事件日期未知，故填unknown。</p>
+<p><strong>S17</strong> <a href="https://www.pacific.london/insights/hallucinated-domain-openai-skill-codex-ai-supply-chain-credential-theft-ai-governance-uk-mid-market-software-supply-chain">Hallucinated Domain in OpenAI Skill Led to Codex AI Supply Chain Credential Theft</a> · Pacific London
+- 发布：2026-10-18；事件：2026-10-18；查阅：2026-10-21。
+- 来源族：security_analysis；读取：secondary；定位：报道正文。
+- 原文支持：反证—官方Skill供应链风险：2026-10-18报道称官方OpenAI Skill引用了一个从未注册的域名，研究者注册该域名后收到真实生产凭证，表明官方资产中的幻觉依赖可形成无需漏洞利用的凭证外泄路径。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；该事件仅见单一二手报道，官方回应与影响范围未在材料中给出，故相关claim不列为supported。</p>
+<p><strong>S18</strong> <a href="https://community.openai.com/t/5-hour-limit-should-be-optional/1403664">5 Hour Limit Should Be Optional</a> · OpenAI Developer Community
+- 发布：2026-10-06；事件：2026-10-06；查阅：2026-10-21。
+- 来源族：community；读取：relevant_text；定位：讨论帖正文。
+- 原文支持：反证—定价与限额争议：2026年10月用户投诉称5小时窗口会中断晚间长会话、周重置未发生且下次重置被推迟数日、单次提示耗尽当月额度；另有报道称Codex负责人否认悄悄降额并将部分快速消耗归因于第三方sub2api转售订阅，争议本身未获可复现的官方计量证明。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；投诉为用户自述，未获官方计量数据证实；官方否认口径亦来自转述。</p>
+<p><strong>S19</strong> <a href="https://gentic.news/article/openai-finds-30-of-swe-bench-pro">OpenAI Finds 30% of SWE-Bench Pro Tasks Flawed</a> · Gentic News
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：industry_press；读取：secondary；定位：报道正文。
+- 原文支持：反证—基准口径争议：OpenAI审查SWE-Bench Pro后撤回背书，称约30%公开任务存在过严、过含糊、过浅或方向误导等问题；SWE-Explore则显示Claude Code与Codex仅覆盖14-19%的关键行，文件级命中高但行级精度坍塌。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；审查方法与SWE-Explore样本细节未在材料中给出；事件日期未知，故填unknown。</p>
+<p><strong>S20</strong> <a href="https://winbuzzer.com/2025/07/15/anatomy-of-a-collapse-the-wild-takeover-saga-of-windsurf-featuring-openai-anthropic-microsoft-google-and-cognition-xcxwbn/">Anatomy of a Collapse: The Windsurf Takeover Saga</a> · WinBuzzer
+- 发布：unknown；事件：2025-07-11；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：反证—生态扩张受挫：OpenAI拟以30亿美元收购Windsurf的交易在2025-07-11独占期到期后流产，Google以24亿美元反向收购其创始人与核心研发人员，剩余资产随后由Cognition接手，OpenAI未获得原生深度集成IDE资产。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；交易条款与各方动机的完整官方记录未在材料中给出；published未知，故填unknown。</p>
+<p><strong>S21</strong> <a href="https://pondero.ai/news/2026-09-30-codex-security-cloud/">Codex Security Cloud</a> · Pondero
+- 发布：2026-09-30；事件：2026-09-29；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：Codex Security方向：2026-09-29 DevDay推出Codex Security Cloud，对GitHub仓库做持续扫描、去重、调查并生成可审查修复草案，面向Pro/Business/Enterprise/Edu；其CLI与TypeScript SDK以Apache-2.0开源（@openai/codex-security），但完整托管扫描仍为受限Beta，分析依赖OpenAI托管模型。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；Beta准入范围、定价与扫描准确率未在材料中给出。</p>
+<p><strong>S22</strong> <a href="https://cryptobriefing.com/openai-codex-cloud-remote-coding/">OpenAI Codex Cloud: Remote Coding</a> · CryptoBriefing
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：industry_press；读取：relevant_text；定位：报道正文。
+- 原文支持：并行与云端执行：Codex云端任务在隔离云容器中异步运行、可并行提交并以PR交付，桌面App用于管理多Agent与长程任务；但云端内部编排、调度与状态机细节未在公开资料中证实，一律标为unverified/preliminary，不得从模型行为反推架构。
+- 限制：本阶段未重访原文，finding为上游OSINT材料摘要；云端内部架构细节在材料中明确标注为未证实；事件日期未知，故填unknown。</p>
+<p>检索缺口：
+- 未获得官方credit换算率、订阅档位对应的credit额度、限额计量口径与企业合同条款，无法核算真实任务成本。
+- 未获得Dell、AWS Bedrock与GSI合作的实际落地项目数、收入或活跃企业数，官方每周400万开发者宣称未获第三方核验。
+- Codex云端内部编排、调度与状态机细节未在公开资料中证实，材料明确要求标为unverified，不得从模型行为反推。
+- Heapjack与Overpatch修复后的独立复现结果、官方Skill幻觉域名事件的官方回应与影响范围未在材料中给出。
+- Stack Overflow调查的抽样方法、多选口径与分母定义细节未在材料中完整给出，采用率对比应限定在该调查的受访者范围内。
+- Codex Security Cloud受限Beta的准入范围、定价、扫描准确率与误报率未在材料中给出，无法评估其企业安全卖点的实际覆盖。</p>
+<p>检索日志：OpenAI Codex pricing subscription ChatGPT Plus Pro API（discovery）；OpenAI Codex enterprise deployment announcement（discovery）；openai codex GitHub open source CLI（verification）；Codex vs Claude Code Cursor competition coding agent market（discovery）；Codex security vulnerability prompt injection sandbox bypass（counterevidence）；OpenAI Codex rate limit complaints pricing credits users frustrated（counterevidence）；Codex 企业部署 开源 治理 安全（counterevidence）；Codex long task failure benchmark SWE-bench criticism limitations（counterevidence）；OpenAI Windsurf acquisition collapsed Codex strategy Anthropic competition（counterevidence）。</p>
+<h2 id="_29">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>产品定位与演进史</strong>：优选 V03——条件性优选：理解Codex必须先做产品、模型与开源Harness三层区分，2021年补全模型与2025年Agent产品线仅为品牌复用、非同一产品延续；在此前提下，可以把2025年产品线在定位层面讨论为一条入口收敛的演进主线，但模型名必须精确到版本，且定位统一不能反推实现或架构连续性，也不能证明长程能力已经就绪。</li>
+<li><strong>交付形态与开发者工作流</strong>：优选 V02——在补丁覆盖、模型来源与长程验收未逐项核实前，沙箱、模型触发与长程可靠性仍需人工核对兜底；三项条件可核验时可降为分层核对，但最终diff与测试覆盖验收不可取消，长程任务仍需拆分后逐段验收。</li>
+<li><strong>Harness 核心架构</strong>：优选 V02——条件性优选判断：在现有账本范围内，V02经质询收窄后的主张最经得起检验——Codex沙箱与审批的标称档位不能直接等同于主机安全，部署时必须按实际执行路径与版本修复状态单独设防；但这不等于断言当前受支持版本仍可被所载三条历史路径绕过。</li>
+<li><strong>Harness 沙箱与权限安全</strong>：优选 V02——条件性优选V02的修正主张：厂商沙箱不能单独当作硬边界；当项目来源审查、审批委托范围限制、沙箱外受信工具不自动执行等叠加控制缺失或失效时，项目配置、MCP条目、审批委托与沙箱外执行可能把越界执行合法化，因此须叠加代码评审与最小权限。但在上述前提同时成立且有效时，账本没有实例证明越界链必然成立，残余风险未量化，不能断言为零。</li>
+<li><strong>模型能力与实测表现</strong>：优选 V02——在现有账本下，应暂缓把Codex作为无条件长程主力交付工具的结论；可将其定位为受控的桌面或云端辅助交付工具，待独立同口径复现、护栏系统性统计与修复后残留风险证据补齐后再重新评估升级。</li>
+<li><strong>商业模式生态与风险</strong>：优选 V03——在Stack Overflow 2026开发者调查的受访者口径内，Codex目前是编码Agent市场的挑战者而非领导者：其29.5%的采用率显著低于Claude Code的65.5%，且Windsurf收购流产使其未获得原生深度集成IDE资产；Dell、AWS Bedrock与GSI渠道只证明触达路径已经搭建，尚未有可验证的落地规模证明其已转化为份额。</li>
+</ul>
+<h2 id="_30">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+</body></html>

@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</title><style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.8; max-width: 780px; margin: 0 auto; padding: 24px 20px 64px;
+  color: #1f2328; background: #fff; }
+@media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #79c0ff; } }
+h1 { font-size: 1.6em; line-height: 1.4; }
+h2 { font-size: 1.25em; margin-top: 1.8em; padding-bottom: .3em; border-bottom: 1px solid #d0d7de; }
+h3 { font-size: 1.05em; margin-top: 1.5em; }
+a { color: #0969da; overflow-wrap: anywhere; }
+.meta { color: #656d76; font-size: .9em; }
+.toc { background: rgba(127,127,127,.08); border-radius: 8px; padding: 12px 20px; }
+.toc ul { padding-left: 20px; }
+.topbar { margin-bottom: 8px; }
+@media (prefers-color-scheme: dark) { .meta { color: #8b949e; } }
+</style></head>
+<body>
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-10-21 · claude-code · 原文 Markdown 同名文件</p>
+<h1 id="claude-code-harness-2026-10-21">Claude Code 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</h1>
+<div class="toc">
+<ul>
+<li><a href="#claude-code-harness-2026-10-21">Claude Code 产品与 Harness 框架 · 韦青式专题研究（2026-10-21)</a><ul>
+<li><a href="#_1">一、产品定位与演进史</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、交付形态与开发者工作流</a><ul>
+<li><a href="#_7">观点分歧</a></li>
+<li><a href="#_8">少数意见与不确定性</a></li>
+<li><a href="#_9">门罗五步</a></li>
+<li><a href="#_10">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#harness">三、Harness 核心架构</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#harness_1">四、Harness 沙箱与权限安全</a><ul>
+<li><a href="#_15">观点分歧</a></li>
+<li><a href="#_16">少数意见与不确定性</a></li>
+<li><a href="#_17">门罗五步</a></li>
+<li><a href="#_18">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_19">五、模型能力与实测表现</a><ul>
+<li><a href="#_20">观点分歧</a></li>
+<li><a href="#_21">少数意见与不确定性</a></li>
+<li><a href="#_22">门罗五步</a></li>
+<li><a href="#_23">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_24">六、商业模式生态与风险</a><ul>
+<li><a href="#_25">观点分歧</a></li>
+<li><a href="#_26">少数意见与不确定性</a></li>
+<li><a href="#_27">门罗五步</a></li>
+<li><a href="#_28">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_29">各领域判断汇总</a></li>
+<li><a href="#_30">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>范围：2025-02-09 至 2026-10-21。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、产品定位与演进史</h2>
+<p><strong>关键议题</strong>：Claude Code从2025年2月研究预览到2026年10月正式生产工具的定位与演进史，需严格区分产品层、模型层与本地Harness层，并以定价限额与安全反证检验其成熟度。</p>
+<p>选题依据：本节聚焦产品定位与演进史，因为Claude Code的公开叙事常把模型发布、产品GA与Harness功能混为一谈，只有按时间线分层梳理并纳入限额与安全反证，才能判断其从研究预览到生产工具的真实成熟度。</p>
+<p><strong>当前判断</strong>：在账本范围内最经得起检验的是V03经收窄后的主张：工作区沙箱逃逸、桌面预览窗凭据外发与打开仓库前的git劫持证明，信任边界、渲染路径与前置上下文采集在覆盖期内曾被独立跨越，因此须与功能演进同等审视；但在缺乏修复后回归复测证据时，不能把三起已修复或跨厂商问题直接升级为已证实的持续性边界设计缺陷，只能作为需验证的审慎推断。 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S13</a> <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">S14</a> <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">S15</a></p>
+<p>优选：V03；置信度：medium。三起安全事件的核心事实均为supported，但均来自二手摘要且未重新核验原文，缺乏修复后回归复测、2.1.x完整版本史与桌面端完整时间线；C18本身为preliminary预测，持续性判断只能为推断而非已证实结论。
+成立条件：仅适用于截至2026年10月21日的账本覆盖期；不推断各厂商修复后的当前防护水平；不否认CVE-2026-55607与SneakPeek已有修复；不把功能演进速度单独作为生产成熟度证据；成本与产品形态判断需另以各自证据限定。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（产品演进乐观情景分析者；代表从发布时间线与功能清单看演进的视角：以GA、Code 2.0、桌面端与Security预览等节点论证产品化进程，但不否认限额与安全反证。）：Claude Code已从2025年2月的有限研究预览，演进为具备SDK、编辑器扩展、GitHub后台任务、桌面端与安全子产品的正式生产工具；模型迭代与Harness功能共同支撑了这一转变，但这一判断仅指产品形态与功能范围的演进，不等于在成本与安全维度上已达到无保留的生产成熟度。
+- 限定：范围限定为截至2026年10月21日账本覆盖的产品定位与演进史；对“从有限预览演进为正式生产工具”的方向性判断为中等置信度，对各功能精确上线日、桌面端完整演进与“最佳编码模型”等厂商宣传口径的置信度较低；Security本身仍为有限研究预览，不应被表述为已正式可用。
+- 最强反证：最强反证是成本与安全两条线：订阅周限额与5小时滚动限额并行、阈值未公开、与聊天共用用量池，且有重度用户触顶、失败信号不透明与恢复重付上下文成本的投诉，使重度用户的实际可用性与支出难以事前预测；同时存在工作区沙箱逃逸、桌面预览窗凭据外发与打开仓库前git劫持等安全事件，虽有修复，但说明功能清单本身不能单独证明生产成熟度，信任边界与限额透明度必须与功能演进同等审视。 <a href="https://absolutedigitalpublishers.com/articles/from-origins-to-frontier-a-history-of-claude-code-and-agentic-development-tools">S01</a> <a href="https://www.macrumors.com/2025/05/22/anthropic-launches-claude-4/">S03</a> <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">S05</a> <a href="https://github.com/luongnv89/claude-howto">S06</a> <a href="https://www.macrumors.com/2025/11/24/anthropic-claude-opus-4-5/">S08</a> <a href="https://vfuturemedia.com/ai/introducing-claude-code-security-anthropics-ai-powered-tool-for-smarter-vulnerability-detection-now-in-limited-research-preview/">S09</a> <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">S10</a></p>
+<p><strong>观点 V02</strong>（重度用户与成本敏感情景分析者；代表按实际用量与账单体验评估的视角：以官方约5%受影响说法与用户触顶、恢复重付成本的投诉之间的张力为核心，并强调厂商间口径不可直接对比。）：对重度用户而言，20美元Pro档更像是试用档而非工作档：周限额与5小时滚动限额并行、阈值未公开、与Claude聊天共用用量池且失败信号不透明，使实际支出与可用性难以事前预测。
+- 限定：范围限定为重度Claude Code用户与成本敏感情景下的Pro 20美元档评估，不适用于轻度或偶发用户；结论为基于现有初步与冲突证据的评估性判断，置信度中等偏低，尤其在精确阈值、触顶比例与恢复成本的普遍性上保留不确定性。
+- 最强反证：最强反证是官方口径与升级路径：官方称仅约5%用户受影响，说明对多数用户20美元档可能足够；超额后可按API价购买额外用量，且Max档提供5x/20x用量，表明重度需求有官方升级通道而非只能换厂商；用户投诉与恢复成本个案未经系统性抽样，不能证明触顶与重付成本是普遍体验；厂商间口径不可直接对比，也削弱了以竞品入门档低廉直接否定Pro档的论证。 <a href="https://securityonline.info/claude-ai-hits-weekly-rate-limits-anthropic-caps-usage-for-subscribers-sparking-developer-backlash/">S11</a> <a href="https://dev.to/theaidownside/the-claude-pro-is-consumed-within-an-hour-a-week-of-coding-tool-defections-35ba">S12</a> <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S16</a></p>
+<p><strong>观点 V03</strong>（安全审慎情景分析者；代表以攻击面与修复时间线评估成熟度的视角：承认相关问题已有修复，但指出初修被绕过、跨厂商共性与前置执行等模式说明风险具有持续性。）：安全边界是演进史中未被功能清单覆盖的一面：工作区沙箱逃逸、桌面预览窗凭据外发与打开仓库前的git劫持表明，信任边界、渲染路径与前置上下文采集都需要与功能演进同等审视。
+- 限定：范围限于账本覆盖的事件与2026年10月21日之前的信息。对三起已发生事件的描述置信较高，因C13、C14、C15均为supported事实；对风险具有持续性的判断是基于修复时间线与跨厂商模式的审慎推断，置信中等，且C18本身为preliminary预测，不构成对未来必然发生同类事件的断言。
+- 最强反证：最强反证是：三起问题均已有修复或被定位为跨厂商问题——CVE-2026-55607已于2.1.163修复且未报告野外利用，SneakPeek已于8月17日最终修复，GitSpawn同时存在于多家产品而不宜只归因于单一厂商。若以修复完成与无野外利用作为成熟度标准，则可反驳称这些事件属于已被闭环的历史缺陷，而非持续风险的证据；本观点对此的回应是，初修被绕过与前置执行模式仍使仅凭“已修复”不足以完成评估，但该反驳确实限制了本主张的强度。 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S13</a> <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">S14</a> <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">S15</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：产品形态从有限研究预览向生产化方向演进的节点序列可作背景参考，但各Harness功能的精确上线日、桌面端完整演进与内部实现仍未证实，不宜单独作为成熟度结论。
+- V02的合理洞察：在账本描述的重度用户情景下，Pro档可预测性不足的评估可保留，但须限定为初步与冲突证据下的 scoped 判断，待官方阈值原文与系统性用量抽样补齐后才能讨论普遍性。</p>
+<p>不确定性及改变判断的条件：
+- CVE-2026-55607修复后同类沙箱逃逸的回归复测结果会如何改变持续性判断。
+- SneakPeek最终修复后的渲染路径复测结果，以及GitSpawn各厂商修复状态的可比对照。
+- 官方周限额与5小时滚动限额的精确阈值、计量口径与用量池分摊规则。
+- SDK、扩展、GitHub后台任务、Code 2.0各项机制与桌面端的逐项官方上线日。
+- 2026年10月21日之后的产品、定价与安全动态。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：Claude Code的功能清单在变长，但账本内三条独立安全边界曾在覆盖期内被跨越：工作区沙箱、桌面预览渲染路径与信任提示前的上下文采集。</li>
+<li><strong>需要</strong>：生产采纳前需要的不只是功能清单或“已修复”声明，而是修复后可复现的边界验证、公开可核查的限额规则，以及产品层、模型层与Harness层分开核对的官方依据。</li>
+<li><strong>方案</strong>：采取“先隔离验证、再有条件使用”的方案：对不受信仓库默认隔离，对大文件预览与授权前执行做回归复测，对限额与成本以官方规则或预算上限兜底，验证通过一项才放宽一项。</li>
+<li><strong>预演</strong>：有条件的场景预演：若回归复测全部通过且限额规则可引用，则可在受控仓库与预算上限内有条件用于生产辅助；若任一关键复测失败或阈值仍不公开，则只在隔离环境使用不受信仓库，并把重度任务预算按Max档或API价另行封顶。</li>
+<li><strong>行动</strong>：
+   - 由安全复核者在生产使用前，对当前版本复测CVE-2026-55607同类路径：工作区命名为.git、移出沙箱文件夹与git fsmonitor执行脚本是否可覆盖主目录文件 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S13</a>
+     时间：投入生产使用前，并在每次大版本升级后复测；指标：关键逃逸复测用例通过率，主目录受保护文件零覆盖；基线：账本记载2026年6月4日于2.1.163修复、6月25日公告且未报告野外利用，但无修复后回归复测。
+     停止/成功条件：全部关键用例通过并记录版本与复测日期，否则不打开不受信仓库；任一用例失败即停止生产使用；阈值来源：证据所给修复版本2.1.163为基线，复测通过标准为分析者建议。
+   - 由安全复核者复测桌面预览路径：大于256KB的HTML文件是否仍走file://渲染、是否带CSP隔离、凭据是否可被无提示读取外发 <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">S14</a>
+     时间：投入桌面端使用前，并在预览相关版本更新后复测；指标：file://渲染路径出现次数与凭据读取外发成功次数，目标均为零；基线：账本记载7月9日初修被绕过、8月17日最终修复，但无最终修复后复测。
+     停止/成功条件：全部用例零成功外发并记录版本，否则禁用桌面预览打开不受信HTML；阈值来源：证据所给256KB分界与带CSP的data:路径要求；零外发标准为分析者建议。
+   - 由安全复核者在打开仓库前验证：是否在用户输入提示或信任提示之前执行git status等上下文采集命令，是否可在隔离沙箱中执行并留痕 <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">S15</a>
+     时间：首次打开不受信仓库前，并纳入常规安全复核；指标：信任提示前执行次数，以及可比的各厂商修复状态对照完成度；基线：账本仅说明GitSpawn为跨厂商共性问题，未给出各厂商修复状态对比。
+     停止/成功条件：提示前零执行或隔离执行可证明，否则不直接打开不受信仓库；阈值来源：分析者建议；账本未给可接受的提示前执行阈值。
+   - 由采购或平台负责人核查官方限额与定价原文：周限额、5小时滚动限额的阈值与计量口径、与聊天共用用量池的分摊方式、超额按API价购买的计价规则 <a href="https://securityonline.info/claude-ai-hits-weekly-rate-limits-anthropic-caps-usage-for-subscribers-sparking-developer-backlash/">S11</a> <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S16</a>
+     时间：重度使用立项前，并在定价或限额变更时复核；指标：可引用的官方规则条目数与重度任务实际支出占预算比；基线：账本记载阈值未公开、未见官方定价页与限额阈值原文，重度支出区间仅为评测口径。
+     停止/成功条件：拿到可引用官方规则或以Max档／API预算设定硬上限，否则不把Pro档作为重度工作档立项；阈值来源：分析者建议；账本未给官方阈值。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Claude Code于2025年2月24日作为有限研究预览发布，与Claude 3.7 Sonnet同期推出，定位为可搜索和阅读代码、编辑文件、编写运行测试、提交推送到GitHub并使用命令行工具的终端协作Agent，且每一步保留人工介入。 <a href="https://absolutedigitalpublishers.com/articles/from-origins-to-frontier-a-history-of-claude-code-and-agentic-development-tools">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：2025年5月22日Anthropic发布Claude Opus 4与Sonnet 4，Claude Code同期从研究预览转为正式可用（GA），并推出Claude Code SDK、VS Code/JetBrains扩展（beta）与GitHub后台任务集成。 <a href="https://www.macrumors.com/2025/05/22/anthropic-launches-claude-4/">S03</a></li>
+<li><strong>C03 / source_statement / preliminary</strong>：2025年5月首届开发者大会期间配合Opus 4/Sonnet 4测试后，内部Claude生成代码占比从约10%跃升至近30%，此前产品曾经历平台期，突破来自更强底层模型。 <a href="https://www.itiger.com/hans/news/1187504635">S02</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：Claude Sonnet 4与Opus 4的SWE-bench成绩分别为72.7%与72.5%，Opus 4另有Terminal-bench 43.2%，并被宣传为可多小时持续执行、含数千步骤的长任务。 <a href="https://dev.to/thisweekinjavascript/angular-v20s-big-launch-at-google-io-2025-claude-sonnet-and-opus-4-typescripts-10x-speed-23fi">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：2025年9月29日Claude Sonnet 4.5发布，同期Claude Code更新为2.0：原生VS Code扩展、检查点（checkpoints）、子代理、Hooks与后台任务；Sonnet 4.5当时被宣传为最佳编码模型，定价3/15美元每百万token。 <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">S05</a></li>
+<li><strong>C06 / fact / supported</strong>：Claude Code的Harness可验证机制包括CLAUDE.md项目记忆、Skills与自定义斜杠命令、子代理（Task工具/并行）、Hooks（PreToolUse/PostToolUse等生命周期事件）、MCP服务器接入、插件打包（命令+代理+MCP+Hooks），以及权限模式与无头模式（claude -p）用于CI/CD。 <a href="https://github.com/luongnv89/claude-howto">S06</a></li>
+<li><strong>C07 / fact / preliminary</strong>：计划模式要求先达成可编辑的实施计划再写码；会话管理包括检查点/回退（/rewind）、恢复（/resume）、分支与压缩（/compact），上下文满后以摘要保留近期内容，但长任务失败与遗忘仍是已知短板。 <a href="https://www.cloudcontraptions.com/courses/cloudcontraptions/tools/ai-coding-assistants/pdf/agentic-coding-with-claude-code.pdf">S07</a></li>
+<li><strong>C08 / source_statement / preliminary</strong>：2025年11月24日Claude Opus 4.5发布，被Anthropic定位为当时世界最佳编码/代理/计算机使用模型，SWE-bench Verified 80.9%，定价降至5/25美元每百万token，较Opus 4降价约三分之二；同期Claude Code进入桌面端并强化计划模式与长时代理工具。 <a href="https://www.macrumors.com/2025/11/24/anthropic-claude-opus-4-5/">S08</a></li>
+<li><strong>C09 / fact / supported</strong>：2026年2月20日Claude Code Security以有限研究预览面向Enterprise与Team客户推出（开源维护者可加速免费接入），基于Claude Opus 4.6做类人工安全研究员的数据流追踪与补丁建议，但补丁仍需人工审核、不自动部署。 <a href="https://vfuturemedia.com/ai/introducing-claude-code-security-anthropics-ai-powered-tool-for-smarter-vulnerability-detection-now-in-limited-research-preview/">S09</a></li>
+<li><strong>C10 / fact / preliminary</strong>：2026年模型层快速迭代：Opus 4.6于2月引入Agent Teams与1M token上下文；Opus 4.7为4月16日、Opus 4.8为5月28日（含研究预览Dynamic workflows）、Sonnet 5为6月30日；2026年9月22日Opus 5.5与9月28日Sonnet 5.5成为默认模型并带1M上下文。 <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">S10</a></li>
+<li><strong>C11 / source_statement / conflicting</strong>：Anthropic于2025年8月28日对Claude订阅新增周限额，与既有5小时滚动限额并行，官方称仅约5%用户受影响，但重度Claude Code用户（尤其多会话Opus 4）仍易触顶，超额后可按API价购买额外用量；限额阈值未公开是争议核心。 <a href="https://securityonline.info/claude-ai-hits-weekly-rate-limits-anthropic-caps-usage-for-subscribers-sparking-developer-backlash/">S11</a></li>
+<li><strong>C12 / source_statement / preliminary</strong>：2025年8月用户集中投诉Claude Pro在简单任务中一小时内耗尽、有人10分钟触顶后转投Codex；另有无头任务触限时返回结果仍标记success、恢复会话需重付上下文成本（一次恢复约18美元对应63次工具调用，高于首跑79次调用的9美元），说明限额与失败信号不透明。 <a href="https://dev.to/theaidownside/the-claude-pro-is-consumed-within-an-hour-a-week-of-coding-tool-defections-35ba">S12</a></li>
+<li><strong>C13 / fact / supported</strong>：CVE-2026-55607影响Claude Code 2.1.38至2.1.163版本：提示注入的恶意仓库可通过把工作区命名为.git并移出沙箱文件夹，利用git fsmonitor执行脚本并覆盖用户主目录文件（如~/.zshenv），在最严格Bash设置下仍逃逸macOS seatbelt沙箱；2026年6月4日于2.1.163修复，6月25日发布GHSA-7835-87q9-rgvv公告，未报告野外利用。 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S13</a></li>
+<li><strong>C14 / fact / supported</strong>：SneakPeek漏洞中，Claude Code Desktop预览窗对大于256KB的HTML文件走file://渲染路径而非带CSP的data:路径，且请求过滤器未生效，恶意脚本可无提示读取SSH密钥、AWS/GitHub/npm凭据与Claude OAuth token并外发；研究者7月4日报告、7月9日初修被绕过、8月17日最终修复。 <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">S14</a></li>
+<li><strong>C15 / fact / supported</strong>：GitSpawn为跨厂商问题：打开含恶意仓库文件夹时，Claude Code会在用户输入任何提示、甚至工作区信任提示之前运行git status等上下文采集命令，仓库可借此劫持执行并导致任意代码执行；该类问题在Claude Code、Codex、Cursor等多家产品中同时存在，不宜只归因于单一厂商。 <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">S15</a></li>
+<li><strong>C16 / source_statement / preliminary</strong>：截至2026年10月19日核查，Claude Code无免费层、Pro 20美元/月（年付17美元）、Max 100美元起（5x/20x Pro用量），且与Claude聊天共用一个用量池；Codex与Cursor入门档更低且有免费/受限入口，多家评测指出20美元档对日常Agent用户只是试用档，重度用户实际支出常达100-200美元，厂商间限额口径不可直接对比。 <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S16</a></li>
+<li><strong>C17 / inference / unverified</strong>：必须严格区分三层：Claude Code产品与订阅/API服务、底层Claude模型版本、本地Harness实现；凡未见官方文档原文的内部架构细节应标为unverified/preliminary，不得从模型行为反推架构，社区逆向说法不得当作官方实现。 <a href="https://deepwiki.com/victor-software-house/claude-code-docs/3.1-prerequisites-and-installation">S17</a></li>
+<li><strong>C18 / forecast / preliminary</strong>：提示注入、沙箱边界与凭据外发仍将是Claude Code类Agent工具的持续风险点，功能演进速度本身不能单独证明其生产成熟度。 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S13</a> <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">S14</a> <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">S15</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://absolutedigitalpublishers.com/articles/from-origins-to-frontier-a-history-of-claude-code-and-agentic-development-tools">Claude Code与Agent开发工具的历史梳理</a> · Absolute Digital Publishers
+- 发布：unknown；事件：2025-02-24；查阅：2026-10-21。
+- 来源族：第三方历史梳理；读取：relevant_text；定位：articles/from-origins-to-frontier-a-history-of-claude-code-and-agentic-development-tools。
+- 原文支持：Claude Code于2025年2月24日作为有限研究预览发布，与Claude 3.7 Sonnet同期推出，定位为可搜索和阅读代码、编辑文件、编写运行测试、提交推送到GitHub并使用命令行工具的终端协作Agent，且每一步保留人工介入。
+- 限制：仅依据提供的摘要，未重新核验原文；发表日期未知，故填unknown，不编造精确发表日。</p>
+<p><strong>S02</strong> <a href="https://www.itiger.com/hans/news/1187504635">Claude Code早期平台期与2025年5月转折报道</a> · ITiger
+- 发布：unknown；事件：2025-05-01；查阅：2026-10-21。
+- 来源族：中文科技报道；读取：relevant_text；定位：news/1187504635。
+- 原文支持：Claude Code早期并非一炮而红，曾经历平台期，真正的突破来自更强底层模型；2025年5月首届开发者大会期间配合Opus 4/Sonnet 4测试后，内部Claude生成代码占比从约10%跃升至近30%。
+- 限制：日期精度为月，已按契约填当月1日；内部代码占比为厂商/报道口径，未见独立审计，不宜当作全行业采用率。</p>
+<p><strong>S03</strong> <a href="https://www.macrumors.com/2025/05/22/anthropic-launches-claude-4/">Anthropic发布Claude 4与Claude Code正式可用</a> · MacRumors
+- 发布：2025-05-22；事件：2025-05-22；查阅：2026-10-21。
+- 来源族：厂商发布报道；读取：relevant_text；定位：2025/05/22/anthropic-launches-claude-4。
+- 原文支持：2025年5月22日Anthropic发布Claude Opus 4与Sonnet 4，Claude Code同期从研究预览转为正式可用（GA），并推出Claude Code SDK、VS Code/JetBrains扩展（beta）与GitHub后台任务集成。
+- 限制：仅依据提供的摘要，未重新核验原文；需注意不可把模型发布日直接等同于Harness全部功能上线日。</p>
+<p><strong>S04</strong> <a href="https://dev.to/thisweekinjavascript/angular-v20s-big-launch-at-google-io-2025-claude-sonnet-and-opus-4-typescripts-10x-speed-23fi">Claude Sonnet 4与Opus 4基准成绩报道</a> · Dev.to
+- 发布：unknown；事件：2025-05-22；查阅：2026-10-21。
+- 来源族：开发者社区报道；读取：relevant_text；定位：正文摘要。
+- 原文支持：Claude Sonnet 4与Opus 4的SWE-bench成绩分别为72.7%与72.5%，Opus 4另有Terminal-bench 43.2%，并被宣传为可多小时持续执行、含数千步骤的长任务。
+- 限制：该口径为厂商发布基准，未见独立复现；发表日期未知，故填unknown。</p>
+<p><strong>S05</strong> <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">Claude Sonnet 4.5与Claude Code 2.0功能梳理</a> · IntuitionLabs
+- 发布：unknown；事件：2025-09-29；查阅：2026-10-21。
+- 来源族：产品功能梳理；读取：relevant_text；定位：articles/claude-sonnet-4-5-code-2-0-features。
+- 原文支持：2025年9月29日Claude Sonnet 4.5发布，同期Claude Code更新为2.0：原生VS Code扩展、检查点（checkpoints）、子代理、Hooks与后台任务；Sonnet 4.5当时被宣传为最佳编码模型，定价3/15美元每百万token。
+- 限制：仅依据提供的摘要，未重新核验原文；“最佳编码模型”为厂商宣传口径；发表日期未知，故填unknown。</p>
+<p><strong>S06</strong> <a href="https://github.com/luongnv89/claude-howto">Claude Code使用指南：扩展机制与运行模式整理</a> · GitHub luongnv89/claude-howto
+- 发布：unknown；事件：2025-09-29；查阅：2026-10-21。
+- 来源族：社区使用指南；读取：relevant_text；定位：仓库正文摘要。
+- 原文支持：Claude Code的扩展机制包括CLAUDE.md项目记忆、Skills与自定义斜杠命令、子代理（Task工具/并行）、Hooks（PreToolUse/PostToolUse等生命周期事件）、MCP服务器接入、插件打包（命令+代理+MCP+Hooks），以及权限模式与无头模式（claude -p）用于CI/CD。
+- 限制：第三方整理，未见官方文档原文逐项核对；发表日期未知，故填unknown；机制名称以摘要为准，不推断内部实现。</p>
+<p><strong>S07</strong> <a href="https://www.cloudcontraptions.com/courses/cloudcontraptions/tools/ai-coding-assistants/pdf/agentic-coding-with-claude-code.pdf">Agentic Coding with Claude Code课程资料：计划模式与会话管理</a> · Cloud Contraptions
+- 发布：unknown；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：课程资料；读取：relevant_text；定位：PDF正文摘要。
+- 原文支持：计划模式（plan mode）要求先达成可编辑的实施计划再写码；会话管理包括检查点/回退（/rewind）、恢复（/resume）、分支与压缩（/compact），上下文满后以摘要保留近期内容，长任务失败与遗忘仍是已知短板。
+- 限制：日期精度为月，已按契约填当月1日；课程资料为二手整理，长任务短板为定性描述，未量化失败率。</p>
+<p><strong>S08</strong> <a href="https://www.macrumors.com/2025/11/24/anthropic-claude-opus-4-5/">Anthropic发布Claude Opus 4.5</a> · MacRumors
+- 发布：2025-11-24；事件：2025-11-24；查阅：2026-10-21。
+- 来源族：厂商发布报道；读取：relevant_text；定位：2025/11/24/anthropic-claude-opus-4-5。
+- 原文支持：2025年11月24日Claude Opus 4.5发布，被Anthropic定位为当时世界最佳编码/代理/计算机使用模型，SWE-bench Verified 80.9%，定价降至5/25美元每百万token，较Opus 4降价约三分之二；同期Claude Code进入桌面端并强化计划模式与长时代理工具。
+- 限制：仅依据提供的摘要，未重新核验原文；基准与“最佳”定位为厂商口径，需与独立复现区分；降价幅度为摘要给出的约数。</p>
+<p><strong>S09</strong> <a href="https://vfuturemedia.com/ai/introducing-claude-code-security-anthropics-ai-powered-tool-for-smarter-vulnerability-detection-now-in-limited-research-preview/">Claude Code Security有限研究预览介绍</a> · VFuture Media
+- 发布：unknown；事件：2026-02-20；查阅：2026-10-21。
+- 来源族：产品发布报道；读取：relevant_text；定位：正文摘要。
+- 原文支持：2026年2月20日Claude Code Security以有限研究预览面向Enterprise与Team客户推出（开源维护者可加速免费接入），基于Claude Opus 4.6做类人工安全研究员的数据流追踪与补丁建议，但补丁仍需人工审核、不自动部署。
+- 限制：仅依据提供的摘要，未重新核验原文；发表日期未知，故填unknown；与搜索线索中的2月19日说法存在一日差异，以本条事实日期2026-02-20为准并保留该差异。</p>
+<p><strong>S10</strong> <a href="https://intuitionlabs.ai/articles/claude-sonnet-4-5-code-2-0-features">2026年Claude模型快速迭代梳理</a> · IntuitionLabs
+- 发布：unknown；事件：2026-09-28；查阅：2026-10-21。
+- 来源族：产品功能梳理；读取：relevant_text；定位：articles/claude-sonnet-4-5-code-2-0-features。
+- 原文支持：Opus 4.6于2026年2月引入Agent Teams与1M token上下文；其后Opus 4.7（2026年4月16日）、Opus 4.8（2026年5月28日，含研究预览Dynamic workflows）、Sonnet 5（2026年6月30日）延续快速迭代，2026年9月22日Opus 5.5与9月28日Sonnet 5.5成为默认模型并带1M上下文。
+- 限制：单一二手梳理汇总多条模型时间线，未逐项见官方发布原文；发表日期未知，故填unknown；默认模型切换的具体生效范围未在摘要中展开。</p>
+<p><strong>S11</strong> <a href="https://securityonline.info/claude-ai-hits-weekly-rate-limits-anthropic-caps-usage-for-subscribers-sparking-developer-backlash/">Claude订阅新增周限额引发开发者反弹</a> · SecurityOnline
+- 发布：unknown；事件：2025-08-28；查阅：2026-10-21。
+- 来源族：科技新闻报道；读取：relevant_text；定位：正文摘要。
+- 原文支持：Anthropic于2025年8月28日对Claude订阅新增周限额，与既有5小时滚动限额并行，官方称仅约5%用户受影响，但重度Claude Code用户（尤其多会话Opus 4）仍易触顶，超额后可按API价购买额外用量；限额阈值未公开是争议核心。
+- 限制：仅依据提供的摘要，未重新核验原文；“仅约5%”为官方口径，与重度用户体验存在张力；发表日期未知，故填unknown。</p>
+<p><strong>S12</strong> <a href="https://dev.to/theaidownside/the-claude-pro-is-consumed-within-an-hour-a-week-of-coding-tool-defections-35ba">Claude Pro用量耗尽与用户转投投诉报道</a> · Dev.to
+- 发布：unknown；事件：2025-08-01；查阅：2026-10-21。
+- 来源族：开发者社区报道；读取：relevant_text；定位：正文摘要。
+- 原文支持：2025年8月用户集中投诉Claude Pro在简单任务中一小时内耗尽、有人10分钟触顶后转投Codex；另有无头任务触限时返回结果仍标记success、恢复会话需重付上下文成本（一次恢复约18美元对应63次工具调用，高于首跑79次调用的9美元），说明限额与失败信号不透明。
+- 限制：日期精度为月，已按契约填当月1日；用户投诉与个案成本为轶事证据，未构成系统性抽样；发表日期未知，故填unknown。</p>
+<p><strong>S13</strong> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">CVE-2026-55607：Claude Code工作区沙箱逃逸事件</a> · VibeIncidents
+- 发布：unknown；事件：2026-06-04；查阅：2026-10-21。
+- 来源族：安全事件披露；读取：relevant_text；定位：incidents/claude-code-worktree-sandbox-escape-cve-2026-55607。
+- 原文支持：CVE-2026-55607：Claude Code 2.1.38至2.1.163版本中，提示注入的恶意仓库可通过把工作区命名为.git并移出沙箱文件夹，利用git fsmonitor执行脚本并覆盖用户主目录文件（如~/.zshenv），在最严格Bash设置下仍逃逸macOS seatbelt沙箱；2026年6月4日于2.1.163修复，6月25日发布GHSA-7835-87q9-rgvv公告，未报告野外利用。
+- 限制：仅依据提供的摘要，未重新核验原文与CVE/GHSA原文；“未报告野外利用”不等于证实无野外利用；发表日期未知，故填unknown。</p>
+<p><strong>S14</strong> <a href="https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration">SneakPeek：Claude Code Desktop预览窗零点击凭据窃取</a> · Qpulse/QuasarCyberTech
+- 发布：unknown；事件：2026-08-17；查阅：2026-10-21。
+- 来源族：安全事件披露；读取：relevant_text；定位：news/6817/sneakpeek-zero-click-vulnerability。
+- 原文支持：SneakPeek：Claude Code Desktop预览窗对大于256KB的HTML文件走file://渲染路径而非带CSP的data:路径，且请求过滤器未生效，恶意脚本可无提示读取SSH密钥、AWS/GitHub/npm凭据与Claude OAuth token并外发；研究者7月4日报告、7月9日初修被绕过、8月17日最终修复。
+- 限制：仅依据提供的摘要，未重新核验原文；修复时间线以摘要为准，初修被绕过的技术细节未展开；发表日期未知，故填unknown。</p>
+<p><strong>S15</strong> <a href="https://www.manifold.security/blog/ai-coding-agents-git-hijack">GitSpawn：AI编码Agent的git劫持跨厂商问题</a> · Manifold Security
+- 发布：unknown；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：安全研究披露；读取：relevant_text；定位：blog/ai-coding-agents-git-hijack。
+- 原文支持：GitSpawn跨厂商问题：打开含恶意仓库文件夹时，Claude Code会在用户输入任何提示、甚至工作区信任提示之前运行git status等上下文采集命令，仓库可借此劫持执行并导致任意代码执行；该类问题在Claude Code、Codex、Cursor等多家产品中同时存在，不宜只归因于单一厂商。
+- 限制：仅依据提供的摘要，未重新核验原文；跨厂商归因需谨慎，摘要未给出各厂商修复状态对比；发表日期未知，故填unknown。</p>
+<p><strong>S16</strong> <a href="https://vibecodershq.com/guides/claude-code-vs-codex">Claude Code与Codex对比：定价与用量口径指南</a> · Vibe Coders HQ
+- 发布：unknown；事件：2026-10-19；查阅：2026-10-21。
+- 来源族：对比指南；读取：relevant_text；定位：guides/claude-code-vs-codex。
+- 原文支持：截至2026年10月19日核查：Claude Code无免费层、Pro 20美元/月（年付17美元）、Max 100美元起（5x/20x Pro用量），且与Claude聊天共用一个用量池；Codex与Cursor入门档更低且有免费/受限入口，多家评测指出20美元档对日常Agent用户只是试用档，重度用户实际支出常达100-200美元，厂商间限额口径不可直接对比。
+- 限制：仅依据提供的摘要，未重新核验原文与官方定价页；核查时点为2026-10-19，之后定价可能变化；厂商间口径不可直接对比；发表日期未知，故填unknown。</p>
+<p><strong>S17</strong> <a href="https://deepwiki.com/victor-software-house/claude-code-docs/3.1-prerequisites-and-installation">分层与来源等级提醒：产品、模型与Harness须区分</a> · DeepWiki Claude Code Docs
+- 发布：unknown；事件：2026-10-21；查阅：2026-10-21。
+- 来源族：方法说明；读取：relevant_text；定位：3.1-prerequisites-and-installation。
+- 原文支持：必须严格区分三层：(1)Claude Code产品与订阅/API服务；(2)底层Claude模型版本（Sonnet/Opus/Haiku命名与发布时间以官方为准）；(3)本地Harness实现。本次搜集到的Agent主循环、子代理、Hooks、MCP、权限与沙箱机制均来自官方文档转述与第三方整理，凡未见官方文档原文的内部架构细节应标为unverified/preliminary，不得从模型行为反推架构；Claude Code与Codex的开源程度不同，社区逆向说法不得当作官方实现。
+- 限制：该条本身为方法提醒而非产品事实；发表日期未知，故填unknown；内部架构细节在本账本中均未当作已证实事实。</p>
+<p>检索缺口：
+- 未见Anthropic官方发布原文与官方变更日志逐项核对，模型发布时间与Harness功能上线日的对应关系仍依赖二手报道。
+- 未见官方定价页与限额阈值原文，周限额、5小时滚动窗口与Max档用量倍数的精确规则未证实。
+- 未见SWE-bench、Terminal-bench等厂商基准的独立复现，基准成绩仅能作为厂商口径引用。
+- 未见Claude Code 2.1.x完整版本变更记录，CVE-2026-55607之外的版本演进与修复覆盖面不完整。
+- 未见Claude Code Desktop正式发布与演进的完整时间线，SneakPeek事件之外的桌面端功能史缺口较大。
+- 未见官方内部架构文档，Agent主循环、子代理调度与沙箱实现的内部细节均应保持unverified/preliminary。
+- 2026年10月21日之后的产品、定价与安全动态不在本账本覆盖范围内。</p>
+<p>检索日志：Anthropic Claude Code research preview launch February 2025（discovery）；Claude Code changelog versions features 2025 2026 Anthropic（discovery）；Claude Code security vulnerability prompt injection sandbox bypass（counterevidence）；Claude Code 研究预览 发布 演进历史（discovery）；Claude Code 定价 限额 争议 与 Codex Cursor 对比 评测（counterevidence）；Claude Opus 4.5 November 2025 best coding model agent teams Sonnet 4.5 September 2025（verification）；Claude Code plugins SDK GitHub Actions VS Code extension checkpoints plan mode hooks CLAUDE.md（verification）；Claude Code long task failure context limit usage limit complaints August 2025（counterevidence）；site anthropic.com Claude Code generally available May 2025 Sonnet 4 Opus 4（verification）。</p>
+<h2 id="_6">二、交付形态与开发者工作流</h2>
+<p><strong>关键议题</strong>：Claude Code的交付形态与开发者工作流应如何按产品层、模型层与本地Harness层区分，并在无头、子代理、Hooks与权限/沙箱约束下可靠落地？</p>
+<p>选题依据：选题依据：提供的OSINT同时覆盖交付形态全谱（CLI/IDE/桌面/云端/手机、无头与GitHub Action、Agent SDK）、开发者工作流核心机制（子代理并行、Hooks、CLAUDE.md与计划模式、Skills/MCP/插件、权限与沙箱）以及必要的反证（提示注入、CVE、云端护栏争议、定价与实测口径），足以按产品层、模型层与Harness层编制可审查的证据账本，而非单一厂商宣传口径。</p>
+<p><strong>当前判断</strong>：条件性优选：分层交付与无头并行工作流可有条件使用，但不得默认信任模型、默认并发或把bypass等同于沙箱；必须以显式权限与完整allow列表、PreToolUse硬性门控、容器或沙箱隔离、对文件工具与Hooks及MCP另行控制和显式验收为前置条件。 <a href="https://code.claude.com/docs/en/agent-sdk/overview">S01</a> <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a> <a href="https://medium.com/@yuraoak/claude-code-sandbox-built-in-isolation-docker-and-cloud-85258f26d567">S11</a> <a href="https://github.github.com/gh-aw/engines/claude/">S17</a> <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">S05</a> <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">S07</a></p>
+<p>优选：V02；置信度：medium。有C18与C05为supported支撑，C11、C12、C16、C17等多项初步证据方向一致，但本地沙箱实现、版本细节与云端隔离缺乏官方原文，缺少无头静默失败率、长程成功率与同模型受控基准等一手数据。
+成立条件：仅适用于已更新至CVE修复版本之后、运行于容器或虚拟机或沙箱、配齐deny规则与白名单并完成显式验收的Claude Code部署；云端隔离说法未经官方证实，不得作为部署依据；定价与单次实测结论不得直接用作纯Harness排序。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_7">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（效率优先的开发者工作流倡导者；代表主张以交付形态与自动化复用取胜的一方，强调SDK、无头与并行带来的覆盖面与吞吐，相对弱化安全与成本约束的权重。）：分层交付与可编程工作流是规模化主路径：CLI/IDE/云端多形态加Agent SDK、claude -p无头模式与fork子代理并行，能把同一工具链从交互开发扩展到CI与批量任务。
+- 限定：范围限定于账本所载的交付形态与工作流机制，不承诺具体吞吐、成本或成功率；总体置信度为初步，仅C05为supported，其余四项均为preliminary。结论成立的前提是显式权限配置、分波次任务与显式验收得到落实，且各端可用性与版本细节以官方当前文档为准。
+- 最强反证：最强反证是：默认并行与默认信任并不可靠——仅靠默认并发假设可能出现超限并行，缺少完整allow列表的无头任务可能静默未完成；bypass只取消常规审批而不等同沙箱隔离，云端与GitHub Action的护栏也受到质疑；同时单次实测与定价口径不能直接证明Harness优劣。因此，若不把显式权限、硬性并发门控、容器隔离与显式验收作为前置条件，分层交付的规模化主张会被安全与成本约束削弱，而非自动成立。 <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S03</a> <a href="https://juejin.cn/post/7598424770321580041">S04</a> <a href="https://code.claude.com/docs/en/agent-sdk/overview">S01</a> <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">S05</a> <a href="https://aiweekly.co/alerts/claude-code-21302-turns-on-fork-subagents-in-sdk-and-apps">S06</a></p>
+<p><strong>观点 V02</strong>（审慎的安全与合规评审者；代表以攻击面与失控风险为先的一方，强调提示注入、越权访问、密钥泄露与云端Action护栏争议，要求把确定性门控置于效率之前。）：bypass不等于沙箱、Hooks并非万能、云端护栏与历史CVE表明，工作流必须以deny规则、PreToolUse硬性门控、容器隔离与显式验收为前提，而非默认信任模型与默认并发。
+- 限定：范围与置信度：仅适用于本账本覆盖的Claude Code交付与工作流场景，不扩展为对所有智能体工具的普遍定论；因除C18外其余关键证据多为preliminary且C13为unverified，结论置信度为中等偏低的审慎性判断，即应先设门控再运行，而非断言风险必然发生。
+- 最强反证：最强反证：C17所述两项CVE均已在对应版本修复，C11也表明bypass并非完全无防护，C13的第三方描述称云端任务在隔离沙箱中运行、凭据加密且不直接暴露给运行时；若版本已更新、运行于容器或沙箱、并配齐deny与白名单，风险可被显著压低。因此反方可以主张问题出在默认配置与旧版本，而非工作流本身不可用；但由于C13未经官方证实且C12仍要求对文件工具、Hooks与MCP另行控制，该反证只能支持有条件使用，不能支持默认信任。 <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a> <a href="https://medium.com/@yuraoak/claude-code-sandbox-built-in-isolation-docker-and-cloud-85258f26d567">S11</a> <a href="https://claudenotes.net/blog/claude-code-on-the-web/">S12</a> <a href="https://www.ayautomate.com/blog/claude-code-security-risks">S15</a> <a href="https://hackernoob.tips/claude-codes-critical-vulnerabilities-beginners-using-ai-coding-tools-check/">S16</a> <a href="https://github.github.com/gh-aw/engines/claude/">S17</a></p>
+<p><strong>观点 V03</strong>（成本与实测口径怀疑者；代表以可比性与总成本质疑结论的一方，强调跨端共用额度、价格层级与基准变量分离问题，反对把单次贵而彻底的结果直接等同于Harness胜负。）：定价共用额度与25个PR实测都不能直接证明Harness优劣：前者决定长期可用成本，后者同时混杂模型能力与Harness实现，引用旧模型名或单次实测结论都需核对时间点与口径。
+- 限定：范围仅限于对“直接证明Harness优劣”这一推论的质疑，不否认实测结果本身或共用额度对用户成本的实际影响。对方法论批评的置信度为中等，因为混杂变量与共用额度均由账本直接记载；对任何实质性Harness排名的置信度为低，因为现有证据为初步、第三方、单次实测，且缺乏受控对照。结论仅在提供的证据与口径内成立，不扩展为对其他任务、模型版本或价格时点的一般判断。
+- 最强反证：最强反证是：用户实际关心的往往不是纯Harness隔离，而是默认产品组合的交付结果与总代价。按此口径，23个对21个的完成数差距、“更彻底但更贵更慢”的权衡、以及跨端共用额度造成的长期成本约束，仍是真实决策信息；若比较的是官方默认搭配而非抽象Harness，混杂变量反而是产品选择的一部分。此外，若后续出现同模型、同任务的受控基准或官方定价原文，单次实测的解释力可能被修正或加强，本主张的否定范围也应相应收窄。 <a href="https://www.morphllm.com/comparisons/codex-vs-claude-code">S14</a> <a href="https://dev.to/jamilxt/claude-code-vs-codex-cli-in-2026-which-subscription-should-you-actually-pay-for-m4m">S18</a> <a href="https://octomind.run/blog/codex-vs-claude-code">S19</a></p>
+<h3 id="_8">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：Agent SDK与CLI同款工具、循环与上下文管理确实提供形态复用基础，在V02的门控条件满足时可作为有条件的可规模化方案，但不得称已验证的主路径。
+- V03的合理洞察：在比较官方默认搭配整体交付结果与总代价时，25个PR实测与共用额度仍有初步决策参考价值，前提是标注单次第三方实测、样本量、模型版本时间点与未以官方原文复核的定价口径。</p>
+<p>不确定性及改变判断的条件：
+- 缺少官方changelog或文档原文对v2.1.302 fork子代理默认开启、2.1.63 Task改名Agent与本地沙箱Seatbelt实现的直接引文，官方原文出现会改变版本细节判断。
+- 缺少云端隔离架构的官方披露，官方披露出现会改变云端部署的可信度判断。
+- 缺少无头任务静默失败率、fork并行实际吞吐与长程成功率、默认并发超限复现条件与发生率的一手可重复数据。
+- 缺少同模型、同任务、同评估标准的受控基准与官方定价及限额原文，出现后会改变Harness排序与成本结论。
+- 所述硬化组合在具体版本与配置下的实际残余风险未在账本内证实。</p>
+<h3 id="_9">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同一工具链可覆盖CLI、IDE、云端与无头任务，但默认信任、默认并发与bypass模式都不是安全默认项，历史信任边界缺陷与提示注入风险真实存在。</li>
+<li><strong>需要</strong>：需要在规模化之前先把不可绕过的门控、隔离边界与验收标准立起来，否则无头任务可能静默未完成、并行可能超限、密钥与越权路径可能被放大。</li>
+<li><strong>方案</strong>：采用V02收窄后的有条件方案：先更新版本与核对官方文档，再以显式权限、硬性并发门控、容器或沙箱隔离与显式验收落地分层工作流；同时把定价与实测结论限定为默认搭配的初步参考，不作纯Harness排名。</li>
+<li><strong>预演</strong>：若按此落地，交互开发、CI评审与批量任务可复用同一工具链并在门控内并行；若跳过门控，则可能重现静默未完成、超限并行或在无足够安全架构的Action中运行的风险，而非获得可复用的规模化收益。</li>
+<li><strong>行动</strong>：
+   - 部署前由负责人核对当前版本与官方文档，确认已高于CVE-2025-59536修复版本1.0.111与CVE-2026-21852修复版本2.0.65，并记录官方文档核对结果 <a href="https://hackernoob.tips/claude-codes-critical-vulnerabilities-beginners-using-ai-coding-tools-check/">S16</a> <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a>
+     时间：部署前完成，此后每次升级复核；指标：受影响旧版本实例数为零，官方核对记录完整率；基线：未核对前的部署版本清单。
+     停止/成功条件：任一实例仍低于修复版本或无官方核对记录时停止上线；阈值来源：证据所给：C17给出的修复版本阈值。
+   - 由工作流负责人为无头与并行任务配置显式权限模式与完整allow列表、PreToolUse硬性并发门控、分波次任务与显式验收，并记录静默未完成与超限并行事件 <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">S05</a> <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">S07</a> <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a>
+     时间：试点两周内完成并复核；指标：静默未完成任务占比与超限并行事件数；基线：试点前默认配置下的同类任务记录，如无基线则以试点首周为基线。
+     停止/成功条件：出现未被门控拦截的超限并行或静默未完成未被验收发现时暂停扩量；阈值来源：分析者建议，未见证据给出具体失败率阈值；门控本身来自证据，数值阈值待试点数据确定。
+   - 由安全负责人将bypass类运行限定在容器、虚拟机或沙箱内，配齐deny规则与白名单，设置本地沙箱不可用时失败而非降级，并对文件工具、Hooks、MCP与可读路径另行控制 <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a> <a href="https://medium.com/@yuraoak/claude-code-sandbox-built-in-isolation-docker-and-cloud-85258f26d567">S11</a>
+     时间：与上一项试点同期完成；指标：绕过路径检查通过率与沙箱不可用时失败而非降级事件占比；基线：未配置前的绕过路径清单。
+     停止/成功条件：任一绕过路径未堵住或沙箱不可用时静默降级时停止该类运行；阈值来源：证据所给的机制要求，分析者建议：绕过路径为零容忍，证据未给出量化阈值。
+   - 由采购与评估负责人重新核对当前官方定价与限额原文及当前默认模型版本，在同模型、同任务口径下重做受控对比前，不得引用旧模型名或单次25个PR实测作纯Harness排序 <a href="https://www.morphllm.com/comparisons/codex-vs-claude-code">S14</a> <a href="https://dev.to/jamilxt/claude-code-vs-codex-cli-in-2026-which-subscription-should-you-actually-pay-for-m4m">S18</a> <a href="https://octomind.run/blog/codex-vs-claude-code">S19</a>
+     时间：采购决策前完成；指标：官方原文核对完成率与受控基准样本量；基线：现有单次25个PR第三方实测，仅作默认搭配初步参考。
+     停止/成功条件：无官方定价原文或无受控基准时，仅保留初步参考结论，不作排序决策；阈值来源：分析者建议：以官方原文与受控基准作为决策门槛，证据未给出样本量阈值。</li>
+</ol>
+<h3 id="_10">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：须区分三层：Claude Code是产品与订阅/API服务层，Claude Sonnet/Opus/Haiku是底层模型层，CLI/IDE扩展/Agent SDK/Hooks/MCP是本地Harness层，三者不可混为同一发布时间或同一开源状态。 <a href="https://code.claude.com/docs/en/agent-sdk/overview">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Claude Code于2025-02-24以研究预览发布，并随Claude 3.7 Sonnet一同推出；2025年5月随Claude 4向Pro、Max与企业用户广泛开放。 <a href="https://builtin.com/articles/anthropic-claude-code-tool">S02</a></li>
+<li><strong>C03 / fact / preliminary</strong>：交付形态包括终端CLI、VS Code扩展与JetBrains插件、桌面端、云端claude.ai/code与手机端；Codex同样覆盖终端、IDE、桌面、云端与手机，但两者订阅与模型归属不同。 <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S03</a></li>
+<li><strong>C04 / fact / preliminary</strong>：无头交付可用claude -p做一句话输入、stdout输出并带成本的CI/定时任务；官方GitHub Action支持@claude交互模式与事件驱动自动化评审/修复，v1简化配置并支持prompt、claude_args、触发短语与Bedrock/Vertex选项。 <a href="https://juejin.cn/post/7598424770321580041">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：Agent SDK把与Claude Code相同的工具、Agent循环与上下文管理打包为Python/TypeScript库，运行在用户自己的进程中；官方明确区分Agent SDK、CLI、Client SDK与托管Agents，后者由Anthropic托管云沙箱或用户自托管沙箱运行。 <a href="https://code.claude.com/docs/en/agent-sdk/overview">S01</a></li>
+<li><strong>C06 / fact / preliminary</strong>：官方Agent SDK快速入门强调工具决定能力、权限模式决定人工监督程度，SDK按固定顺序评估权限模式与allow/deny规则；无头最佳实践要求用claude -p、显式权限模式与完整allow列表，否则Manual模式下需审批的调用会被拒绝且任务可能静默未完成。 <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">S05</a></li>
+<li><strong>C07 / fact / preliminary</strong>：子代理拥有独立上下文、只把最终消息返回父会话，适合并行探索与隔离噪声上下文；v2.1.302起fork子代理在claude -p、Agent SDK、桌面端与VS Code默认开启，可用CLAUDE_CODE_FORK_SUBAGENT=0关闭，提示与Agent hooks同类事件最多并行12个。 <a href="https://aiweekly.co/alerts/claude-code-21302-turns-on-fork-subagents-in-sdk-and-apps">S06</a></li>
+<li><strong>C08 / fact / preliminary</strong>：Hooks是确定性扩展点而非模型自主决策：PreToolUse返回exit 2可拦截工具调用并把stderr返回模型，而SubagentStart的exit 2不能阻止子代理启动；Task工具在2.1.63改名为Agent，旧matcher需同时写Agent|Task。 <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">S07</a></li>
+<li><strong>C09 / fact / preliminary</strong>：会话/上下文与记忆方面，CLAUDE.md分全局~/.claude/CLAUDE.md、项目级与目录级分层，/init生成、/memory编辑、/compact压缩、/context查看用量、/resume恢复；计划模式为只读，计划文件存于~/.claude/plans/并可在审批前作为可评审契约，settings.json可设plansDirectory改为项目内路径。 <a href="https://www.datacamp.com/tutorial/claude-code-plan-mode">S08</a></li>
+<li><strong>C10 / fact / preliminary</strong>：扩展三层分工：Skills为Markdown可复用工作流与斜杠命令，支持按需加载；MCP服务器提供外部系统真实工具调用；插件用.claude-plugin/plugin.json打包skills、agents、hooks与MCP以便跨项目/团队分享，独立配置则放在.claude/目录。 <a href="https://www.cnblogs.com/elesos/p/19528513">S09</a></li>
+<li><strong>C11 / fact / preliminary</strong>：权限模式包括默认逐项询问、计划模式、acceptEdits自动批准文件编辑但仍询问Bash、bypassPermissions；bypass模式不等同沙箱：它只取消常规审批、不提供网络隔离与根权限隔离，deny规则、关键路径rm/rmdir提示与跨会话消息防护等仍可能生效，官方建议仅在容器/虚拟机/沙箱中使用。 <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a></li>
+<li><strong>C12 / fact / preliminary</strong>：本地沙箱可限制Shell命令及其子进程与文件/网络边界，macOS用系统沙箱、Linux/WSL2需bubblewrap与socat，/sandbox可开启，allowUnsandboxedCommands=false与failIfUnavailable=true可堵住绕过路径；但文件工具、Hooks、MCP与可读路径仍需另行控制，社区对二进制字符串的Seatbelt策略解读属于第三方初步证据而非官方实现披露。 <a href="https://medium.com/@yuraoak/claude-code-sandbox-built-in-isolation-docker-and-cloud-85258f26d567">S11</a></li>
+<li><strong>C13 / source_statement / unverified</strong>：云端执行被第三方描述为每个任务在隔离沙箱中运行、Git经安全代理访问、凭据加密且不直接暴露给运行时；但该类云端细节多来自第三方解读，凡未见官方文档原文的内部隔离实现应标为unverified/preliminary，不得从模型行为反推架构。 <a href="https://claudenotes.net/blog/claude-code-on-the-web/">S12</a></li>
+<li><strong>C14 / fact / preliminary</strong>：开源程度关键差异：Claude Code本体为闭源商业条款产品，开放的是Skills格式、MCP协议与可配置扩展点；Codex CLI为Apache-2.0开源Rust实现，可读改Harness源码；因此凡来自社区逆向的Claude Code内部循环说法必须标明来源等级。 <a href="https://loreai.dev/compare/codex-cli-vs-claude-code">S13</a></li>
+<li><strong>C15 / fact / preliminary</strong>：模型层需与产品层区分：2026年5月核查时Claude Code运行模型包括Opus 4.8、Sonnet 4.6与Haiku 4.5；到2026年10月第三方对比称默认模型已变为Opus 5.5、并列Sonnet 5.5与Haiku 5.5，说明模型版本快速迭代，引用旧模型名需核对时间点。 <a href="https://www.morphllm.com/comparisons/codex-vs-claude-code">S14</a></li>
+<li><strong>C16 / fact / preliminary</strong>：提示注入被列为最严重风险，恶意README/依赖文件、过宽文件访问、密钥进入上下文、Shell注入、YOLO模式与不受信任MCP均可放大攻击面；缓解包括PreToolUse hooks、permissions.deny、--allowedTools白名单与仅在CI使用--dangerously-skip-permissions。 <a href="https://www.ayautomate.com/blog/claude-code-security-risks">S15</a></li>
+<li><strong>C17 / fact / preliminary</strong>：已披露漏洞：CVE-2025-59536为1.0.111之前信任对话框缺陷，可在用户接受信任前执行项目代码；CVE-2026-21852为2.0.65之前恶意仓库设置ANTHROPIC_BASE_URL可在信任提示前发出API请求并可能泄露API密钥，两者均已在对应版本修复。 <a href="https://hackernoob.tips/claude-codes-critical-vulnerabilities-beginners-using-ai-coding-tools-check/">S16</a></li>
+<li><strong>C18 / fact / supported</strong>：GitHub Agentic Workflows文档明确指出直接在GitHub Actions运行claude等CLI若无足够安全架构不被推荐，并称anthropics/claude-code-action的安全模型护栏较少，若可用GitHub Agentic Workflows则不推荐前者。 <a href="https://github.github.com/gh-aw/engines/claude/">S17</a></li>
+<li><strong>C19 / fact / preliminary</strong>：定价与限额方面，Claude Code无免费层，Pro $20被官方支持文档描述为轻量使用，真正可用量级为Max 5x $100与Max 20x $200，且五小时窗口与周上限跨claude.ai、Claude Code与桌面端共用同一额度池，超额后可用标准API费率的使用积分继续。 <a href="https://dev.to/jamilxt/claude-code-vs-codex-cli-in-2026-which-subscription-should-you-actually-pay-for-m4m">S18</a></li>
+<li><strong>C20 / fact / preliminary</strong>：同一25个真实合并PR任务的第三方实测中，Claude Code配Opus 5解决23个、花费$81.79、用时6.7小时，Codex配GPT-5.6-Sol解决21个、花费$14.86、用时1.0小时；该结果同时反映模型与Harness，不能直接解读为纯Harness优劣，基准口径争议本身就是结论的一部分。 <a href="https://octomind.run/blog/codex-vs-claude-code">S19</a></li>
+<li><strong>C21 / fact / preliminary</strong>：真实会话曾在10个子代理上限下跑出15个子代理，说明仅靠默认并发假设不可靠，需用PreToolUse钩子做硬性并发门控；子代理无法中途向用户追问、返回摘要可能丢失关键细节，长程任务需拆波次与显式验收。 <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">S07</a></li>
+<li><strong>C22 / inference / preliminary</strong>：据此推断，可靠的无头与并行工作流应同时具备显式权限模式与完整allow列表、PreToolUse硬性并发门控、分波次任务与显式验收，而非仅依赖默认并发假设或bypass模式。 <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">S05</a> <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">S07</a> <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">S10</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://code.claude.com/docs/en/agent-sdk/overview">Agent SDK overview</a> · Anthropic（Claude Code官方文档）
+- 发布：2026-09-21；事件：见正文说明；查阅：2026-10-21。
+- 来源族：official_docs；读取：relevant_text；定位：Agent SDK overview。
+- 原文支持：三层区分：产品层、模型层与本地Harness层不可混同；Agent SDK与CLI同款工具、Agent循环与上下文管理，运行于用户进程；区分Agent SDK、CLI、Client SDK与托管Agents。
+- 限制：材料提供的日期与摘要，未声称重新全文复核原文；文档版本时效以原文为准。</p>
+<p><strong>S02</strong> <a href="https://builtin.com/articles/anthropic-claude-code-tool">Anthropic Claude Code Tool</a> · Built In
+- 发布：2025-05-22；事件：2025-02-24；查阅：2026-10-21。
+- 来源族：news_media；读取：relevant_text；定位：Claude Code tool介绍。
+- 原文支持：Claude Code于2025-02-24以研究预览发布，随Claude 3.7 Sonnet推出；2025年5月随Claude 4向Pro、Max与企业用户广泛开放。
+- 限制：材料提供的发布日期与摘要，未声称重新全文复核原文。</p>
+<p><strong>S03</strong> <a href="https://vibecodershq.com/guides/claude-code-vs-codex">Claude Code vs Codex</a> · Vibe Coders HQ
+- 发布：2026-10-19；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：Claude Code vs Codex交付形态对比。
+- 原文支持：交付形态包括终端CLI、VS Code扩展与JetBrains插件、桌面端、云端claude.ai/code与手机端；Codex同样覆盖多端，但订阅与模型归属不同。
+- 限制：第三方对比指南，非官方交付清单；各端可用性需以官方当前文档为准。</p>
+<p><strong>S04</strong> <a href="https://juejin.cn/post/7598424770321580041">Claude Code中英文系列教程15</a> · 掘金
+- 发布：2026-01-24；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Claude Code中英文系列教程15。
+- 原文支持：无头交付：claude -p一句话输入、stdout输出并带成本的CI/定时任务；官方GitHub Action支持@claude交互与事件驱动自动化评审/修复，v1简化配置并支持prompt、claude_args、触发短语与Bedrock/Vertex选项。
+- 限制：中文教程类二手整理，非官方Action文档原文；参数时效需以官方Action当前版本为准。</p>
+<p><strong>S05</strong> <a href="https://dev.to/aobaworks/claude-code-permissions-best-practices-headless-template-28gc">Claude Code Permissions Best Practices: Headless Template</a> · DEV
+- 发布：2026-10-20；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community_blog；读取：relevant_text；定位：Headless Template权限最佳实践。
+- 原文支持：官方Agent SDK快速入门强调工具决定能力、权限模式决定人工监督程度，SDK按固定顺序评估权限模式与allow/deny规则；无头最佳实践要求显式权限模式与完整allow列表，否则Manual模式下需审批调用会被拒绝且任务可能静默未完成。
+- 限制：第三方最佳实践总结，非官方SDK文档原文；固定评估顺序等细节需以官方文档为准。</p>
+<p><strong>S06</strong> <a href="https://aiweekly.co/alerts/claude-code-21302-turns-on-fork-subagents-in-sdk-and-apps">Claude Code 2.1.302 Turns On Fork Subagents in SDK and Apps</a> · AI Weekly
+- 发布：2026-10-16；事件：见正文说明；查阅：2026-10-21。
+- 来源族：news_media；读取：relevant_text；定位：v2.1.302 fork子代理报道。
+- 原文支持：子代理独立上下文、只返回最终消息；v2.1.302起fork子代理在claude -p、Agent SDK、桌面端与VS Code默认开启，可用CLAUDE_CODE_FORK_SUBAGENT=0关闭，提示与Agent hooks同类事件最多并行12个。
+- 限制：第三方版本动态报道，版本号与默认开启范围未以官方changelog原文复核。</p>
+<p><strong>S07</strong> <a href="https://dev.to/rulestack/one-claude-code-session-ran-15-subagents-under-our-10-subagent-rule-after-a-pretooluse-hook-676-566m">One Claude Code session ran 15 subagents</a> · DEV
+- 发布：2026-10-18；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community_blog；读取：relevant_text；定位：15个子代理会话案例。
+- 原文支持：Hooks为确定性扩展点：PreToolUse返回exit 2可拦截并把stderr返回模型，SubagentStart的exit 2不能阻止子代理启动；Task工具在2.1.63改名为Agent；真实会话在10个上限下跑出15个子代理。
+- 限制：单次真实会话案例与第三方解读，改名版本号与并发上限事件未以官方changelog原文复核。</p>
+<p><strong>S08</strong> <a href="https://www.datacamp.com/tutorial/claude-code-plan-mode">Claude Code Plan Mode</a> · DataCamp
+- 发布：2026-03-09；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：Plan Mode教程。
+- 原文支持：CLAUDE.md分全局、项目级与目录级分层，/init生成、/memory编辑、/compact压缩、/context查看用量、/resume恢复；计划模式只读，计划文件存于~/.claude/plans/，settings.json可设plansDirectory改为项目内路径。
+- 限制：第三方教程整理，非官方文档原文；路径与命令时效需以当前版本为准。</p>
+<p><strong>S09</strong> <a href="https://www.cnblogs.com/elesos/p/19528513">Claude Code插件教程20</a> · 博客园
+- 发布：2026-01-24；事件：见正文说明；查阅：2026-10-21。
+- 来源族：tutorial；读取：relevant_text；定位：插件教程20。
+- 原文支持：Skills为Markdown可复用工作流与斜杠命令，支持按需加载；MCP服务器提供外部系统真实工具调用；插件用.claude-plugin/plugin.json打包skills、agents、hooks与MCP，独立配置放在.claude/目录。
+- 限制：中文博客教程类二手整理，非官方插件规范原文。</p>
+<p><strong>S10</strong> <a href="https://clawdbytes.com/article/2026-10-07-claude-code-dangerously-skip-permissions-usage-and-limits">Claude Code Dangerously Skip Permissions Usage and Limits</a> · ClawdBytes
+- 发布：2026-10-07；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_analysis；读取：relevant_text；定位：bypassPermissions用法与限制。
+- 原文支持：权限模式包括默认逐项询问、计划模式、acceptEdits、bypassPermissions；bypass不等同沙箱，只取消常规审批、不提供网络与根权限隔离，deny规则与关键路径提示等仍可能生效，官方建议仅在容器/虚拟机/沙箱中使用。
+- 限制：第三方安全解读，非官方权限文档原文；bypass边界细节需以官方文档为准。</p>
+<p><strong>S11</strong> <a href="https://medium.com/@yuraoak/claude-code-sandbox-built-in-isolation-docker-and-cloud-85258f26d567">Claude Code Sandbox: Built-in Isolation, Docker, and Cloud</a> · Medium
+- 发布：2026-10-19；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community_blog；读取：relevant_text；定位：内置隔离、Docker与云端沙箱对比。
+- 原文支持：本地沙箱限制Shell及其子进程与文件/网络边界，macOS用系统沙箱、Linux/WSL2需bubblewrap与socat，/sandbox可开启，allowUnsandboxedCommands=false与failIfUnavailable=true可堵绕过路径；文件工具、Hooks、MCP与可读路径仍需另行控制；二进制字符串Seatbelt解读属第三方初步证据。
+- 限制：第三方沙箱解读，社区对二进制字符串的策略解读非官方实现披露。</p>
+<p><strong>S12</strong> <a href="https://claudenotes.net/blog/claude-code-on-the-web/">Claude Code on the Web</a> · Claude Notes
+- 发布：2026-08-01；事件：见正文说明；查阅：2026-10-21。
+- 来源族：community_blog；读取：secondary；定位：Claude Code on the Web。
+- 原文支持：云端执行被描述为每任务隔离沙箱、Git经安全代理访问、凭据加密且不直接暴露给运行时；但内部隔离实现未见官方文档原文，应标为unverified/preliminary。
+- 限制：第三方解读，内部隔离实现无官方原文支撑，不得从模型行为反推架构。</p>
+<p><strong>S13</strong> <a href="https://loreai.dev/compare/codex-cli-vs-claude-code">Codex CLI vs Claude Code</a> · LoreAI
+- 发布：2026-10-06；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：Codex CLI vs Claude Code开源对比。
+- 原文支持：Claude Code本体为闭源商业条款产品，开放的是Skills格式、MCP协议与可配置扩展点；Codex CLI为Apache-2.0开源Rust实现，可读改Harness源码；社区逆向的内部循环说法须标明来源等级。
+- 限制：第三方对比，非官方许可文本原文；开源范围表述需以双方当前许可为准。</p>
+<p><strong>S14</strong> <a href="https://www.morphllm.com/comparisons/codex-vs-claude-code">Codex vs Claude Code October 2026</a> · MorphLLM
+- 发布：2026-10-19；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：October 2026对比。
+- 原文支持：2026年5月核查时运行模型包括Opus 4.8、Sonnet 4.6与Haiku 4.5；到2026年10月第三方对比称默认模型已变为Opus 5.5、并列Sonnet 5.5与Haiku 5.5，说明模型版本快速迭代。
+- 限制：两个时间点的第三方快照对比，非官方模型版本公告；引用旧模型名需核对时间点。</p>
+<p><strong>S15</strong> <a href="https://www.ayautomate.com/blog/claude-code-security-risks">Claude Code Security Risks</a> · AY Automate
+- 发布：2026-09-26；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_analysis；读取：relevant_text；定位：安全风险梳理。
+- 原文支持：提示注入被列为最严重风险，恶意README/依赖文件、过宽文件访问、密钥进入上下文、Shell注入、YOLO模式与不受信任MCP均可放大攻击面；缓解包括PreToolUse hooks、permissions.deny、--allowedTools白名单与仅在CI使用--dangerously-skip-permissions。
+- 限制：第三方安全风险梳理，非官方威胁模型原文；风险排序为来源作者判断。</p>
+<p><strong>S16</strong> <a href="https://hackernoob.tips/claude-codes-critical-vulnerabilities-beginners-using-ai-coding-tools-check/">Claude Code's Critical Vulnerabilities Explained</a> · HackerNoob
+- 发布：2026-09-24；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_analysis；读取：relevant_text；定位：CVEs Explained。
+- 原文支持：CVE-2025-59536为1.0.111之前信任对话框缺陷，可在接受信任前执行项目代码；CVE-2026-21852为2.0.65之前恶意仓库设置ANTHROPIC_BASE_URL可在信任提示前发出API请求并可能泄露API密钥，两者均已在对应版本修复。
+- 限制：第三方漏洞解读，CVE编号与修复版本未以官方安全公告原文复核。</p>
+<p><strong>S17</strong> <a href="https://github.github.com/gh-aw/engines/claude/">Using Claude Code</a> · GitHub Agentic Workflows
+- 发布：2026-10-19；事件：见正文说明；查阅：2026-10-21。
+- 来源族：vendor_docs；读取：relevant_text；定位：Using Claude Code引擎文档。
+- 原文支持：GitHub Agentic Workflows文档指出直接在GitHub Actions运行claude等CLI若无足够安全架构不被推荐，并称anthropics/claude-code-action的安全模型护栏较少，若可用GitHub Agentic Workflows则不推荐前者。
+- 限制：材料提供的文档摘要，未声称重新全文复核原文；推荐关系以该文档当前版本为准。</p>
+<p><strong>S18</strong> <a href="https://dev.to/jamilxt/claude-code-vs-codex-cli-in-2026-which-subscription-should-you-actually-pay-for-m4m">Claude Code vs Codex CLI Pricing</a> · DEV
+- 发布：2026-10-12；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：2026订阅对比。
+- 原文支持：Claude Code无免费层，Pro $20被官方支持文档描述为轻量使用，真正可用量级为Max 5x $100与Max 20x $200，五小时窗口与周上限跨claude.ai、Claude Code与桌面端共用同一额度池，超额后可用标准API费率的使用积分继续。
+- 限制：第三方定价对比，价格与额度口径未以官方支持文档原文复核，且可能随订阅调整。</p>
+<p><strong>S19</strong> <a href="https://octomind.run/blog/codex-vs-claude-code">Codex vs Claude Code: Same 25 Real PRs</a> · Octomind
+- 发布：2026-10-16；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：Same 25 Real PRs实测。
+- 原文支持：同一25个真实合并PR任务实测：Claude Code配Opus 5解决23个、花费$81.79、用时6.7小时，Codex配GPT-5.6-Sol解决21个、花费$14.86、用时1.0小时；结果同时反映模型与Harness，不能直接解读为纯Harness优劣。
+- 限制：单次第三方实测，样本25个PR、模型与Harness变量未分离，基准口径争议本身就是结论的一部分。</p>
+<p>检索缺口：
+- 缺少官方changelog或官方文档原文对v2.1.302 fork子代理默认开启、2.1.63 Task改名Agent、本地沙箱Seatbelt实现的直接引文
+- 缺少官方定价与限额文档、云端隔离架构的官方披露，云端沙箱内部实现仍属第三方解读
+- 缺少无头任务静默失败率、长程任务成功率等一手可重复数据
+- 缺少同模型、同任务口径下隔离Harness差异的受控基准，现有25个PR实测同时混杂模型与Harness变量
+- 中文教程类来源的版本时效与配置细节未在窗口内以官方原文复核</p>
+<p>检索日志：Claude Code CLI IDE extension GitHub Actions SDK subagents workflow（discovery）；Claude Code changelog subagents parallel tasks hooks custom commands（discovery）；Claude Code 开发者工作流 CLI IDE扩展 GitHub Actions 子代理（discovery）；Claude Code 权限绕过 提示注入 MCP 安全风险 争议（counterevidence）；Anthropic Claude Code research preview February 2025 launch blog（verification）；Claude Code VS Code extension plan mode CLAUDE.md settings memory（discovery）；Claude Agent SDK launch Python TypeScript claude -p headless（discovery）；Claude Code usage limits pricing controversy long tasks fail Codex comparison（counterevidence）；Claude Code web claude.ai/code cloud tasks sandbox permissions（discovery）；Claude Code open source closed source Codex open source comparison harness（verification）；Claude Code MCP 服务器 插件 skills 自定义命令 中文（discovery）。</p>
+<h2 id="harness">三、Harness 核心架构</h2>
+<p><strong>关键议题</strong>：Harness核心架构是什么：Claude Code作为Agent主循环如何以工具、权限、Hooks、记忆与子代理组织模型能力，及其官方可验证边界与反证风险为何。</p>
+<p>选题依据：本节聚焦Harness本身而非底层模型或产品订阅，依据官方可验证的权限、沙箱、Hooks与记忆层，区分官方口径、第三方解读与安全反证，避免把社区逆向细节当作官方架构。</p>
+<p><strong>当前判断</strong>：在受信配置已经建立的前提下，V01经修正后的判断最经得起检验：Harness的核心是可配置、可核对的官方层——deny规则优先、沙箱仅覆盖shell命令、PreToolUse可在工具调用前设卡、CLAUDE.md与settings分层提供持久指令与配置，计划模式只是工作方式而非安全边界；但该结构不构成打开不可信仓库时的信任前安全边界，仓库配置须当作不可信输入处理，人工复核仍不可省略。 <a href="https://builtin.com/articles/anthropic-claude-code-tool">S01</a> <a href="https://code.claude.com/docs/en/permissions">S04</a> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S05</a> <a href="https://dev.to/oldeucryptoboi/inside-claude-codes-architecture-the-agentic-loop-that-codes-for-you-cmk">S06</a> <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">S10</a> <a href="https://claudefolio.com/blog/prompt-injection-how-a-readme-can-hijack-claude-code">S12</a></p>
+<p>优选：V01；置信度：medium。deny优先有官方文档口径摘要支撑，属相对最强的部分；但沙箱与记忆层主要来自第三方转述或标注为官方可验证层的第三方解读，CVE修复状态与信任前加载时序均未独立核验，因此只能给中等置信度。
+成立条件：仅适用于受信配置已建立、且以当前官方文档口径为准的情形；不适用于首次打开不可信仓库、原生Windows命令、文件工具、MCP服务器与Hooks的覆盖范围之外，也不延伸为对闭源内部实现或完整审计日志能力的断言。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（主张以官方可验证层为准的架构分析者；代表严格区分官方口径与第三方解读的立场：只把文档可验证的权限、沙箱、Hooks与记忆机制作为架构结论，把内部实现细节排除在外。）：Harness的核心是可配置、可审计的官方层：权限deny优先、沙箱只覆盖shell命令、Hooks在工具调用前后设卡、CLAUDE.md与settings分层提供持久记忆，计划模式只是工作方式而非安全边界。
+- 限定：范围限定为官方口径与标注为官方可验证的配置层，不包括社区逆向或第三方解读的内部实现细节；置信度为有条件的中等偏高，其中deny优先的官方文档口径相对最强，沙箱与记忆层的第三方转述性质使结论需以官方文档当前版本为准；若官方文档口径变更，相应部分应随之修正。
+- 最强反证：最强反证是：上述官方层描述的是规则生效后的边界，而非配置与输入本身可信的前提。若仓库配置可在信任提示出现前执行、MCP同意可被绕过、API密钥可被重定向，或恶意文档与工具输出可注入指令诱导非预期操作，则deny、沙箱与Hooks的防线可能在生效前或覆盖范围外被绕过；加之沙箱不覆盖文件工具、MCP与Hooks、原生Windows命令不走沙箱，人工复核仍不可省略。因此该主张只能说明官方层的结构与优先级，不能单独证明系统在不可信配置或不可信输入面前是安全的。 <a href="https://builtin.com/articles/anthropic-claude-code-tool">S01</a> <a href="https://code.claude.com/docs/en/permissions">S04</a> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S05</a> <a href="https://dev.to/oldeucryptoboi/inside-claude-codes-architecture-the-agentic-loop-that-codes-for-you-cmk">S06</a></p>
+<p><strong>观点 V02</strong>（以反证为中心的安全审视者；代表从漏洞披露与注入案例出发的怀疑立场：强调配置即输入、信任提示不是执行边界，deny与沙箱的覆盖缺口必须被显式说明。）：Harness的信任边界比文档表观更脆弱：仓库配置可在信任提示前执行、MCP同意可被绕过、API密钥可被重定向、提示注入可经由文档与工具输出进入，人工复核仍是最后一道防线。
+- 限定：范围限定于材料所载的披露与案例，不扩展为对所有版本、所有配置的普遍结论；置信度为有限、中低。即使材料所称的修复属实，也只针对所载具体路径，不自动消除“配置即输入”与“工具输出即潜在指令”这两类结构性风险。
+- 最强反证：最强反证是：若在打开不可信仓库之前已在用户级或全局级正确配置deny规则、PreToolUse拦截、最小权限与沙箱，并且保持更新、事先检查仓库配置而不直接信任默认设置，材料所称的具体执行与重定向路径可能被阻断或已修复；权限审批、网络命令不自动批准、可疑命令检测与隔离上下文也可拦截部分注入操作。因此，这些反证指向的是特定版本与配置下的边界失效，而非证明任何安全控制都不可能生效；但它们没有否定核心时序问题——一旦执行发生在信任提示之前，事后提示本身不是执行边界。 <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">S10</a> <a href="https://theoutpost.ai/news-story/critical-claude-code-security-vulnerabilities-enable-remote-code-execution-and-api-key-theft-24106/">S11</a> <a href="https://claudefolio.com/blog/prompt-injection-how-a-readme-can-hijack-claude-code">S12</a></p>
+<p><strong>观点 V03</strong>（关注成本与实测的工程权衡者；代表把Harness当作生产依赖的工程立场：关注限额、并行成本与基准口径，反对把单次实测或营销对比当作普遍结论。）：Harness的生产价值受成本与实测口径制约：并行子代理加速消耗限额，限额调整会直接改变可用容量，而单任务、模型未恒定的工具对比不能证明跨工具优劣，子代理并行需靠Teams或worktree隔离而非无限嵌套。
+- 限定：范围仅限于所给材料内对Harness生产使用的规划判断，不构成跨工具总体排名；置信度上，子代理须经隔离并行、单任务对比不可泛化为中等，限额具体数值与调整影响为初步、低至中等，须以官方文本为准。
+- 最强反证：最强反证有三点：其一，相对基线看永久25%仍是提升，约下降17%只是相对临时峰值的解读，换参照系则结论方向改变；其二，Teams与worktree已提供并行路径，嵌套禁令未必封堵生产并行，只是改变实现形式；其三，同题对比在该任务上的质量、速度与修复成本差异仍是真实观察，否定其泛化不等于否定其单次信息价值。 <a href="https://www.juanpazminob.com/learnings/claude-code-agent-teams.html">S09</a> <a href="https://dev.to/gabrielanhaia/your-ai-coding-plans-usage-limit-is-now-a-production-dependency-39hh">S13</a> <a href="https://ccodelearner.com/cursor-vs-claude-code/">S14</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V02的合理洞察：即使V01的官方层在受信配置下成立，也不能用信任提示或事后审批代替对仓库配置的不可信输入处理；信任前加载时序、CVE-2026-21852状态与提示注入残余风险仍是未决缺口，人工复核在不可信输入场景下仍是必要做法。
+- V03的合理洞察：生产规划不应把约10倍消耗或相对临时峰值约下降17%当作精确预算公式，也不应把单任务、模型未恒定的三工具对比泛化为普遍排名；子代理不能无限嵌套，并行设计须同时预算Teams或worktree隔离成本与限额影响。</p>
+<p>不确定性及改变判断的条件：
+- 用户级或全局级deny规则与PreToolUse Hook是否在仓库.mcp.json、settings与Hooks首次读取或执行之前生效，材料无时序证据；什么证据会改变判断：官方文档或可复现测试给出的配置加载顺序说明。
+- CVE-2025-59536所称2.0.65+修复的范围与CVE-2026-21852的影响范围、修复状态，材料仅为二手转述；什么证据会改变判断：Check Point原始报告或Anthropic官方修复公告。
+- 限额政策的完整官方文本、5小时窗口起算与重置方式、周限额基线与当前数值、子代理与云端Agent是否共池、计量是否严格线性，材料均未提供；什么证据会改变判断：Anthropic官方限额文本或受控计量实测。
+- 单异步生成器主循环、AppState字段数、Hook事件数、压缩管线层数等内部实现细节是否为官方架构，材料已标注为社区逆向或第三方解读；什么证据会改变判断：Anthropic官方架构实现披露。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：Harness的官方规则层看起来完整，但打开不可信仓库的那一刻可能先于信任决定：规则生效后的优先级，不等于信任建立前的安全边界。</li>
+<li><strong>需要</strong>：需要在不把社区逆向细节当作官方架构、不把单次实测当作普遍结论的前提下，确认哪些官方层真正可依赖，以及哪些风险仍需在信任前处理。</li>
+<li><strong>方案</strong>：采用V01修正后的分层结论作为基线：受信配置下以deny优先、沙箱有限覆盖、PreToolUse设卡、CLAUDE.md与settings分层为准；对不可信仓库一律先隔离检查配置与输入通道，再谈信任；对生产并行一律先以实测计量而非约数预算。</li>
+<li><strong>预演</strong>：若按此执行，使用者在受信项目中能明确说出哪条规则胜出、哪类操作不受沙箱覆盖；在不可信仓库场景中，检查清单会在执行前拦住可疑配置；在并行规划中，限额预算基于实测而非传闻倍数。若不执行，则可能在信任提示出现前已触发配置执行，或在限额耗尽后才发现并行成本被低估。</li>
+<li><strong>行动</strong>：
+   - 核对当前官方权限与沙箱文档，记录deny优先、Hook allow不可覆盖deny、沙箱仅覆盖shell命令且不覆盖文件工具、MCP与Hooks、原生Windows命令不走沙箱的现行表述与文档日期 <a href="https://code.claude.com/docs/en/permissions">S04</a> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S05</a>
+     时间：1个工作日内；指标：形成带文档日期与链接的核对记录，逐项标注与材料口径一致或已变更；基线：材料所载官方文档口径摘要。
+     停止/成功条件：核对记录完成且任一变更均已标注；若官方文档无法访问，则停止并记录为未核验，不默认沿用旧口径；阈值来源：证据所给：官方文档口径摘要，未逐字复核线上全文。
+   - 在与主工作区隔离的一次性环境中，仅静态检查不可信仓库的.mcp.json、.claude/settings.json、Hooks配置与ANTHROPIC_BASE_URL等设置，不直接在主环境中打开或执行该仓库 <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">S10</a> <a href="https://theoutpost.ai/news-story/critical-claude-code-security-vulnerabilities-enable-remote-code-execution-and-api-key-theft-24106/">S11</a>
+     时间：每次打开不可信仓库之前；指标：检查清单完成率与发现的可疑项数量；任一可疑项均记为拦截；基线：零信任前执行：未完成检查前不执行仓库配置。
+     停止/成功条件：检查通过方可进入受信流程；发现Hooks执行、MCP同意绕过设置或外部端点重定向嫌疑即停止并隔离处理；阈值来源：分析者建议：基于C13、C14的初步二手转述作出的审慎做法，其漏洞与修复状态本身未独立核验。
+   - 核查本机Claude Code版本与官方更新日志，确认所称CVE-2025-59536在2.0.65+修复的说法是否有官方记录，并单独确认CVE-2026-21852的状态 <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">S10</a> <a href="https://theoutpost.ai/news-story/critical-claude-code-security-vulnerabilities-enable-remote-code-execution-and-api-key-theft-24106/">S11</a>
+     时间：1周内；指标：官方记录是否找到、版本号与公告日期是否可对应；基线：材料转述：CVE-2025-59536称在2.0.65+修复，CVE-2026-21852无修复证据。
+     停止/成功条件：找到官方公告即按公告更新结论；找不到则继续标注为未独立核验，不宣称已修复或仍可利用；阈值来源：证据所给但未独立核验：材料转述的修复版本声称。
+   - 在固定任务与固定模型条件下实测单Agent与多Agent并行的限额消耗，记录单位、窗口与是否共池，不直接以约10倍作为预算公式 <a href="https://www.juanpazminob.com/learnings/claude-code-agent-teams.html">S09</a> <a href="https://dev.to/gabrielanhaia/your-ai-coding-plans-usage-limit-is-now-a-production-dependency-39hh">S13</a>
+     时间：下一次并行规划前；指标：同一工作负载下单Agent与并行消耗的实测比值及方差；基线：材料表述：并行10个Agent约以10倍速度消耗，仅为近似口径。
+     停止/成功条件：实测完成并形成预算区间；若官方限额文本先行发布，则以官方计量口径为准并替换实测假设；阈值来源：分析者建议：实测方法为分析者建议，约10倍与5小时窗口、周限额均来自初步第三方解读。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Claude Code、底层模型系列与Harness是三层不同概念：前者是产品与服务，中间是Sonnet/Opus/Haiku模型，后者是围绕模型的Agent主循环、工具、权限与记忆实现，三者不可混为一谈。 <a href="https://builtin.com/articles/anthropic-claude-code-tool">S01</a></li>
+<li><strong>C02 / fact / preliminary</strong>：Claude Code于2025年2月24日以有限研究预览发布，最初随Claude 3.7 Sonnet推出，定位为终端内可委派大量工程任务的Agent式编码工具。 <a href="https://www.scriptbyai.com/anthropic-claude-timeline/">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：Claude Code 1.0.0于2025年5月22日正式可用，同批为Sonnet 4与Opus 4；此前0.2.x版本属于研究预览阶段。 <a href="https://developertoolkit.ai/en/claude-code/reference/changelog/">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：Harness演进关键节点包括：2025年6月30日Hooks上线，7月24日自定义子代理，9月29日2.0.0原生VS Code扩展与Claude Agent SDK更名，10月9日插件系统，10月16日Skills支持。 <a href="https://developertoolkit.ai/en/claude-code/reference/changelog/">S03</a></li>
+<li><strong>C05 / fact / preliminary</strong>：底层模型上线时间需与Harness版本区分：Haiku 4.5与Explore子代理约在2025年10月15-17日，Opus 4.5约在2025年11月24日，Opus 4.6约在2026年2月5日、Sonnet 4.6在2026年2月17日左右进入Claude Code。 <a href="https://developertoolkit.ai/en/claude-code/reference/changelog/">S03</a></li>
+<li><strong>C06 / fact / supported</strong>：官方文档口径：权限规则分deny/ask/allow，deny规则在所有模式（含bypassPermissions）下生效，Hook的allow不能覆盖匹配的deny；PreToolUse Hook可在每次工具调用前deny、强制提问或跳过提问。 <a href="https://code.claude.com/docs/en/permissions">S04</a></li>
+<li><strong>C07 / fact / supported</strong>：官方文档口径：沙箱是操作系统强制的边界，仅覆盖Claude运行的shell命令，不覆盖Claude文件工具、MCP服务器与Hooks；支持macOS、Linux与WSL2，原生Windows下命令不走沙箱。 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S05</a></li>
+<li><strong>C08 / fact / supported</strong>：计划模式本身不是沙箱：它是只读/先定方案的工作方式，真正的强制执行靠deny规则、沙箱与PreToolUse Hook（如按permission_mode=plan拦截Edit/Write）实现。 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S05</a></li>
+<li><strong>C09 / fact / supported</strong>：记忆与上下文机制的官方可验证层：CLAUDE.md提供项目级持久指令，settings.json与settings.local.json分层管理权限/Hooks/MCP，/memory可查看CLAUDE.md与自动记忆，会话可恢复/压缩，子代理用独立上下文仅回传摘要。 <a href="https://dev.to/oldeucryptoboi/inside-claude-codes-architecture-the-agentic-loop-that-codes-for-you-cmk">S06</a></li>
+<li><strong>C10 / source_statement / preliminary</strong>：第三方解读的扩展流水线为：用户提示触发UserPromptSubmit Hook，组装系统提示与技能元数据，组装内置+MCP工具池并应用deny规则，模型调用工具时Pre/PostToolUse Hook可拦截或注入上下文，技能与子代理按需加载。 <a href="https://dev.to/oldeucryptoboi/how-claude-code-extends-itself-skills-hooks-agents-and-mcp-55pd">S07</a></li>
+<li><strong>C11 / source_statement / unverified</strong>：所谓单异步生成器主循环、400字段AppState、27个Hook事件、5层压缩管线等内部细节来自社区逆向/第三方架构解读，非Anthropic官方实现披露，不得当作官方架构。 <a href="https://www.slideshare.net/slideshow/inside-claude-code-architecture-of-a-production-ai-coding-agent/287086530">S08</a> <a href="https://cc.bruniaux.com/guide/architecture/">S15</a></li>
+<li><strong>C12 / fact / preliminary</strong>：内置Explore（只读检索）、Plan（计划研究）、General-purpose子代理；子代理不能再嵌套子代理；长程/多路并行靠Agent Teams跨会话或git worktree隔离实现，GitHub端可通过Claude Code GitHub Action与@claude在Issue/PR中触发云端Agent。 <a href="https://www.juanpazminob.com/learnings/claude-code-agent-teams.html">S09</a></li>
+<li><strong>C13 / source_statement / preliminary</strong>：反证：仓库内.mcp.json/.claude/settings.json可通过Hooks在信任提示出现前执行任意shell命令（RCE），并通过enableAllProjectMcpServers等设置绕过MCP同意；CVE-2025-59536，材料称在Claude Code 2.0.65+修复。 <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">S10</a></li>
+<li><strong>C14 / source_statement / preliminary</strong>：反证：仓库settings文件设置ANTHROPIC_BASE_URL指向攻击者端点，可在信任提示前发出带明文API密钥的请求，CVE-2026-21852；说明信任提示不是执行边界，须把仓库配置当作不可信输入处理。 <a href="https://theoutpost.ai/news-story/critical-claude-code-security-vulnerabilities-enable-remote-code-execution-and-api-key-theft-24106/">S11</a></li>
+<li><strong>C15 / source_statement / preliminary</strong>：反证：恶意README、依赖文件或MCP工具输出可嵌入指令诱导模型执行非预期操作，官方防御依赖权限审批、网络命令默认不自动批准、可疑命令检测与Web抓取隔离上下文，但最终仍要求人工复核。 <a href="https://claudefolio.com/blog/prompt-injection-how-a-readme-can-hijack-claude-code">S12</a></li>
+<li><strong>C16 / source_statement / preliminary</strong>：反证：订阅有5小时滚动窗口限额，付费计划另有周限额，Claude Code与聊天共用同一池，并行10个Agent约以10倍速度消耗；2026年9月14日临时50%周限额提升结束，改为相对基线永久25%，相对临时峰值约下降17%，引发用户争议。 <a href="https://dev.to/gabrielanhaia/your-ai-coding-plans-usage-limit-is-now-a-production-dependency-39hh">S13</a></li>
+<li><strong>C17 / source_statement / preliminary</strong>：同题三工具对比中Claude Code代码质量占优但在Docker Compose网络配置上受挫，Cursor最快但出现幻觉的Redis配置，Codex最便宜但需最多手工修复；33K vs 188K token对比为单任务、模型未恒定，不能当作独立基准。 <a href="https://ccodelearner.com/cursor-vs-claude-code/">S14</a></li>
+<li><strong>C18 / inference / preliminary</strong>：由于Claude Code为闭源商业产品，任何未在官方文档出现的内部实现细节都应按社区逆向/第三方解读处理，闭源部分标为unverified，而非默认采信为官方架构。 <a href="https://cc.bruniaux.com/guide/architecture/">S15</a> <a href="https://www.slideshare.net/slideshow/inside-claude-code-architecture-of-a-production-ai-coding-agent/287086530">S08</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://builtin.com/articles/anthropic-claude-code-tool">Anthropic Claude Code Tool</a> · Built In
+- 发布：2025-05-22；事件：2025-05-22；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：relevant_text；定位：Claude Code与模型系列、Harness区分。
+- 原文支持：三层区分：Claude Code是终端/IDE/云端产品与订阅/API服务，Claude Sonnet/Opus/Haiku是底层模型系列，Harness是CLI/IDE扩展围绕模型的Agent主循环、工具、权限与记忆实现，三者不可混为一谈。
+- 限制：材料提供的为摘要层信息，未逐字复核全文；日期为材料标注日期。</p>
+<p><strong>S02</strong> <a href="https://www.scriptbyai.com/anthropic-claude-timeline/">Anthropic Claude Timeline</a> · ScriptByAI
+- 发布：2025-02-24；事件：2025-02-24；查阅：2026-10-21。
+- 来源族：timeline；读取：secondary；定位：Claude Code发布条目。
+- 原文支持：Claude Code于2025年2月24日以有限研究预览发布，最初随Claude 3.7 Sonnet推出，定位为终端内可委派大量工程任务的Agent式编码工具。
+- 限制：第三方时间线转述，非Anthropic官方发布原文；未独立核验原文。</p>
+<p><strong>S03</strong> <a href="https://developertoolkit.ai/en/claude-code/reference/changelog/">Claude Code version history / changelog</a> · DeveloperToolkit
+- 发布：2026-02-17；事件：2025-05-22；查阅：2026-10-21。
+- 来源族：changelog；读取：relevant_text；定位：版本历史条目。
+- 原文支持：1.0.0于2025年5月22日GA，同批Sonnet 4与Opus 4，此前0.2.x为研究预览；2025年6月30日Hooks、7月24日自定义子代理、9月29日2.0.0原生VS Code扩展与Claude Agent SDK更名、10月9日插件系统、10月16日Skills；Haiku 4.5与Explore子代理约2025年10月15-17日，Opus 4.5约2025年11月24日，Opus 4.6约2026年2月5日、Sonnet 4.6于2026年2月17日进入Claude Code。
+- 限制：版本线为第三方整理的changelog摘要；2025年10月15-17日、2026年2月5日等标注为左右，精度为约数而非确切单日。</p>
+<p><strong>S04</strong> <a href="https://code.claude.com/docs/en/permissions">Configure permissions</a> · Claude Code Docs
+- 发布：2026-10-20；事件：2026-10-20；查阅：2026-10-21。
+- 来源族：official_docs；读取：relevant_text；定位：权限规则与PreToolUse Hook。
+- 原文支持：权限规则分deny/ask/allow，deny规则在所有模式（含bypassPermissions）下生效，Hook的allow不能覆盖匹配的deny；PreToolUse Hook可在每次工具调用前deny、强制提问或跳过提问。
+- 限制：材料提供的为官方文档口径摘要，未声称逐字复核当前线上文档全文；日期为材料标注日期。</p>
+<p><strong>S05</strong> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">Plan Mode Was Never a Sandbox</a> · Dev.to
+- 发布：2026-10-16；事件：2026-10-16；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：relevant_text；定位：沙箱与计划模式章节。
+- 原文支持：沙箱是操作系统强制的边界，仅覆盖Claude运行的shell命令，不覆盖Claude文件工具、MCP服务器与Hooks；支持macOS、Linux与WSL2，原生Windows下命令不走沙箱；计划模式本身不是沙箱，它是只读/先定方案的工作方式，真正强制执行靠deny规则、沙箱与PreToolUse Hook（如按permission_mode=plan拦截Edit/Write）实现。
+- 限制：第三方文章转述官方文档，非官方文档原文；沙箱覆盖范围需以官方文档当前版本为准。</p>
+<p><strong>S06</strong> <a href="https://dev.to/oldeucryptoboi/inside-claude-codes-architecture-the-agentic-loop-that-codes-for-you-cmk">Inside Claude Code's Architecture</a> · Dev.to
+- 发布：2026-03-01；事件：2026-03-01；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：relevant_text；定位：记忆与上下文机制章节。
+- 原文支持：官方可验证层：CLAUDE.md提供项目级持久指令，settings.json与settings.local.json分层管理权限/Hooks/MCP，/memory可查看CLAUDE.md与自动记忆，会话可恢复/压缩（compaction），子代理用独立上下文仅回传摘要。
+- 限制：第三方解读中标注为官方可验证层，但材料未提供官方文档逐条对应关系；日期为材料标注日期，精度为月，已按当月1日处理。</p>
+<p><strong>S07</strong> <a href="https://dev.to/oldeucryptoboi/how-claude-code-extends-itself-skills-hooks-agents-and-mcp-55pd">How Claude Code Extends Itself</a> · Dev.to
+- 发布：2026-04-01；事件：2026-04-01；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：扩展系统流水线章节。
+- 原文支持：第三方解读的扩展流水线：用户提示触发UserPromptSubmit Hook，组装系统提示与技能元数据，组装内置+MCP工具池并应用deny规则，模型调用工具时Pre/PostToolUse Hook可拦截或注入上下文，技能与子代理按需加载。
+- 限制：明确标注为第三方解读，需与官方文档交叉核对，不得当作官方实现披露；日期精度为月，已按当月1日处理。</p>
+<p><strong>S08</strong> <a href="https://www.slideshare.net/slideshow/inside-claude-code-architecture-of-a-production-ai-coding-agent/287086530">Inside Claude Code Architecture of a Production AI Coding Agent</a> · SlideShare
+- 发布：2026-04-01；事件：2026-04-01；查阅：2026-10-21。
+- 来源族：community_analysis；读取：secondary；定位：内部细节章节。
+- 原文支持：所谓单异步生成器主循环、400字段AppState、27个Hook事件、5层压缩管线等内部细节来自社区逆向/第三方架构解读，非Anthropic官方实现披露，应标为unverified/preliminary。
+- 限制：社区逆向来源，未经官方证实；日期精度为月，已按当月1日处理。</p>
+<p><strong>S09</strong> <a href="https://www.juanpazminob.com/learnings/claude-code-agent-teams.html">Claude Code Agent Teams</a> · Juan Pazmino
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：子代理与并行章节。
+- 原文支持：内置Explore（只读检索）、Plan（计划研究）、General-purpose子代理；子代理不能再嵌套子代理；长程/多路并行靠Agent Teams跨会话或git worktree隔离实现，GitHub端可通过Claude Code GitHub Action与@claude在Issue/PR中触发云端Agent。
+- 限制：第三方学习笔记，非官方文档原文；日期精度为月，已按当月1日处理。</p>
+<p><strong>S10</strong> <a href="https://healsecurity.com/claude-code-hacked-to-achieve-full-rce-and-hijacked-organization-api-keys/">Claude Code hacked to achieve full RCE and hijacked organization API keys</a> · HEAL Security
+- 发布：2026-02-25；事件：2026-02-25；查阅：2026-10-21。
+- 来源族：security_report；读取：secondary；定位：Check Point Research转述章节。
+- 原文支持：转述Check Point Research：仓库内.mcp.json/.claude/settings.json可通过Hooks在信任提示出现前执行任意shell命令（RCE），并通过enableAllProjectMcpServers等设置绕过MCP同意；CVE-2025-59536，称在Claude Code 2.0.65+修复。
+- 限制：二手转述，非Check Point原始报告或官方修复公告；修复版本声称未独立核验。</p>
+<p><strong>S11</strong> <a href="https://theoutpost.ai/news-story/critical-claude-code-security-vulnerabilities-enable-remote-code-execution-and-api-key-theft-24106/">Critical Claude Code security vulnerabilities enable remote code execution and API key theft</a> · The Outpost AI
+- 发布：2026-02-25；事件：2026-02-25；查阅：2026-10-21。
+- 来源族：security_report；读取：secondary；定位：API密钥窃取章节。
+- 原文支持：仓库settings文件设置ANTHROPIC_BASE_URL指向攻击者端点，可在信任提示前发出带明文API密钥的请求，CVE-2026-21852；说明信任提示不是执行边界，须把仓库配置当作不可信输入处理。
+- 限制：第三方新闻报道，非原始漏洞披露或官方公告；影响范围与修复状态未独立核验。</p>
+<p><strong>S12</strong> <a href="https://claudefolio.com/blog/prompt-injection-how-a-readme-can-hijack-claude-code">Prompt injection: how a README can hijack Claude Code</a> · ClaudeFolio
+- 发布：2026-09-01；事件：2026-09-01；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：提示注入章节。
+- 原文支持：恶意README、依赖文件或MCP工具输出可嵌入指令诱导模型执行非预期操作（如读取凭据并外发），官方防御依赖权限审批、网络命令默认不自动批准、可疑命令检测与Web抓取隔离上下文，但最终仍要求人工复核。
+- 限制：第三方博客案例与防御归纳，非官方安全白皮书；日期精度为月，已按当月1日处理。</p>
+<p><strong>S13</strong> <a href="https://dev.to/gabrielanhaia/your-ai-coding-plans-usage-limit-is-now-a-production-dependency-39hh">Your AI Coding Plan's Usage Limit Is Now a Production Dependency</a> · Dev.to
+- 发布：2026-09-14；事件：2026-09-14；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：限额与定价章节。
+- 原文支持：订阅有5小时滚动窗口限额，付费计划另有周限额，Claude Code与聊天共用同一池，并行10个Agent约以10倍速度消耗；2026年9月14日临时50%周限额提升结束，改为相对基线永久25%，相对临时峰值约下降17%，引发用户争议。
+- 限制：第三方对限额政策的解读与争议归纳，非官方定价公告原文；17%为相对临时峰值的推算解读，非官方口径。</p>
+<p><strong>S14</strong> <a href="https://ccodelearner.com/cursor-vs-claude-code/">Cursor vs Claude Code</a> · CCodeLearner
+- 发布：2026-09-01；事件：2026-09-01；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：同题对比章节。
+- 原文支持：同题三工具对比中Claude Code代码质量占优但在Docker Compose网络配置上受挫，Cursor最快但出现幻觉的Redis配置，Codex最便宜但需最多手工修复；广为流传的33K vs 188K token对比为单任务、模型未恒定（Opus vs GPT-5），不能当作独立基准。
+- 限制：单任务第三方实测，非受控基准；日期精度为月，已按当月1日处理。</p>
+<p><strong>S15</strong> <a href="https://cc.bruniaux.com/guide/architecture/">Claude Code Architecture &amp; Agent Loop</a> · CC Bruniaux
+- 发布：2026-10-19；事件：2026-10-19；查阅：2026-10-21。
+- 来源族：third_party_analysis；读取：secondary；定位：开源程度与架构章节。
+- 原文支持：Claude Code为Anthropic闭源商业产品（CLI二进制/官方文档+GitHub仓库以Issue与更新日志为主），与Codex的开源程度不同；因此任何未在官方文档出现的内部实现细节一律按社区逆向/第三方解读处理，闭源部分标为unverified。
+- 限制：第三方指南的开源程度判断，非Anthropic官方源代码状态声明；闭源程度的精确法律表述未核验。</p>
+<p>检索缺口：
+- 未提供Anthropic官方架构实现披露，单异步生成器、AppState字段数、Hook事件数、压缩管线层数等内部细节无法以官方来源证实。
+- CVE-2025-59536与CVE-2026-21852仅有二手转述与新闻报道，未提供Check Point原始报告或官方修复公告，修复版本与影响范围未独立核验。
+- 模型进入Claude Code的具体日期多标注为左右，Haiku 4.5、Opus 4.5/4.6等条目缺乏确切单日官方记录。
+- 限额政策的完整官方文本缺失，5小时窗口、周限额与并行消耗倍数的精确规则，以及2026年9月限额调整的官方表述未在本材料中提供。
+- 第三方单任务工具对比未提供可复现的任务、提示、模型版本与评分方法，无法作为独立基准复用。</p>
+<p>检索日志：Claude Code agent loop harness architecture tools context CLAUDE.md settings hooks（discovery）；Claude Code official documentation hooks custom commands MCP permissions sandbox（verification）；Claude Code 研究预览 发布 历史 版本 更新（discovery）；Claude Code 权限绕过 提示注入 MCP 安全风险 局限（counterevidence）；Anthropic Claude Code research preview February 2025 launch blog（verification）；Claude Code GitHub Actions plan mode subagents Task tool parallel（discovery）；Claude Code pricing limits controversy usage limit weekly（counterevidence）；Claude Code 与 Codex Cursor 对比 实测 差距 长任务失败（counterevidence）。</p>
+<h2 id="harness_1">四、Harness 沙箱与权限安全</h2>
+<p><strong>关键议题</strong>：Harness沙箱与权限安全的关键议题是Claude Code的审批文本、分类器裁决与托管策略能否构成可信安全边界，还是只能把OS沙箱、最小权限与配置审查作为真正边界</p>
+<p>选题依据：选题依据是窗口内材料集中呈现了同一转向：从逐条人工审批转向分类器裁决加OS沙箱加托管策略的三层模型，同时反证高度集中在信任前加载、解析层绕过与审批欺骗上，适合以证据账本区分厂商主张、第三方披露与厂商立场分歧，并明确真正边界所在</p>
+<p><strong>当前判断</strong>：在所给账本范围内，审批文本、分类器裁决与仓库配置本身不能作为安全证据；真正可信的边界只能是逐项验证后的组合：信任对话前完成审查、托管基线锁定且禁用绕过、已升级至已披露修复版本、OS沙箱与网络出口同时生效。V2经质询缩小后的主张最经得起检验：仅对信任前未审查、未托管锁定、未升级修复版本或审查后又变更的Hooks、MCP与.claude/、.mcp.json配置，按潜在执行路径对待；同时满足信任前人工审查、托管锁定且禁用绕过、已升级修复版本的本地配置不再按未审查对待，但这不构成绝对安全证明，云端写路径因细节未核对不在放行范围内。 <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a> <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a> <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">S9</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S11</a></p>
+<p>优选：V2；置信度：medium。核心模式由C7、C8两项supported证据支撑，信任前执行与沙箱逃逸并非孤例；但C9为conflicting且存在厂商立场分歧，C10为preliminary且细节需官方advisory核对，官方文档原文、Harness对照材料、分类器独立评测与Windows及回归验证均缺失，故不能定为high。
+成立条件：仅适用于账本覆盖的Claude Code权限与沙箱材料，不能直接外推为Harness平台的结论；适用于信任对话完成前的未审查配置判断；已审查锁定情形仅限本地配置且须满足四项同时成立，审批展示仍不能单独作为安全证据；高敏感操作、无托管基线或未经审查的仓库不在可接受范围内。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_15">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（效率优先的内部部署者；代表希望在受控内网与托管策略下推广 Auto mode 的部署视角：承认分类器不是沙箱，但认为叠加沙箱与托管 deny 后残余风险可管理）：在分层控制到位的前提下，分类器加OS沙箱加托管策略已可接受用于常规开发，审批负担下降是可用性收益而非安全降级
+- 限定：范围限定为：受控内网与托管策略已落地、禁用绕过模式、沙箱与网络出口锁定、且仅用于常规开发的场景；不适用于高敏感操作、无托管基线或未经审查的仓库配置。置信度为中等偏低：所引多为初步状态的第三方转述，厂商数字未经独立验证，结论依赖上述前提全部满足。
+- 最强反证：最强反证是：若分层前提任一缺失，结论即不成立。信任前加载的配置、解析层绕过、审批展示与真实目标不一致、以及已披露的沙箱逃逸案例都表明，单靠分类器裁决或审批通过不能作为安全证据；一旦托管策略未锁定、沙箱或网络出口未收紧、或合并前未审查配置，残余风险不再可管理，审批负担下降便可能掩盖真实越境风险。本立场不否认这些薄弱处，只主张它们应通过补齐分层前提来管理，而非因此否定受控常规开发场景下的分层方案。 <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a> <a href="https://cryptobriefing.com/anthropic-claude-code-sandbox-mode/">S4</a> <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude-code-puts-auto-mode-in-the-drivers-seat/5285326">S5</a> <a href="https://www.convective.com/currents/a-classifier-is-not-a-sandbox">S6</a></p>
+<p><strong>观点 V2</strong>（保守安全审查者；代表以反证为出发点的安全审查视角：强调信任前执行、沙箱逃逸、审批欺骗与云端未认证写路径，否定以审批通过作为安全证据）：审批文本、分类器裁决与仓库配置均不可作为安全证据；任何在信任对话前未被审查的 Hooks、MCP 与 .claude/ 配置，都应视为潜在执行路径并按可执行代码对待。
+- 限定：范围限于所给证据账本中的 Claude Code 权限与沙箱材料，不直接外推为 Harness 平台的结论；结论针对“信任对话前未审查”的配置，不否定已审查、已锁定且版本已修复环境下的受控使用。置信度：信任前执行与沙箱逃逸模式为中等偏高（C7、C8 为 supported），审批欺骗因厂商立场分歧为有争议（C9 为 conflicting），云端写路径细节为较低（C10 为 preliminary，需官方 advisory 核对）。
+- 最强反证：最强反证是：上述多起案例已有版本修复，CVE-2026-55607 未报告野外利用，Anthropic 对 GhostApproval 的立场是用户信任某目录即接受该目录带来的风险，并已为敏感目录审批增加警告；据此可主张在“只克隆可信仓库、及时升级、受控目录内使用”条件下，审批仍可作为日常可用性控制。这一反证的限度在于：它把安全前提重新压回“事先信任”本身，而本方主张恰恰是——在信任对话完成之前，无法先假定仓库可信；修复存在不等于未审查配置在旧版本、旁路路径或云端侧同样安全。 <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a> <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">S9</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a></p>
+<p><strong>观点 V3</strong>（治理与合规视角的平台方；代表负责多团队基线的平台治理视角：强调 managed-settings 与 disableBypassPermissionsMode、deny 叠加不可移除，以及 PR 前审查 .claude/ 与 .mcp.json 的制度化作用）：治理的关键不在单点审批，而在托管策略、最小权限与分支合并前的配置审查；CLAUDE.md只能作为协作约定，不能作为强制安全边界。
+- 限定：适用范围限于多团队基线治理语境，且限于所提供账本覆盖的Claude Code权限与配置治理逻辑；置信度为初步。C12是预测，需标注为预测而非已证事实；对Harness的具体适用性须在补齐Harness官方材料后另行判断。
+- 最强反证：最强反证来自本方依据自身的限度：托管deny仍是字符串匹配，若托管策略部署不到位、PR审查流于形式或审查后配置仍在信任前被加载，治理基线同样可被绕过；同时，单靠制度化审查无法保证审查者识别所有经过混淆的解析层绕过，因此托管策略、最小权限与合并前审查是必要治理重心，但不是已被证明充分的安全保证。 <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S11</a> <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a> <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">S9</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a></p>
+<h3 id="_16">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的合理洞察：在托管deny不可移除、绕过模式已禁用、沙箱文件范围与网络出口逐项验证锁定且仅用于常规开发时，分层方案可接受，审批负担下降不必自动等于安全降级；关键是把配置声明换成逐项验证证据。
+- V3的合理洞察：治理重心应前移至不可由用户移除的托管基线、最小权限与分支合并前对.claude/与.mcp.json的审查，CLAUDE.md只能作为协作约定；但在本证据下该组合仅为必要前提，不是已被证明充分的安全边界。</p>
+<p>不确定性及改变判断的条件：
+- Harness平台自身的沙箱与权限实现文档缺失，账本实际覆盖Claude Code，何种证据可建立Harness对照仍未决。
+- Anthropic官方文档原文未核对，allow/ask/deny、托管设置与沙箱实现细节仍需官方原文确认。
+- Auto mode分类器缺乏独立评测，13.6%、89%、97%与提示减少约84%均为厂商自述或转述，独立评测结果会改变对分类器权重的判断。
+- C10的GitHub Action checkWritePermissions与bash validator绕过的官方advisory细节、适用版本与修复状态未核对。
+- C9中GhostApproval是否构成漏洞仍为第三方披露与厂商立场分歧，官方回应与敏感目录警告的实际覆盖范围未定。
+- 托管deny能否从字符串匹配升级为语义边界、PR审查对经混淆解析层绕过的实际检出率、审查后配置在信任决策前的加载时序如何闭合，均无实测证据。
+- Windows平台沙箱实现、企业部署实测与沙箱逃逸修复后的回归验证未覆盖。</p>
+<h3 id="_17">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：审批通过不等于操作安全：信任对话前就可能被加载执行的仓库配置、与真实目标不一致的审批展示、以及可被解析层绕过的deny规则，是本账本中最集中的越境风险。</li>
+<li><strong>需要</strong>：需要在执行与信任决定之前建立可验证的边界，而不是事后用审批记录、分类器通过或CLAUDE.md禁令证明安全；同时必须补齐Harness对照，避免把Claude Code结论直接套用于Harness。</li>
+<li><strong>方案</strong>：采用V2缩小后的规则：未审查、未锁定、未升级或审查后变更的Hooks、MCP与.claude/、.mcp.json一律按可执行代码对待；仅当信任前人工审查、托管锁定且禁用绕过、已升级修复版本同时满足时，才对本地配置解除未审查对待，并以OS沙箱与网络出口验证作为独立边界。</li>
+<li><strong>预演</strong>：有条件的场景预演：新仓库接入时先完成配置审查与托管、沙箱、出口三项验证再进入信任对话，常规开发可在分层控制下运行；任一验证失败即按未受控处理，审批负担下降不再被解读为安全改善；云端写路径在官方advisory核对前单独管控。</li>
+<li><strong>行动</strong>：
+   - 信任对话前审查：接手新仓库或分支前，由审查者人工检查Hooks、MCP服务器、.claude/与.mcp.json的全部新增与变更项并留存审查记录，审查完成前不进入信任对话 <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S11</a>
+     时间：每个新仓库或相关配置变更接入前；指标：应审查配置项的审查覆盖率；基线：未审查即默认可信的现状。
+     停止/成功条件：全部相关配置项均有审查记录且无未解释的高风险项时方可进入信任对话；任一高风险项未清除则停止接入；阈值来源：分析者建议：账本只确立信任前审查的必要性，未给出覆盖率数值阈值，故以100%作为分析者建议的操作阈值。
+   - 验证托管基线生效：检查managed-settings.json是否设定仅允许托管规则、托管Hook、托管MCP服务器并禁用绕过权限模式，并实测普通用户尝试移除托管deny或启用绕过模式是否失败 <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a>
+     时间：部署基线时及每次基线变更后；指标：绕过尝试被拒绝的次数占尝试次数的比例；基线：仅凭配置声明即认定已落地的做法。
+     停止/成功条件：全部拒绝性测试均通过时视为基线生效；任一测试可绕过即视为基线未生效并停止推广；阈值来源：分析者建议的验证方法：账本证据只说明托管deny可叠加且用户无法移除，未给出测试通过率阈值，故以全部通过作为分析者建议标准。
+   - 验证沙箱与网络出口：用受控测试尝试沙箱外写操作与访问非预批域名，确认文件范围限于工作目录及其子目录、网络仅放行预批域名 <a href="https://cryptobriefing.com/anthropic-claude-code-sandbox-mode/">S4</a> <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude-code-puts-auto-mode-in-the-drivers-seat/5285326">S5</a> <a href="https://www.convective.com/currents/a-classifier-is-not-a-sandbox">S6</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a>
+     时间：沙箱启用时及每次沙箱或网络策略变更后；指标：越境写操作与非预批域名访问的成功次数；基线：一次审批通过或配置声明即认定沙箱生效的做法。
+     停止/成功条件：全部越境测试均被阻止时视为边界生效；出现一次成功越境即停止使用并按逃逸事件处理；阈值来源：分析者建议：账本只说明沙箱的文件与网络约束，未给出可接受逃逸次数，故以零成功越境作为分析者建议标准。
+   - 核对版本与云端 advisory：确认运行版本覆盖CVE-2026-21852的2.0.65修复与CVE-2026-55607的2.1.163修复，并以官方advisory核对C10的GitHub Action与bash validator绕过细节、适用版本与修复状态，核对完成前云端写路径单独管控 <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a>
+     时间：下一次部署检查前完成，之后每次版本或advisory更新时复核；指标：已核对的关键CVE与advisory项占应核对项的比例；基线：以第三方汇总日期或版本号推断修复状态的做法。
+     停止/成功条件：全部关键项均以官方advisory核对一致时方可解除单独管控；任一关键项未核对即继续单独管控；阈值来源：证据所给版本号：2.0.65与2.1.163来自账本；核对完成比例为分析者建议的操作标准。
+   - 补齐Harness对照材料：检索Harness官方沙箱与权限实现文档，对照本结论逐项确认或修正适用范围，在补齐前不对Harness作等同结论 <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a> <a href="https://cryptobriefing.com/anthropic-claude-code-sandbox-mode/">S4</a>
+     时间：报告发布后的下一轮材料补齐周期内；指标：Harness官方材料中已对照的关键控制项数量；基线：当前账本缺失Harness自身实现文档的状态。
+     停止/成功条件：Harness沙箱、权限模型与配置信任边界均有官方来源对照时方可形成Harness结论；未补齐前维持仅限Claude Code的结论范围；阈值来源：未知：账本未提供Harness材料，故不设数值阈值，仅以官方来源对照完成作为停止条件。</li>
+</ol>
+<h3 id="_18">证据账本</h3>
+<ul>
+<li><strong>C1 / fact / preliminary</strong>：Claude Code 权限核心是 allow/ask/deny 三态：读文件与搜索代码默认免审批，编辑、写文件、Bash 与 MCP 工具默认先问，deny 规则优先于 allow；规则分层为项目 .claude/settings.json、用户 ~/.claude/settings.json 与个人覆盖 settings.local.json <a href="https://skillsplayground.com/guides/claude-code-permissions/">S1</a></li>
+<li><strong>C2 / fact / preliminary</strong>：权限模式包括 default（人工审批）、acceptEdits（自动放行编辑）、plan（仅规划不执行）、auto（分类器裁决）与 bypassPermissions/--dangerously-skip-permissions（跳过全部检查，仅限 CI 与沙箱等无人场景）；评估顺序为 deny 优先、ask 其次，再经工具自身 checkPermissions 与模式裁决 <a href="https://deepwiki.com/songcbo/claude-code-analysis/3.3-permission-system">S2</a></li>
+<li><strong>C3 / fact / preliminary</strong>：企业托管设置 managed-settings.json 可设 allowManagedPermissionRulesOnly、allowManagedHooksOnly、allowManagedMcpServersOnly 与 disableBypassPermissionsMode，托管 deny 可叠加且用户无法移除；CLAUDE.md 中的禁令只是请求而非保证，真正强制靠 deny 规则与 PreToolUse Hook <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">S3</a></li>
+<li><strong>C4 / fact / preliminary</strong>：本地 Bash 沙箱为 OS 级隔离：macOS 用 Seatbelt，Linux/WSL2 用 bubblewrap，文件系统限于当前工作目录及其子目录，网络经代理仅放行预批域名，分 auto-allow（沙箱内 Bash 自动放行）与全审批两种模式 <a href="https://cryptobriefing.com/anthropic-claude-code-sandbox-mode/">S4</a></li>
+<li><strong>C5 / source_statement / preliminary</strong>：Auto mode 于 2026 年 3 月研究预览、7 月 10 日正式可用，2026 年 8 月 14 日起成为 Pro/Max/Team 新会话默认，Enterprise/API/Bedrock/Vertex 暂为 opt-in；分类器拦截不可逆、破坏性或越境操作；厂商实验称人类审批仅检出 13.6% 危险命令、分类器约 89%，用户 97% 提示点通过，该数字为厂商自述，需独立验证 <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude-code-puts-auto-mode-in-the-drivers-seat/5285326">S5</a></li>
+<li><strong>C6 / inference / supported</strong>：分类器不是沙箱：即使 Auto mode 成为默认，分类器裁决也不能替代 OS 沙箱与网络出口管控，须叠加 OS 沙箱与锁定网络出口才构成基础设施边界 <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude-code-puts-auto-mode-in-the-drivers-seat/5285326">S5</a> <a href="https://www.convective.com/currents/a-classifier-is-not-a-sandbox">S6</a></li>
+<li><strong>C7 / fact / supported</strong>：信任前执行是已披露的失败模式：仓库内 Hooks 在启动时静默执行，MCP 同意可被仓库配置 enableAllProjectMcpServers 等绕过（CVE-2025-59536）；settings.json 中 ANTHROPIC_BASE_URL 被改写可致 API 密钥明文外泄（CVE-2026-21852，2.0.65 修复）；修复方向是信任对话前不执行 MCP 并强化不可信配置警告 <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a></li>
+<li><strong>C8 / fact / supported</strong>：沙箱逃逸已有已修复案例：CVE-2026-55607 可创建名为 .git 的 worktree 并移出沙箱文件夹，提示注入的恶意仓库可借 git fsmonitor 配置改写 ~/.zshenv 实现 macOS seatbelt 沙箱外代码执行，2026 年 6 月 4 日在 2.1.163 修复，Anthropic advisory GHSA-7835-87q9-rgvv 于 2026 年 6 月 25 日发布，未报告野外利用 <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a></li>
+<li><strong>C9 / fact / conflicting</strong>：审批文本不等于真实目标：SymJack 以诱饵路径显示审批、内核跟随符号链接致 .claude/settings.json 或 .mcp.json 被植入；GhostApproval 内部已知是 zsh 配置文件、展示的却是 project_settings.json 编辑请求；Anthropic 对后者以用户信任目录即接受风险为由未列为漏洞，但为敏感目录审批增加了警告，属第三方披露与厂商立场分歧 <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">S9</a></li>
+<li><strong>C10 / fact / preliminary</strong>：云端与 GitHub 执行侧存在未认证写路径风险：2026 年 9 月 Claude Code GitHub Action 的 checkWritePermissions 无条件信任任意 GitHub App actor（CVSS 4.0 7.8），未认证外部 actor 可借 agent 权限写仓库；第三方汇总另称 Black Hat 披露中 bash validator 剥离单引号内容致 git push --receive-pack 绕过并窃取 API 密钥与 GitHub token，细节需以官方 advisory 核对 <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a></li>
+<li><strong>C11 / inference / preliminary</strong>：deny 规则是字符串匹配而非语义边界：失败模式高度集中在解析层绕过（环境变量前缀、bash -c 包装、符号链接 TOCTOU 如 CVE-2026-103435 于 2.1.129 修复、输出重定向）与信任前加载配置，因此真正边界只能是沙箱、最小权限与分支/PR 前审查 .claude/ 与 .mcp.json <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S11</a></li>
+<li><strong>C12 / forecast / preliminary</strong>：预测：未来高风险仍将集中在解析层绕过、信任前加载配置与审批展示欺骗三类，而非单纯的分类器准确率提升；仅靠放宽审批或调高分类器阈值而不收紧沙箱、网络出口与 PR 前配置审查，仍会重复出现越境执行 <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">S7</a> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">S8</a> <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">S9</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S10</a> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">S11</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://skillsplayground.com/guides/claude-code-permissions/">Claude Code Permissions, Sandbox &amp; Security: Complete Guide (2026)</a> · SkillsPlayground
+- 发布：2026-02-24；事件：2026-02-24；查阅：2026-10-21。
+- 来源族：第三方指南；读取：relevant_text；定位：文章正文。
+- 原文支持：权限核心是 allow/ask/deny 三态：读文件与搜索代码默认免审批，编辑、写文件、Bash 与 MCP 工具默认先问，deny 规则优先于 allow；规则存于项目 .claude/settings.json 与用户 ~/.claude/settings.json，settings.local.json 为个人覆盖
+- 限制：第三方指南总结，非官方原文，需以官方文档核对；本账本仅依据提供的 OSINT 摘要，未重新打开原文核验，accessed 为材料整理日期，relevant_text 指提供的摘要文本</p>
+<p><strong>S2</strong> <a href="https://deepwiki.com/songcbo/claude-code-analysis/3.3-permission-system">Permission System | songcbo/claude-code-analysis</a> · DeepWiki
+- 发布：2026-04-04；事件：2026-04-04；查阅：2026-10-21。
+- 来源族：社区逆向文档；读取：relevant_text；定位：文章正文。
+- 原文支持：权限模式分 default、acceptEdits、plan、auto 与 bypassPermissions/--dangerously-skip-permissions；评估顺序为 deny 优先、ask 其次，再经工具自身 checkPermissions 与模式裁决；bypass 仅限 CI 与沙箱等无人场景
+- 限制：社区逆向文档总结，来源等级为第三方解读，非官方实现说明，需以官方文档核对；本账本未重新核验原文</p>
+<p><strong>S3</strong> <a href="https://systemprompt.io/guides/enterprise-claude-code-managed-settings">Enterprise Claude Code with Managed Settings</a> · Systemprompt
+- 发布：2026-10-20；事件：2026-10-20；查阅：2026-10-21。
+- 来源族：第三方企业指南；读取：relevant_text；定位：文章正文。
+- 原文支持：企业治理层为托管设置 managed-settings.json，可设 allowManagedPermissionRulesOnly、allowManagedHooksOnly、allowManagedMcpServersOnly 与 disableBypassPermissionsMode，托管 deny 可叠加且用户无法移除；CLAUDE.md 中的禁令只是请求而非保证，真正强制靠 deny 规则与 PreToolUse Hook
+- 限制：第三方企业指南总结，非官方原文，需以官方文档核对；本账本未重新核验原文</p>
+<p><strong>S4</strong> <a href="https://cryptobriefing.com/anthropic-claude-code-sandbox-mode/">Anthropic introduces local sandbox mode for Claude Code desktop</a> · CryptoBriefing
+- 发布：2026-08-30；事件：2026-08-30；查阅：2026-10-21。
+- 来源族：第三方报道；读取：relevant_text；定位：文章正文。
+- 原文支持：本地 Bash 沙箱为 OS 级隔离：macOS 用 Seatbelt，Linux/WSL2 用 bubblewrap，文件系统限于当前工作目录及其子目录，网络经代理仅放行预批域名；分 auto-allow 与全审批两种模式，官方称权限提示减少约 84%
+- 限制：第三方报道转述 Anthropic 说法，84% 为厂商自述，未经独立验证；沙箱自 2025 年 10 月前后迭代，具体版本边界需核对；本账本未重新核验原文</p>
+<p><strong>S5</strong> <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude-code-puts-auto-mode-in-the-drivers-seat/5285326">Claude Code puts auto mode in the driver's seat</a> · The Register
+- 发布：2026-08-10；事件：2026-08-10；查阅：2026-10-21。
+- 来源族：科技媒体报道；读取：relevant_text；定位：文章正文。
+- 原文支持：Auto mode 于 2026 年 3 月为研究预览、7 月 10 日正式可用，2026 年 8 月 14 日起成为 Pro/Max/Team 新会话默认，Enterprise/API/Bedrock/Vertex 暂为 opt-in；分类器拦截不可逆、破坏性或越境操作，厂商实验称人类审批仅检出 13.6% 危险命令、分类器约 89%，且用户 97% 提示点通过
+- 限制：厂商实验数字为厂商自述，需独立验证；分类器不是沙箱，不能替代 OS 沙箱与网络出口管控；本账本未重新核验原文</p>
+<p><strong>S6</strong> <a href="https://www.convective.com/currents/a-classifier-is-not-a-sandbox">Is Claude Code Auto Mode Safe? A Classifier Is Not a Sandbox</a> · Convective
+- 发布：2026-10-19；事件：2026-10-19；查阅：2026-10-21。
+- 来源族：第三方安全评论；读取：relevant_text；定位：文章正文。
+- 原文支持：2026 年 8 月 26 日 Embrace The Red 演示显示，仅要求总结该网站的请求在 Auto mode 下最终导致代码执行与远程载荷/C2 回连，论证分类器不应被当作基础设施边界，须叠加 OS 沙箱与锁定网络出口
+- 限制：第三方安全评论与演示转述，非官方复现报告，演示条件与完整链路需核对；本账本未重新核验原文</p>
+<p><strong>S7</strong> <a href="https://blog.checkpoint.com/research/check-point-researchers-expose-critical-claude-code-flaws/">Check Point Researchers Expose Critical Claude Code Flaws</a> · Check Point Research
+- 发布：2025-10-03；事件：2025-10-03；查阅：2026-10-21。
+- 来源族：安全厂商研究；读取：relevant_text；定位：文章正文。
+- 原文支持：Check Point 披露仓库内 Hooks 在启动时静默执行、MCP 同意可被仓库配置 enableAllProjectMcpServers 等绕过（CVE-2025-59536，2025 年 10 月 3 日发布），以及 settings.json 中 ANTHROPIC_BASE_URL 被改写致 API 密钥明文外泄（CVE-2026-21852，2.0.65 修复）；修复方向是信任对话前不执行 MCP、强化不可信配置警告
+- 限制：材料未单独给出 CVE-2026-21852 的披露日期，不应以本条 published 日期推断该 CVE 日期；修复版本与细节需以官方 advisory 核对；本账本未重新核验原文</p>
+<p><strong>S8</strong> <a href="https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/">CVE-2026-55607 worktree sandbox escape</a> · VibeIncidents
+- 发布：2026-06-25；事件：2026-06-25；查阅：2026-10-21。
+- 来源族：漏洞事件库；读取：relevant_text；定位：文章正文。
+- 原文支持：CVE-2026-55607 中 2.1.38 至 2.1.163 的 Claude Code 可创建名为 .git 的 worktree 并移出沙箱文件夹，提示注入的恶意仓库可借 git fsmonitor 配置改写用户家目录 ~/.zshenv 实现 macOS seatbelt 沙箱外代码执行，2026 年 6 月 4 日在 2.1.163 修复，Anthropic advisory GHSA-7835-87q9-rgvv 于 6 月 25 日发布；未报告野外利用
+- 限制：第三方事件库转述，版本区间与修复版本的表述需以官方 advisory 核对；未报告野外利用不等于未发生未公开利用；本账本未重新核验原文</p>
+<p><strong>S9</strong> <a href="https://adversa.ai/blog/claude-code-vulnerabilities/">Claude Code vulnerabilities: 10 attacks, CVEs and defenses</a> · Adversa
+- 发布：2026-09-23；事件：2026-09-23；查阅：2026-10-21。
+- 来源族：安全厂商披露；读取：relevant_text；定位：文章正文。
+- 原文支持：Adversa 披露 SymJack（审批显示诱饵路径、内核跟随符号链接致 .claude/settings.json 或 .mcp.json 被植入，下次重启加载恶意 MCP）与 Wiz 的 GhostApproval（模型内部已知是 zsh 配置文件、展示给用户的却是 project_settings.json 编辑请求）；Anthropic 对后者以用户信任目录即接受风险为由未列为漏洞，但为敏感目录审批增加了警告
+- 限制：第三方披露与厂商立场分歧并存，GhostApproval 是否构成漏洞存在争议，需以官方回应核对；本账本未重新核验原文</p>
+<p><strong>S10</strong> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">The Agent Supply Chain Is Now the Attack Surface (23 Sep 2026)</a> · Capernaums
+- 发布：2026-09-23；事件：2026-09-23；查阅：2026-10-21。
+- 来源族：第三方汇总；读取：secondary；定位：文章正文。
+- 原文支持：2026 年 9 月 Claude Code GitHub Action 的 checkWritePermissions 无条件信任任意 GitHub App actor（CVSS 4.0 7.8），未认证外部 actor 可借 agent 权限写仓库；同时第三方汇总称同一时期 Black Hat 披露中 bash validator 剥离单引号内容致 git push --receive-pack 绕过并窃取 API 密钥与 GitHub token
+- 限制：第三方汇总与转述，需以官方 advisory 核对细节，尤其是 bash validator 绕过的适用版本与修复状态；本账本未重新核验原文</p>
+<p><strong>S11</strong> <a href="https://codersera.com/blog/how-to-sandbox-ai-coding-agents-2026/">How to Sandbox AI Coding Agents: 2026 Security Guide</a> · Codersera
+- 发布：2026-10-05；事件：2026-10-05；查阅：2026-10-21。
+- 来源族：第三方综合分析；读取：secondary；定位：文章正文。
+- 原文支持：窗口内安全演进主线是从逐条人工审批转向分类器裁决加 OS 沙箱加托管策略三层，但失败模式高度集中在解析层绕过（环境变量前缀、bash -c 包装、符号链接 TOCTOU 如 CVE-2026-103435 于 2.1.129 修复、输出重定向）与信任前加载配置；因此 deny 规则是字符串匹配而非语义边界，真正边界只能是沙箱、最小权限与分支/PR 前审查 .claude/ 与 .mcp.json
+- 限制：第三方 2026 年 9-10 月综合分析，非官方安全模型说明；各绕过案例的版本与修复状态需逐项以官方 advisory 核对；本账本未重新核验原文</p>
+<p>检索缺口：
+- 材料未提供 Anthropic 官方文档原文，allow/ask/deny、托管设置与沙箱实现的细节均未以官方原文核对
+- 材料未提供 Harness 平台自身的沙箱与权限实现文档，本账本实际覆盖的是 Claude Code 权限与沙箱，Harness 对照缺失，需另行检索 Harness 官方材料补齐
+- Auto mode 分类器的独立评测缺失，13.6%、89%、97% 与权限提示减少约 84% 均为厂商自述或转述，未经独立验证
+- GitHub Action checkWritePermissions 与 bash validator 单引号剥离绕过的官方 advisory 细节、适用版本与修复状态未核对
+- Windows 平台沙箱实现、企业部署实测数据与沙箱逃逸修复后的回归验证未覆盖
+- CVE-2026-21852 的单独披露日期与完整时间线在材料中未给出，不应以 Check Point 文章日期推断</p>
+<p>检索日志：Claude Code permissions sandbox approval allow tools settings documentation（discovery）；Claude Code MCP prompt injection security vulnerability（counterevidence）；Claude Code 权限模式 沙箱 审批 安全（discovery）；Claude Code 提示注入 MCP 越权 绕过 安全风险（counterevidence）；Anthropic Claude Code sandbox macOS seatbelt plan mode auto mode August 2026（verification）；Claude Code GitHub Action checkWritePermissions bypass vulnerability September 2026（counterevidence）。</p>
+<h2 id="_19">五、模型能力与实测表现</h2>
+<p><strong>关键议题</strong>：Claude Code的模型能力与实测表现是否构成可信的编码领先，抑或受基准口径、安全与限额反证削弱？</p>
+<p>选题依据：OSINT材料同时包含模型基准、产品演进、Harness机制、第三方同任务与长程实测，以及基准口径、安全漏洞与限额三类反证，适合检验“编码领先”主张的可信边界而非只罗列分数。</p>
+<p><strong>当前判断</strong>：在现有账本范围内，优选V02的收窄主张：单一SWE-bench Verified分数不足以证明全维度领先；只有在区分基准口径、任务类型与来源等级后，才能判断领先范围。Verified内部相对名次仅保留有限参考价值，因瑕疵与污染是否对称尚未证实。 <a href="https://overchat.ai/ai-hub/claude-opus-4-5">S06</a> <a href="https://www.datacamp.com/blog/codex-vs-claude-code">S13</a> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">S15</a> <a href="https://epoch.ai/benchmarks/swe-bench-verified/review">S14</a></p>
+<p>优选：V02；置信度：medium。方法论结论（分口径比较）较稳固，但关键分数为第三方转述的preliminary或conflicting，审计仅抽查27.6%，对称性与重算结果缺失，故非high；又因跨基准胜负分裂与口径不可比有直接证据，故非low。
+成立条件：适用于本账本证据范围；不否定Claude在特定编码任务上的初步表现，也不把V03的安全与限额前置条件排除在部署决策之外；若出现官方一手分数、清洗重算或大样本复测，判断应更新。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_20">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（编码领先论者；以官方转述基准与第三方实测质量为依据，强调编码任务上的领先与长程可用性，但不否认需人工复核。）：在编码基准与单任务质量上，Claude Code与Claude 4.5系构成领先：Opus 4.5的SWE-bench Verified为80.9%，同任务对照质量最高，长程重构可完成47次迭代并显著提升覆盖率。
+- 限定：范围限定于编码基准与单任务质量语境下的Claude 4.5系，不外推为全部推理任务领先，也不等于免复核部署；置信度为初步、有限，需以官方一手来源与更大样本复核后方可提高。
+- 最强反证：最强反证来自同一批证据内部：同任务对照中Claude Code并非最快也非最便宜，42分钟慢于Cursor的28分钟，0.15美元贵于Codex的0.03美元，领先的是质量而非效率与成本；长程案例作者仍需人工复核并发现2个被漏掉的边界情况，说明长程自主不等于免复核；且核心基准分数目前只是第三方转述的preliminary状态，单样本结论的稳健性不足。 <a href="https://ts2.tech/en/anthropics-new-ai-powers-through-code-worlds-best-claude-sonnet-4-5-debuts/">S03</a> <a href="https://followin.io/en/feed/21619226">S04</a> <a href="https://giganectar.com/claude-opus-4-5-80-percent-swe-bench-score-66-percent-price-drop-anthropic-ai-model/">S05</a> <a href="https://dev.to/unfiltered_anshul/claude-code-vs-cursor-vs-codex-i-tested-all-three-on-the-same-task-172c">S11</a> <a href="https://dev.to/intelligenttools_tomic_85/i-let-claude-code-run-unsupervised-for-8-hours-heres-what-it-built-5gp3">S12</a></p>
+<p><strong>观点 V02</strong>（基准口径怀疑论者；以OpenAI审计、Epoch AI标记与跨基准对比为依据，要求区分基准口径、任务类型与官方/第三方来源等级。）：单一SWE-bench分数不能证明全维度领先：必须区分基准口径、任务类型与官方/第三方来源等级后，才能判断所谓领先的范围。
+- 限定：范围限定于所给账本与上述来源等级：结论是方法论上的谨慎主张，即“单一分数不足以证明全维度领先”，而非否定Claude在特定编码任务上的表现；对具体分数的置信度低，对“须分口径、分任务、分来源等级比较”这一程序性结论的置信度相对较高。
+- 最强反证：最强反证是：测试瑕疵与污染并不自动使相对排序失效，对方仍可用OSWorld-Verified上Claude领先以及同一基准内的相对名次主张编码维度领先；同时，本方援引的Pro也并非干净的替代标准，其约30%公开任务有问题的说法同样来自审计转述，且审计仅抽查Verified的27.6%任务，不能直接推广为全部任务无效。因此，本主张成立的只是“不能仅凭一个分数下全维度结论”，而不是“该分数毫无信息量”或“Pro分数更可信”。 <a href="https://www.datacamp.com/blog/codex-vs-claude-code">S13</a> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">S15</a> <a href="https://epoch.ai/benchmarks/swe-bench-verified/review">S14</a></p>
+<p><strong>观点 V03</strong>（安全与成本审慎部署者；以官方文档转述的安全限定、已修复漏洞家族与限额变更为依据，主张把权限、凭证隔离与限额预算作为部署前置条件。）：即使编码能力领先，部署仍须先过安全与成本关：沙箱与计划模式的限定、信任前执行与提示注入风险，以及周限额下调与诉讼争议，决定了实际可用边界；权限、凭证隔离与限额预算应作为部署前置条件，而非事后补救。
+- 限定：本主张的置信度为中等、范围限定：它主张的是“先过安全与成本关”的部署顺序，而非否定编码能力领先；诉讼部分仅保留为未证实的争议信号，不作为事实前提；所引漏洞多已标注修复版本，结论针对的是仍需配置、复核与预算的部署实践，而非断言当前版本必然可被同样方式攻破。
+- 最强反证：最强反证是：deny规则在所有模式下均生效、相关漏洞已有明确修复版本、云端会话运行于隔离虚拟机，说明风险可通过正确配置与及时升级缓解；且限额下调的绝对值仍高于原基线（125%），诉讼亦未获证实。因此，若部署方已做到最小权限、显式deny敏感路径、隔离凭证、禁用或严格审查仓库自带Hooks/MCP与bypassPermissions默认设置，并按125%限额做预算与降级预案，本主张的紧迫性会显著下降；但这恰恰印证了“前置条件”本身，而非取消它。 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S08</a> <a href="https://www.gensee.ai/blogs/claude-code-security-guide.html">S09</a> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S16</a> <a href="https://dev.to/thomastartrau/ai-coding-agent-security-flaws-claude-code-gemini-codex-29le">S17</a> <a href="https://www.notebookcheck.net/Claude-Code-leak-Researchers-find-first-vulnerability.1267370.0.html">S18</a> <a href="https://alphasignal.ai/news/anthropic-quietly-cuts-claude-code-weekly-limits-by-17-in-september">S19</a> <a href="https://www.classaction.org/news/claude-lawsuit-claims-anthropic-wrongfully-reduced-subscribers-practical-access-under-claude-pro-max-plans">S20</a> <a href="https://www.53ai.com/news/LargeLanguageModel/2026011017953.html">S21</a></p>
+<h3 id="_21">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：报告的编码分数与单任务质量表现可保留为初步假设，用于指导后续复测，而非定论；不适用于全部推理任务或免复核部署。
+- V03的合理洞察：即使采纳V02的判断，部署仍应先完成显式deny敏感路径、凭证隔离、审查仓库Hooks/MCP与bypassPermissions设置、升级至已修复版本，并按125%周限额做预算与降级预案；满足后是持续治理而非绝对阻碍。</p>
+<p>不确定性及改变判断的条件：
+- 测试瑕疵与题目/解法暴露是否对各模型对称，及剔除问题测试后名次是否变化。
+- 官方一手基准、定价与4.6系说法能否确认；多任务大样本下质量、失败率、耗时与成本分布如何。
+- 云端隔离虚拟机是否改变本地沙箱对文件工具、MCP与Hooks的覆盖范围；前置条件满足后的残余提示注入风险。
+- 周限额实际耗用分布、企业级部署成本与诉讼实际影响；后者目前仅为未证实主张。</p>
+<h3 id="_22">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：注意：80.9%等单一分数容易被误读为全维度领先，而审计已显示该基准存在测试问题与污染争议。</li>
+<li><strong>需要</strong>：需要一套可审查的比较规则：先分基准口径、分任务类型、分官方与第三方来源等级，再谈领先。</li>
+<li><strong>方案</strong>：方案：以V02的收窄判断为决策基线，把编码领先降级为待复核的初步信号，同时把V03的前置安全与限额检查作为并行门槛。</li>
+<li><strong>预演</strong>：有条件预演：若清洗重算后名次不变且多任务复现，编码领先信号增强，可扩大试点；若名次反转或仅单任务成立，则只在已验证的编码子任务内使用，并保留人工复核。</li>
+<li><strong>行动</strong>：
+   - 由复核人对照Anthropic官方发布与官方文档，核对Opus 4.5/Sonnet 4.5的SWE-bench Verified、Terminal-Bench与定价 <a href="https://ts2.tech/en/anthropics-new-ai-powers-through-code-worlds-best-claude-sonnet-4-5-debuts/">S03</a> <a href="https://followin.io/en/feed/21619226">S04</a> <a href="https://giganectar.com/claude-opus-4-5-80-percent-swe-bench-score-66-percent-price-drop-anthropic-ai-model/">S05</a>
+     时间：14天内；指标：官方一手来源核对覆盖率；基线：现有账本分数均为第三方转述preliminary。
+     停止/成功条件：全部关键分数有官方来源或差异被记录；无法确认的项保留为未证实；阈值来源：分析者建议：关键分数官方核对率100%，未知则注明。
+   - 由复核人取得审计口径数据，剔除有问题测试后重算并检验各模型暴露与惩罚是否对称 <a href="https://epoch.ai/benchmarks/swe-bench-verified/review">S14</a> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">S15</a>
+     时间：30天内；指标：重算后名次变化与各模型受瑕疵测试影响率；基线：Verified抽查27.6%任务中59.4%存在测试问题。
+     停止/成功条件：重算结果与对称性检验公开，或明确说明数据不可得；阈值来源：证据所给：抽查比例与问题比例来自C13；对称性检验方法为分析者建议。
+   - 由测试负责人开展多任务重复实测，记录质量、修复量、耗时、成本与失败率分布 <a href="https://dev.to/unfiltered_anshul/claude-code-vs-cursor-vs-codex-i-tested-all-three-on-the-same-task-172c">S11</a> <a href="https://dev.to/intelligenttools_tomic_85/i-let-claude-code-run-unsupervised-for-8-hours-heres-what-it-built-5gp3">S12</a>
+     时间：30天内；指标：独立任务数与失败率、成本分布；基线：现有同任务对照为单任务、长程案例为单案例。
+     停止/成功条件：完成预设任务数并公布分布，或因样本不足明确降级结论；阈值来源：分析者建议：不少于10个独立任务，覆盖编码与非编码任务类型。
+   - 由部署负责人执行前置核查：显式deny敏感凭证路径、隔离凭证、审查仓库自带Hooks/MCP与bypassPermissions默认设置、升级至已修复版本 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S08</a> <a href="https://www.gensee.ai/blogs/claude-code-security-guide.html">S09</a> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S16</a> <a href="https://dev.to/thomastartrau/ai-coding-agent-security-flaws-claude-code-gemini-codex-29le">S17</a> <a href="https://www.notebookcheck.net/Claude-Code-leak-Researchers-find-first-vulnerability.1267370.0.html">S18</a>
+     时间：上线前；指标：前置核查清单通过率；基线：沙箱仅覆盖shell命令，不覆盖文件工具、MCP与Hooks；计划模式不是沙箱。
+     停止/成功条件：清单100%通过或未通过项导致暂停上线；阈值来源：证据所给：C08的覆盖限定与C14标注的修复版本；清单通过率100%为分析者建议。
+   - 由成本负责人按125%标准周限额建立使用监测与降级预案，记录高峰耗用 <a href="https://alphasignal.ai/news/anthropic-quietly-cuts-claude-code-weekly-limits-by-17-in-september">S19</a>
+     时间：上线后连续4周；指标：周实际用量占125%限额的比例与高峰中断次数；基线：2026-09-14起标准周限额永久定为基线125%，相对临时150%峰值净降约17%。
+     停止/成功条件：连续4周无超限中断且降级预案演练通过，或触发限额时按预案降级；阈值来源：证据所给：125%与约17%来自C15；连续4周监测期为分析者建议。</li>
+</ol>
+<h3 id="_23">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Claude Code于2025-02-24以研究预览发布，定位为终端命令行智能编码代理，可读库、改文件、跑命令与测试、用Git完成任务。 <a href="https://www.webpronews.com/claude-code-is-anthropics-quiet-bet-that-ai-will-write-most-software-and-the-numbers-are-staggering/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Claude Code于2025-05-22正式GA，同日发布Claude Opus 4与Sonnet 4，并宣布VS Code/JetBrains集成与GitHub Actions后台任务支持。 <a href="https://www.scriptbyai.com/claude-code-timeline/">S02</a></li>
+<li><strong>C03 / source_statement / preliminary</strong>：据官方发布转述，Claude Sonnet 4.5于2025-09-29发布，官方宣称可连续自主编码30小时以上，SWE-bench Verified为77.2%，Terminal-Bench为50.0%，定价为每百万token输入3美元、输出15美元。 <a href="https://ts2.tech/en/anthropics-new-ai-powers-through-code-worlds-best-claude-sonnet-4-5-debuts/">S03</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：据Anthropic发布转述，Claude Opus 4.5于2025-11-24发布，SWE-bench Verified为80.9%，高于GPT-5.1-Codex-Max的77.9%与Gemini 3 Pro的76.2%，定价为每百万token输入5美元、输出25美元，较Opus 4.1降约67%。 <a href="https://followin.io/en/feed/21619226">S04</a> <a href="https://giganectar.com/claude-opus-4-5-80-percent-swe-bench-score-66-percent-price-drop-anthropic-ai-model/">S05</a></li>
+<li><strong>C05 / fact / preliminary</strong>：Claude 4.5家族当时分三档：Opus 4.5主打复杂生产任务、Sonnet 4.5日常任务、Haiku 4.5高速低成本（SWE-bench Verified 73.3%，定价1/5美元每百万token），当时上下文窗口均为200K token。 <a href="https://giganectar.com/claude-opus-4-5-80-percent-swe-bench-score-66-percent-price-drop-anthropic-ai-model/">S05</a></li>
+<li><strong>C06 / fact / preliminary</strong>：Opus 4.5在Terminal-Bench 2.0为59.3%、OSWorld为66.3%，均高于Sonnet 4.5的50.0%与61.4%，但ARC-AGI-2差距更大（37.6%对13.6%），编码领先不等于全部推理任务同等领先。 <a href="https://overchat.ai/ai-hub/claude-opus-4-5">S06</a></li>
+<li><strong>C07 / fact / preliminary</strong>：Harness层演进包括：2025-06-18起支持远程MCP服务器，2025-06-30起Hooks可在会话启动、工具调用前后、停止时触发，2025年7月起可用/agents定义自定义子代理；CLAUDE.md、settings.json权限与Hooks/MCP配置、/memory等管理命令及JSONL transcript恢复与压缩是可验证的机制描述。 <a href="https://www.scriptbyai.com/claude-code-timeline/">S02</a> <a href="https://m87technologies.com/blog/how-claude-code-works">S07</a></li>
+<li><strong>C08 / fact / preliminary</strong>：关键限定：据官方文档转述，deny规则在所有模式包括bypassPermissions下均生效，但沙箱仅覆盖shell命令，不覆盖文件工具、MCP服务器与Hooks；计划模式本身不是沙箱；Bash权限按命令文本匹配，可被改写绕过，且沙箱默认读范围较宽，仍可读取敏感凭证路径，须另行配置拒绝项。 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S08</a> <a href="https://www.gensee.ai/blogs/claude-code-security-guide.html">S09</a></li>
+<li><strong>C09 / fact / supported</strong>：Claude Code云端会话于2026-09-23走出研究预览正式GA，在Anthropic托管的隔离虚拟机中运行，合上笔记本后仍可继续，可从浏览器、移动端、桌面端或CLI启动，并连接GitHub仓库。 <a href="https://subagentic.ai/posts/claude-code-cloud-sessions-ga/">S10</a></li>
+<li><strong>C10 / fact / preliminary</strong>：同一URL缩短服务第三方同任务对照中，Claude Code用时42分钟、成本约0.15美元、需2处小修复、质量最高；Cursor 28分钟最快但出现Redis静默失败；Codex CLI 35分钟最便宜约0.03美元但需5处修复。 <a href="https://dev.to/unfiltered_anshul/claude-code-vs-cursor-vs-codex-i-tested-all-three-on-the-same-task-172c">S11</a></li>
+<li><strong>C11 / fact / preliminary</strong>：一例8小时无人值守重构完成47次迭代、覆盖率从62%升至87%、成本23.14美元，但作者仍需人工复核并发现2个被漏掉的边界情况，说明长程自主不等于免复核。 <a href="https://dev.to/intelligenttools_tomic_85/i-let-claude-code-run-unsupervised-for-8-hours-heres-what-it-built-5gp3">S12</a></li>
+<li><strong>C12 / fact / conflicting</strong>：跨基准比较无全维度碾压：第三方对比称Codex/GPT-5.3-Codex在Terminal-Bench 2.0约77%高于Claude Opus 4.6约65%，而OSWorld-Verified上Claude领先；且SWE-bench Verified约81%与Pro约54%分属不同任务难度，分数不可直接比较，4.6系分数为第三方对比，需官方核对。 <a href="https://www.datacamp.com/blog/codex-vs-claude-code">S13</a> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">S15</a></li>
+<li><strong>C13 / source_statement / preliminary</strong>：基准口径存在双向争议：OpenAI于2026-02-23审计SWE-bench Verified，抽查27.6%任务中59.4%存在会拒绝功能正确解法的测试问题，且所有前沿模型均见过部分题目与解法，Epoch AI据此将该基准标记为Flawed；SWE-bench Pro任务平均触及4.1个文件、面向数小时至数天的长程任务，后续也被审计称约30%公开任务有问题。 <a href="https://epoch.ai/benchmarks/swe-bench-verified/review">S14</a> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">S15</a></li>
+<li><strong>C14 / fact / preliminary</strong>：安全反证包括：SneakPeek漏洞（CVSS 8.7）利用Desktop预览窗对大于256KB HTML走file://渲染且不施加CSP的路径窃取凭证并外发，已在Desktop 1.30096.1修复；仓库信任前执行问题包括.claude/settings.json中Hooks/MCP在信任对话框出现前即运行（CVE-2025-59536）及默认模式被设为bypassPermissions导致对话框消失（CVE-2026-33068，已在2.1.53修复）；提示注入仍是首要风险，文件内容默认被当作上下文而非不可信数据。 <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S16</a> <a href="https://dev.to/thomastartrau/ai-coding-agent-security-flaws-claude-code-gemini-codex-29le">S17</a> <a href="https://www.notebookcheck.net/Claude-Code-leak-Researchers-find-first-vulnerability.1267370.0.html">S18</a></li>
+<li><strong>C15 / fact / preliminary</strong>：2026-09-14起Pro/Max/Team及按席位企业版的Claude Code标准周限额永久定为基线125%，取代5月至9月13日的临时150%，相对临时峰值净降约17%，官方最初按“+25%”表述引发误导批评后改口承认。 <a href="https://alphasignal.ai/news/anthropic-quietly-cuts-claude-code-weekly-limits-by-17-in-september">S19</a></li>
+<li><strong>C16 / source_statement / unverified</strong>：针对Pro/Max的集体诉讼指控Anthropic在2026年3月调整高峰时段五小时限额等后端变更，使用户更快耗尽额度并贬损已购服务价值，该指控为原告主张、尚未证实，不可当作已认定事实；另有第三方工具复用个人订阅被误伤封禁的争议，官方承认误伤并回滚修复。 <a href="https://www.classaction.org/news/claude-lawsuit-claims-anthropic-wrongfully-reduced-subscribers-practical-access-under-claude-pro-max-plans">S20</a> <a href="https://www.53ai.com/news/LargeLanguageModel/2026011017953.html">S21</a></li>
+<li><strong>C17 / inference / preliminary</strong>：综合推断：Claude Code在编码基准与单任务质量对照中占优，但推理任务分布不均、长程运行仍需人工复核、且同任务对照样本有限，因此“编码领先”不宜直接外推为“全部任务领先”或“免复核部署”。 <a href="https://overchat.ai/ai-hub/claude-opus-4-5">S06</a> <a href="https://dev.to/unfiltered_anshul/claude-code-vs-cursor-vs-codex-i-tested-all-three-on-the-same-task-172c">S11</a> <a href="https://dev.to/intelligenttools_tomic_85/i-let-claude-code-run-unsupervised-for-8-hours-heres-what-it-built-5gp3">S12</a></li>
+<li><strong>C18 / fact / unverified</strong>：本次检索中Opus 4.6/4.7及1M上下文等2026年说法仅见第三方对比，未见Anthropic官方一手确认；闭源Harness内部架构（如Agent主循环具体实现、模型内部推理细节）无法从公开资料证实，凡未标注官方文档的架构说法均来自第三方指南或社区逆向解读，不得当作官方实现。 <a href="https://www.datacamp.com/blog/codex-vs-claude-code">S13</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://www.webpronews.com/claude-code-is-anthropics-quiet-bet-that-ai-will-write-most-software-and-the-numbers-are-staggering/">Claude Code Timeline</a> · WebProNews
+- 发布：unknown；事件：2025-02-24；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Claude Code于2025-02-24以研究预览发布，定位为终端命令行智能编码代理。
+- 限制：发表日期在材料中未给出，填unknown，未编造；基于提供的OSINT摘要，未重新打开原文全文核验。</p>
+<p><strong>S02</strong> <a href="https://www.scriptbyai.com/claude-code-timeline/">Claude Code Timeline</a> · ScriptByAI
+- 发布：unknown；事件：2025-05-22；查阅：2026-10-21。
+- 来源族：timeline；读取：relevant_text；定位：全文相关段落。
+- 原文支持：2025-05-22 GA及IDE/GitHub Actions支持；2025-06远程MCP、06-30 Hooks、07月自定义子代理的时间线。
+- 限制：发表日期在材料中未给出，填unknown；该时间线聚合多个事件日期，单条event_date取GA日期，细节以正文时间为准；未重新打开原文全文核验。</p>
+<p><strong>S03</strong> <a href="https://ts2.tech/en/anthropics-new-ai-powers-through-code-worlds-best-claude-sonnet-4-5-debuts/">Anthropic's New AI Powers Through Code: Claude Sonnet 4.5 Debuts</a> · TS2.tech
+- 发布：unknown；事件：2025-09-29；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Sonnet 4.5发布、30小时自主编码宣称、SWE-bench Verified 77.2%、Terminal-Bench 50.0%、定价3/15美元每百万token。
+- 限制：发表日期在材料中未给出，填unknown；该来源为官方发布的第三方转述，非官方一手原文；未重新打开原文全文核验。</p>
+<p><strong>S04</strong> <a href="https://followin.io/en/feed/21619226">Claude Opus 4.5 Release Report</a> · Followin
+- 发布：unknown；事件：2025-11-24；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Opus 4.5发布、SWE-bench Verified 80.9%高于GPT-5.1-Codex-Max与Gemini 3 Pro、定价5/25美元、较Opus 4.1降约67%。
+- 限制：发表日期在材料中未给出，填unknown；该来源为Anthropic发布的第三方转述，非官方一手原文；未重新打开原文全文核验。</p>
+<p><strong>S05</strong> <a href="https://giganectar.com/claude-opus-4-5-80-percent-swe-bench-score-66-percent-price-drop-anthropic-ai-model/">Claude Opus 4.5 80 Percent SWE-bench Score and Price Drop</a> · GigaNectar
+- 发布：unknown；事件：2025-11-24；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Opus/Sonnet/Haiku 4.5三档定位、分数与定价，上下文窗口当时均为200K token。
+- 限制：发表日期在材料中未给出，填unknown；为第三方整理，非官方一手原文；未重新打开原文全文核验。</p>
+<p><strong>S06</strong> <a href="https://overchat.ai/ai-hub/claude-opus-4-5">Claude Opus 4.5 AI Hub Summary</a> · Overchat
+- 发布：unknown；事件：2025-11-24；查阅：2026-10-21。
+- 来源族：benchmark_summary；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Opus 4.5与Sonnet 4.5在Terminal-Bench 2.0、OSWorld、ARC-AGI-2上的对比分数。
+- 限制：发表日期在材料中未给出，填unknown；为官方基准的第三方整理，需官方核对；未重新打开原文全文核验。</p>
+<p><strong>S07</strong> <a href="https://m87technologies.com/blog/how-claude-code-works">How Claude Code Works</a> · M87 Technologies
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：third_party_guide；读取：relevant_text；定位：全文相关段落。
+- 原文支持：CLAUDE.md、settings.json权限与Hooks/MCP配置、管理命令及JSONL transcript恢复与压缩。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；明确标注为第三方指南，非官方文档；未重新打开原文全文核验。</p>
+<p><strong>S08</strong> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">Plan Mode Was Never a Sandbox</a> · DEV.to
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：technical_blog；读取：relevant_text；定位：全文相关段落。
+- 原文支持：引述官方文档：deny规则全模式生效、沙箱仅覆盖shell命令、计划模式不是沙箱。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为官方文档的第三方引述，非官方一手原文；未重新打开原文全文核验。</p>
+<p><strong>S09</strong> <a href="https://www.gensee.ai/blogs/claude-code-security-guide.html">Claude Code Security Guide</a> · Gensee
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_guide；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Bash权限按命令文本匹配可被改写绕过；沙箱默认读范围较宽，仍可读取凭证路径，须另行配置拒绝项。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为官方文档的第三方引述；未重新打开原文全文核验。</p>
+<p><strong>S10</strong> <a href="https://subagentic.ai/posts/claude-code-cloud-sessions-ga/">Claude Code Cloud Sessions GA</a> · Subagentic
+- 发布：unknown；事件：2026-09-23；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Claude Code云端会话GA、隔离虚拟机运行、跨端启动、连接GitHub仓库。
+- 限制：发表日期在材料中未给出，填unknown；未重新打开原文全文核验。</p>
+<p><strong>S11</strong> <a href="https://dev.to/unfiltered_anshul/claude-code-vs-cursor-vs-codex-i-tested-all-three-on-the-same-task-172c">Claude Code vs Cursor vs Codex on the Same Task</a> · DEV.to
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：field_test；读取：relevant_text；定位：全文相关段落。
+- 原文支持：同任务对照：Claude Code 42分钟、0.15美元、2处修复质量最高；Cursor最快但Redis静默失败；Codex最便宜但需5处修复。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；单任务第三方实测，样本量小；未重新打开原文全文核验。</p>
+<p><strong>S12</strong> <a href="https://dev.to/intelligenttools_tomic_85/i-let-claude-code-run-unsupervised-for-8-hours-heres-what-it-built-5gp3">I Let Claude Code Run Unsupervised for 8 Hours</a> · DEV.to
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：field_test；读取：relevant_text；定位：全文相关段落。
+- 原文支持：8小时无人值守重构：47次迭代、覆盖率62%升至87%、成本23.14美元，仍需人工复核并发现2个边界问题。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；单案例第三方实测；未重新打开原文全文核验。</p>
+<p><strong>S13</strong> <a href="https://www.datacamp.com/blog/codex-vs-claude-code">Codex vs Claude Code</a> · DataCamp
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：comparison；读取：relevant_text；定位：全文相关段落。
+- 原文支持：Codex Terminal-Bench 2.0约77%高于Claude Opus 4.6约65%，OSWorld-Verified上Claude领先；4.6系分数为第三方对比，需官方核对。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；4.6系分数明确标注为第三方对比，未见官方确认；未重新打开原文全文核验。</p>
+<p><strong>S14</strong> <a href="https://epoch.ai/benchmarks/swe-bench-verified/review">SWE-bench Verified Benchmark Review</a> · Epoch AI
+- 发布：unknown；事件：2026-02-23；查阅：2026-10-21。
+- 来源族：benchmark_review；读取：relevant_text；定位：全文相关段落。
+- 原文支持：OpenAI审计SWE-bench Verified：抽查27.6%任务中59.4%存在测试问题，所有前沿模型均见过部分题目与解法，Epoch AI标记为Flawed。
+- 限制：发表日期在材料中未给出，填unknown，event_date为审计日期；未重新打开原文全文核验。</p>
+<p><strong>S15</strong> <a href="https://www.codesota.com/news/swe-bench-contamination-debate">SWE-bench Contamination Debate</a> · CodeSota
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：benchmark_summary；读取：relevant_text；定位：全文相关段落。
+- 原文支持：SWE-bench Pro任务平均触及4.1个文件、面向数小时至数天长程任务，顶分约54%远低于Verified约81%；Pro后续也被审计称约30%公开任务有问题。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为第三方整理，口径争议双向存在；未重新打开原文全文核验。</p>
+<p><strong>S16</strong> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">Claude Code Preview Pane Secret Leak Flaw</a> · Cybernews
+- 发布：unknown；事件：2026-10-14；查阅：2026-10-21。
+- 来源族：security_report；读取：relevant_text；定位：全文相关段落。
+- 原文支持：SneakPeek漏洞CVSS 8.7：Desktop预览窗大于256KB HTML走file://渲染且不施加CSP，可读取并外发SSH私钥、AWS凭证、GitHub/npm token，已在Desktop 1.30096.1修复。
+- 限制：发表日期在材料中未给出，填unknown，event_date为披露日期；未重新打开原文全文核验。</p>
+<p><strong>S17</strong> <a href="https://dev.to/thomastartrau/ai-coding-agent-security-flaws-claude-code-gemini-codex-29le">AI Coding Agent Security Flaws: Claude Code, Gemini, Codex</a> · DEV.to
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_report；读取：relevant_text；定位：全文相关段落。
+- 原文支持：仓库信任前执行Hooks/MCP（CVE-2025-59536）及仓库文件设默认bypassPermissions致对话框消失（CVE-2026-33068，已在2.1.53修复）。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为Check Point与CVE的第三方转述；未重新打开原文全文核验。</p>
+<p><strong>S18</strong> <a href="https://www.notebookcheck.net/Claude-Code-leak-Researchers-find-first-vulnerability.1267370.0.html">Claude Code Leak: Researchers Find First Vulnerability</a> · Notebookcheck
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：security_report；读取：relevant_text；定位：全文相关段落。
+- 原文支持：文件内容默认被当作上下文而非不可信数据，隐藏指令可改变代理行为；长命令链曾出现deny规则检查降级，2.1.90 changelog称已修复解析失败回退问题。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为第三方风险梳理；未重新打开原文全文核验。</p>
+<p><strong>S19</strong> <a href="https://alphasignal.ai/news/anthropic-quietly-cuts-claude-code-weekly-limits-by-17-in-september">Anthropic Quietly Cuts Claude Code Weekly Limits by 17 Percent in September</a> · AlphaSignal
+- 发布：unknown；事件：2026-09-14；查阅：2026-10-21。
+- 来源族：technology_news；读取：relevant_text；定位：全文相关段落。
+- 原文支持：2026-09-14起标准周限额永久定为基线125%，取代临时150%，相对临时峰值净降约17%，官方表述引发误导批评后改口承认。
+- 限制：发表日期在材料中未给出，填unknown，event_date为限额生效日期；未重新打开原文全文核验。</p>
+<p><strong>S20</strong> <a href="https://www.classaction.org/news/claude-lawsuit-claims-anthropic-wrongfully-reduced-subscribers-practical-access-under-claude-pro-max-plans">Claude Lawsuit Claims Anthropic Wrongfully Reduced Subscribers' Practical Access</a> · ClassAction.org
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：legal_report；读取：secondary；定位：全文相关段落。
+- 原文支持：Pro/Max集体诉讼指控2026年3月后端限额变更贬损已购服务价值，该指控为原告主张、尚未证实。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；仅为原告主张的第三方转述，不可当作已认定事实；未重新打开原文全文核验。</p>
+<p><strong>S21</strong> <a href="https://www.53ai.com/news/LargeLanguageModel/2026011017953.html">Claude Code Subscription Third-Party Tool Ban Controversy</a> · 53AI
+- 发布：unknown；事件：见正文说明；查阅：2026-10-21。
+- 来源族：technology_news；读取：secondary；定位：全文相关段落。
+- 原文支持：加强安全套接字欺骗防护后，部分通过OAuth复用个人订阅在第三方工具运行代理的用户被误伤封禁，官方承认误伤并回滚修复。
+- 限制：发表日期与事件日期在材料中均未给出，填unknown；为Anthropic工程师与社区反应的第三方转述；未重新打开原文全文核验。</p>
+<p>检索缺口：
+- 未纳入Anthropic官方博客与官方文档一手原文，模型基准与定价均为第三方转述，需以官方发布核对。
+- Opus 4.6/4.7、1M上下文等2026年说法在本次材料中仅见第三方对比，官方确认缺失。
+- 同任务对照与8小时长程案例均为单任务/单案例第三方实测，样本量小，无法估计分布、失败率与成本方差。
+- 闭源Harness内部实现、模型内部推理细节无公开可证实来源，一律保留为未证实项。
+- 长期订阅成本、周限额实际耗用分布、企业级部署数据不足，限额与诉讼影响无法量化。
+- 中文语境、大型单体仓库、无RAG大文档检索等场景的系统性实测缺失。</p>
+<p>检索日志：Claude Code SWE-bench performance benchmark model capabilities（discovery）；Anthropic Claude Code launch February 2025 research preview（discovery）；Claude Code 代码生成 实测表现 长程任务 评测（discovery）；Claude Code 定价 限额 争议 提示注入 安全风险（counterevidence）；Anthropic Claude Opus 4.5 Sonnet 4.5 release September November 2025 SWE-bench（verification）；Claude Code hooks MCP CLAUDE.md plan mode permissions sandbox documentation（verification）；Claude Code prompt injection vulnerability permission bypass security flaw（counterevidence）；Claude Code 与 Codex Cursor 对比 实测 差距 评测（discovery）；SWE-bench Verified contamination unreliable benchmark criticism OpenAI 2026（counterevidence）；Claude Code 订阅限额 每周限额 Max 诉讼 降速（counterevidence）；Claude Code GitHub Actions cloud subagents background agents general availability May 2025（discovery）。</p>
+<h2 id="_24">六、商业模式生态与风险</h2>
+<p><strong>关键议题</strong>：Claude Code以订阅捆绑加API按量与企业席位加插件生态扩张，但限额争议、企业成本失控与集成层安全事件构成其商业模式与企业选型的核心风险。</p>
+<p>选题依据：所给材料同时覆盖定价与订阅结构、企业席位与生态目录、竞品定位分化，以及限额诉讼、成本失控与多起安全事件三类反证，足以就商业模式的可持续性与企业选型风险编制可审查账本，而非仅作产品功能罗列。</p>
+<p><strong>当前判断</strong>：在企业签约前的选型阶段，成本可预算性与可退出性比编码能力更先成为决策门槛：未配置用量上限、支出告警与治理时，订阅倍数与周限额口径不确定、无上限账单与闭源锁定构成主要摩擦；若已按账本配置并执行管理员支出上限且以API通道做预算隔离，Uber式无上限失控不再是必然结论，残余摩擦主要为周限额口径不确定与单一供应商锁定。 <a href="https://vibecoding.app/blog/claude-code-pricing">S02</a> <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a> <a href="https://www.neowin.net/news/claude-code-gets-throttled-as-anthropic-rolls-out-fresh-usage-caps/">S14</a> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a> <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a></p>
+<p>优选：V02；置信度：medium。核心锁定事实为supported，限额争议为conflicting，成本案例与预测为preliminary；三方均在交叉质询中收窄了主张，未把未决诉讼或未证实个案当作裁决依据，但官方原文、诉讼后续、Uber一手口径与C19修复状态等关键缺口仍在。
+成立条件：适用于企业采购与签约前审慎判断，尤其大规模推广场景；不评价Claude Code本身编码能力高低，不断言官方现行价目与限额原文、诉讼主张成立、Uber案例可推广至所有企业，也不覆盖中国区定价、合规与本地部署。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_25">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（订阅生态乐观情景分析者；代表主张生态与订阅协同者：强调捆绑定价、Web与移动端沙箱会话、GitHub Action与Marketplace目录带来的部署便利，认为风险可通过管理员上限与白名单治理。）：订阅捆绑加企业席位加插件目录降低了采用门槛，使Claude Code成为已有Claude订阅团队的自然延伸。
+- 限定：范围限定于已有Claude付费订阅、且能使用Web/移动端与GitHub集成路径的团队；对未订阅团队、新采购审批严格的组织或定价与目录口径未核实的场景不作同等断言。综合置信度为中等：捆绑定价与企业席位部分为supported，生态目录部分为preliminary，整体结论应视为“门槛降低的合理情景”，而非成本最优或采用必然成功的证明。
+- 最强反证：最强反证在本组证据内部即已显现：C09的Web与移动端仍为研究预览，尚不能等同于稳定企业级交付；C02、C03的价格均为约数且属第三方整理，实际账单仍受用量与席位结构影响；C10的目录规模未经官方核实；更重要的是，C03的管理员支出上限与C09的工具白名单只是治理功能，所给本组证据并未提供它们在实际部署中有效防止超支或越权的结果证据，因此“风险可治理”仍是待验证的管理假设而非已证实结论。 <a href="https://www.webpronews.com/claude-code-is-anthropics-quiet-bet-that-ai-will-write-most-software-and-the-numbers-are-staggering/">S01</a> <a href="https://vibecoding.app/blog/claude-code-pricing">S02</a> <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://siliconangle.com/2025/10/20/anthropic-takes-aim-biotech-claude-life-sciences/">S10</a> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a></p>
+<p><strong>观点 V02</strong>（企业成本与锁定审慎情景分析者；代表企业采购与财务审慎方：强调限额争议、诉讼指控未决、Uber式账单失控与闭源无自托管回退，认为签约前必须先定用量上限与退出预案。）：订阅倍数承诺、周限额口径与无上限企业账单的不确定性，使成本与锁定成为比编码能力更先暴露的选型问题；企业签约前应先定用量上限与退出预案。
+- 限定：范围限定为企业采购与签约前审慎判断，不评价Claude Code本身的编码能力高低。置信度中等偏低：C02、C03、C11为supported，C13为conflicting，C15、C16、C22为preliminary；结论成立依赖“企业未配置上限与治理”这一前提，配置后风险程度会变化。
+- 最强反证：最强反证是：Enterprise本身包含SSO、审计日志与管理员支出上限（C03），说明账单失控并非不可防——若企业在签约时即设定席位、用量与支出上限并用API按量通道做预算隔离，Uber式失控可大幅缓解；同时官方称周限额影响不足5%订阅者（C13，冲突状态），多数轻量用户可能根本不触及限额争议。因此本主张针对的是“未设防的大规模推广”，而非所有规模的采用。 <a href="https://vibecoding.app/blog/claude-code-pricing">S02</a> <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a> <a href="https://www.neowin.net/news/claude-code-gets-throttled-as-anthropic-rolls-out-fresh-usage-caps/">S14</a> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a> <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a></p>
+<p><strong>观点 V03</strong>（安全与合规怀疑情景分析者；代表安全与合规评审方：强调已披露CVE与高危预览窗漏洞、集成层权限绕过与未证实误删个案的信号价值，认为仓库信任、预览与CI触发路径须单独设防。）：安全评审应聚焦信任对话框、预览窗与 GitHub Action 等集成面，而非只以模型能力判断 Claude Code 的企业可用性；仓库信任、预览渲染与 CI 触发路径须单独设防和核验版本与配置。
+- 限定：范围限定为企业安全评审的优先级主张，而非“当前版本仍可被利用”或“模型能力无关”的断言；置信度为中等：集成面须单独评审的方向较可信，但具体严重程度、普遍性与残余风险取决于版本升级、预览与 CI 配置及 Windows 与沙箱部署方式，需以企业实际环境核验为准。
+- 最强反证：最强反证是：C17 与 C18 均已给出修复版本，C21 本身也说明拒规则在所有模式下生效，计划模式若被正确理解为“先提方案待批准”而非沙箱承诺，则部分风险源于误用而非产品宣称的隔离失效；若企业已升级、限制预览与 CI 写权限并核验信任配置，残余风险可能大幅降低。此外，C20 未证实，不能用单个已删除帖子的个案证明系统性破坏倾向；模型能力仍影响代码质量与其它风险维度，集成聚焦应是补充而非替代整体评审。 <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S18</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S19</a> <a href="https://phronews.com/claude-code-allegedly-deleted-48000-files-in-seconds-what-went-wrong/">S20</a> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S21</a></p>
+<h3 id="_26">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：对已有Claude付费订阅团队，捆绑定价、企业席位与插件目录确实降低采用决策门槛；但管理员支出上限、工具白名单与沙箱会话的实际拦阻成效未证实，Marketplace规模仅为第三方初步报道，云端仍为研究预览。
+- V03的合理洞察：仓库信任、预览渲染与CI触发路径应作为部署前必须单独核验的项目，重点核对修复版本、预览与CI写权限配置以及计划模式与沙箱边界；但在已升级并经核验的前提下，账本不能证明集成面残余风险仍高于成本与锁定问题。</p>
+<p>不确定性及改变判断的条件：
+- 官方当前定价页与周限额政策原文缺失，现行价目、倍数口径与合并计量方式仍未核实。
+- Kahn诉Anthropic案后续进展、法院认定与和解情况未知，指控目前仅停留在立案阶段。
+- Uber案例的一手统计口径及其当时是否配置支出上限未知，不能据此推断设防后仍会失控。
+- C19所称GitHub Action权限绕过的修复版本与当前状态未在账本中给出，需单独核验。
+- 管理员支出上限在真实大规模部署中的执行方式（阻断还是仅告警）与实际拦阻效果未知。
+- 退出预案的实际迁移成本未量化；缺乏中国区定价、合规与本地部署信息，无法评估中国企业选型。</p>
+<h3 id="_27">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：企业在签约前最容易先被编码演示吸引，却在账单、限额与退出成本上后知后觉：订阅倍数含义不清、周限额口径可变、闭源且无自托管回退，使财务与采购风险先于编码效果暴露。</li>
+<li><strong>需要</strong>：企业需要一份签约前可核验的治理清单：官方价目与限额口径、真实有效的支出上限、预算隔离方式、退出路径，以及集成面的版本与权限核查，而不是仅凭演示或第三方整理做大规模推广决策。</li>
+<li><strong>方案</strong>：先以小规模试点验证上限与计量口径，再以书面方式锁定支出上限、API预算隔离、退出预案与集成面核查项；只有在这些项经核验后，才扩大席位与推广范围。</li>
+<li><strong>预演</strong>：若签约前完成核验，企业可在可控预算内评估编码收益，限额争议与锁定成本有书面预案；若跳过核验直接大规模推广，则可能重现无上限账单、限额口径争议与迁移困难，届时再补治理成本更高。</li>
+<li><strong>行动</strong>：
+   - 签约前索取并归档Anthropic官方现行定价页与周限额政策原文，核对Pro、Max、Team与Enterprise价目及5小时会话倍数与周倍数的计量口径 <a href="https://vibecoding.app/blog/claude-code-pricing">S02</a> <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://www.neowin.net/news/claude-code-gets-throttled-as-anthropic-rolls-out-fresh-usage-caps/">S14</a> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a>
+     时间：签约前2周内完成；指标：是否取得官方原文或供应商书面澄清，价目与限额口径是否可逐项对应到合同条款；基线：第三方整理的约数价目与2025年7月28日限额公告、2026年9月14日限额调整的第三方报道。
+     停止/成功条件：取得官方原文并完成口径对照，或在未取得时暂停大规模签约并以书面澄清作为前置条件；阈值来源：证据所给缺口：官方原文缺失，属分析者建议的核验门槛，非证据给出的数值阈值。
+   - 在试点中配置管理员支出上限并以API按量通道做预算隔离，实测上限触发时是阻断还是仅告警，并核对订阅通道与API通道是否合并计量 <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a> <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a> <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a>
+     时间：试点4周内完成；指标：上限触发测试结果、试点实际账单与预设上限的偏差、订阅与API计量口径记录；基线：未设防大规模推广下第三方转引的Uber式账单情景。
+     停止/成功条件：上限行为与计量口径经实测确认且账单在预设范围内，或未通过时暂停扩围；阈值来源：分析者建议：企业自定预算上限；证据未给出通用金额阈值，具体金额以企业预算为准。
+   - 制定并演练退出预案：导出数据与工作流，测试关键工作流在替代模型或工具上的最小可用迁移，并估算迁移成本 <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a>
+     时间：大规模推广前完成；指标：成功导出率、替代环境最小可用工作流通过率、迁移工时与成本估算；基线：Claude Code闭源专有、无自托管回退、模型调用限定Anthropic一方的现状。
+     停止/成功条件：退出演练通过并形成书面预案，或未通过时限制推广规模直至预案成立；阈值来源：分析者建议；证据未量化迁移成本，阈值以企业可接受的迁移成本为准。
+   - 做集成面版本与权限审计：核对版本是否达到C17修复版本2.0.65及之后与C18修复版本1.30096.1，核查GitHub Action写权限与claude_args白名单，并确认计划模式与沙箱边界尤其原生Windows下的覆盖范围 <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S18</a> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S19</a> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S21</a>
+     时间：获得生产仓库或CI访问权限前完成；指标：版本合规率、CI写路径白名单覆盖率、计划模式与沙箱边界书面确认；基线：已披露的信任对话框、预览窗与GitHub Action问题及第三方对计划模式与沙箱边界的解读。
+     停止/成功条件：全部不合规实例升级或隔离，C19修复状态经核验确认，或未通过时不授予生产写权限；阈值来源：证据所给修复版本适用于C17与C18；C19修复版本未知，须以核验结果为准。</li>
+</ol>
+<h3 id="_28">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Claude Code于2025年2月24日以研究预览发布，2025年5月随Claude 4向Pro、Max与企业用户广泛开放，定位为可读库、改文件、跑测试与调试的终端Agent。 <a href="https://www.webpronews.com/claude-code-is-anthropics-quiet-bet-that-ai-will-write-most-software-and-the-numbers-are-staggering/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Claude Code没有独立定价，而是捆绑于付费Claude订阅：Pro约20美元/月、Max 5x约100美元/月、Max 20x约200美元/月，另可用API密钥按token付费。 <a href="https://vibecoding.app/blog/claude-code-pricing">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：Team席位约20至125美元/月，Enterprise为20美元/席位/月另加API用量价，含SSO、审计日志等企业能力与管理员支出上限，属第三方对官方定价页的整理。 <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：模型层官方口径：Claude Opus 4.1在SWE-bench Verified达74.5%且定价与Opus 4相同；Claude Sonnet 4.5于2025年9月29日发布，API价为3美元输入与15美元输出每百万token，官方称可在复杂多步任务上保持30小时以上专注。 <a href="https://www.anthropic.com/news/claude-opus-4-1">S04</a> <a href="https://www.anthropic.com/news/claude-sonnet-4-5">S05</a></li>
+<li><strong>C05 / fact / preliminary</strong>：Opus 4.5于2025年11月24日发布并被第三方整理为当时最强编码模型与80.9% SWE-bench Verified，但该数字与Claude Code产品本身的成功率不是同一口径，不可直接等同。 <a href="https://intuitionlabs.ai/pdfs/anthropic-claude-4-llm-evolution-165aefdae45835ee.pdf">S06</a></li>
+<li><strong>C06 / fact / supported</strong>：Claude Code的可验证Harness机制包括CLAUDE.md项目记忆、/plan计划模式先提方案待批准再执行、/agents子代理并行探索、Hooks在PreToolUse等生命周期点拦截或执行脚本，以及MCP接入外部工具。 <a href="https://www.kdnuggets.com/a-beginners-guide-to-setting-up-claude-code-for-high-performance-agentic-programming">S07</a></li>
+<li><strong>C07 / fact / preliminary</strong>：权限模式包括default、acceptEdits、plan、dontAsk与bypassPermissions，项目级settings现会忽略bypassPermissions与auto以防克隆仓库强制提权，该改动被报道为设计加固而非已证实漏洞。 <a href="https://digitalmatters.me/security/claude-code-permission-modes-project-settings/">S08</a></li>
+<li><strong>C08 / inference / preliminary</strong>：公开资料可证实命令、权限、Hooks与MCP等外部行为，但Agent主循环内部实现、上下文压缩与调度细节若无官方文档则不得从模型行为反推为官方架构，须标注unverified/preliminary。 <a href="https://m87technologies.com/blog/how-claude-code-works">S09</a></li>
+<li><strong>C09 / fact / supported</strong>：Claude Code on Web与移动端为研究预览，每个会话在独立沙箱环境运行并经安全代理访问已授权仓库；GitHub Action以@claude触发并可用claude_args白名单限制工具。 <a href="https://siliconangle.com/2025/10/20/anthropic-takes-aim-biotech-claude-life-sciences/">S10</a></li>
+<li><strong>C10 / fact / preliminary</strong>：2025年末官方插件市场兴起，2026年Claude Marketplace把连接器、插件、代理产品与服务伙伴整合为企业一站式目录，第三方报道称规模超2000项并可用Anthropic支出承诺购买部分第三方产品。 <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a></li>
+<li><strong>C11 / fact / supported</strong>：生态与开源差异是企业选型关键：Codex CLI为Apache-2.0开源，Claude Code为闭源专有且无自托管回退，模型调用限定Anthropic一方，构成锁定风险。 <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a></li>
+<li><strong>C12 / fact / preliminary</strong>：第三方2026年10月对比认为三者无全面胜者：Claude Code适合已有Claude订阅与长时无人值守会话，Codex适合预算与默认沙箱，Cursor适合编辑器与Agent一体化。 <a href="https://vibecodershq.com/guides/claude-code-vs-codex">S13</a></li>
+<li><strong>C13 / fact / conflicting</strong>：Anthropic于2025年7月28日宣布8月28日起对Pro与Max新增周限额并称影响不足5%订阅者，但此前已有用户反映无预警被限，争议焦点是5小时会话倍数与周倍数口径不一致，官方说法与用户体验陈述冲突。 <a href="https://www.neowin.net/news/claude-code-gets-throttled-as-anthropic-rolls-out-fresh-usage-caps/">S14</a></li>
+<li><strong>C14 / source_statement / unverified</strong>：2026年6月14日Kahn诉Anthropic案在加州北区法院立案，指控Max 5x/20x实际周用量仅约3.5倍与6至8倍Pro而非宣称倍数；该指控尚未被法院证实，无已认证集体与和解。 <a href="https://openclassactions.com/lawsuits/anthropic-claude-max-subscription-class-action-lawsuit.php">S15</a></li>
+<li><strong>C15 / fact / preliminary</strong>：2026年9月14日起周限额永久政策较原始基线高25%，但较临时50%加成低约17%，用户批评首发宣传突出增幅却未明说临时加成到期。 <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a></li>
+<li><strong>C16 / fact / preliminary</strong>：第三方转引Forbes称Uber于2025年12月向约5000名工程师推广Claude Code，2026年3月采用率达84%，人均月账单500至2000美元并在4月烧完当年AI预算，凸显无用量上限的失控风险；该案例为转引，非一手财报口径。 <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a></li>
+<li><strong>C17 / fact / preliminary</strong>：2026年2月披露的CVE-2025-59536与CVE-2026-21852涉Claude Code项目加载信任对话框逻辑，前者可在信任提示前执行命令，后者可通过篡改ANTHROPIC_BASE_URL窃取API密钥，修复版本为2.0.65及之后。 <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a></li>
+<li><strong>C18 / fact / preliminary</strong>：研究者发现的SneakPeek漏洞可借大于256KB的HTML文件绕过Desktop预览窗CSP与请求过滤，读取SSH密钥与云凭证并外发，Anthropic评为CVSS 8.7并在1.30096.1修复。 <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">S18</a></li>
+<li><strong>C19 / fact / preliminary</strong>：2026年9月23日安全简报称Claude Code GitHub Action存在CVSS 7.8权限绕过，checkWritePermissions无条件信任GitHub App参与者从而打开未认证写路径，属集成层而非模型本身缺陷。 <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">S19</a></li>
+<li><strong>C20 / fact / unverified</strong>：有开发者称Claude Code子代理清理脚本误跟Windows目录连接，导致48218个文件在103秒内被删；该个案来自已删除帖子且未经Anthropic公开证实，只能作未证实风险信号而非定论。 <a href="https://phronews.com/claude-code-allegedly-deleted-48000-files-in-seconds-what-went-wrong/">S20</a></li>
+<li><strong>C21 / fact / preliminary</strong>：第三方基于官方文档的解读指出计划模式本身不是沙箱，拒规则在所有模式含bypassPermissions下生效，而沙箱仅覆盖Shell命令且原生Windows下命令不走沙箱，文件工具、MCP与Hooks在其外。 <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">S21</a></li>
+<li><strong>C22 / forecast / preliminary</strong>：若企业不设用量上限、支出告警与仓库信任治理，订阅捆绑下的成本失控、单一供应商锁定与集成层安全事件将继续是Claude Code企业采用的主要摩擦，而非模型编码能力本身。 <a href="https://www.cloudzero.com/blog/claude-code-pricing/">S03</a> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">S11</a> <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">S12</a> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">S16</a> <a href="https://www.cloudeagle.ai/blogs/claude-security">S17</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://www.webpronews.com/claude-code-is-anthropics-quiet-bet-that-ai-will-write-most-software-and-the-numbers-are-staggering/">Claude Code Is Anthropic's Quiet Bet That AI Will Write Most Software</a> · WebProNews
+- 发布：2025-02-24；事件：2025-02-24；查阅：2026-10-21。
+- 来源族：product；读取：relevant_text；定位：正文产品发布部分。
+- 原文支持：Claude Code于2025年2月24日以研究预览发布，2025年5月随Claude 4向Pro、Max与企业用户广泛开放，定位为可读库、改文件、跑测试与调试的终端Agent。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要。</p>
+<p><strong>S02</strong> <a href="https://vibecoding.app/blog/claude-code-pricing">Claude Code Pricing</a> · VibeCoding
+- 发布：2026-08-23；事件：2026-08-23；查阅：2026-10-21。
+- 来源族：pricing；读取：relevant_text；定位：正文定价部分。
+- 原文支持：Claude Code没有独立定价，而是捆绑于付费Claude订阅，Pro约20美元/月、Max 5x约100美元/月、Max 20x约200美元/月，另可用API密钥按token付费。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；价格为约数且可能随官方调整变化。</p>
+<p><strong>S03</strong> <a href="https://www.cloudzero.com/blog/claude-code-pricing/">Claude Code Pricing</a> · CloudZero
+- 发布：2026-09-21；事件：2026-09-21；查阅：2026-10-21。
+- 来源族：pricing；读取：relevant_text；定位：正文定价与企业案例部分。
+- 原文支持：Team席位约20至125美元/月、Enterprise为20美元/席位/月另加API用量价，含SSO、审计日志与管理员支出上限，属第三方对官方定价页的整理；另转引Forbes称Uber约5000名工程师推广后人均月账单500至2000美元并在2026年4月烧完当年AI预算。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；Uber案例为转引，非一手来源。</p>
+<p><strong>S04</strong> <a href="https://www.anthropic.com/news/claude-opus-4-1">Claude Opus 4.1</a> · Anthropic官方博客
+- 发布：2025-08-01；事件：2025-08-01；查阅：2026-10-21。
+- 来源族：model；读取：relevant_text；定位：正文模型发布部分。
+- 原文支持：Claude Opus 4.1是Opus 4在Agent任务与真实编码上的升级，官方称SWE-bench Verified达74.5%，且定价与Opus 4相同。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S05</strong> <a href="https://www.anthropic.com/news/claude-sonnet-4-5">Claude Sonnet 4.5</a> · Anthropic官方博客
+- 发布：2025-09-29；事件：2025-09-29；查阅：2026-10-21。
+- 来源族：model；读取：relevant_text；定位：正文模型发布部分。
+- 原文支持：Claude Sonnet 4.5于2025年9月29日发布，官方称其在SWE-bench Verified上领先并可在复杂多步任务上保持30小时以上专注，API价为3美元输入与15美元输出每百万token。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要。</p>
+<p><strong>S06</strong> <a href="https://intuitionlabs.ai/pdfs/anthropic-claude-4-llm-evolution-165aefdae45835ee.pdf">Anthropic Claude 4 LLM Evolution</a> · IntuitionLabs
+- 发布：2025-11-24；事件：2025-11-24；查阅：2026-10-21。
+- 来源族：model；读取：secondary；定位：正文Opus 4.5部分。
+- 原文支持：Opus 4.5于2025年11月24日发布并被第三方整理为当时最强编码模型与80.9% SWE-bench Verified，但该数字与Claude Code产品本身的成功率不是同一口径，不可直接等同。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；第三方整理口径，非官方产品成功率。</p>
+<p><strong>S07</strong> <a href="https://www.kdnuggets.com/a-beginners-guide-to-setting-up-claude-code-for-high-performance-agentic-programming">A Beginner's Guide to Setting Up Claude Code for High-Performance Agentic Programming</a> · KDnuggets
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：harness；读取：relevant_text；定位：正文机制部分。
+- 原文支持：Claude Code提供CLAUDE.md项目记忆、/plan计划模式先提方案待批准再执行、/agents子代理并行探索、Hooks在PreToolUse等生命周期点拦截或执行脚本，以及MCP接入外部工具。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S08</strong> <a href="https://digitalmatters.me/security/claude-code-permission-modes-project-settings/">Claude Code Permission Modes and Project Settings</a> · Digital Matters
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：harness；读取：secondary；定位：正文权限模式部分。
+- 原文支持：权限模式包括default、acceptEdits、plan、dontAsk与bypassPermissions，项目级settings现会忽略bypassPermissions与auto以防克隆仓库强制提权，该改动被报道为设计加固而非已证实漏洞。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计；加固定性为报道说法。</p>
+<p><strong>S09</strong> <a href="https://m87technologies.com/blog/how-claude-code-works">How Claude Code Works</a> · M87 Technologies技术解析（第三方）
+- 发布：2026-01-01；事件：2026-01-01；查阅：2026-10-21。
+- 来源族：harness；读取：secondary；定位：正文架构解析部分。
+- 原文支持：公开资料可证实命令、权限、Hooks与MCP等外部行为，但Agent主循环内部实现、上下文压缩与调度细节若无官方文档则一律不得从模型行为反推为官方架构。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；第三方技术解析，非官方架构文档；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S10</strong> <a href="https://siliconangle.com/2025/10/20/anthropic-takes-aim-biotech-claude-life-sciences/">Anthropic Takes Aim at Biotech With Claude Life Sciences</a> · SiliconANGLE
+- 发布：2025-10-20；事件：2025-10-20；查阅：2026-10-21。
+- 来源族：ecosystem；读取：relevant_text；定位：正文云端与GitHub部分。
+- 原文支持：Claude Code on Web与移动端为研究预览，每个会话在独立沙箱环境运行并经安全代理访问已授权仓库，GitHub Action则以@claude触发并可用claude_args白名单限制工具。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要。</p>
+<p><strong>S11</strong> <a href="https://alphasignal.ai/news/anthropic-s-claude-marketplace-unifies-2-000-partners-into-one-enterprise-hub">Anthropic's Claude Marketplace Unifies 2,000 Partners Into One Enterprise Hub</a> · AlphaSignal
+- 发布：2026-09-24；事件：2026-09-24；查阅：2026-10-21。
+- 来源族：ecosystem；读取：relevant_text；定位：正文Marketplace部分。
+- 原文支持：2025年末官方插件市场兴起，2026年Claude Marketplace把连接器、插件、代理产品与服务伙伴整合为企业一站式目录，第三方报道称规模超2000项并可用Anthropic支出承诺购买部分第三方产品。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；2000项规模为第三方报道，未经官方目录核实。</p>
+<p><strong>S12</strong> <a href="https://arte.itlibra.com/en/articles/claude-code-vs-codex-ai-coding-tools-comparison">Claude Code vs Codex: AI Coding Tools Comparison</a> · Arte IT Libra
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：ecosystem；读取：relevant_text；定位：正文对比部分。
+- 原文支持：Codex CLI为Apache-2.0开源，Claude Code为闭源专有且无自托管回退，模型调用限定Anthropic一方，这是企业选型中锁定风险的关键差异。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S13</strong> <a href="https://vibecodershq.com/guides/claude-code-vs-codex">Claude Code vs Codex</a> · Vibe Coders HQ
+- 发布：2026-10-19；事件：2026-10-19；查阅：2026-10-21。
+- 来源族：competition；读取：relevant_text；定位：正文对比结论部分。
+- 原文支持：第三方2026年10月对比认为三者无全面胜者，Claude Code适合已有Claude订阅与长时无人值守会话，Codex适合预算与默认沙箱，Cursor适合编辑器与Agent一体化。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；第三方对比结论，非三家官方口径。</p>
+<p><strong>S14</strong> <a href="https://www.neowin.net/news/claude-code-gets-throttled-as-anthropic-rolls-out-fresh-usage-caps/">Claude Code Gets Throttled as Anthropic Rolls Out Fresh Usage Caps</a> · Neowin
+- 发布：2025-07-28；事件：2025-07-28；查阅：2026-10-21。
+- 来源族：risk_limits；读取：relevant_text；定位：正文限额公告部分。
+- 原文支持：Anthropic于2025年7月28日宣布8月28日起对Pro与Max新增周限额并称影响不足5%订阅者，但此前已有用户反映无预警被限，争议焦点是5小时会话倍数与周倍数口径不一致。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要。</p>
+<p><strong>S15</strong> <a href="https://openclassactions.com/lawsuits/anthropic-claude-max-subscription-class-action-lawsuit.php">Anthropic Claude Max Subscription Class Action Lawsuit</a> · OpenClassActions
+- 发布：2026-06-14；事件：2026-06-14；查阅：2026-10-21。
+- 来源族：risk_limits；读取：secondary；定位：正文诉讼指控部分。
+- 原文支持：2026年6月14日Kahn诉Anthropic案在加州北区法院立案，指控Max 5x/20x实际周用量仅约3.5倍与6至8倍Pro而非宣称倍数，该指控尚未被法院证实、无已认证集体与和解。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；诉讼聚合页转述的原告指控，非法院认定。</p>
+<p><strong>S16</strong> <a href="https://en.softonic.com/articles/claude-code-weekly-limits-updated-less-for-most-users">Claude Code Weekly Limits Updated: Less for Most Users</a> · Softonic
+- 发布：2026-09-01；事件：2026-09-14；查阅：2026-10-21。
+- 来源族：risk_limits；读取：relevant_text；定位：正文限额调整部分。
+- 原文支持：2026年9月14日起周限额永久政策较原始基线高25%，但较临时50%加成低约17%，用户批评首发宣传突出增幅却未明说临时加成到期。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给材料日期仅精确到月，published按当月1日计，event_date为政策生效日2026-09-14。</p>
+<p><strong>S17</strong> <a href="https://www.cloudeagle.ai/blogs/claude-security">Claude Security</a> · CloudEagle
+- 发布：2026-02-01；事件：2026-02-01；查阅：2026-10-21。
+- 来源族：risk_security；读取：relevant_text；定位：正文漏洞部分。
+- 原文支持：2026年2月披露的CVE-2025-59536与CVE-2026-21852涉Claude Code项目加载信任对话框逻辑，前者可在信任提示前执行命令，后者可通过篡改ANTHROPIC_BASE_URL窃取API密钥，修复版本为2.0.65及之后。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S18</strong> <a href="https://cybernews.com/security/claude-code-preview-pane-secret-leak-flaw/">Claude Code Preview Pane Secret Leak Flaw</a> · Cybernews
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：risk_security；读取：relevant_text；定位：正文漏洞部分。
+- 原文支持：研究者发现的SneakPeek漏洞可借大于256KB的HTML文件绕过Desktop预览窗CSP与请求过滤，读取SSH密钥与云凭证并外发，Anthropic评为CVSS 8.7并在1.30096.1修复。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计。</p>
+<p><strong>S19</strong> <a href="https://www.capernaums.com/d/digest-coding-1790138090.html">Digest: Coding 1790138090</a> · Capernaums
+- 发布：2026-09-23；事件：2026-09-23；查阅：2026-10-21。
+- 来源族：risk_security；读取：relevant_text；定位：正文安全简报部分。
+- 原文支持：2026年9月23日安全简报称Claude Code GitHub Action存在CVSS 7.8权限绕过，checkWritePermissions无条件信任GitHub App参与者从而打开未认证写路径，属集成层而非模型本身缺陷。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要。</p>
+<p><strong>S20</strong> <a href="https://phronews.com/claude-code-allegedly-deleted-48000-files-in-seconds-what-went-wrong/">Claude Code Allegedly Deleted 48,000 Files in Seconds: What Went Wrong?</a> · PHR News
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：risk_security；读取：secondary；定位：正文个案报道部分。
+- 原文支持：有开发者称Claude Code子代理清理脚本误跟Windows目录连接，导致48218个文件在103秒内被删，该个案来自已删除帖子且未经Anthropic公开证实，只能作未证实风险信号而非定论。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计；原始帖子已删除，无法独立核实。</p>
+<p><strong>S21</strong> <a href="https://dev.to/gabrielanhaia/plan-mode-was-never-a-sandbox-claude-codes-own-docs-say-when-it-doesnt-hold-1h52">Plan Mode Was Never a Sandbox: Claude Code's Own Docs Say When It Doesn't Hold</a> · DEV Community
+- 发布：2026-10-01；事件：2026-10-01；查阅：2026-10-21。
+- 来源族：risk_security；读取：secondary；定位：正文计划模式分析部分。
+- 原文支持：第三方基于官方文档的解读指出计划模式本身不是沙箱，拒规则在所有模式含bypassPermissions下生效，而沙箱仅覆盖Shell命令且原生Windows下命令不走沙箱，文件工具、MCP与Hooks在其外。
+- 限制：本阶段未重新打开原文，finding来自提供的OSINT材料摘要；所给日期仅精确到月，published按当月1日计；为第三方基于官方文档的解读，非官方原文逐字表述。</p>
+<p>检索缺口：
+- 未纳入Anthropic官方当前定价页与周限额政策原文，Pro/Max/Team/Enterprise现行价目以第三方整理为准
+- Claude Marketplace超2000项规模与支出承诺购买范围仅为第三方报道，缺乏官方目录口径核实
+- Kahn诉Anthropic案的后续进展、法院认定与和解情况缺失，指控仍停留在立案阶段
+- Uber部署成本案例为第三方转引Forbes，缺乏Uber或Anthropic一手来源与统计口径
+- 2025年8月模型质量下降的三项基础设施故障事后分析未包含在所给关键事实中，未能展开为账本条目
+- CVE与SneakPeek漏洞的官方安全公告原文未纳入，修复版本与影响范围以第三方安全报道为准
+- 缺乏中国区定价、合规与本地部署信息，无法评估中国企业选型的实际可用性与成本</p>
+<p>检索日志：Claude Code pricing Max subscription Pro API pricing 2025 2026（discovery）；Claude Code enterprise deployment plugins ecosystem 2025 2026（discovery）；Claude Code vs Codex vs Cursor comparison competition 2025 2026（discovery）；Claude Code security vulnerability prompt injection permission bypass（counterevidence）；Claude Code 定价 订阅 限额 争议（counterevidence）；Claude Code 企业版 安全事件 故障 争议（counterevidence）；Claude Code weekly usage limits July 2025 backlash Max users controversy（counterevidence）；Claude Sonnet 4.5 Opus 4.1 release SWE-bench official Anthropic（verification）。</p>
+<h2 id="_29">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>产品定位与演进史</strong>：优选 V03——在账本范围内最经得起检验的是V03经收窄后的主张：工作区沙箱逃逸、桌面预览窗凭据外发与打开仓库前的git劫持证明，信任边界、渲染路径与前置上下文采集在覆盖期内曾被独立跨越，因此须与功能演进同等审视；但在缺乏修复后回归复测证据时，不能把三起已修复或跨厂商问题直接升级为已证实的持续性边界设计缺陷，只能作为需验证的审慎推断。</li>
+<li><strong>交付形态与开发者工作流</strong>：优选 V02——条件性优选：分层交付与无头并行工作流可有条件使用，但不得默认信任模型、默认并发或把bypass等同于沙箱；必须以显式权限与完整allow列表、PreToolUse硬性门控、容器或沙箱隔离、对文件工具与Hooks及MCP另行控制和显式验收为前置条件。</li>
+<li><strong>Harness 核心架构</strong>：优选 V01——在受信配置已经建立的前提下，V01经修正后的判断最经得起检验：Harness的核心是可配置、可核对的官方层——deny规则优先、沙箱仅覆盖shell命令、PreToolUse可在工具调用前设卡、CLAUDE.md与settings分层提供持久指令与配置，计划模式只是工作方式而非安全边界；但该结构不构成打开不可信仓库时的信任前安全边界，仓库配置须当作不可信输入处理，人工复核仍不可省略。</li>
+<li><strong>Harness 沙箱与权限安全</strong>：优选 V2——在所给账本范围内，审批文本、分类器裁决与仓库配置本身不能作为安全证据；真正可信的边界只能是逐项验证后的组合：信任对话前完成审查、托管基线锁定且禁用绕过、已升级至已披露修复版本、OS沙箱与网络出口同时生效。V2经质询缩小后的主张最经得起检验：仅对信任前未审查、未托管锁定、未升级修复版本或审查后又变更的Hooks、MCP与.claude/、.mcp.json配置，按潜在执行路径对待；同时满足信任前人工审查、托管锁定且禁用绕过、已升级修复版本的本地配置不再按未审查对待，但这不构成绝对安全证明，云端写路径因细节未核对不在放行范围内。</li>
+<li><strong>模型能力与实测表现</strong>：优选 V02——在现有账本范围内，优选V02的收窄主张：单一SWE-bench Verified分数不足以证明全维度领先；只有在区分基准口径、任务类型与来源等级后，才能判断领先范围。Verified内部相对名次仅保留有限参考价值，因瑕疵与污染是否对称尚未证实。</li>
+<li><strong>商业模式生态与风险</strong>：优选 V02——在企业签约前的选型阶段，成本可预算性与可退出性比编码能力更先成为决策门槛：未配置用量上限、支出告警与治理时，订阅倍数与周限额口径不确定、无上限账单与闭源锁定构成主要摩擦；若已按账本配置并执行管理员支出上限且以API通道做预算隔离，Uber式无上限失控不再是必然结论，残余摩擦主要为周限额口径不确定与单一供应商锁定。</li>
+</ul>
+<h2 id="_30">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+</body></html>
