@@ -129,10 +129,19 @@
   }
 
   // ---------------- actions ----------------
-  function applyHighlight(color, note) {
+  var pendingRange = null; // selection captured when the toolbar appears;
+  // tapping the toolbar can collapse the live selection on mobile, so
+  // toolbar actions use this stored range instead of the live selection.
+  function applyHighlight(color, note, rangeOverride) {
     var sel = window.getSelection();
-    if (!sel || sel.isCollapsed || sel.rangeCount === 0) return null;
-    var range = sel.getRangeAt(0).cloneRange();
+    var range = null;
+    if (rangeOverride && rangeOverride.startContainer
+        && rangeOverride.startContainer.isConnected !== false) {
+      range = rangeOverride.cloneRange();
+    } else if (sel && !sel.isCollapsed && sel.rangeCount > 0) {
+      range = sel.getRangeAt(0).cloneRange();
+    }
+    if (!range) return null;
     if (insideUI(range.startContainer) || insideUI(range.endContainer)) return null;
     var marks = document.querySelectorAll('mark[data-anno]');
     for (var i = 0; i < marks.length; i++) {
@@ -197,21 +206,17 @@
   }
   var toolbar = null, popover = null, panel = null, fab = null, currentAnnoId = null;
 
-  function hideToolbar() { if (toolbar) toolbar.style.display = 'none'; }
+  function hideToolbar() { if (toolbar) toolbar.style.display = 'none'; pendingRange = null; }
+  // The toolbar is a fixed bottom-center bar (see CSS), deliberately far
+  // from the selection: the native context/callout menu opens next to the
+  // selection and used to cover a toolbar parked there.
   function showToolbar() {
     var sel = window.getSelection();
     if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideToolbar(); return; }
     var range = sel.getRangeAt(0);
     if (insideUI(range.startContainer) || insideUI(range.endContainer)) { hideToolbar(); return; }
-    var rect = range.getBoundingClientRect();
-    if (!rect || (rect.width === 0 && rect.height === 0)) { hideToolbar(); return; }
+    pendingRange = range.cloneRange();
     toolbar.style.display = 'flex';
-    var w = toolbar.offsetWidth || 300, h = toolbar.offsetHeight || 48;
-    var left = Math.max(8, Math.min(window.innerWidth - w - 8, rect.left + rect.width / 2 - w / 2));
-    var top = rect.top - h - 8;
-    if (top < 8) top = rect.bottom + 8;
-    toolbar.style.left = left + 'px';
-    toolbar.style.top = top + 'px';
   }
   var toolbarTimer = null;
   function scheduleToolbar() {
@@ -295,15 +300,16 @@
       var t = ev.target.closest('button');
       if (!t) return;
       if (t.getAttribute('data-act') === 'close') { hideToolbar(); return; }
+      var useRange = pendingRange;
       if (t.getAttribute('data-act') === 'note') {
-        var anno = applyHighlight('yellow', '');
+        var anno = applyHighlight('yellow', '', useRange);
         hideToolbar();
         if (anno && !anno.error) { renderPanel(); openPopover(anno.id); }
         return;
       }
       var color = t.getAttribute('data-color');
       if (color) {
-        var a2 = applyHighlight(color, '');
+        var a2 = applyHighlight(color, '', useRange);
         hideToolbar();
         if (a2 && !a2.error) renderPanel();
       }
@@ -400,8 +406,8 @@
       if (mark) { openPopover(mark.getAttribute('data-anno')); renderPanel(); }
     });
     document.addEventListener('selectionchange', scheduleToolbar);
-    document.addEventListener('scroll', hideToolbar, { passive: true });
-    window.addEventListener('resize', hideToolbar);
+    // No scroll/resize hiding: the bar is fixed to the viewport bottom, so
+    // scrolling and resizing never move it out of place.
   }
 
   function exportJSON() { return JSON.stringify(load(), null, 2); }
@@ -427,6 +433,7 @@
   window.AIReportsAnno = {
     list: load,
     applyHighlight: applyHighlight,
+    showToolbar: showToolbar,
     updateNote: function (id, note) { updateAnno(id, { note: note }); },
     setColor: function (id, color) { updateAnno(id, { color: color }); },
     remove: removeAnno,
