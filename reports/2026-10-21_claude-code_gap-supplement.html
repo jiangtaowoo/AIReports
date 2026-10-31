@@ -1,27 +1,12 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</title><style>
-:root { color-scheme: light dark; }
-body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  line-height: 1.8; max-width: 780px; margin: 0 auto; padding: 24px 20px 64px;
-  color: #1f2328; background: #fff; }
-@media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #79c0ff; } }
-h1 { font-size: 1.6em; line-height: 1.4; }
-h2 { font-size: 1.25em; margin-top: 1.8em; padding-bottom: .3em; border-bottom: 1px solid #d0d7de; }
-h3 { font-size: 1.05em; margin-top: 1.5em; }
-a { color: #0969da; overflow-wrap: anywhere; }
-.meta { color: #656d76; font-size: .9em; }
-.toc { background: rgba(127,127,127,.08); border-radius: 8px; padding: 12px 20px; }
-.toc ul { padding-left: 20px; }
-.topbar { margin-bottom: 8px; }
-@media (prefers-color-scheme: dark) { .meta { color: #8b949e; } }
-</style></head>
-<body>
+<title>Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</title><link rel="stylesheet" href="../style.css"></head>
+<body id="top">
 <div class="topbar"><a href="../index.html">← 全部报告</a></div>
 <p class="meta">2026-10-21 · claude-code_gap-supplement · 原文 Markdown 同名文件</p>
 <h1 id="claude-code-2026-10-21">Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</h1>
-<div class="toc">
+<details class="toc" open><summary>目录</summary>
 <ul>
 <li><a href="#claude-code-2026-10-21">Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</a><ul>
 <li><a href="#1">1. 定价与周限额：多家第三方整理口径一致，但官方原文仍未逐字取得</a></li>
@@ -36,7 +21,7 @@ a { color: #0969da; overflow-wrap: anywhere; }
 </ul>
 </li>
 </ul>
-</div>
+</details>
 <p><strong>性质</strong>：本文件是对 <code>2026-10-21_claude-code.md</code> 的独立补遗，不修改原文。
 原文第 6 节末尾明确列出的三处缺口是：(1) 官方现行定价页与周限额政策原文未纳入；
 (2) CVE 与 SneakPeek 的官方安全公告原文未纳入；(3) 缺乏中国区定价、合规与本地部署信息。
@@ -130,4 +115,5 @@ a { color: #0969da; overflow-wrap: anywhere; }
 <li>安全基线：版本下限 ≥ 2.1.247 + 桌面 SneakPeek 08-17 补丁确认 + 托管锁定禁用绕过 + 信任前仓库审查，否则仍按原文 V2 处理为潜在执行路径。</li>
 <li>中国区：正式选型按“官方不支持”记账；如团队确需使用，走支持地区实体与合规渠道，不要把中转代理写进评审底稿的推荐路径。</li>
 </ol>
+<nav class="bottomnav"><a href="../index.html">← 全部报告</a><a href="#top">回到顶部 ↑</a></nav>
 </body></html>
