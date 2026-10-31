@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex 与 Claude Code 对照决策页：Harness 共识与分歧（2026-10-21）</title><style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.8; max-width: 780px; margin: 0 auto; padding: 24px 20px 64px;
+  color: #1f2328; background: #fff; }
+@media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #79c0ff; } }
+h1 { font-size: 1.6em; line-height: 1.4; }
+h2 { font-size: 1.25em; margin-top: 1.8em; padding-bottom: .3em; border-bottom: 1px solid #d0d7de; }
+h3 { font-size: 1.05em; margin-top: 1.5em; }
+a { color: #0969da; overflow-wrap: anywhere; }
+.meta { color: #656d76; font-size: .9em; }
+.toc { background: rgba(127,127,127,.08); border-radius: 8px; padding: 12px 20px; }
+.toc ul { padding-left: 20px; }
+.topbar { margin-bottom: 8px; }
+@media (prefers-color-scheme: dark) { .meta { color: #8b949e; } }
+</style></head>
+<body>
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-10-21 · codex-vs-claude-code_harness-decision · 原文 Markdown 同名文件</p>
+<h1 id="codex-claude-code-harness-2026-10-21">Codex 与 Claude Code 对照决策页：Harness 共识与分歧（2026-10-21）</h1>
+<div class="toc">
+<ul>
+<li><a href="#codex-claude-code-harness-2026-10-21">Codex 与 Claude Code 对照决策页：Harness 共识与分歧（2026-10-21）</a><ul>
+<li><a href="#_1">一、共识：两份报告在同一结论上汇合（可直接进评审基线）</a></li>
+<li><a href="#_2">二、分歧：机制落点不同，部署清单不能互抄</a></li>
+<li><a href="#_3">三、给技术评审的统一部署清单（两份报告门罗五步的交集）</a></li>
+<li><a href="#_4">四、仍未闭合，引用时必须保留的限定</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>性质</strong>：本页是对同日两份韦青式专题报告（<code>2026-10-21_codex.md</code>、<code>2026-10-21_claude-code.md</code>，及 Claude Code 补遗 <code>2026-10-21_claude-code_gap-supplement.md</code>）的对照提炼，不新增事实、不修改原文。两份报告均为条件性判断（置信度均为 medium），引用时须保留其限定。</p>
+<h2 id="_1">一、共识：两份报告在同一结论上汇合（可直接进评审基线）</h2>
+<ol>
+<li><strong>先分三层，再谈工具</strong>：两份报告的首要结论一致——产品、模型、Harness 是三个不同实体，不可混为一谈（Codex 报告 §三 C01；Claude Code 报告 §三 C01）。选型讨论必须先说明谈的是哪一层。</li>
+<li><strong>厂商沙箱/审批层单独不能当硬边界</strong>：Codex 报告的表述是“厂商沙箱不能单独当作硬边界”；Claude Code 报告的表述是“审批文本、分类器裁决与仓库配置本身不能作为安全证据”。方向一致，只是落点机制不同。</li>
+<li><strong>仓库配置本身就是信任边界</strong>：两份报告独立记载了同一攻击面——恶意仓库的 git/配置在沙箱与审批之外执行。Codex：恶意 <code>.git/config</code> 的 <code>core.fsmonitor</code> 可被后台 git 操作触发，以用户权限执行（§三 C18），另有 <code>.env</code> 重定向 CODEX_HOME + 恶意 MCP 命令的 CVE-2025-61260（§四 C15）。Claude Code：仓库内 Hooks 在信任提示出现前静默执行、MCP 同意可被 <code>enableAllProjectMcpServers</code> 绕过（CVE-2025-59536）、<code>ANTHROPIC_BASE_URL</code> 改写致 API 密钥明文外泄（CVE-2026-21852）（§三 C13、C14；§四 C7）。<strong>同一 git 配置攻击面在两份报告中独立出现，是本次对照最值得注意的交叉点。</strong></li>
+<li><strong>审批委托不等于正确性判断</strong>：Codex 的自动评审/守护审批可在用户不介入时批准沙箱外命令，失败时把越界执行“合法化”（§四 C14）；Claude Code 的 Auto mode 分类器不是沙箱，审批展示还可被欺骗（SymJack 诱饵路径、GhostApproval 展示与真实目标不一致）（§四 C9、C6）。</li>
+<li><strong>处方收敛到同一组叠加控制</strong>：两份报告的门罗五步行动都要求——信任前/加载前审查仓库配置、最小权限、OS 沙箱与网络出口同时生效、高风险动作保留人工复核。Codex 的表述是“加载前评审、委托范围限制、沙箱外执行禁令”；Claude Code 的表述是“信任前人工审查、托管锁定且禁用绕过、已升级修复版本、OS 沙箱与网络出口同时生效”。</li>
+<li><strong>残余风险在两份报告中都未量化</strong>：Codex 报告明言“残余风险未量化，不能断言为零”；Claude Code 报告明言满足四项条件“不构成绝对安全证明”。任何一方都不应被写成“已证明安全”。</li>
+</ol>
+<h2 id="_2">二、分歧：机制落点不同，部署清单不能互抄</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Codex（开源 Harness）</th>
+<th>Claude Code（闭源 Harness）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>证据等级</td>
+<td>Harness 有官方博客披露：Agent 主循环、App Server、Item/Turn/Thread 三原语，核心机制多为 supported</td>
+<td>内部实现来自社区逆向/第三方解读，报告明确标为 unverified/preliminary，不得当官方架构</td>
+</tr>
+<tr>
+<td>沙箱覆盖面</td>
+<td>沙箱与审批是两套正交控制：sandbox_mode（read-only / workspace-write / danger-full-access）× approval_policy；workspace-write 默认无出站网络</td>
+<td>沙箱仅覆盖 shell 命令，<strong>不覆盖文件工具、MCP 服务器与 Hooks</strong>；原生 Windows 命令不走沙箱</td>
+</tr>
+<tr>
+<td>权限模型</td>
+<td>权限画像（beta）与 sandbox_mode 二选一；yolo 类绕过同时移除沙箱与审批</td>
+<td>deny/ask/allow 三态，deny 在所有模式（含 bypass）下优先，Hook 的 allow 不能覆盖 deny；PreToolUse Hook 可在工具调用前设卡</td>
+</tr>
+<tr>
+<td>企业治理层</td>
+<td>内部运行口径：受管网络策略 + 自动评审代批低风险请求</td>
+<td>managed-settings.json：托管 deny 可叠加且用户无法移除、可禁用 bypass 模式；CLAUDE.md 禁令只是请求而非保证</td>
+</tr>
+<tr>
+<td>信任时序缺陷</td>
+<td>项目级配置仅在受信项目加载，但 MCP 命令在配置加载时即可能执行（加载时即信任边界）</td>
+<td>更结构性：Hooks/MCP 配置在<strong>信任提示出现前</strong>就已执行，信任提示本身不是执行边界</td>
+</tr>
+<tr>
+<td>标志性逃逸</td>
+<td>Heapjack（Desktop node_repl 共享堆窃取令牌，即使 read-only 模式也可执行宿主命令）、Overpatch、DNS 校验前解析泄露（0.163.0 于 2026-10-15 修复）、Windows 命名管道 IPC 接管（CVSS 8.5）</td>
+<td>worktree <code>.git</code> 沙箱逃逸（CVE-2026-55607，2.1.163 于 2026-06-04 修复）、SneakPeek 桌面预览窗零点击凭据外发（2026-08-17 最终补丁）、GitHub Action checkWritePermissions 未认证写路径（CVSS 4.0 7.8）</td>
+</tr>
+<tr>
+<td>成本口径</td>
+<td>长会话多次 compaction 重复计费、自动 compaction 约 5 分钟、长任务 30 分钟膨胀至 3 小时（社区投诉口径）</td>
+<td>5 小时滚动窗口 + 周限额（周限额不公布绝对值，只公布倍数）；2026-09-14 起周限额相对基线永久 +25%，相对临时峰值约 −17%；并行约 10 倍消耗（第三方口径，须实测）</td>
+</tr>
+<tr>
+<td>中国区</td>
+<td>报告 §六聚焦采用率与渠道（Stack Overflow 2026 调查口径：挑战者而非领导者），未给出中国区定价/合规结论</td>
+<td>补遗结论：官方不支持中国内地/香港/澳门（台湾在列），无中国区定价与本地部署；中转代理不应进入企业选型基线</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">三、给技术评审的统一部署清单（两份报告门罗五步的交集）</h2>
+<ol>
+<li><strong>不可信仓库一律先隔离审查再谈信任</strong>：静态检查 <code>.git/config</code>、<code>config.toml</code>/<code>mcp_servers</code>、<code>.claude/</code>、<code>.mcp.json</code>、Hooks 与 <code>ANTHROPIC_BASE_URL</code> 类重定向项；审查完成前不在主环境打开或执行该仓库。</li>
+<li><strong>版本下限以官方 advisory 为准，当前可执行的部分下限</strong>：Codex ≥ 0.163.0（DNS 修复，2026-10-15）；Claude Code ≥ 2.1.247（Beltdown 完整修复，2026-08-26）并单独确认桌面端 SneakPeek 2026-08-17 补丁已应用。Heapjack/Overpatch 的修复版本号在 Codex 账本中未给出（仅称 2026-09-15 公开后约 8 日内修复），须另行核对。</li>
+<li><strong>沙箱与网络出口逐项实测，不以档位名称或审批通过作为证据</strong>：越境写与非预批域名访问测试须为零成功；Codex 侧核对 workspace-write 默认断网与受保护路径只读；Claude Code 侧核对沙箱不覆盖文件工具/MCP/Hooks 这一缺口。</li>
+<li><strong>审批委托书面划界</strong>：仅限低风险/已充分授权范围代批，高风险动作一律人工复核；Claude Code 侧禁用 bypass 模式并以托管 deny 锁定基线。</li>
+<li><strong>成本按实测预算，不按倍数口头换算</strong>：Claude Code 的 Max 20x 是“每会话倍数”而非月度 20 倍；Codex 的长会话 compaction 成本逐次记录。</li>
+</ol>
+<h2 id="_4">四、仍未闭合，引用时必须保留的限定</h2>
+<ul>
+<li><strong>Claude Code 报告内 2.0.65 的归属不一致</strong>：§三称 CVE-2025-59536 在 2.0.65+ 修复，§四行动项称 2.0.65 覆盖 CVE-2026-21852。补遗亦说明两起 CVE 的官方 advisory 原文均未核实。部署核查时应以官方 advisory 为准，不要直接引用报告中任一处归属。</li>
+<li><strong>官方原文仍缺</strong>：Anthropic 官方定价页与周限额政策原文、CVE 与 SneakPeek 官方 advisory 原文、Check Point 原始报告均未纳入账本；补遗的定价与中国区结论属于“多家第三方整理交叉一致”，不是官方原文引用。</li>
+<li><strong>Claude Code 云端写路径不在放行范围</strong>：报告 §四明言云端写路径因细节未核对，不在放行范围内；GitHub Action 与 bash validator 绕过的官方 advisory 细节、适用版本与修复状态未核对。</li>
+<li><strong>Codex 侧缺口</strong>：App Server 完整消息格式、云端并行调度与容器缓存、沙箱逃逸修复后的回归验证、受影响版本完整范围均未在账本中展开；长会话计费为社区投诉口径，非官方账单审计。</li>
+</ul>
+<p><strong>来源</strong>：<code>2026-10-21_codex.md</code> §三、§四；<code>2026-10-21_claude-code.md</code> §三、§四；<code>2026-10-21_claude-code_gap-supplement.md</code>。两份报告窗口分别为 2025-04-30 至 2026-10-21（Codex）与 2025-02-09 至 2026-10-21（Claude Code）。</p>
+</body></html>

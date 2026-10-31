@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</title><style>
+:root { color-scheme: light dark; }
+body { font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.8; max-width: 780px; margin: 0 auto; padding: 24px 20px 64px;
+  color: #1f2328; background: #fff; }
+@media (prefers-color-scheme: dark) { body { color: #e6edf3; background: #0d1117; } a { color: #79c0ff; } }
+h1 { font-size: 1.6em; line-height: 1.4; }
+h2 { font-size: 1.25em; margin-top: 1.8em; padding-bottom: .3em; border-bottom: 1px solid #d0d7de; }
+h3 { font-size: 1.05em; margin-top: 1.5em; }
+a { color: #0969da; overflow-wrap: anywhere; }
+.meta { color: #656d76; font-size: .9em; }
+.toc { background: rgba(127,127,127,.08); border-radius: 8px; padding: 12px 20px; }
+.toc ul { padding-left: 20px; }
+.topbar { margin-bottom: 8px; }
+@media (prefers-color-scheme: dark) { .meta { color: #8b949e; } }
+</style></head>
+<body>
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-10-21 · claude-code_gap-supplement · 原文 Markdown 同名文件</p>
+<h1 id="claude-code-2026-10-21">Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</h1>
+<div class="toc">
+<ul>
+<li><a href="#claude-code-2026-10-21">Claude Code 报告补遗：三处检索缺口的核查（2026-10-21）</a><ul>
+<li><a href="#1">1. 定价与周限额：多家第三方整理口径一致，但官方原文仍未逐字取得</a></li>
+<li><a href="#2-advisory">2. 安全公告：三起逃逸/外发事件的修复版本可核对，官方 advisory 原文仍缺</a><ul>
+<li><a href="#cve-2026-55607worktree">CVE-2026-55607（worktree 沙箱逃逸）</a></li>
+<li><a href="#sneakpeek">SneakPeek（桌面预览窗凭据外发，零点击）</a></li>
+<li><a href="#_1">另两起同类逃逸（用于定版本下限）</a></li>
+</ul>
+</li>
+<li><a href="#3">3. 中国区：官方口径是“不支持”，灰色通道存在但不适合企业选型</a></li>
+<li><a href="#_2">给技术评审的一页建议</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>性质</strong>：本文件是对 <code>2026-10-21_claude-code.md</code> 的独立补遗，不修改原文。
+原文第 6 节末尾明确列出的三处缺口是：(1) 官方现行定价页与周限额政策原文未纳入；
+(2) CVE 与 SneakPeek 的官方安全公告原文未纳入；(3) 缺乏中国区定价、合规与本地部署信息。
+本补遗用 2026-10-21 当天的公开检索对三处缺口做部分闭合，并如实标注仍未闭合的部分。
+<strong>已核查时间</strong>：2026-10-21 上午（北京时间）。以下价格与版本信息以检索当日为准，签约前须以官方页面复核。</p>
+<h2 id="1">1. 定价与周限额：多家第三方整理口径一致，但官方原文仍未逐字取得</h2>
+<p>多家独立整理（均称依据 Anthropic 定价页与帮助中心）口径一致：</p>
+<table>
+<thead>
+<tr>
+<th>档位</th>
+<th>价格</th>
+<th>关键口径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pro</td>
+<td>$20/月，或年付 $17/月（$200 预付）</td>
+<td>基线；Fable 仅走 usage credits</td>
+</tr>
+<tr>
+<td>Max 5x</td>
+<td>$100/月（仅月付）</td>
+<td>每 5 小时会话 5x Pro 用量</td>
+</tr>
+<tr>
+<td>Max 20x</td>
+<td>$200/月（仅月付）</td>
+<td>每 5 小时会话 20x Pro 用量</td>
+</tr>
+<tr>
+<td>Team Standard</td>
+<td>$25/座/月，$20 年付</td>
+<td>每座 1.25x Pro 会话用量，限额按座不共池</td>
+</tr>
+<tr>
+<td>Team Premium</td>
+<td>$125/座/月，$100 年付</td>
+<td>每座 6.25x Pro 会话用量</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>$20/座/月 + 按 API 计价的用量</td>
+<td>管理员支出上限、SSO、审计日志等</td>
+</tr>
+</tbody>
+</table>
+<p>周限额机制（多家整理一致）：</p>
+<ul>
+<li>所有付费档都有<strong>滚动 5 小时会话限额 + 周限额</strong>，周限额跨全部模型、与 Claude 对话共享，周重置时间为按账号分配的固定时间。</li>
+<li><strong>Anthropic 不公布周限额的绝对 token 数或金额数</strong>，只公布倍数；倍数是“每会话”而非“每月总量”——Max 20x 不等于每月 20 倍 Pro。</li>
+<li>2026-09-14 起，Pro/Max/Team/座位制 Enterprise 的周限额在促销前水平上<strong>永久提高 25%</strong>；但此前 50% 临时加成于 09-13 结束，因此相对 09-13 当天实际水平是<strong>下降约 17%</strong>。这是限额争议的核心时间点，引用时必须注明基准日。</li>
+<li>超出限额后可开 usage credits（按 API 价），Team 需管理员启用；Enterprise 可设支出上限——这正是原文“无上限账单不再是必然结论”的前提条件。</li>
+</ul>
+<p><strong>仍未闭合</strong>：本补遗未逐字拉取 Anthropic 定价页与帮助中心原文，上述内容属于“多家第三方整理交叉一致”，不是官方原文引用。企业签约前应把官方定价页与周限额说明作为书面澄清附件。</p>
+<p>来源：https://klymentiev.com/blog/claude-plans 、https://hypercho.com/blog/claude-plan-limits-in-tokens-pro-max-team-opus-fable-sonnet-haiku 、https://www.morphllm.com/claude-code-usage-limits 、https://www.morphllm.com/claude-code-pricing 、https://theweightedaverage.com/posts/2026-08-31-claude-code-limit-per-dollar/</p>
+<h2 id="2-advisory">2. 安全公告：三起逃逸/外发事件的修复版本可核对，官方 advisory 原文仍缺</h2>
+<h3 id="cve-2026-55607worktree">CVE-2026-55607（worktree 沙箱逃逸）</h3>
+<ul>
+<li>影响：2.1.38 至 2.1.163 之前版本；恶意仓库经提示注入引导 worktree 工具，可把 <code>.git</code> 命名的 worktree 移出沙箱目录，经 git fsmonitor 设置执行自带脚本、改写用户主目录文件（如 <code>~/.zshenv</code>），在 macOS seatbelt 沙箱外执行代码。</li>
+<li>修复：<strong>2.1.163（2026-06-04 发布）</strong>；Anthropic advisory <strong>GHSA-7835-87q9-rgvv（2026-06-25 发布）</strong>；Anthropic CVSS 4.0 评分 7.7，NVD CVSS 3.1 评分 8.8。</li>
+<li>前置条件：须克隆恶意仓库并在上面运行 Claude Code，且依赖提示注入引导；该来源称 advisory 与研究者均未报告野外利用。</li>
+<li>来源：https://vibeincidents.com/incidents/claude-code-worktree-sandbox-escape-cve-2026-55607/</li>
+</ul>
+<h3 id="sneakpeek">SneakPeek（桌面预览窗凭据外发，零点击）</h3>
+<ul>
+<li>机制：桌面端预览窗自动渲染 HTML 文件（&gt;256KB、内嵌恶意脚本）时，缺失内容安全策略、来源访问不受限、请求过滤未生效，可静默外发 AWS/GitHub 凭据、API 密钥与 Claude 自身 OAuth token，全程无需用户点击。</li>
+<li>时间线：2026-07-04 上报；07-09 初修；07-24 被发现绕过；<strong>08-17 最终补丁</strong>。该来源未给出最终补丁的具体版本号——这是本项仍缺的数字。</li>
+<li>来源：https://qpulse.quasarcybertech.com/news/6817/sneakpeek-zero-click-vulnerability-in-anthropic-claude-code-desktop-allows-credential-exfiltration</li>
+</ul>
+<h3 id="_1">另两起同类逃逸（用于定版本下限）</h3>
+<ul>
+<li>bubblewrap 沙箱逃逸 <strong>CVE-2026-25725</strong>：沙箱启动时若 <code>.claude/settings.json</code> 不存在则不受保护，沙箱内代码可创建该文件并注入 SessionStart 等持久 hooks，重启后以主机权限执行；<strong>2.1.2 修复</strong>。</li>
+<li>Beltdown（Accomplish 披露）：2026-07-13 上报，当日 triage，08-06 部分补丁，<strong>08-26 在 2.1.247 完成完整修复</strong>。</li>
+<li>来源：https://hackernoob.tips/claude-codes-critical-vulnerabilities-beginners-using-ai-coding-tools-check/ 、https://www.sovereignmagazine.com/article/ai-coding-agents-sandbox-escape-security-2026</li>
+</ul>
+<p><strong>对原文判断的影响</strong>：三起事件均已修复，支持原文“不能直接升级为持续性边界设计缺陷”的收窄结论；但原文的放行条件（托管锁定 + 已升级修复版本 + OS 沙箱与网络出口同时生效）仍然成立，且可落到一个可执行版本下限：<strong>部署前核实版本 ≥ 2.1.247，并单独确认桌面端 SneakPeek 的 08-17 补丁已应用</strong>（版本号待官方 advisory 确认）。</p>
+<p><strong>仍未闭合</strong>：Anthropic 官方 advisory 原文（GHSA 全文、Check Point 原始报告）仍未纳入；CVE-2025-59536 与 CVE-2026-21852 的官方修复公告亦未在本补遗中核实。交付时可按 GHSA 编号检索官方 advisory 全文补齐。</p>
+<h2 id="3">3. 中国区：官方口径是“不支持”，灰色通道存在但不适合企业选型</h2>
+<ul>
+<li><strong>官方可用性</strong>：多家 2026-10 上旬核查称，Anthropic Supported Regions Policy 列表中<strong>中国内地、香港、澳门均不在列，台湾在列</strong>；未列出的地区即不支持，且政策覆盖身处当地的人、当地注册企业以及由不支持地区实体控股超 50% 的企业。</li>
+<li><strong>合规路径</strong>：合法路径不是绕过区域限制，而是经支持地区的实体与 Bedrock 等云渠道；Bedrock 在亚太的公开运行时点包括东京、首尔、新加坡、孟买、悉尼，<strong>中国内地与香港无 Bedrock 运行时点</strong>。面向中国内地用户的产品还另有 CAC 生成式 AI 备案与 PIPL 跨境传输两道门，与 Anthropic 区域限制是两回事。</li>
+<li><strong>灰色市场现实</strong>：2026-10 的多家报道称，中国内地存在大量“中转站”代理，以约官方价 10% 转售 Claude 访问，付款走微信/支付宝；Anthropic 称曾有超 24,000 个虚假账号、超 1,600 万次请求用于蒸馏，并以 IP、支付卡发卡地、设备时区、身份证件与活体自拍等手段封堵。代理能看到全部 prompt 与返回内容，且有封号与合规风险。</li>
+<li><strong>选型结论</strong>：对中国企业选型，Claude Code 的中国区可用性应记为<strong>官方不支持、无中国区定价与本地部署</strong>；任何经中转代理的低价方案都不应进入企业代码库的正式选型基线，只能作为个人研究的非正式路径并自行承担提示词外泄与封号风险。</li>
+</ul>
+<p>来源：https://www.21cloudbox.com/support/anthropic-claude-china.html 、https://madrobot.blog/2026/09/29/is-claude-available-in-my-country-supported-countries-not-available-fix/ 、https://blakecrosley.com/blog/codex-vs-claude-code-2026 、https://the-decoder.com/how-chinas-gray-market-sells-claude-tokens-at-a-fraction-of-the-price/ 、https://www.medianama.com/2026/10/223-anthropic-abuse-claude-ban-campaign-targeting/</p>
+<h2 id="_2">给技术评审的一页建议</h2>
+<ol>
+<li>成本口径：按“每会话倍数 + 未公布绝对值的周限额”签约谈判，不要把 Max 20x 理解为月度 20 倍；谈判要点是管理员支出上限、usage credits 开关与周限额书面说明。</li>
+<li>安全基线：版本下限 ≥ 2.1.247 + 桌面 SneakPeek 08-17 补丁确认 + 托管锁定禁用绕过 + 信任前仓库审查，否则仍按原文 V2 处理为潜在执行路径。</li>
+<li>中国区：正式选型按“官方不支持”记账；如团队确需使用，走支持地区实体与合规渠道，不要把中转代理写进评审底稿的推荐路径。</li>
+</ol>
+</body></html>
