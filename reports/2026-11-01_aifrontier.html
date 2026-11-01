@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 前沿 · 韦青式专题研究（2026-11-01)</title><link rel="stylesheet" href="../style.css"></head>
+<body id="top">
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-11-01 · aifrontier · 原文 Markdown 同名文件</p>
+<h1 id="ai-2026-11-01">AI 前沿 · 韦青式专题研究（2026-11-01)</h1>
+<details class="toc" open><summary>目录</summary>
+<ul>
+<li><a href="#ai-2026-11-01">AI 前沿 · 韦青式专题研究（2026-11-01)</a><ul>
+<li><a href="#_1">一、大模型前沿</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、智能体生态</a><ul>
+<li><a href="#_7">观点分歧</a></li>
+<li><a href="#_8">少数意见与不确定性</a></li>
+<li><a href="#_9">门罗五步</a></li>
+<li><a href="#_10">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#ai">三、AI 硬件</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_15">四、具身智能</a><ul>
+<li><a href="#_16">观点分歧</a></li>
+<li><a href="#_17">少数意见与不确定性</a></li>
+<li><a href="#_18">门罗五步</a></li>
+<li><a href="#_19">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_20">各领域判断汇总</a></li>
+<li><a href="#_21">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</details>
+<p>范围：2026-10-26 至 2026-11-01。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、大模型前沿</h2>
+<p><strong>关键议题</strong>：2026年10月下旬大模型前沿是否正从单纯规模竞赛转向开放权重可用性、细粒度MoE架构与推理调度效率的工程化竞争？</p>
+<p>选题依据：窗口内多源交叉指向同一主线：10月29日Mistral Large 4开放权重发布并附许可与安全争议，10月26日URSA推理调度论文与10月30日千次架构实验总结同时出现，且附有明确的厂商自报、许可限制与传闻反证，适合做可审查的证据账本而非单一发布简报。</p>
+<p><strong>当前判断</strong>：条件性优选审慎检验立场：就本批证据而言，Mistral Large 4提高了前沿能力的接入可能性，但不能据此断定其为无条件开源或已证全面领先；细粒度MoE与URSA只能列为值得优先验证的工程假设，不能称为已证实的当前主线。因此，所谓“从单纯规模转向工程化竞争”仅在可用性与研究注意力层面得到初步支撑，尚未得到可验证的转向结论。 <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">S3</a> <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a> <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a></p>
+<p>优选：V2；置信度：medium。核心限定有受支持事实支撑：MaaS须另获商业授权为supported，权重不可撤回与可能提升实际攻击能力为厂商自承；但基准与排名为厂商口径或二手转述且无独立复现与指数快照，URSA无效果量、MoE实验自承玩具性质，故整体只能达到中等置信。
+成立条件：仅适用于2026年10月29日Mistral Large 4这一案例及10月下旬所列初步工程证据；不推广至全部开放权重模型，不等同于综合榜单领先或生产落地已证实；若独立复现、许可证全文、部署成本与前沿规模复现证据到齐，怀疑强度可相应收窄，但权重不可撤回的安全检验仍在。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（开放权重乐观情景分析者；代表将开放权重发布与降价视为生态扩散利好的解读，强调可用性而非仅看榜单名次。）：开放权重已逼近可用前沿：在可用性意义上，万亿参数MoE开放权重加1M上下文与降价，使更多团队能直接部署与微调，开放生态的实用门槛明显下降；该判断针对可用性与扩散，而非榜单全面领先。
+- 限定：范围限定为开放权重可用性与生态扩散，不主张该模型已全面领先闭源前沿或所有开放模型；事实部分置信度较高，扩散与门槛下降的推断置信度为中等偏低，取决于后续独立评测与真实部署数据。
+- 最强反证：最强反证是：基准数字多为厂商自报且未经独立复现，该模型在Artificial Analysis Intelligence Index上综合排名仅为开放权重第五、落后于中国开放模型；其许可证并非无条件开源，以Model-as-a-Service形式对外提供服务须另获商业授权；且开放权重一旦放出无法撤回，厂商自承模型可能提升实施实际攻击的能力。这些反证削弱了“开放即无门槛、发布即领先”的解读，但不直接否定权重可得性与长上下文带来的可用性增量。 <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a> <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a></p>
+<p><strong>观点 V2</strong>（审慎的开源与安全审查者；代表以许可证、安全不可逆性与证据独立性为检验标准的解读，强调反证优先于发布叙事。）：开放权重不等于无条件开源或已证领先：对 Mistral Large 4 而言，须以许可文本、独立评测与安全管控来检验厂商叙事，而不能仅凭“开放权重”标签断定其开源程度或领先地位。
+- 限定：范围限定于 2026 年 10 月 29 日 Mistral Large 4 这一案例，不推广至全部开放权重模型。置信度：许可限制为中等偏高；“未独立复现、排名待核对”为中等偏低；“可能提升实际攻击能力”为厂商自承的风险信号，而非已测量的危害结论。本主张的结论是“须检验”，而非“已证明不领先”或“已证明有害”。
+- 最强反证：最强反证是：开放权重仍可带来本地部署、修改与微调的实际可用性，发布伴随的降价也可能降低使用门槛，因此“非无条件开源”不等于“毫无开放价值”；厂商主动披露安全风险并把更激进版本限于受审查合作伙伴，也可被解读为风险管控而非放任。若后续出现独立复现支持其基准、许可证全文显示限制范围较窄，或实际滥用风险未被证实，则本主张的怀疑力度应相应下调。 <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">S3</a> <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a> <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a></p>
+<p><strong>观点 V3</strong>（工程效率优先的架构研究者；代表将推理效率与架构改进视为近期主线的解读，同时接受作者自承的外推限制。）：当前可验证的增量更多来自架构与调度工程：细粒度MoE在实验中改善损失，URSA针对KV缓存瓶颈与静态调度失效提出学习型调度，但两者在前沿规模上仍属待验证假设，而非已证实的前沿结论。
+- 限定：范围限定于所提供的10月下旬材料与两项初步证据，置信度低至中等；结论仅为“值得优先验证的工程假设”，不可直接外推至前沿规模或真实生产推理。
+- 最强反证：最强反证来自证据自身限定：细粒度MoE作者自承实验规模小、数据与基准为玩具性质，结论不可直接外推至前沿规模；URSA仅提出方法而无可评估的效果量，因此“架构与调度已带来可验证的前沿增量”的较强表述在本批证据下不成立。 <a href="https://wisevoter.com/world/2026/10/26/ursa-ai-scheduler-boosts-llm-efficiency">S4</a> <a href="https://fourweekmba.com/ai-1000-runs-find-fine-grained-moe-is-llms-biggest-win/">S5</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V1经收窄后的合理洞察：权重可得、1M上下文与厂商口径API降价确实提高了试用与API接入可能性，可作为开放可用性的初步信号，但不等于本地部署与微调门槛已证实下降。
+- V3经收窄后的合理洞察：细粒度MoE的小规模损失改善与URSA针对KV缓存瓶颈的学习型调度，是10月下旬值得优先验证的工程假设，验证顺序应排在规模叙事之前，但验证完成前不应升级为主线结论。</p>
+<p>不确定性及改变判断的条件：
+- Terminal-Bench从28.3%升至41%是否经独立复现，复现方法与得分差值如何。
+- Mistral Ecosystem Open-Weight License全文中MaaS条款的适用对象、规模或收入门槛为何，普通部署、修改与微调权利是否受限。
+- Artificial Analysis Intelligence Index开放权重第五的口径、时间点与原始快照为何，是否落后于中国开放模型的结论可核对。
+- 约49B激活参数万亿MoE的本地部署显存、带宽、推理成本、微调后性能与真实采用率如何。
+- 细粒度MoE在前沿规模与真实生产负载下的损失、吞吐与延迟是否复现，URSA的吞吐、延迟与显存收益与基准为何。
+- Qwen4与Kimi 3.1仍属传闻且未进入可引用账本，不应作为本判断的依据；其后续官方公告或权重发布会改变证据版图，但目前不在裁决范围内。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：10月下旬“开放权重发布加降价”很容易被同时读作开源程度与领先地位的双重证明，而本批证据恰恰在许可、基准独立性与安全不可逆性三处留有缺口。</li>
+<li><strong>需要</strong>：需要在采纳、部署或引用该模型之前，先区分四件事：法律上能商用多远、基准是否独立可信、权重放出后风险是否可控、本地部署成本是否可承受。</li>
+<li><strong>方案</strong>：用四项检验代替发布标签判断：核对许可证全文、等待或执行独立基准复现、按不可撤回权重做安全管控、实测部署成本；同时把MoE与URSA只列为优先验证假设，按前沿规模与生产负载指标复核。</li>
+<li><strong>预演</strong>：有条件的场景预演：若许可证全文显示MaaS限制仅及于特定规模或收入门槛的对外服务者、独立复现支持基准提升、部署实测成本可承受，则可用性判断可加强；若任一检验失败或无结果，则“开放前沿”判断应继续打折，架构与调度结论仍停留在假设层。</li>
+<li><strong>行动</strong>：
+   - 核对Mistral Ecosystem Open-Weight License全文，定位MaaS定义、适用对象、规模或收入门槛及普通部署、修改与微调权利 <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">S3</a>
+     时间：下一核查周期内；指标：许可证条款对照表是否完整覆盖MaaS定义、门槛条款与普通使用权利；基线：本批仅确认MaaS对外服务须另获商业授权，许可证全文与门槛细节缺失。
+     停止/成功条件：全文条款已定位并记录结论，或确认无法获取并如实保留缺口；阈值来源：分析者建议。
+   - 对发布版Terminal-Bench厂商口径得分进行独立复现核查 <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a> <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a>
+     时间：独立结果发布后即核对；指标：独立复现得分与厂商口径41%的差值，以及复现方法是否公开可核查；基线：预览28.3%与发布版厂商口径41%，状态为初步且未经独立复现。
+     停止/成功条件：独立结果与方法已公开并可比对，或确认暂无独立结果并保留preliminary状态；阈值来源：证据所给厂商口径28.3%→41%；独立接受标准为分析者建议。
+   - 实测约49B激活参数万亿MoE的本地部署与微调成本 <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a> <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a>
+     时间：下一核查周期内；指标：显存需求、带宽需求、单token推理成本、微调后性能与真实采用信号；基线：权重可得与API价格每百万token输入0.70美元、输出2.10美元，API价不等于本地部署成本。
+     停止/成功条件：实测数据覆盖主流部署配置并可比对，或确认数据缺失并保留缺口；阈值来源：分析者建议。
+   - 在前沿规模与真实生产负载下复核细粒度MoE与URSA <a href="https://wisevoter.com/world/2026/10/26/ursa-ai-scheduler-boosts-llm-efficiency">S4</a> <a href="https://fourweekmba.com/ai-1000-runs-find-fine-grained-moe-is-llms-biggest-win/">S5</a>
+     时间：可复现基准发布后即核对；指标：前沿规模损失、吞吐、延迟与显存对比，及URSA的基准、模型规模与代码或权重可得性；基线：小规模实验三档损失改善4.9%、5.6%、6.2%，URSA仅有方法描述而无效果量。
+     停止/成功条件：可复现的生产负载基准已发布并可比对，或仍列为待验证假设而不升级为主线；阈值来源：证据所给实验数值为基线；接受标准为分析者建议。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Mistral于2026年10月29日在Hugging Face发布Large 4（Le Chonk）开放权重，约1万亿总参数、每token约49B激活参数（计入嵌入与输出层为52B）、1M token上下文，原生多模态MoE架构。 <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a></li>
+<li><strong>C02 / source_statement / preliminary</strong>：据厂商口径转述，发布版经三周额外强化学习与客户测试后，Terminal-Bench得分从预览时的28.3%升至41%，API价格降至每百万token输入0.70美元、输出2.10美元。 <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a></li>
+<li><strong>C03 / fact / supported</strong>：Mistral Large 4采用修改版MIT的Mistral Ecosystem Open-Weight License，允许使用、修改与商业化，但以Model-as-a-Service形式对外提供服务的企业须先另获商业授权，并非无条件开源。 <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">S3</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：反证：Mistral的基准数字多为厂商自报、未经独立复现；其在Artificial Analysis Intelligence Index上综合排名开放权重第五，仅为西方开放权重中最高，落后于中国开放模型。 <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a></li>
+<li><strong>C05 / source_statement / supported</strong>：安全反证：Mistral自承在预览中看到模型可能提升实施实际攻击的能力，开放权重无法撤回，决心者可尝试微调去除拒答；更激进的渗透测试专用版本仅限Orange Cyberdefense等受审查合作伙伴。 <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">S2</a></li>
+<li><strong>C06 / fact / preliminary</strong>：2026年10月26日发表的URSA论文提出不确定性感知离线强化学习调度器，通过预测输出长度分布与显存需求、学习历史调度策略，缓解LLM推理中KV缓存瓶颈与静态启发式调度失效问题。 <a href="https://wisevoter.com/world/2026/10/26/ursa-ai-scheduler-boosts-llm-efficiency">S4</a></li>
+<li><strong>C07 / source_statement / preliminary</strong>：2026年10月30日发布的超1000次架构实验总结称，自GPT-3以来最大的单项架构收益是细粒度MoE，在三档宽度上分别改善损失4.9%、5.6%、6.2%，其次为线性注意力；但作者自承实验规模小、数据与基准为玩具性质，结论不可直接外推至前沿规模。 <a href="https://fourweekmba.com/ai-1000-runs-find-fine-grained-moe-is-llms-biggest-win/">S5</a></li>
+<li><strong>C08 / forecast / unverified</strong>：有参会者称Qwen4可能下周发布，但阿里巴巴尚未确认日期；同期Qwen4与Kimi 3.1仅为在LLM Arena上被社区发现、官方尚未宣布，应视为传闻而非发布事实。 <a href="https://pasqualepillitteri.it/zh/news/24374/zuijia-open-weight-moxing-2026-nian-10-yue-duibi">S6</a></li>
+<li><strong>C09 / inference / preliminary</strong>：综合推断：10月下旬前沿主线正从单纯规模转向开放权重可用性、细粒度MoE架构收益与推理调度工程化，但厂商自报基准、MaaS许可限制与小规模实验限定，使“开源”与“领先”判断均需打折，不能直接等同于前沿全面领先。 <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">S1</a> <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">S3</a> <a href="https://wisevoter.com/world/2026/10/26/ursa-ai-scheduler-boosts-llm-efficiency">S4</a> <a href="https://fourweekmba.com/ai-1000-runs-find-fine-grained-moe-is-llms-biggest-win/">S5</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://aiagentupdate.com/post/mistral-le-chonk-open-weights-2026-10-30">Mistral Le Chonk open weights</a> · AI Agent Update
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：Mistral Large 4于10月29日在Hugging Face发布开放权重，约1万亿总参数、每token约49B激活参数（计入嵌入与输出层为52B）、1M token上下文，原生多模态MoE架构；其基准多为厂商自报、未经独立复现，Artificial Analysis Intelligence Index上开放权重综合第五。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；基准与排名为二手转述，未附独立复现或指数快照。</p>
+<p><strong>S2</strong> <a href="https://www.skimwire.com/mistral-large-4-open-weights-cybersecurity/">Mistral Large 4 open weights cybersecurity</a> · Skimwire
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：发布版经三周额外强化学习与客户测试后，Terminal-Bench得分从预览时的28.3%升至41%，API价格降至每百万token输入0.70美元、输出2.10美元；Mistral自承预览中模型可能提升实施实际攻击的能力，开放权重无法撤回，更激进的渗透测试专用版本仅限受审查合作伙伴。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；基准提升与价格为厂商口径转述，安全表述为厂商自承。</p>
+<p><strong>S3</strong> <a href="https://www.llms.blog/posts/mistral-large-4-open-weights-hugging-face">Mistral Large 4 open weights Hugging Face</a> · LLMs Blog
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：Mistral Large 4采用修改版MIT的Mistral Ecosystem Open-Weight License，允许使用、修改与商业化，但以Model-as-a-Service形式对外提供服务的企业须先另获商业授权，并非无条件开源。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；未附许可证全文条款，收入门槛等细节不在本批材料中。</p>
+<p><strong>S4</strong> <a href="https://wisevoter.com/world/2026/10/26/ursa-ai-scheduler-boosts-llm-efficiency">URSA AI scheduler boosts LLM efficiency</a> · WiseVoter
+- 发布：2026-10-26；事件：2026-10-26；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：10月26日发表的URSA论文提出不确定性感知离线强化学习调度器，通过预测输出长度分布与显存需求、学习历史调度策略，缓解LLM推理中KV缓存瓶颈与静态启发式调度失效问题。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；未附论文基准、模型规模与同行评审信息，效果量未在本批材料中给出。</p>
+<p><strong>S5</strong> <a href="https://fourweekmba.com/ai-1000-runs-find-fine-grained-moe-is-llms-biggest-win/">AI 1000 runs find fine-grained MoE is LLMs biggest win</a> · FourWeekMBA
+- 发布：2026-10-30；事件：2026-10-30；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：10月30日发布的超1000次架构实验总结称，自GPT-3以来最大的单项架构收益是细粒度MoE，在三档宽度上分别改善损失4.9%、5.6%、6.2%，其次为线性注意力；但作者自承实验规模小、数据与基准为玩具性质，结论不可直接外推至前沿规模。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；实验细节、宽度定义与原始数据不在本批材料中，且作者已限定不可外推。</p>
+<p><strong>S6</strong> <a href="https://pasqualepillitteri.it/zh/news/24374/zuijia-open-weight-moxing-2026-nian-10-yue-duibi">最佳open weight模型2026年10月对比</a> · Pasquale Pillitteri（10月最佳open weight模型对比）
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：online article；读取：relevant_text；定位：正文相关段落（OSINT材料提供）。
+- 原文支持：10月29日有参会者称Qwen4可能下周发布，但阿里巴巴尚未确认日期；同期Qwen4与Kimi 3.1仅为在LLM Arena上被社区发现，官方尚未宣布，应视为传闻而非发布事实。
+- 限制：本阶段依据所提供OSINT相关文本，未重新打开原文全文核验；传闻来源为参会者转述与社区发现，无官方公告佐证。</p>
+<p>检索缺口：
+- 本批关键事实未附Kimi K3.1 Pro权重发布与许可证的直接来源链接，检索日志中的核查结论（截至10月26日权重未发布、承诺11月4日前发布）未进入可引用来源账本。
+- 发现阶段提到的Meta Muse Spark Open、Reflection Beam、DeepSeek V4.1-Flash-1017等10月发布缺乏本批可引用事实与链接，未纳入claims。
+- Mistral在Artificial Analysis Intelligence Index上的排名缺乏指数原始快照或独立复现结果，无法核对口径与时间点。
+- URSA论文缺乏基准数值、模型规模、同行评审状态与代码/权重信息，效果量无法评估。
+- 细粒度MoE千次实验缺乏原始数据、宽度定义与训练配置，作者的玩具性质限定使结论无法外推。
+- Qwen4与Kimi 3.1的LLM Arena出现记录缺乏官方公告与可核查的Arena条目链接，仍属传闻。</p>
+<p>检索日志：large language model new release October 2026（discovery）；LLM architecture innovation training inference optimization late October 2026（discovery）；大模型 新发布 2026年10月（discovery）；大语言模型 架构创新 推理优化 2026年10月（discovery）；Mistral Large 4 open weights October 29 2026（verification）；Mistral Large 4 开源权重 10月29日（verification）；Kimi K3.1 Pro Moonshot October 2026 release（verification）；LLM open weight limitations licensing criticism October 2026（counterevidence）。</p>
+<h2 id="_6">二、智能体生态</h2>
+<p><strong>关键议题</strong>：2026年10月底智能体生态在旗舰模型、评测、推理平台与身份治理集中发布的同时，能力宣传与可控、安全落地之间是否存在落差？</p>
+<p>选题依据：2026年10月26日至31日集中出现Gemini 4 Carbon、Artificial Analysis指数改版、Akamai推理与沙箱、IBM智能体身份治理、华大九天EDA智能体与Notion智能体化等多线发布，且同期出现榜单争议、幻觉与延迟代价、沙箱执行限制与治理缺口等反证，适合以证据账本检验生态演进是全面成熟还是能力与治理并行分化。</p>
+<p><strong>当前判断</strong>：在2026年10月26日至31日账本范围内，智能体生态呈现能力供给集中发布与可控落地约束并存的方向性落差：综合榜首、平台beta供给与场景化机制发布属实，但单项落后、幻觉与延迟代价、沙箱执行上限与企业治理自动化缺口同时存在，因此不应把发布密度或综合分数直接读作已可控、可审计、可长程规模化落地。 <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S8</a> <a href="https://gattyworks.com/news/gemini-4-carbon-gated-fairwind-cyber-defenders">S9</a> <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">S10</a> <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">S11</a></p>
+<p>优选：V2；置信度：medium。方向性落差由多类独立证据共同支撑（综合与单项、执行限制、治理缺口），但关键数值多为preliminary二手报道或二手解读，C8为conflicting，且缺乏评测原始数据、沙箱正式文档与治理原始样本，故方向可信而数值与推广度不可信。
+成立条件：结论仅限账本窗口与账本证据；落差是方向性判断而非普遍定量结论，尤其幻觉率、延迟与治理百分比不作推广；若评测原始数据、沙箱正式文档或治理原始调研出现反向结果，应按支柱逐项缩小，执行与治理约束同时消除时才撤回。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_7">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（乐观情景分析者；以模型得分、发布密度与平台供给为主要依据，强调能力侧的进展；对治理与执行限制的权重较低。）：2026年10月底，模型与平台能力正在快速扩展：旗舰模型登顶、评测体系改版、推理与执行基础设施集中供给，构成智能体生态上行的主线。
+- 限定：范围限于2026年10月26日至31日的窗口与能力供给侧，不主张生态已全面成熟或规模化落地。置信度为中等：C1至C4的发布事实与榜首位置较一致，C6因属初步证据且为厂商宣称，在本论证中权重较低；若后续公开日期、正式定价或独立评测改变，结论需相应修正。
+- 最强反证：最强反证是综合榜首可能掩盖单项与落地短板：有报道指出该模型在自身公布的OSWorld一行上落后于竞品，且伴随较高的幻觉率与首token延迟代价；Akamai沙箱仍处技术预览，当前执行能力有限；企业治理调研也显示治理能力远落后于部署意愿。这些反证不否定同期发布密度本身，但限制了本主张的适用范围：上行主线成立于能力供给层面，不等于可控、安全、长程的规模化落地已经实现。 <a href="https://www.unite.ai/staged-rollout-sends-googles-gemini-4-carbon-to-cyber-defenders-first/">S1</a> <a href="https://www.ghacks.net/2026/10/31/google-launches-gemini-4-carbon-for-cyber-defenders-first-with-api-pricing-from-2-per-million-tokens/">S2</a> <a href="https://theainewsreport.com/2026-10-28-artificial-analysis-index-v5-cost-per-point-explained.html">S3</a> <a href="https://www.globenewswire.com/news-release/2026/10/27/3388793/0/en/akamai-launches-ai-inference-service-and-agent-execution-environment.html">S4</a> <a href="http://chinaaet.com/article/3000181336">S6</a></p>
+<p><strong>观点 V2</strong>（审慎治理视角分析者；以反证与治理调研为主要依据，强调单项评测、执行约束与审计控制缺口；对厂商宣称与综合分数持保留态度。）：综合榜首掩盖了单项落后、幻觉与延迟代价，以及沙箱执行与企业治理的明显短板，能力宣传与可控落地之间存在落差。
+- 限定：范围限定于2026年10月26日至31日窗口内的账本证据；结论是“存在落差”，而非“能力无效”或“全面不成熟”；方向性判断具中等可信度，具体数值（尤其幻觉率、延迟与治理百分比）可信度偏低，需以原始评测、官方文档与原始调研复核为准。
+- 最强反证：最强反证是：综合居首仍代表多维能力占优，单项落后不等于整体判定；同期沙箱隔离与企业身份、凭证、审计类产品正在发布，表明执行与治理短板已有补齐方向；若原始数据显示幻觉与延迟仅限特定场景、沙箱后续放宽时长限制、更大样本调研显示自动化控制比例更高，则“落差”的程度应下调，但账本内当前证据尚不足以作出该修正。 <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S8</a> <a href="https://gattyworks.com/news/gemini-4-carbon-gated-fairwind-cyber-defenders">S9</a> <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">S10</a> <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">S11</a></p>
+<p><strong>观点 V3</strong>（产品落地视角分析者；以企业身份治理、垂直工具与办公产品中的触发、授权与审计机制为依据，强调场景化落地而非通用榜单。）：垂直与办公场景的智能体化正在先行：身份与凭证治理、EDA Copilot与可审批可留痕的任务派发，代表更贴近落地的演进路径。
+- 限定：范围限定于2026年10月26日至27日的窗口内发布与拆解信息，结论为相对判断而非全面成熟的判定；置信度为中等偏低，因三条依据中两条为preliminary，且均未提供生产规模、采纳率或审计实际运行数据。
+- 最强反证：最强反证是：三条依据都停留在发布、厂商宣称或第三方拆解层面，未证明生产部署与持续运行效果；若EDA效率口径不可比、Notion机制与官方实现有出入，或企业身份治理只完成产品发布而未被实际采用，则所谓“先行”可能只是发布密度，而非落地密度。 <a href="https://www.unite.ai/zh-cn/ibm-brings-governed-identity-and-credential-controls-to-ai-agents/">S5</a> <a href="http://chinaaet.com/article/3000181336">S6</a> <a href="https://www.candu.ai/blog/how-notion-crafts-a-personalized-onboarding-experience-6-lessons-to-guide-new-users">S7</a></p>
+<h3 id="_8">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的合理洞察：2026年10月27日至28日旗舰模型、评测改版与推理基础设施集中发布，确属供给密度与供给形态扩张，适用于判断能力供给侧趋势，但不等于普遍可获得性或规模化落地。
+- V3的合理洞察：企业身份治理、垂直Copilot与可审批可留痕的任务派发合起来构成场景化落地的机制设计方向，适用于评估未来落地路径的完备性，但目前仅为设计方向，未证明生产闭环。</p>
+<p>不确定性及改变判断的条件：
+- Gemini 4 Carbon评测原始数据与完整口径：OSWorld差距是否可比、幻觉率与首token延迟的测试条件为何；反向结果将缩小C8与C9权重。
+- Akamai Agent Sandbox正式技术文档：是否已支持持续、有状态长程运行，执行时长与资源限制的正式边界为何；反向结果将动摇C10支柱。
+- 企业治理调研原始样本量、行业分布与问卷口径：自动化控制与审计轨迹比例是否仍为个位数；反向结果将动摇C11支柱。
+- Gemini 4 Carbon面向开发者与消费者的公开日期与正式定价文件、华大九天.aix效率宣称的独立复测与口径、Notion机制的官方确认：缺失则V1可获得性与V3落地判断仍不能升级。</p>
+<h3 id="_9">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：2026年10月底旗舰模型登顶与平台集中发布的同时，单项落后、幻觉与延迟代价、沙箱执行上限与治理自动化缺口并存，综合分数与发布密度不能直接等同于可控落地。</li>
+<li><strong>需要</strong>：需要在采纳智能体之前，先以原始评测、正式文档与原始调研核验榜单口径、执行边界与治理现状，并以可审计的触发、授权、审批与留痕闭环作为放行条件，而非仅凭发布与综合分数决策。</li>
+<li><strong>方案</strong>：采取分层核验与受控试点：先核验三项决定性证据，再在小范围试点中验证身份、审批、审计与长程执行，达标一项放行一项，未达标则停留在受限场景。</li>
+<li><strong>预演</strong>：若核验通过且试点审计完整，生态可从发布密度走向可控落地；若原始数据否定代价数字但执行与治理约束仍在，落差缩小但不消失；若三类约束同时被消除，落差判断应撤回并转为规模化落地判断。</li>
+<li><strong>行动</strong>：
+   - 核验Carbon评测原始数据与完整口径：核对Intelligence Index v5单项得分、OSWorld差距可比性及幻觉率与延迟测试条件，执行者为评估负责人 <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S8</a> <a href="https://gattyworks.com/news/gemini-4-carbon-gated-fairwind-cyber-defenders">S9</a>
+     时间：下一份相关周报窗口内完成，逾期未获则保持现有判断；指标：是否取得原始方法说明与单项得分表，OSWorld差距是否在相同条件下可比；基线：当前账本状态：仅有二手报道，C8为conflicting，C9为preliminary。
+     停止/成功条件：取得原始数据并复核通过则更新C8与C9权重；无法取得则停止升级结论，不作推断补全；阈值来源：分析者建议：以官方原始评测为准，二手报道不作定量依据。
+   - 核验Akamai Sandbox正式技术文档：确认执行时长上限、有状态与持续运行能力及算力、内存与出站限制，执行者为平台评估负责人 <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">S10</a>
+     时间：试点立项前完成；指标：正式文档是否支持持续、有状态长程运行，约一分钟间歇步骤限制是否已被取消；基线：当前账本状态：技术预览，仅支持约一分钟间歇步骤，C10为supported的报道口径。
+     停止/成功条件：正式文档确认长程能力则缩小落差；仍为间歇步骤则长程场景不予放行；阈值来源：证据所给：C10的约一分钟间歇步骤口径，正式文档为准。
+   - 核验企业治理调研原始样本与问卷口径：取得样本量、行业分布与问卷原文，复核82%、26%与5%的适用范围，执行者为治理评估负责人 <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">S11</a>
+     时间：治理现状评估前完成；指标：是否取得原始样本与口径，自动化控制与审计轨迹比例是否仍为个位数水平；基线：当前账本状态：二手解读，缺乏原始样本与口径，C11为preliminary。
+     停止/成功条件：取得原始调研则按实际比例更新判断；无法取得则不将百分比推广至全部企业；阈值来源：证据所给：C11的82%、26%、5%为二手解读数字，原始调研为准。
+   - 在受控试点中验证智能体身份、审批与审计闭环：以IBM类身份与凭证治理为对照，记录每次运行的触发、授权、审批与日志，执行者为试点负责人 <a href="https://www.unite.ai/zh-cn/ibm-brings-governed-identity-and-credential-controls-to-ai-agents/">S5</a> <a href="https://www.candu.ai/blog/how-notion-crafts-a-personalized-onboarding-experience-6-lessons-to-guide-new-users">S7</a>
+     时间：试点期4周内；指标：高风险操作审批覆盖率与审计日志完整率；基线：当前账本状态：仅有产品发布与机制描述，无生产审计运行数据。
+     停止/成功条件：审批与日志完整率均达100%方可扩大范围；任一缺失则暂停扩大并回炉整改；阈值来源：分析者建议：高风险操作审批与留痕为放行硬条件，100%为建议阈值而非证据所给数字。</li>
+</ol>
+<h3 id="_10">证据账本</h3>
+<ul>
+<li><strong>C1 / source_statement / supported</strong>：Google于2026年10月28日发布Gemini 4 Carbon，自称其最强模型、主打网络安全与长程任务，首批仅向部分网络防御者开放，暂无面向开发者与消费者的公开日期。 <a href="https://www.unite.ai/staged-rollout-sends-googles-gemini-4-carbon-to-cyber-defenders-first/">S1</a></li>
+<li><strong>C2 / fact / supported</strong>：Gemini 4 Carbon在Artificial Analysis Intelligence Index v5.0中得59分居首，首批定价为每百万输入2美元、输出10美元，介绍期后将升至4美元与20美元。 <a href="https://www.ghacks.net/2026/10/31/google-launches-gemini-4-carbon-for-cyber-defenders-first-with-api-pricing-from-2-per-million-tokens/">S2</a></li>
+<li><strong>C3 / fact / supported</strong>：Artificial Analysis于2026年10月27日推出Intelligence Index v5，改用九项评测、四类各占25%，并新增FrontierCode 2.0与Terminal-Bench-Science，同时推出Progress Index。 <a href="https://theainewsreport.com/2026-10-28-artificial-analysis-index-v5-cost-per-point-explained.html">S3</a></li>
+<li><strong>C4 / fact / supported</strong>：Akamai于2026年10月27日以beta形式推出Akamai Inference与Akamai Agent Sandbox，前者通过OpenAI兼容API提供12个开源权重模型，后者用WebAssembly隔离智能体生成的代码并限制算力、内存与出站连接。 <a href="https://www.globenewswire.com/news-release/2026/10/27/3388793/0/en/akamai-launches-ai-inference-service-and-agent-execution-environment.html">S4</a></li>
+<li><strong>C5 / fact / supported</strong>：IBM于2026年10月27日在TechXchange 2026上正式推出IBM Agent Identity与HashiCorp Vault 2.2，为企业智能体提供集中登记、身份、凭证与审计控制。 <a href="https://www.unite.ai/zh-cn/ibm-brings-governed-identity-and-credential-controls-to-ai-agents/">S5</a></li>
+<li><strong>C6 / source_statement / preliminary</strong>：华大九天在HUG 2026大会上发布.aix系列AI智能体平台，将EDA工具升级为陪伴式Copilot智能体，宣称模拟电路设计迭代减少60%、面板像素设计效率提升7倍以上。 <a href="http://chinaaet.com/article/3000181336">S6</a></li>
+<li><strong>C7 / fact / preliminary</strong>：Notion被描述为已转向“给智能体派活”：智能体可按计划、事件或消息触发运行，权限按智能体单独授予、默认高风险操作需审批且每次运行留日志。 <a href="https://www.candu.ai/blog/how-notion-crafts-a-personalized-onboarding-experience-6-lessons-to-guide-new-users">S7</a></li>
+<li><strong>C8 / fact / conflicting</strong>：Gemini 4 Carbon虽在综合指数居首，但其自身公布的OSWorld一行落后于Opus 5.5，因此不应只看单一综合分数判断模型优劣。 <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S8</a></li>
+<li><strong>C9 / fact / preliminary</strong>：Carbon在AA-Omniscience上的幻觉率为11%，高于Argon的4%，且首token延迟被报道为103秒、约为Argon 49秒的两倍。 <a href="https://gattyworks.com/news/gemini-4-carbon-gated-fairwind-cyber-defenders">S9</a></li>
+<li><strong>C10 / fact / supported</strong>：Akamai Agent Sandbox仍处技术预览，当前仅支持约一分钟的间歇执行步骤，持续运行、有状态智能体仍是未来能力，尚未等于生产级长程运行。 <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">S10</a></li>
+<li><strong>C11 / fact / preliminary</strong>：企业调研显示，82%高管认为能治理智能体，但仅26%能解决智能体间冲突、仅5%建立了自动化控制与审计轨迹。 <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">S11</a></li>
+<li><strong>C12 / inference / preliminary</strong>：综合判断：2026年10月底的智能体生态呈现“能力与平台集中发布、治理与长程执行约束并行”的分化格局，而非全面成熟的规模化落地。 <a href="https://www.unite.ai/staged-rollout-sends-googles-gemini-4-carbon-to-cyber-defenders-first/">S1</a> <a href="https://www.globenewswire.com/news-release/2026/10/27/3388793/0/en/akamai-launches-ai-inference-service-and-agent-execution-environment.html">S4</a> <a href="https://www.unite.ai/zh-cn/ibm-brings-governed-identity-and-credential-controls-to-ai-agents/">S5</a> <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">S10</a> <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">S11</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://www.unite.ai/staged-rollout-sends-googles-gemini-4-carbon-to-cyber-defenders-first/">Google Gemini 4 Carbon staged rollout to cyber defenders first</a> · Unite.AI
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-01。
+- 来源族：媒体报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Google于2026年10月28日发布Gemini 4 Carbon，自称其最强模型、主打网络安全与长程任务，首批仅向部分网络防御者开放，暂无面向开发者与消费者的公开日期。
+- 限制：仅依据OSINT相关文本，未重新核验原文全文；“最强模型”为厂商自称，未经独立复测。</p>
+<p><strong>S2</strong> <a href="https://www.ghacks.net/2026/10/31/google-launches-gemini-4-carbon-for-cyber-defenders-first-with-api-pricing-from-2-per-million-tokens/">Google launches Gemini 4 Carbon for cyber defenders first, with API pricing from $2 per million tokens</a> · ghacks.net
+- 发布：2026-10-31；事件：2026-10-31；查阅：2026-11-01。
+- 来源族：媒体报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Gemini 4 Carbon在Artificial Analysis Intelligence Index v5.0中得59分居首，首批定价为每百万输入2美元、输出10美元，介绍期后将升至4美元与20美元。
+- 限制：仅依据OSINT相关文本，未重新核验原文全文与评测原始数据；定价为首批/介绍期口径，后续价格以官方正式公布为准。</p>
+<p><strong>S3</strong> <a href="https://theainewsreport.com/2026-10-28-artificial-analysis-index-v5-cost-per-point-explained.html">Artificial Analysis Index v5: cost per point explained</a> · The AI News Report
+- 发布：2026-10-28；事件：2026-10-27；查阅：2026-11-01。
+- 来源族：评测报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Artificial Analysis于2026年10月27日推出Intelligence Index v5，改用九项评测、四类各占25%，并新增FrontierCode 2.0与Terminal-Bench-Science，同时推出Progress Index。
+- 限制：仅依据OSINT相关文本，未重新核验评测机构原始方法说明；四类构成与权重细节以官方方法文档为准。</p>
+<p><strong>S4</strong> <a href="https://www.globenewswire.com/news-release/2026/10/27/3388793/0/en/akamai-launches-ai-inference-service-and-agent-execution-environment.html">Akamai launches AI inference service and agent execution environment</a> · GlobeNewswire（Akamai公告）
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-01。
+- 来源族：厂商公告；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Akamai于2026年10月27日以beta形式推出Akamai Inference与Akamai Agent Sandbox，前者通过OpenAI兼容API提供12个开源权重模型，后者用WebAssembly隔离智能体生成的代码并限制算力、内存与出站连接。
+- 限制：仅依据OSINT相关文本，未重新核验公告全文；两者均为beta，功能与可用性以正式版为准。</p>
+<p><strong>S5</strong> <a href="https://www.unite.ai/zh-cn/ibm-brings-governed-identity-and-credential-controls-to-ai-agents/">IBM brings governed identity and credential controls to AI agents</a> · Unite.AI
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-01。
+- 来源族：媒体报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：IBM于2026年10月27日在TechXchange 2026上正式推出IBM Agent Identity与HashiCorp Vault 2.2，为企业智能体提供集中登记、身份、凭证与审计控制。
+- 限制：仅依据OSINT相关文本，未重新核验原文全文与产品文档；实际部署效果未经独立验证。</p>
+<p><strong>S6</strong> <a href="http://chinaaet.com/article/3000181336">华大九天在HUG 2026发布.aix系列AI智能体平台</a> · 电子技术应用（chinaaet.com）
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-01。
+- 来源族：行业媒体报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：华大九天于2026年10月27日消息在HUG 2026大会上发布.aix系列AI智能体平台，将EDA工具升级为陪伴式Copilot智能体，宣称模拟电路设计迭代减少60%、面板像素设计效率提升7倍以上。
+- 限制：仅依据OSINT相关文本，未重新核验原文全文；效率数字为厂商宣称，未见独立复测与口径说明。</p>
+<p><strong>S7</strong> <a href="https://www.candu.ai/blog/how-notion-crafts-a-personalized-onboarding-experience-6-lessons-to-guide-new-users">How Notion crafts a personalized onboarding experience: 6 lessons to guide new users</a> · Candu
+- 发布：2026-10-26；事件：2026-10-26；查阅：2026-11-01。
+- 来源族：产品拆解；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Notion在2026年10月26日的拆解中被描述为已转向“给智能体派活”：智能体可按计划、事件或消息触发运行，权限按智能体单独授予、默认高风险操作需审批且每次运行留日志。
+- 限制：仅依据OSINT相关文本与第三方拆解描述，未重新核验Notion官方公告；触发与审批细节以官方产品说明为准。</p>
+<p><strong>S8</strong> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">Benchmark crowns get contested: Gemini 4 Carbon leads overall but trails on OSWorld</a> · Agent Brief
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：评测争议报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：2026年10月29日的评测争议指出，Gemini 4 Carbon虽在综合指数居首，但其自身公布的OSWorld一行落后于Opus 5.5，榜单之争提醒不应只看单一综合分数。
+- 限制：仅依据OSINT相关文本，未重新核验原始榜单与各单项得分；单项落后不等于整体能力判定。</p>
+<p><strong>S9</strong> <a href="https://gattyworks.com/news/gemini-4-carbon-gated-fairwind-cyber-defenders">Gemini 4 Carbon gated rollout: hallucination and latency costs reported</a> · GattyWorks
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-01。
+- 来源族：媒体报道；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Carbon在AA-Omniscience上的幻觉率为11%，高于Argon的4%，且首token延迟被报道为103秒、约为Argon 49秒的两倍，显示长程能力提升伴随幻觉与延迟代价。
+- 限制：仅依据OSINT相关文本与单一二手报道，未重新核验评测原始数据与测试条件；延迟与幻觉数字的适用场景需以原始评测为准。</p>
+<p><strong>S10</strong> <a href="https://aicybr.com/blog/akamai-inference-agent-sandbox-beta-webassembly-pricing-2026">Akamai Inference and Agent Sandbox beta: WebAssembly isolation and pricing</a> · AiCybr
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-01。
+- 来源族：行业分析；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：Akamai Agent Sandbox仍处技术预览，当前仅支持约一分钟的间歇执行步骤，持续运行、有状态智能体仍是未来能力，说明“安全执行”尚未等于生产级长程运行。
+- 限制：仅依据OSINT相关文本，未重新核验官方技术文档；执行时长上限为报道口径，具体限制以官方文档为准。</p>
+<p><strong>S11</strong> <a href="https://www.yidaoit.cn/news-2026-10-26-b.html">企业智能体治理缺口调研解读</a> · 一道科技解读（yidaoit.cn）
+- 发布：2026-10-26；事件：2026-10-26；查阅：2026-11-01。
+- 来源族：行业调研解读；读取：relevant_text；定位：OSINT提供的相关文本摘要。
+- 原文支持：企业落地侧的调研显示，82%高管认为能治理智能体，但仅26%能解决智能体间冲突、仅5%建立了自动化控制与审计轨迹，治理能力远落后于部署意愿。
+- 限制：仅依据OSINT相关文本与二手解读，未重新核验原始调研样本量、方法与问卷口径；百分比不宜直接推广至全部企业。</p>
+<p>检索缺口：
+- 未采用窗口外的Visa/BILL试点（2026年10月20日）与窗口边缘的无问芯穹智子Agent 1.0（2026年10月25日），其落地细节不在本账本结论内。
+- 缺乏Gemini 4 Carbon面向开发者与消费者的公开日期、正式定价文件与评测原始数据，未能核实59分与单项得分的完整口径。
+- 缺乏华大九天.aix效率宣称的独立复测、测试基准与样本口径，60%与7倍以上仅为厂商宣称。
+- 缺乏Notion官方公告一手来源，触发、授权与审批细节仅依据第三方拆解描述。
+- 缺乏企业治理调研的原始样本量、行业分布与问卷口径，82%、26%与5%不宜直接推广至全部企业。
+- 缺乏Akamai Sandbox正式技术文档对执行时长、有状态能力与资源限制的完整说明，生产级长程运行的边界仍不完整。</p>
+<p>检索日志：AI agent product launch framework October 2026（discovery）；AI agent benchmark evaluation news late October 2026（discovery）；AI智能体 Agent 产品发布 2026年10月（discovery）；智能体框架 评测基准 落地应用 2026年10月底（discovery）；Google Gemini 4 Carbon announced October 28 2026（verification）；Akamai Agent Sandbox Inference October 27 2026 launch（verification）；AI agent failure security risk limitation October 2026（counterevidence）；AI智能体 安全风险 失败 治理 2026年10月（counterevidence）。</p>
+<h2 id="ai">三、AI 硬件</h2>
+<p><strong>关键议题</strong>：2026年10月下旬AI硬件的主线是超大规模客户机架级多厂商落地与上游产能瓶颈并存，而端侧性能宣称与AI眼镜的社会接受度则面临检验。</p>
+<p>选题依据：窗口内事件高度集中在10月26日至31日，覆盖云端多厂商芯片布局、机架级客户落地、上游基板瓶颈、端侧新品、数据中心基础设施与AI眼镜监管反证，适合以证据账本方式区分宣布、可订购与已验证三层状态。</p>
+<p><strong>当前判断</strong>：截至2026年10月31日的时点快照，最经得起检验的判断是谨慎情景：Oracle多厂商菜单存在可用性落差，上游基板约束可能影响兑现节奏，2027年检验标准应从宣布名单转向可订购、可交付与机架级部署；但这只是条件性谨慎判断，不是已证实的全面延迟。 <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">S02</a> <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a> <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a></p>
+<p>优选：V02；置信度：medium。V02的核心快照有具体日期与金额支撑且在质询中主动收窄、拒绝编造阈值，但C02、C05、C09均为preliminary且源于OSINT摘要、未独立全文核验，缺少定价、可订购数量、预付拆分与交付排期，决定性交付数据缺失，故不能给high。
+成立条件：仅适用于2026年10月31日OCI可用性快照与合计口径基板预付；已公布2027年计划的项目与未公布日期的项目须分别判断；2027年计划本身不等于违约或延迟；预付不等于具体项目必然延迟。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；强调Oracle多厂商布局与Meta同时绑定AMD、英伟达的部署线索，认为机架级落地比单颗芯片参数更重要。）：云端AI硬件已进入多厂商菜单时代，超大规模客户的机架级部署将决定赢家。
+- 限定：范围限定于2026年10月下旬的宣布与初步部署线索层面，结论为初步、有条件的趋势判断而非已验证的规模化结论；置信度有限，只有在后续出现可核查的部署规模与交付数据后才能提高。
+- 最强反证：最强反证是宣布不等于可订购与可交付：截至2026年10月31日梳理，Oracle菜单中只有Positron Atlas在OCI已全面可用，谷歌TPU与Cerebras计划2027年上线，OpenAI Jalapeño与SambaNova SN50未公布日期；同时上游基板产能已被大量预付锁定并伴随材料短缺预警，机架级部署可能被供给与排期拖慢，而非由客户意愿单独决定。 <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a> <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-amd-intel-and-nvidia-rising-today-october-28?utm_source=marketbeat.com&amp;utm_medium=referral">S04</a> <a href="https://themodelpress.com/news/2026/10/ai-news-this-week-october-24-30-2026">S06</a></p>
+<p><strong>观点 V02</strong>（谨慎情景分析者；强调只有部分加速器已全面可用、其余排期到2027年或未定，以及基板预付与材料短缺预警所指向的供给约束。）：宣布不等于供给：Oracle多厂商菜单的实际兑现可能因可用性落差与上游基板瓶颈而慢于宣布所呈现的广度，但这只是有条件的谨慎情景，而非已证实的全面延迟。
+- 限定：范围限定于2026年10月31日时点Oracle OCI的多厂商布局与基板预付合计口径；置信度为初步、有条件。2027年上线属于已公布的计划而非已错过的最后期限，不能直接等同于违约或延迟；C09的2027年竞争焦点转向可订购、可交付的预测未经验证，仅作为条件性推断。
+- 最强反证：最强反证是多厂商落地并非只停留在宣布层面：Meta一侧已有AMD Helios机架运行或安装测试并将部署更多Vera Rubin系统，且相关增发投资意向显示超大规模客户正在实际绑定多家芯片商；基板预付也可被解释为提前锁定产能以保障后续供给，而非瓶颈必然拖慢兑现的证据。若2027年排期如期兑现且预付产能到位，则可用性落差会随时间收窄，本观点的主张力度将相应减弱。 <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">S02</a> <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a> <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a></p>
+<p><strong>观点 V03</strong>（监管与社会接受度视角分析者；以苹果M6的厂商性能宣称为待验证项，以参议员对Meta智能眼镜的调查为反证，强调监管回应与社会接受度可能影响产品落地节奏。）：端侧与可穿戴AI的放量不能只看性能宣称，隐私与社会接受度是同等重要的约束：性能提升需经独立验证，而涉及旁观者拍摄的可穿戴产品，其监管回应与社会接受度可能影响落地节奏。
+- 限定：范围限定于2026年10月下旬账本内的两个案例——M6笔记本的性能宣称与Meta智能眼镜的参议员调查。对“宣称未经独立证实”和“调查已经启动”有账本支持；对“隐私与接受度会实质拖慢放量”的判断仅为条件性推断，置信度低，不应扩展为已发生禁令、销量下滑或产品失败的结论。
+- 最强反证：最强反证是：调查本身不等于市场否决或违规认定，账本也未提供Meta智能眼镜销量、投诉或禁令证据；M6的预订与发售日期在账本中仍按厂商时间表陈述，未见延期证据。此外，笔记本与智能眼镜的社会接受度机制并不相同，不能用眼镜的隐私争议直接否定M6类端侧产品的性能价值。若后续独立实测证实性能提升、且Meta作出可被接受的防护说明，放量仍可能主要由性能与体验驱动。 <a href="https://www.pymnts.com/technology/2026/apple-touts-ai-capabilities-in-new-14-inch-macbook-pro/">S03</a> <a href="https://petapixel.com/2026/10/30/senators-launch-investigation-into-metas-smart-glasses-over-nonconsensual-filming/">S08</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：机架级落地是值得追踪的候选主线，适用条件是补齐Meta部署规模、交付时间与独立实测后方可升级为规模化结论。
+- V03的合理洞察：性能宣称须经独立验证，涉及旁观者拍摄的可穿戴产品须以监管后续结论与市场接受度数据分别检验，适用条件是区分笔记本与智能眼镜的不同接受机制。</p>
+<p>不确定性及改变判断的条件：
+- Meta部署Helios与Vera Rubin的具体机架数量、上线时间与实测性能为何，什么证据会改变判断：生产部署清单与第三方基准。
+- Oracle各加速器在OCI的具体定价、可订购数量与交付排期为何，什么证据会改变判断：OCI可订购清单与交付排期。
+- 三家基板预付的各自拆分、合同期限与覆盖产能口径为何，什么证据会改变判断：分厂商合同与产能覆盖披露。
+- 苹果M6独立实测结果为何，什么证据会改变判断：第三方基准对照。
+- Meta感恩节前回复内容、调查后续结论、欧洲限制最终文本及智能眼镜销量与投诉数据为何，什么证据会改变判断：正式回复与跟进结论、分品类市场数据。
+- 账本外线索如RTX Spark、微软Maia 300、Synaptics与谷歌Coral边缘芯片、英伟达DSX POD等未经本账本核查，不得据此扩展结论。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：2026年10月下旬云端AI硬件宣布声势很大，但2026年10月31日快照显示只有部分加速器真正全面可用，上游基板已被大额预付锁定。</li>
+<li><strong>需要</strong>：需要把“宣布了哪些芯片”换成可核查的检验：哪些加速器可订购、有多少数量、何时交付、机架是否真正生产部署。</li>
+<li><strong>方案</strong>：以V02的谨慎检验框架为准：分项追踪OCI可用性、Meta机架部署与基板供给传导，2027年计划如期转化为可订购数量与交付排期时改称正常爬坡，未定日期项目不作兑现判断。</li>
+<li><strong>预演</strong>：有条件预演：若TPU与Cerebras在2027年如期上线并出现可核查数量与排期，则落差收窄；若仍只有年份重申而无数量与排期，或未定日期项目长期无排期，则谨慎判断保留；若出现生产机架规模与实测数据，V01的机架主线才可升级。</li>
+<li><strong>行动</strong>：
+   - 追踪Oracle OCI加速器可用性：核对Positron Atlas、谷歌TPU、Cerebras、OpenAI Jalapeño与SambaNova SN50是否从计划变为可订购 <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">S02</a> <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a> <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a>
+     时间：2026年11月起至2027年排期兑现或落空；指标：已全面可用加速器数量及每项可订购数量与交付排期；基线：2026年10月31日快照：仅Positron Atlas已全面可用。
+     停止/成功条件：出现可核查的可订购清单与交付排期即判该项兑现；2027年计划到期仍无数量与排期即保留落差表述；阈值来源：证据所给：2027年上线计划与2026年10月31日快照；具体数量阈值账本未给，分析者建议以实际可订购清单为准。
+   - 追踪Meta机架级部署：核对Helios是否从运行或安装测试转为生产部署，以及更多Vera Rubin系统的部署数量与上线时间 <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-amd-intel-and-nvidia-rising-today-october-28?utm_source=marketbeat.com&amp;utm_medium=referral">S04</a> <a href="https://themodelpress.com/news/2026/10/ai-news-this-week-october-24-30-2026">S06</a>
+     时间：2026年11月起至后续部署披露；指标：生产部署机架数量、分批交付与上线时间、独立实测或第三方基准；基线：账本内仅为运行或安装测试，未披露机架数量与实测性能。
+     停止/成功条件：出现生产部署数量与实测数据后方可升级机架主线；否则维持候选主线；阈值来源：账本未给具体机架数量阈值，分析者建议以可核查的生产部署数量与上线时间为判定标准，具体数值待披露后设定。
+   - 追踪基板预付的供给传导：核对三家预付拆分、合同期限、覆盖产能口径及是否影响具体机架交付节奏 <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a>
+     时间：2026年11月起至2027年材料与交付披露；指标：分厂商预付拆分、合同期限、覆盖产能口径、交付延迟或如期交付记录；基线：合计超1000亿新台币（约50亿美元），无分厂商拆分。
+     停止/成功条件：出现分厂商口径与具体交付影响证据后方可判定传导；仅有合计数字时不作单家供给保障结论；阈值来源：证据所给：合计预付金额；分厂商阈值账本未给，分析者建议以合同披露为准。
+   - 分别验证端侧与可穿戴约束：核对M6独立实测，以及Meta感恩节前回复、调查后续结论、欧洲限制最终文本与智能眼镜市场接受度数据 <a href="https://www.pymnts.com/technology/2026/apple-touts-ai-capabilities-in-new-14-inch-macbook-pro/">S03</a> <a href="https://petapixel.com/2026/10/30/senators-launch-investigation-into-metas-smart-glasses-over-nonconsensual-filming/">S08</a>
+     时间：M6于2026年11月6日发售后；Meta回复以感恩节前为限，调查后续持续追踪；指标：M6第三方基准结果；Meta回复内容与监管跟进；智能眼镜销量、退货与投诉数据；基线：M6性能为厂商宣称未独立证实；Meta调查已启动但未认定违规或出台禁令。
+     停止/成功条件：实测证实且监管无进一步限制、市场数据未受明显抑制时，隐私约束降为条件性风险；出现正式限制或销量投诉恶化时，约束升级为实质拖慢因素；阈值来源：证据所给：M6宣称数值与感恩节前回复期限；“可被接受”与市场抑制的具体阈值账本未给，分析者建议以正式监管结论与分品类市场数据为准。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C01 / source_statement / supported</strong>：Oracle在2026年10月27日AI World宣布云端AI硬件从单一英伟达路线转向多厂商菜单，包括扩展Vera Rubin系统、首次在OCI提供谷歌TPU并计划引入Cerebras与SambaNova芯片。 <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a></li>
+<li><strong>C02 / fact / preliminary</strong>：截至2026年10月31日梳理，Oracle多厂商布局存在可用性落差：只有Positron Atlas在OCI已全面可用，谷歌TPU与Cerebras计划2027年上线，OpenAI Jalapeño与SambaNova SN50未公布日期。 <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">S02</a></li>
+<li><strong>C03 / source_statement / preliminary</strong>：苹果宣称M6版14英寸MacBook Pro图形比M5最高快30%、AI负载最高快25%，续航最长24小时，10月28日起预订、11月6日发售；该性能数字尚未经独立实测证实。 <a href="https://www.pymnts.com/technology/2026/apple-touts-ai-capabilities-in-new-14-inch-macbook-pro/">S03</a></li>
+<li><strong>C04 / fact / preliminary</strong>：超大规模客户正同时绑定多家芯片商：AMD Helios机架系统已在Meta运行或安装测试，Meta将部署更多Vera Rubin系统，AMD与英伟达拟分别向Meta增发投资10亿与30亿美元。 <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-amd-intel-and-nvidia-rising-today-october-28?utm_source=marketbeat.com&amp;utm_medium=referral">S04</a> <a href="https://themodelpress.com/news/2026/10/ai-news-this-week-october-24-30-2026">S06</a></li>
+<li><strong>C05 / fact / preliminary</strong>：英伟达、AMD与英特尔合计向台湾先进基板厂商预付超1000亿新台币（约50亿美元）锁定长期产能，瓶颈已从晶圆与先进封装向上游基板与材料蔓延。 <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a></li>
+<li><strong>C06 / inference / preliminary</strong>：10月最后一周硬件竞争的可见主线是超大规模客户的机架级落地，而非单颗芯片参数竞赛；该判断基于当周合作与部署线索的概括，仍需部署规模数据佐证。 <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-amd-intel-and-nvidia-rising-today-october-28?utm_source=marketbeat.com&amp;utm_medium=referral">S04</a> <a href="https://themodelpress.com/news/2026/10/ai-news-this-week-october-24-30-2026">S06</a></li>
+<li><strong>C07 / fact / supported</strong>：德州仪器于2026年10月31日推出三款面向AI数据中心的产品，分别针对电源控制、遥测与信号完整性，反映竞争已延伸到模拟、电源与时序等基础设施环节。 <a href="https://www.ad-hoc-news.de/boerse/corporate-news/texas-instruments-stock-in-focus-after-ai-data-center-chip-launch/70438516">S07</a></li>
+<li><strong>C08 / fact / supported</strong>：2026年10月30日，美国参议员就Meta智能眼镜的非自愿拍摄与隐私安全风险展开调查，要求Meta在感恩节前说明防护措施与AI训练数据使用情况，构成对AI眼镜放量叙事的监管反证。 <a href="https://petapixel.com/2026/10/30/senators-launch-investigation-into-metas-smart-glasses-over-nonconsensual-filming/">S08</a></li>
+<li><strong>C09 / forecast / preliminary</strong>：若多厂商宣布的可用性时间表与基板产能约束如材料所述，则2027年云端AI硬件的竞争焦点可能从“宣布了哪些芯片”转向“哪些加速器真正可订购、可交付且有机架级部署”，但该预测未经验证。 <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">S01</a> <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">S02</a> <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">S05</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://kurums.com/oracle-expands-ai-chip-offerings-nvidia-google-cerebras-notes-for-technology-october-2026/?v=653f5ac96a69">Oracle在AI World扩展AI芯片布局</a> · Kurums
+- 发布：2026-10-27；事件：见正文说明；查阅：2026-11-01。
+- 来源族：云厂商芯片布局；读取：relevant_text；定位：相关报道正文。
+- 原文支持：Oracle在AI World宣布把英伟达Vera Rubin系统扩展至多吉瓦规模，同时首次在OCI提供谷歌TPU，并计划引入Cerebras与SambaNova芯片。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；宣布不等于可订购，见S02的可用性落差。</p>
+<p><strong>S02</strong> <a href="https://tech-insider.org/ca/oracle-oci-google-tpu-ai-accelerators-nvidia-2026/">Oracle OCI加速器可用性梳理</a> · Tech Insider
+- 发布：2026-10-27；事件：见正文说明；查阅：2026-11-01。
+- 来源族：可用性核查；读取：relevant_text；定位：相关报道正文。
+- 原文支持：截至10月31日梳理，只有Positron Atlas在OCI已全面可用，谷歌TPU与Cerebras计划2027年上线，OpenAI Jalapeño与SambaNova SN50未公布日期。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；可用性状态以10月31日梳理时点为准。</p>
+<p><strong>S03</strong> <a href="https://www.pymnts.com/technology/2026/apple-touts-ai-capabilities-in-new-14-inch-macbook-pro/">苹果发布搭载M6芯片的14英寸MacBook Pro</a> · PYMNTS
+- 发布：2026-10-27；事件：见正文说明；查阅：2026-11-01。
+- 来源族：端侧硬件；读取：relevant_text；定位：相关报道正文。
+- 原文支持：苹果10月27日发布搭载M6芯片的14英寸MacBook Pro，称图形比M5最高快30%、AI负载最高快25%，续航最长24小时，10月28日起预订、11月6日发售。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；性能数字为厂商宣称，缺乏独立实测对照。</p>
+<p><strong>S04</strong> <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-amd-intel-and-nvidia-rising-today-october-28?utm_source=marketbeat.com&amp;utm_medium=referral">AMD Helios在Meta运行与英伟达拟参与Meta增发</a> · TipRanks
+- 发布：2026-10-28；事件：见正文说明；查阅：2026-11-01。
+- 来源族：超大规模客户合作；读取：relevant_text；定位：相关报道正文。
+- 原文支持：AMD确认Helios机架系统已在Meta运行并将向Meta拟议增发投资10亿美元，英伟达则拟投资30亿美元参与Meta增发并扩大Vera Rubin与Vera CPU合作。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；增发投资为拟议安排，非已完成交易。</p>
+<p><strong>S05</strong> <a href="https://www.theasianglobe.com/index/read/4915/nvidia-amd-and-intel-prepay-over-5-billion-to-lock-in-taiwan-substrate-capacity">芯片厂商预付超50亿美元锁定台湾基板产能</a> · The Asian Globe
+- 发布：2026-10-27；事件：见正文说明；查阅：2026-11-01。
+- 来源族：供应链与产能；读取：relevant_text；定位：相关报道正文。
+- 原文支持：英伟达、AMD与英特尔合计向台湾先进基板厂商预付超1000亿新台币（约50亿美元）锁定长期产能，Unimicron警告设备交期可达30个月、2027年材料或短缺20%。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；预付总额为合计口径，未给出三家各自拆分。</p>
+<p><strong>S06</strong> <a href="https://themodelpress.com/news/2026/10/ai-news-this-week-october-24-30-2026">2026年10月24日至30日AI新闻周报</a> · The Model Press
+- 发布：2026-10-26；事件：见正文说明；查阅：2026-11-01。
+- 来源族：周报梳理；读取：relevant_text；定位：相关报道正文。
+- 原文支持：10月26日当周梳理指出英伟达与Meta扩大合作、Meta将部署更多Vera Rubin系统，AMD Helios机架在Meta安装测试，硬件主线是机架级落地而非单颗芯片参数竞赛。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；“主线”判断为该梳理的概括，非账本独立结论。</p>
+<p><strong>S07</strong> <a href="https://www.ad-hoc-news.de/boerse/corporate-news/texas-instruments-stock-in-focus-after-ai-data-center-chip-launch/70438516">德州仪器推出三款AI数据中心芯片</a> · AD HOC NEWS
+- 发布：2026-10-31；事件：见正文说明；查阅：2026-11-01。
+- 来源族：数据中心基础设施；读取：relevant_text；定位：相关报道正文。
+- 原文支持：德州仪器10月31日推出三款面向AI数据中心的产品，分别针对电源控制、遥测与信号完整性。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；未给出具体型号、性能指标与客户采用情况。</p>
+<p><strong>S08</strong> <a href="https://petapixel.com/2026/10/30/senators-launch-investigation-into-metas-smart-glasses-over-nonconsensual-filming/">参议员就Meta智能眼镜非自愿拍摄展开调查</a> · PetaPixel
+- 发布：2026-10-30；事件：见正文说明；查阅：2026-11-01。
+- 来源族：监管与隐私；读取：relevant_text；定位：相关报道正文。
+- 原文支持：美国参议员Ron Wyden与Edward Markey于10月30日就Meta智能眼镜的非自愿拍摄与隐私安全风险展开调查，要求Meta在感恩节前说明防护措施与AI训练数据使用情况。
+- 限制：账本依据OSINT材料中的事实摘要，未独立全文核验；调查启动不等于已认定违规或已出台禁令。</p>
+<p>检索缺口：
+- 缺少苹果M6与AMD Helios的独立实测或第三方基准数据，厂商宣称与部署宣称无法直接等同于性能结论。
+- 缺少Oracle各加速器在OCI的具体定价、可订购数量与交付排期细节，无法量化可用性落差的实际影响。
+- 缺少三家芯片商基板预付的各自拆分、合同期限与覆盖产能口径，合计数字无法还原为单家供给保障程度。
+- 缺少德州仪器三款产品的型号、规格与客户采用信息，无法判断其对数据中心成本或可靠性的实际影响。
+- 缺少Meta智能眼镜的销量、退货与投诉数据，以及欧洲限制措施的最终文本，监管反证的强度仍停留在调查启动层面。
+- 检索线索中提到的RTX Spark、微软Maia 300、Synaptics与谷歌Coral边缘芯片、英伟达DSX POD等未进入本账本的关键事实来源，需另行立项核查后方可纳入。</p>
+<p>检索日志：AI hardware GPU chip launch October 2026（discovery）；Nvidia AMD AI chip news late October 2026（discovery）；AI芯片 GPU 最新发布 2026年10月（discovery）；智能硬件 AI眼镜 机器人 2026年10月新品（discovery）；AI hardware news October 27 28 29 30 2026 chip launch（discovery）；Synaptics Google Coral edge AI chip October 20 2026 launch Astra（verification）；英伟达 GTC柏林 2026年10月21日 DSX POD 机器人（verification）；AI glasses sales decline failure limitation battery privacy October 2026（counterevidence）；2026年10月27日 苹果 M6 MacBook Pro AI 性能（verification）；October 30 2026 AI glasses privacy ban regulation smart glasses（counterevidence）。</p>
+<h2 id="_15">四、具身智能</h2>
+<p><strong>关键议题</strong>：2026年10月具身智能新品、度量框架与地方产业目标密集发布之际，工业订单占比偏低与融资数量下滑是否表明规模化兑现仍滞后于行业热度？</p>
+<p>选题依据：2026年10月同时出现消费级与工业级新品发布、Worken有效工时度量框架、上海到2028年的进厂目标，以及订单结构与融资降温的反证，适合用证据账本检验热度与兑现之间的差距。</p>
+<p><strong>当前判断</strong>：在公开中标口径与10月融资统计口径内，具身智能的规模化兑现仍滞后于2026年10月的发布热度：公开买方结构以教育科研与政府国资为主、工业企业仅占21.1%，同期融资起数较9月近乎腰斩并伴随上市遇冷；该结论不等同于全部真实工业需求偏冷，也不等于2028年目标必然失败。 <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a></p>
+<p>优选：V2；置信度：medium。核心买方结构事实C7为supported，但为二次引用且公开口径不等于全部订单；C8与C9为preliminary，融资口径与企业名单不完整；V2经质询后主动收窄结论范围，使条件性结论与证据强度基本匹配，但关键缺口仍未消除，故不高于medium。
+成立条件：仅适用于所给公开中标口径与10月融资统计口径；未计入非公开直接采购、框架协议与实际交付数据；融资统计的完整数据库、口径与9月总额对照尚未补齐；供给侧发布与上海进厂目标仅作为窗口信号，不作为已完成规模部署的证据。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_16">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（乐观情景分析者；以新品发布密度与政策目标为主要信号，强调供给侧成熟与部署窗口开启。）：2026年10月消费级与工业级新品、基座模型与操作系统集中发布，加上地方进厂目标，表明具身智能正从展示走向规模部署。
+- 限定：范围限定为2026年10月的发布与政策信号所指向的趋势判断，而非对已完成规模部署的事实断言；置信度为有限：供给组合与政策目标方向一致，但因缺乏交付、部署与运行数据，结论应理解为“从展示走向规模部署的窗口正在打开”，而非“规模部署已经完成”。
+- 最强反证：最强反证是需求与资本侧的滞后信号：材料显示2026年上半年国内人形机器人公开中标中真正来自工业企业的订单仅占21.1%，教育科研与政府国资占主导；2026年10月具身智能融资数量较9月近乎腰斩，并伴随上市遇冷现象。若工业订单占比与资本热度不能跟进，10月的发布密度可能仍停留在供给展示阶段，上海2028年进厂目标也将面临兑现压力而非自动实现。 <a href="https://www.globenewswire.com/news-release/2026/10/27/3389757/0/en/mobo-makes-global-debut-and-opens-pre-orders-as-aimoga-unveils-its-new-path-to-industrialization.html">S1</a> <a href="https://humanoidroboticstechnology.com/articles/agibot-innovation-day-2026/">S3</a> <a href="https://www.21jingji.com/article/20261030/herald/224a593625999cc8d34f0363ac831c21.html">S6</a></p>
+<p><strong>观点 V2</strong>（审慎情景分析者；以公开中标结构、融资数量变化与上市遇冷为主要信号，强调需求侧与资本侧的兑现约束。）：当期具身智能需求仍以教育科研与政府国资为主、工业订单占比偏低，资本市场已对规模化兑现节奏重新定价，规模化兑现仍滞后于发布热度。
+- 限定：结论仅限于所给的公开中标口径与10月融资统计口径内，属条件性、初步判断；C7为supported，C8与C9为preliminary，整体置信度中等偏低，不适用于推断未公开订单、单个企业表现或2028年目标必然失败。
+- 最强反证：最强反证是供给与政策信号仍强：10月消费级与工业级新品、基座模型与操作系统集中发布，上海提出到2028年推动8000台人形机器人进工厂的目标，智元亦披露累计下线与上半年营收等公司口径数据；若非公开工业订单、实际部署与交付数据显著好于公开中标口径，或融资总额与单笔规模并未同步降温，则本主张关于需求偏冷与重新定价的推断将被削弱。 <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a></p>
+<p><strong>观点 V3</strong>（产业度量倡导者；以可度量的有效工时为评判标准，强调从数量叙事转向产出叙事。）：应以Worken有效智能工时等产出度量，而非下线量、发布数量或融资额，来判断具身智能是否真正进入有效生产。
+- 限定：范围与置信度：本主张仅适用于“是否真正进入有效生产”这一判定，不否定发布、下线与融资作为产业热度或供给能力的辅助参考信号。主张方向的置信度为中等——从数量叙事转向产出叙事的必要性有C2与C5的对比支撑；但Worken作为具体度量工具的可操作性与可比性置信度低，在口径与验证补齐之前只能作为评判方向，不能作为已成立的判定标准。
+- 最强反证：最强反证：Worken由被评价的厂商自身提出，尚未经独立第三方验证，且材料中没有任何实际Worken数值，等于用一个未证实的新指标去否定已有数量指标，说服力不足；若产出效能比的口径不公开、不统一，Worken同样可以被选择性统计，沦为另一种数量叙事。此外，C5的2万台与43%本身仍属未经核实的公司口径，说明即便转向产出叙事，当前可用的公开证据仍不足以完成一次可信的有效生产判定。 <a href="https://aapnews.aap.com.au/aapreleases/cision20261029AE84454">S2</a> <a href="https://www.mrjjxw.com/articles/2026-10-30/4632522.html">S5</a></p>
+<h3 id="_17">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的合理洞察：10月消费级与工业级产品、基座模型与操作系统同场出现，加上上海8000台进厂目标，构成可追踪的供给与政策窗口信号，但仅可作前瞻线索，不可作规模部署已实现的证据。
+- V3的合理洞察：判断是否进入有效生产应从下线量、发布数与融资额转向可核查的产出度量；Worken目前仅是该方向上的候选提议框架，在统一口径、实际数值与第三方验证补齐前不能单独作判定标准。</p>
+<p>不确定性及改变判断的条件：
+- 非公开直接采购、框架协议与实际部署交付的规模与买方结构为何，是否显著高于公开中标口径的21.1%工业占比。
+- 10月与9月融资统计的完整数据库、口径、企业名单及9月融资总额为何，起数下降是否伴随总额或单笔规模同步下降。
+- Worken的自主工作时长界定、产出效能比分母与跨场景可比口径、第三方审计机制为何，是否有按客户与场景拆分的实际数值。
+- Mobo的售价、预售量、交付时间与家庭场景表现，以及G2 Max、AHA3、GO-3 Preview的部署客户、连续运行小时与良率为何。
+- 上海到2028年8000台进厂目标的分年度路径、统计口径为何，智元43%全球市占率的口径、时间基准与独立验证来源为何。</p>
+<h3 id="_18">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：2026年10月发布密度很高，但公开订单结构与融资信号偏冷：真正的分歧不是有没有新品，而是新品是否已转化为工业买单与可持续产出。</li>
+<li><strong>需要</strong>：需要一把能区分“发布了、造出来了、融到资了”与“在真实生产中干出活来”的尺子，并在公开口径之外补齐非公开订单与实际运行数据，否则容易把窗口信号误读为规模部署已完成。</li>
+<li><strong>方案</strong>：以V2收窄后的条件性结论为当前判断锚点，同时把V1的供给与政策窗口列为待检验线索、把V3的产出度量方向列为待验证的候选标准；三者并行追踪，不用任何一方单独定论。</li>
+<li><strong>预演</strong>：若未来两个季度内工业订单占比与实际部署数据显著改善，滞后判断将被削弱；若工业占比仍停留在公开口径的低位且融资起数不恢复，2028年进厂目标的兑现压力将上升；若Worken口径与实际数值仍不公开，产出叙事将继续停留在方向层面。</li>
+<li><strong>行动</strong>：
+   - 核对非公开工业订单与交付数据：收集直接采购、框架协议与已交付部署的买方结构，复核公开中标口径的代表性 <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a>
+     时间：未来1个季度内复核，之后每季度更新；指标：工业企业订单占比与已交付部署规模；基线：2026年上半年公开中标口径：工业企业占21.1%。
+     停止/成功条件：取得可核对的非公开订单明细或交付数据并重新计算占比后停止本轮追踪；若仍无数据，则结论继续限定在公开口径内；阈值来源：证据所给基线为C7的21.1%；“显著高于”暂无证据阈值，为分析者建议的检验方向，未知则注明。
+   - 复核融资统计口径：取得10月与9月融资完整数据库、企业名单与总额对照，区分起数下降与金额下降 <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a>
+     时间：未来1个月内；指标：融资起数、总额与单笔规模的月度可比变化；基线：证据所给：10月33起、101.05亿元，9月60起；9月总额未在材料中给出。
+     停止/成功条件：取得同口径的9月总额与企业名单后完成对照；若数据库仍不完整，则融资结论继续标注为preliminary；阈值来源：证据所给为33起与60起；同口径总额对照阈值未在证据中给出，为分析者建议。
+   - 追踪Mobo与G2 Max等产品的可核查部署证据：预售量、交付时间、部署客户、连续运行小时与良率 <a href="https://www.globenewswire.com/news-release/2026/10/27/3389757/0/en/mobo-makes-global-debut-and-opens-pre-orders-as-aimoga-unveils-its-new-path-to-industrialization.html">S1</a> <a href="https://humanoidroboticstechnology.com/articles/agibot-innovation-day-2026/">S3</a>
+     时间：未来2个季度内；指标：已交付量、部署客户数、连续运行小时与良率披露情况；基线：当前材料中上述数据均为缺失。
+     停止/成功条件：任一产品披露可核对的部署客户与运行数据后，可重新评估V1的规模部署主张；若持续缺失，则不升级为规模部署结论；阈值来源：证据中无部署阈值，为分析者建议：以可核对披露本身为通过条件，而非预设台数阈值。
+   - 验证Worken是否可成为判定标准：索取自主时长定义、产出效能比分母与基准、按场景拆分的实际数值与第三方审计或可复现计算过程 <a href="https://aapnews.aap.com.au/aapreleases/cision20261029AE84454">S2</a> <a href="https://www.mrjjxw.com/articles/2026-10-30/4632522.html">S5</a>
+     时间：未来2个季度内；指标：口径文件、实际数值与第三方验证的齐备程度；基线：当前仅有公式：活跃机器人数量×自主工作时长×产出效能比，无实际数值与验证机制。
+     停止/成功条件：五类数据齐备后方可将其作为定量判定候选；缺任一类则继续仅作方向参考；阈值来源：证据所给仅为公式；五类补齐要求为分析者建议的检验清单，非证据阈值。
+   - 追踪上海8000台进厂目标的兑现路径：分年度路径、统计口径与阶段性进厂台数披露 <a href="https://www.21jingji.com/article/20261030/herald/224a593625999cc8d34f0363ac831c21.html">S6</a> <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a>
+     时间：每半年复核一次，直至2028年目标期；指标：分年度进厂台数与统计口径披露情况；基线：证据所给目标：到2028年推动8000台人形机器人进工厂，工业机器人密度600台/万人；分年度路径未给出。
+     停止/成功条件：取得原文与分年度路径后按阶段对照；若阶段数据持续缺失，则目标兑现压力判断保持为条件性；阈值来源：证据所给为8000台与2028年；分年度阈值未在证据中给出，为分析者建议的追踪方式。</li>
+</ol>
+<h3 id="_19">证据账本</h3>
+<ul>
+<li><strong>C1 / source_statement / supported</strong>：AiMOGA于2026年10月27日全球发布首款消费级家庭伴侣人形机器人Mobo并开启全球预售，该机器人高0.9米、22个自由度、支持20多种语言。 <a href="https://www.globenewswire.com/news-release/2026/10/27/3389757/0/en/mobo-makes-global-debut-and-opens-pre-orders-as-aimoga-unveils-its-new-path-to-industrialization.html">S1</a></li>
+<li><strong>C2 / source_statement / supported</strong>：智元机器人于2026年10月29日在上海创新日首次提出Worken有效智能工时度量框架，公式为活跃机器人数量×自主工作时长×产出效能比。 <a href="https://aapnews.aap.com.au/aapreleases/cision20261029AE84454">S2</a></li>
+<li><strong>C3 / source_statement / supported</strong>：智元在2026年10月29日创新日发布第三代人形硬件架构AHA3、下一代具身基座模型GO-3 Preview、全模态交互模型WITA-Omni，并正式推出工业机器人G2 Max与灵渠OS 1.0。 <a href="https://humanoidroboticstechnology.com/articles/agibot-innovation-day-2026/">S3</a></li>
+<li><strong>C4 / source_statement / supported</strong>：智元G2 Max为重载轮式力控工业机器人，21个自由度、双臂载荷最高40公斤、作业高度0.1至2.5米，面向制造与物流场景。 <a href="https://www.unite.ai/agibot-unveils-worken-framework-to-quantify-robots-useful-output/">S4</a> <a href="https://humanoidroboticstechnology.com/articles/agibot-innovation-day-2026/">S3</a></li>
+<li><strong>C5 / source_statement / preliminary</strong>：智元披露其通用AI机器人累计下线达2万台，今年上半年营收接近20亿元，并称其占全球人形机器人市场43%。 <a href="https://www.mrjjxw.com/articles/2026-10-30/4632522.html">S5</a></li>
+<li><strong>C6 / fact / supported</strong>：上海市经信委印发的《上海市加快发展新一代智能制造行动方案》提出到2028年推动8000台人形机器人进工厂，工业机器人密度达600台/万人。 <a href="https://www.21jingji.com/article/20261030/herald/224a593625999cc8d34f0363ac831c21.html">S6</a></li>
+<li><strong>C7 / fact / supported</strong>：2026年上半年国内人形机器人公开中标218个、总规模17.23亿元，其中教育科研机构采购占55.5%、政府及国资平台占20.6%，真正来自工业企业的订单仅21.1%。 <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a></li>
+<li><strong>C8 / fact / preliminary</strong>：2026年10月具身智能融资仅33起、总额101.05亿元，交易数量较9月的60起近乎腰斩，同期有赴港机器人企业在挂牌前叫停上市、部分已上市企业跌破发行价。 <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a></li>
+<li><strong>C9 / inference / preliminary</strong>：综合订单结构与融资变化推断：2026年10月具身智能的供给侧发布密度与需求侧工业订单占比、资本热度之间存在脱节，规模化兑现仍滞后于发布热度。 <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a></li>
+<li><strong>C10 / forecast / preliminary</strong>：若工业企业订单占比在未来两年内未显著提升，上海到2028年推动8000台人形机器人进工厂的目标将面临兑现压力，而非自动实现。 <a href="https://www.21jingji.com/article/20261030/herald/224a593625999cc8d34f0363ac831c21.html">S6</a> <a href="https://www.jszn.net.cn/news/n2026103192.html">S7</a> <a href="https://www.jszn.net.cn/news/n2026103101.html">S8</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://www.globenewswire.com/news-release/2026/10/27/3389757/0/en/mobo-makes-global-debut-and-opens-pre-orders-as-aimoga-unveils-its-new-path-to-industrialization.html">mobo makes global debut and opens pre-orders as AiMOGA unveils its new path to industrialization</a> · GlobeNewswire / AiMOGA
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-01。
+- 来源族：press_release；读取：relevant_text；定位：新闻稿正文。
+- 原文支持：奇瑞旗下AiMOGA于2026年10月27日全球发布首款消费级家庭伴侣人形机器人Mobo并开启全球预售，该机器人高0.9米、22个自由度、支持20多种语言。
+- 限制：企业新闻稿口径；本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验；预售量、售价与交付安排未在材料中给出。</p>
+<p><strong>S2</strong> <a href="https://aapnews.aap.com.au/aapreleases/cision20261029AE84454">AGIBOT Innovation Day: Worken framework for effective intelligent working hours</a> · AAP / PR Newswire / AGIBOT
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：press_release；读取：relevant_text；定位：新闻稿正文。
+- 原文支持：智元机器人于2026年10月29日在上海创新日首次提出Worken有效智能工时度量框架，公式为活跃机器人数量×自主工作时长×产出效能比。
+- 限制：企业新闻稿口径；本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验；框架的测算口径与第三方验证情况未在材料中给出。</p>
+<p><strong>S3</strong> <a href="https://humanoidroboticstechnology.com/articles/agibot-innovation-day-2026/">AGIBOT Innovation Day 2026</a> · Humanoid Robotics Technology
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：trade_media；读取：relevant_text；定位：报道正文。
+- 原文支持：智元在同一场创新日发布第三代人形硬件架构AHA3、下一代具身基座模型GO-3 Preview、全模态交互模型WITA-Omni，并正式推出工业机器人G2 Max与灵渠OS 1.0。
+- 限制：本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验；材料中操作系统名称在不同检索记录里表述为灵渠OS 1.0与Link-U OS 1.0，名称对应关系未进一步核实。</p>
+<p><strong>S4</strong> <a href="https://www.unite.ai/agibot-unveils-worken-framework-to-quantify-robots-useful-output/">AGIBOT unveils Worken framework to quantify robots' useful output</a> · Unite.AI
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：trade_media；读取：relevant_text；定位：报道正文。
+- 原文支持：智元G2 Max为重载轮式力控工业机器人，21个自由度、双臂载荷最高40公斤、作业高度0.1至2.5米，面向制造与物流场景。
+- 限制：本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验；实际部署客户、作业良率与连续运行数据未在材料中给出。</p>
+<p><strong>S5</strong> <a href="https://www.mrjjxw.com/articles/2026-10-30/4632522.html">智元创新日披露：累计下线2万台、上半年营收近20亿元</a> · 每日经济新闻
+- 发布：2026-10-30；事件：2026-10-30；查阅：2026-11-01。
+- 来源族：news；读取：relevant_text；定位：报道正文。
+- 原文支持：智元在创新日披露其通用AI机器人累计下线达2万台，今年上半年营收接近20亿元，并称其占全球人形机器人市场43%。
+- 限制：公司口径说法，未经独立审计核对；43%的市场口径、统计范围与时间基准未在材料中说明；本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验。</p>
+<p><strong>S6</strong> <a href="https://www.21jingji.com/article/20261030/herald/224a593625999cc8d34f0363ac831c21.html">上海市加快发展新一代智能制造行动方案：到2028年推动8000台人形机器人进工厂</a> · 21世纪经济报道
+- 发布：2026-10-30；事件：2026-10-30；查阅：2026-11-01。
+- 来源族：news；读取：relevant_text；定位：报道正文。
+- 原文支持：上海市经信委印发的《上海市加快发展新一代智能制造行动方案》提出到2028年推动8000台人形机器人进工厂，工业机器人密度达600台/万人。
+- 限制：本账本仅依据提供的OSINT材料中的相关文本，未独立重访行动方案原文；8000台的统计口径与分年度路径未在材料中给出。</p>
+<p><strong>S7</strong> <a href="https://www.jszn.net.cn/news/n2026103192.html">2026年上半年国内人形机器人公开中标结构分析</a> · 北创大为具身智能（引南方都市报·湾财社2026-10-29）
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-01。
+- 来源族：industry_summary；读取：relevant_text；定位：报道正文。
+- 原文支持：2026年上半年国内人形机器人公开中标218个、总规模17.23亿元，其中教育科研机构采购占55.5%、政府及国资平台占20.6%，真正来自工业企业的订单仅21.1%。
+- 限制：二次引用南方都市报·湾财社的统计，未见原始中标明细表；公开中标口径不等于全部市场订单；本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验。</p>
+<p><strong>S8</strong> <a href="https://www.jszn.net.cn/news/n2026103101.html">10月具身智能融资降温与上市遇冷观察</a> · 北创大为具身智能（引证券时报、21世纪经济报道2026-10-30）
+- 发布：2026-10-31；事件：2026-10-31；查阅：2026-11-01。
+- 来源族：industry_summary；读取：relevant_text；定位：报道正文。
+- 原文支持：10月具身智能融资仅33起、总额101.05亿元，交易数量较9月的60起近乎腰斩，同期有赴港机器人企业在挂牌前叫停上市、部分已上市企业跌破发行价。
+- 限制：二次引用证券时报与21世纪经济报道，未见完整融资数据库与统计口径；叫停上市与破发的企业名单、原因未在材料中完整列出；本账本仅依据提供的OSINT材料中的相关文本，未独立重访全文核验。</p>
+<p>检索缺口：
+- 缺少智元43%全球市占率的独立第三方口径、统计范围与验证来源。
+- 缺少Mobo的售价、预售量、交付时间与实际家庭场景表现数据。
+- 缺少G2 Max与AHA3、GO-3 Preview的实际部署客户、运行小时与良率数据。
+- 缺少检索记录中提及的Gartner预测、乐聚产线案例、三菱电机物理AI系统等反证与案例的原始链接与完整口径，因未提供公开URL而未列入sources。
+- 缺少10月融资33起与9月60起的完整数据库、统计口径与企业名单。
+- 缺少上海市行动方案原文全文核对，以及8000台目标的分年度路径与统计口径。
+- 缺少灵渠OS 1.0与检索记录中Link-U OS 1.0名称对应关系的核实。</p>
+<p>检索日志：embodied AI humanoid robot news October 2026（discovery）；具身智能 人形机器人 最新进展 2026年10月（discovery）；humanoid robot breakthrough October 2026（discovery）；机器人产业 政策 订单 2026年10月（discovery）；AGIBOT Innovation Day October 29 2026 Worken G2 Max（verification）；智元机器人 创新日 2026年10月29日 Worken（verification）；humanoid robot failure limitation safety commercial deployment problem 2026（counterevidence）；人形机器人 局限 失败 商业化困境 2026年10月（counterevidence）。</p>
+<h2 id="_20">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>大模型前沿</strong>：优选 V2——条件性优选审慎检验立场：就本批证据而言，Mistral Large 4提高了前沿能力的接入可能性，但不能据此断定其为无条件开源或已证全面领先；细粒度MoE与URSA只能列为值得优先验证的工程假设，不能称为已证实的当前主线。因此，所谓“从单纯规模转向工程化竞争”仅在可用性与研究注意力层面得到初步支撑，尚未得到可验证的转向结论。</li>
+<li><strong>智能体生态</strong>：优选 V2——在2026年10月26日至31日账本范围内，智能体生态呈现能力供给集中发布与可控落地约束并存的方向性落差：综合榜首、平台beta供给与场景化机制发布属实，但单项落后、幻觉与延迟代价、沙箱执行上限与企业治理自动化缺口同时存在，因此不应把发布密度或综合分数直接读作已可控、可审计、可长程规模化落地。</li>
+<li><strong>AI 硬件</strong>：优选 V02——截至2026年10月31日的时点快照，最经得起检验的判断是谨慎情景：Oracle多厂商菜单存在可用性落差，上游基板约束可能影响兑现节奏，2027年检验标准应从宣布名单转向可订购、可交付与机架级部署；但这只是条件性谨慎判断，不是已证实的全面延迟。</li>
+<li><strong>具身智能</strong>：优选 V2——在公开中标口径与10月融资统计口径内，具身智能的规模化兑现仍滞后于2026年10月的发布热度：公开买方结构以教育科研与政府国资为主、工业企业仅占21.1%，同期融资起数较9月近乎腰斩并伴随上市遇冷；该结论不等同于全部真实工业需求偏冷，也不等于2028年目标必然失败。</li>
+</ul>
+<h2 id="_21">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+<nav class="bottomnav"><a href="../index.html">← 全部报告</a><a href="#top">回到顶部 ↑</a></nav>
+<script src="../annotate.js" defer></script>
+</body></html>
