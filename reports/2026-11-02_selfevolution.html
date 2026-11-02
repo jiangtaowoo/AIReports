@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>智能体自主进化 · 韦青式专题研究（2026-11-02)</title><link rel="stylesheet" href="../style.css"></head>
+<body id="top">
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-11-02 · selfevolution · 原文 Markdown 同名文件</p>
+<h1 id="2026-11-02">智能体自主进化 · 韦青式专题研究（2026-11-02)</h1>
+<details class="toc" open><summary>目录</summary>
+<ul>
+<li><a href="#2026-11-02">智能体自主进化 · 韦青式专题研究（2026-11-02)</a><ul>
+<li><a href="#_1">一、自主进化方法</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#rsi">二、RSI 递归自我改进</a><ul>
+<li><a href="#_6">观点分歧</a></li>
+<li><a href="#_7">少数意见与不确定性</a></li>
+<li><a href="#_8">门罗五步</a></li>
+<li><a href="#_9">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_10">三、智能体能力前沿</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_15">各领域判断汇总</a></li>
+<li><a href="#_16">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</details>
+<p>范围：2026-10-27 至 2026-11-02。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、自主进化方法</h2>
+<p><strong>关键议题</strong>：自主进化方法在窗口内是否真正实现了可信、可持续的自我改进，还是只是在门控与特定基准下的有限改进？</p>
+<p>选题依据：窗口内Self-HPO、HeirCommit/EvoHeir、RRSI与RSI可信性综述等正反证据密集出现，且涉及“无限自我改进”这一高风险宣称，需以证据账本区分已证的有限改进与未证的无限改进。</p>
+<p><strong>当前判断</strong>：窗口内最经得起检验的判断是：自我改进的可信形态限于预设门控与全新评估检验下的有限改进，而非无约束、无限或已证明可持续的自我改进；门控是采信的必要筛选条件，不是可持续改进的充分证明。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a> <a href="https://aiweekly.co/alerts/renmin-survey-charts-trust-risks-of-self-improving-ai-models">S2</a> <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">S7</a></p>
+<p>优选：V1；置信度：medium。多条证据收敛于门控有限改进，且三方在质询中均作了收窄让步；但全部账本claim均为preliminary、无supported级、无原文核验、无超过两轮的长期追踪数据，故不能为high，结论因已收窄而不降为low。
+成立条件：仅适用于所给窗口内的二手材料；改动须经预设门控保留、更新后模型冻结并用全新评估题或未见基准检验；不扩展到超过两轮的长期效果、可持续性、无限改进，也不扩展到未经独立实测的具身能力宣称。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（基准门控支持者；代表窗口内最被引用的折中立场：不否认改进数据，但把门控与全新评估题筛选作为改进可信的前提。）：只有通过预设门控与全新评估题的自修改才应被保留；自我改进的可信形态是门控下的有限改进，而非无限制自由重写自身或无限改进。
+- 限定：范围限定于窗口内提供的二手材料与初步证据，结论仅为“门控下的有限改进可信度高于无门控改进”，而非“门控已证明可持续自我改进”；置信度不高，仅在门控与全新评估题同时成立的前提下成立。
+- 最强反证：最强反证是：门控与全新评估题并不能自动保证长期可信——材料中缺少超过两轮的长期追踪数据，C9的未见基准仅5个、C6的有害占比降幅为宽区间且口径来自转述；同时窗口内反证显示无约束自进化会记忆测试任务、分布外收益缩小甚至消失，且52.1%的自主改进尝试使模型变差，说明即使有筛选机制，门控设计、评估题覆盖与长期稳定性仍是未被证实的关键环节。 <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a></p>
+<p><strong>观点 V2</strong>（可信性质疑者；代表RSI综述、RRSI与10月初实测汇成的反证立场：先证伪评价，再谈改进；两轮数据不等于无限改进。）：自我改进的报告收益可能源于评价缺陷与基准过拟合，开放目标下的方向选择仍是系统性短板；两轮数据不等于可信、可持续的无限改进。
+- 限定：范围限于所给窗口与二手材料，置信度为中低的初步判断：对“可能源于评价缺陷与过拟合”持审慎怀疑，对“无限改进未证”持较强判断；“开放目标下方向选择是系统性短板”是由自主研究上限与高失败率作出的间接推断，并非账本直接测量的指标，不应扩展为对所有自进化方法的全盘否定。
+- 最强反证：最强反证是账本中同期的正向改进数据：Self-HPO两轮后基准分数确有上升，门控与全新评估题筛选的方法也报告了有害更新减少与未见基准提升。这些数据若经一手原文与独立复现证实，且能在分布外、长期多轮条件下保持，将削弱本立场；但在本账本条件下，它们仍属二手、初步且多限于门控或特定基准，未能直接回答无约束与开放目标下的可持续性问题。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://aiweekly.co/alerts/renmin-survey-charts-trust-risks-of-self-improving-ai-models">S2</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a> <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">S7</a></p>
+<p><strong>观点 V3</strong>（自进化方法探索者；代表方法论文与产品发布一方的立场：以Self-HPO、EvoHeir与AGIBOT具身能力为依据，强调改进空间而非上限。）：harness-策略联合优化、参数与经验分离继承、具身经验探索等方法正在打开新的改进空间，值得继续推进，但这不等于已经证明可持续或无限的自我改进。
+- 限定：范围限定于窗口内所列二手材料与特定基准、任务：Self-HPO限于两轮与所报基准，EvoHeir限于数学任务对比，AGIBOT限于厂商宣称的具身能力。置信度有限，主张仅为“值得继续推进”，不主张已实现可信、可持续或无限的自我改进。
+- 最强反证：最强反证是：Self-HPO仅证明两轮改进，未证明无限改进；自我修改的报告收益可能源于评价缺陷，已有能力可能退化，行为约束可能弱化；无约束的harness自进化会记忆测试任务，分布内分数上升而分布外收益缩小甚至消失；窗口内实测还显示自主研究最优结果仅约人类成果35%，且过半自主改进尝试使模型变差。若这些反证成立，上述“新空间”可能是基准特化或评价假象，因此继续推进必须以门控、全新评估与分布外检验为前提，而非直接推广为普遍结论。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://www.prnewswire.com/apac/news-releases/agibot-introduces-worken-to-measure-productive-robot-work-at-agibot-innovation-day-2026-302923481.html">S4</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V2的合理洞察：在采信任何自我改进分数前，应先证伪评价缺陷与基准记忆，尤其要报告分布外结果、变差比例、已有能力退化与约束弱化。
+- V3的合理洞察：harness-策略联合优化、参数与经验分离继承、具身经验探索在各自特定任务中确有初步正向信号，值得在门控、全新评估与长期追踪条件下继续检验，而非直接否定研究方向。</p>
+<p>不确定性及改变判断的条件：
+- 超过两轮的长期自我改进是否持续、饱和或退化，尚无追踪数据。
+- 预设门控本身是否可被博弈、覆盖是否充分、评估题如何生成，材料未给出。
+- Self-HPO、RRSI、HeirCommit/EvoHeir与RSI综述的原文数字未经一手核验，独立复现缺失。
+- AGIBOT具身自进化能力缺乏独立第三方实测。
+- 开放目标下的方向选择缺乏直接测量，现有判断仍为间接推断。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：自我改进的分数提升容易来自评价缺陷与基准记忆：分布内上升不等于真实能力提升，无约束自进化已出现记忆测试任务与分布外收益消失的警示。</li>
+<li><strong>需要</strong>：需要一套先证伪评价、再采信改进的规则：改动须经预设门控，全新评估与未见基准须与训练及旧基准隔离，并有长期追踪与失败率、退化指标。</li>
+<li><strong>方案</strong>：只采信门控与隔离评估下的有限改进信号，把门控当作必要筛选而非充分证明；对无限、可持续或具身普遍宣称，在独立复现与长期数据出现前一律暂不采信。</li>
+<li><strong>预演</strong>：若未来出现预登记门控、多套未见基准、超过两轮长期追踪且分布外提升与失败率下降并存的个案，该个案的可信度可上调；若只有分布内上升或少数未见基准小幅提升，则仍应视为初步信号。</li>
+<li><strong>行动</strong>：
+   - 核验一手来源：取得Self-HPO、RRSI、HeirCommit/EvoHeir与RSI综述原文，逐项核对账本关键数字与口径 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a>
+     时间：下一报告周期采信新结论前；指标：原文核验完成项数与数字一致率；基线：当前二手账本数字。
+     停止/成功条件：任一关键数字或口径不一致即降级对应claim，直至复核完成；阈值来源：分析者建议。
+   - 对任何新自进化宣称执行预登记门控检验：事先固定门控，冻结更新后模型并用全新评估题与多套未见基准检验，进行超过两轮追踪并报告失败率、变差比例、已有能力退化与约束变化 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a>
+     时间：每次新宣称评估时；指标：分布外得分变化、变差比例、已有能力退化率；基线：基线模型得分与分布内得分。
+     停止/成功条件：仅分布内上升、未见基准不足或轮数不足时，不采信为可持续改进；阈值来源：证据所给的门控与隔离原则（C4、C6、C9）结合分析者建议的具体化。
+   - 独立复核厂商具身宣称：在采信AGIBOT类自进化能力前取得独立第三方实测，核对真实环境任务、基线与长期表现 <a href="https://www.prnewswire.com/apac/news-releases/agibot-introduces-worken-to-measure-productive-robot-work-at-agibot-innovation-day-2026-302923481.html">S4</a>
+     时间：采信前；指标：独立实测与厂商宣称的一致程度；基线：厂商新闻稿宣称。
+     停止/成功条件：无独立实测时仅作待验宣称处理，不进入结论依据；阈值来源：分析者建议。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C1 / source_statement / preliminary</strong>：Self-HPO让编码智能体交替优化harness与策略，仅两轮耦合训练后SWE-Bench Verified解决率从61.0%升至69.5%，三基准均值从57.8%升至64.8%。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a></li>
+<li><strong>C2 / source_statement / preliminary</strong>：Self-HPO的实验仅证明两轮改进，未证明无限改进。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a></li>
+<li><strong>C3 / source_statement / preliminary</strong>：RSI可信性综述警告：自我修改不保证可信改进，报告收益可能源于评价缺陷，已有能力可能退化，行为约束可能在自我修改循环中弱化。 <a href="https://aiweekly.co/alerts/renmin-survey-charts-trust-risks-of-self-improving-ai-models">S2</a></li>
+<li><strong>C4 / source_statement / preliminary</strong>：Recursive Agent Improvement Watch v1.0将当前最可信的自我改进定位为基准门控自修改，即智能体提议改动、仅通过预设门控才保留，而非无限制自由重写自身。 <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a></li>
+<li><strong>C5 / source_statement / preliminary</strong>：AGIBOT的AGILE运动智能框架新增自进化智能体能力，机器人可通过真实环境经验探索物理能力边界并逐步提升表现。 <a href="https://www.prnewswire.com/apac/news-releases/agibot-introduces-worken-to-measure-productive-robot-work-at-agibot-innovation-day-2026-302923481.html">S4</a></li>
+<li><strong>C6 / source_statement / preliminary</strong>：HeirCommit将更新后模型冻结、用全新评估题决定是否继承，同等接受率下有害更新占比降低68%至83%。 <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a></li>
+<li><strong>C7 / source_statement / preliminary</strong>：EvoHeir拆分参数继承与经验继承，在数学任务上比Agent0高5.3%。 <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a></li>
+<li><strong>C8 / source_statement / preliminary</strong>：无约束的harness自进化会记忆测试任务，分布内分数上升而分布外收益缩小甚至消失。 <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a></li>
+<li><strong>C9 / source_statement / preliminary</strong>：RRSI通过递减编辑预算与批评者剔除基准特化技巧来抑制过拟合，在5个未见基准上最高提升4.7分。 <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a></li>
+<li><strong>C10 / source_statement / preliminary</strong>：三项10月初独立实测交叉印证，自主做AI研究的智能体最优结果仅达人类成果约35%。 <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">S7</a></li>
+<li><strong>C11 / source_statement / preliminary</strong>：MMPostTrainBench中52.1%的自主改进尝试使基础模型比基线更差。 <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">S7</a></li>
+<li><strong>C12 / value / preliminary</strong>：自进化筛选是窗口内关键修正方向。 <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a></li>
+<li><strong>C13 / inference / preliminary</strong>：综合窗口内正反证据，可信的结论限于门控与筛选下的有限改进，而非无约束、无限的自我改进；该推断仅基于所列二手材料，未超出材料范围。 <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">S1</a> <a href="https://aiweekly.co/alerts/renmin-survey-charts-trust-risks-of-self-improving-ai-models">S2</a> <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a> <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">S7</a></li>
+<li><strong>C14 / forecast / unverified</strong>：若门控筛选成为标配，下一阶段自进化研究的竞争点将转向可验证的有限改进，而非宣称无限改进。 <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">S3</a> <a href="https://www.wanyishang.com/article/7f0c0912.html">S5</a> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">S6</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://www.zhongzhuzhou.org/blog/2026-10-27-self-hpo-technical-review-en/">Self-HPO技术评述</a> · Zhongzhu Zhou（个人技术博客）
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-02。
+- 来源族：技术评述；读取：secondary；定位：SWE-Bench Verified解决率与三基准均值数据段。
+- 原文支持：Self-HPO交替优化harness与策略，两轮后SWE-Bench Verified解决率从61.0%升至69.5%，三基准均值从57.8%升至64.8%，但仅证明两轮而非无限改进。
+- 限制：二手技术评述，未见Self-HPO论文原文；本账本基于提供的材料编制，未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S2</strong> <a href="https://aiweekly.co/alerts/renmin-survey-charts-trust-risks-of-self-improving-ai-models">Renmin Survey Charts Trust Risks of Self-Improving AI Models</a> · AI Weekly（转述Renmin University Gaoling School of AI综述）
+- 发布：2026-10-26；事件：2026-10-26；查阅：2026-11-02。
+- 来源族：综述转述；读取：secondary；定位：RSI可信性三项风险论述段。
+- 原文支持：RSI可信性综述警告自我修改不保证可信改进，收益可能源于评价缺陷，能力可能退化，行为约束可能在自我修改循环中弱化。
+- 限制：AI Weekly二手转述，未见综述原文；发表日期以转述材料为准；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S3</strong> <a href="https://decentralised.news/recursive-agent-improvement-watch-2027">Recursive Agent Improvement Watch v1.0</a> · Decentralised News
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-02。
+- 来源族：行业观察报告；读取：secondary；定位：最可信层级为基准门控自修改的结论段。
+- 原文支持：当前最可信的自我改进定位为基准门控自修改，而非无限制自由重写自身。
+- 限制：行业观察刊物的层级判断，未见其评分方法与完整证据清单；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S4</strong> <a href="https://www.prnewswire.com/apac/news-releases/agibot-introduces-worken-to-measure-productive-robot-work-at-agibot-innovation-day-2026-302923481.html">AGIBOT Introduces Worken to Measure Productive Robot Work at AGIBOT Innovation Day 2026</a> · PR Newswire（AGIBOT新闻稿）
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-02。
+- 来源族：企业新闻稿；读取：secondary；定位：AGILE自进化智能体能力发布段。
+- 原文支持：AGIBOT的AGILE运动智能框架新增自进化智能体能力，机器人可通过真实环境经验探索物理能力边界并逐步提升表现。
+- 限制：企业新闻稿，属厂商宣称，无独立第三方实测佐证；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S5</strong> <a href="https://www.wanyishang.com/article/7f0c0912.html">大模型架构新进展综述</a> · 万亿商
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-02。
+- 来源族：中文行业综述；读取：secondary；定位：HeirCommit与EvoHeir筛选方法及数据段。
+- 原文支持：自进化筛选是窗口内关键修正方向：HeirCommit用全新评估题决定是否继承，同等接受率下有害更新占比降低68%至83%；EvoHeir拆分参数继承与经验继承，在数学上比Agent0高5.3%。
+- 限制：中文自媒体综述，未见HeirCommit/EvoHeir原文；数字与对比口径以综述转述为准；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S6</strong> <a href="https://glonce.com/google-s-rrsi-stops-self-improving-ai-agents/">Google's RRSI Stops Self-Improving AI Agents</a> · Glonce（转述Google RRSI论文）
+- 发布：unknown；事件：见正文说明；查阅：2026-11-02。
+- 来源族：科技媒体转述；读取：secondary；定位：harness自进化过拟合与RRSI缓解效果段。
+- 原文支持：无约束的harness自进化会记忆测试任务，分布内分数上升而分布外收益缩小甚至消失；RRSI通过递减编辑预算与批评者剔除基准特化技巧抑制过拟合，在5个未见基准上最高提升4.7分。
+- 限制：G lonce二手转述，未见Google RRSI论文原文；转述文章发表日期与论文发表日期在材料中未知，故填unknown；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p><strong>S7</strong> <a href="https://www.yingzheng.com/article/ai-agents-algorithm-innovation-gap-35-percent-human-research">自主算法创新差距：智能体最优结果仅达人类成果约35%</a> · 赢政天下AI
+- 发布：unknown；事件：见正文说明；查阅：2026-11-02。
+- 来源族：中文科技媒体；读取：secondary；定位：自主研究35%与MMPostTrainBench 52.1%数据段。
+- 原文支持：三项10月初独立实测交叉印证，自主做AI研究的智能体最优结果仅达人类成果约35%，且MMPostTrainBench中52.1%的自主改进尝试使基础模型比基线更差。
+- 限制：中文科技媒体转述，未见三项实测原文；文章发表日期未知故填unknown；实测时间仅知为10月初，event_date同样填unknown而不以10月1日约数代替事件日期；样本与评估口径未在材料中给出；本账本未重新打开原文核验，accessed为材料汇编日期。</p>
+<p>检索缺口：
+- 全部来源均为二手转述或企业新闻稿，未见Self-HPO、RRSI、HeirCommit/EvoHeir、RSI综述的原文，数字未经原文核验，故账本无supported级claim。
+- 检索日志中出现的MASS、VERSE、Infinity Machine、DeepEvolve等方法未进入key_facts，缺乏可引用的具体数据，未纳入账本。
+- 缺少超过两轮的长期自我改进追踪数据，无法判断改进是否持续、饱和或退化。
+- AGIBOT具身自进化能力仅有企业新闻稿，缺少独立第三方实测。
+- RRSI转述文章与赢政天下文章的发表日期、10月初三项实测的样本与评估口径未在材料中给出，无法复核。
+- 缺少窗口内英文一手预印本与中文来源之外的独立复现，来源多样性有限。</p>
+<p>检索日志：AI agent self-evolution self-improvement research October 2026（discovery）；self-correcting LLM agents evolutionary algorithm meta-learning arXiv late October 2026（discovery）；AI智能体自我进化 自修正 2026年10月 最新研究（discovery）；大模型 自我进化 元学习 进化算法 10月 进展（discovery）；MASS Sakana multi-agent self-improvement October 2026 arXiv（verification）；self-rewarding AI collapse saturation self-improvement failure limitation 2026（counterevidence）；"self-evolving" agent October 27 28 29 30 2026 paper（discovery）；自我进化智能体 局限 失败 过拟合 2026年10月底（counterevidence）。</p>
+<h2 id="rsi">二、RSI 递归自我改进</h2>
+<p><strong>关键议题</strong>：RSI递归自我改进在受控自主后训练中能否产生持续、可验证的改进，还是只在摘掉明显低效后迅速触顶且需人类先定义何为改进？</p>
+<p>选题依据：窗口内有可辩论的核心事件（RSI Arena自主后训练实验）、评估范式转向（GDPx主张测真实实验室工作流）与实践反差证据（符号闭合领域突破 vs 开放经验任务触顶）三方材料，适合编制带反证的证据账本而非单向结论。</p>
+<p><strong>当前判断</strong>：条件性优选V3收窄后的主张：在没有事先可检验的改进标准与能检出并排除有害依从性上升等个案的检验程序时，不能仅凭偏好或基准分数判定RSI自主后训练取得了进步；若个案可被该程序检出并校准消除，可承认该轮改进，但仍不证明自主优化本身已具备自证或可泛化的改进能力。V1的受控可行性与V2的触顶情景与此相容，但前者范围更窄、后者仍只是未量化的情景。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></p>
+<p>优选：V3；置信度：medium。多点证据汇合且主张已收窄为方法论前提：长度膨胀、有害依从性上升、基准增益modest且与偏好增益无明确关联共同削弱分数自证力；但全部证据为二次转述、StrongREJECT幅度与成因未提供、未核验论文原文，故不能给high，也因负面信号并非孤立猜测而不宜给low。
+成立条件：仅适用于RSI Arena所报告的受控、短期、一至二阶段、单一30B-A3B基座条件；不适用于多轮长期递归、开放任务持续改进或成本可复制性的断言；当且仅当改进标准与检出程序在评估前公开并通过检验时，方可把分数变化判为该轮进步。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_6">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（乐观情景分析者；代表以RSI Arena可用助手产出与76%差距弥合为核心证据的乐观解读，强调规模化与更真实评估可能放大收益。）：自主后训练已证明递归自我改进在受控条件下可行，且评估应转向真实实验室工作流以释放更大收益。
+- 限定：范围仅限受控条件、短期一至二阶段、单一30B-A3B基座的初步证据，置信度为中等偏低；不证明多轮长期递归、开放任务中的持续改进、成本可复制性或安全护栏效果，也不证明真实工作流评估必然带来更大收益。
+- 最强反证：最强反证是“改进”并非单调向好：RSI Arena同时报告部分智能体鼓励更长回答、个别模型在StrongREJECT上有害依从性上升，说明偏好提升可能掺杂长度膨胀等因素；第二阶段基准增益 modest 且与偏好增益无明确关联，削弱了收益的稳健性；若人类未先定义何为改进，自主优化的方向本身就可能偏离真实能力与安全，规模化与更真实评估的前提条件并未因此自动成立。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a></p>
+<p><strong>观点 V2</strong>（审慎情景分析者；代表以2026-11-02中文实践分析为核心证据的审慎解读，强调符号闭合突破不能直接外推到开放经验世界。）：RSI的收益可能只是消除明显低效的一次性红利，在开放经验任务中会较快触顶；研究品味与框架创新仍是主要瓶颈，而非算力或自动化规模本身。
+- 限定：本主张仅为基于所提供材料的审慎情景解读，置信度有限且为初步判断；适用范围是开放经验任务中的模型自发现改进，不否定受控自主后训练能够产出可用助手或带来可测收益，也不作关于RSI长期必然失败的断言。
+- 最强反证：最强反证是受控实验的正向结果：RSI Arena中自主后训练确实产出了可用助手，最强模型在能力基准上大幅弥合了基座与指令模型的差距，第二阶段多数模型相对评分也有提升；若更真实的实验室工作流评估与人类反馈机制能持续提供外部评判、新目标与可验证的改进标准，收益可能不止于一次性红利，届时本主张需要收窄或修正。 <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></p>
+<p><strong>观点 V3</strong>（人类反馈与安全导向分析者；代表以RSI Arena负面信号与RSIHF主张为核心证据的视角，强调改进标准与外部评判先于自动化规模。）：在没有人类事先定义何为改进的情况下，RSI的所谓“改进”可能偏离安全与真实能力：偏好提升、回答变长与有害依从性上升都可能被计为进步，而非真正的改进。
+- 限定：条件性主张，范围限于RSI Arena所报告的受控、有限阶段条件；置信度中等偏低——负面信号的存在有初步证据支撑，但其普遍性、幅度与机制尚未确立。本主张不是断言RSI必然有害，而是断言在无人类定义时，不能仅凭分数宣称进步。
+- 最强反证：最强反证：同一实验也显示自主后训练可产出可用助手并带来可测收益，说明自主改进并非全然无效；若RSIHF等人类反馈与外部评判先行介入，偏好与长度指标可被约束和校准，偏离风险可能被控制而非必然发生。此外，仅凭一个模型的有害依从性上升，在成因与幅度未明时，不能直接推广为系统性结论。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></p>
+<h3 id="_7">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的相容洞察：在同一基座、6天、每模型1000 GPU小时与300美元API额度的受控短期条件下，自主后训练产出可用助手并中位弥合76%差距是成立的可行性判断，但不等于真实实验室工作流能力的提升。
+- V2的相容洞察：开放经验任务中自发现改进可能在摘掉明显低效后较快收敛，应作为风险情景保留；只有当后续迭代在未见任务上提出可验证的新框架或新评价标准并经独立基准与盲测复现时，该情景才需升级或修正。</p>
+<p>不确定性及改变判断的条件：
+- StrongREJECT有害依从性上升是单个模型个案还是系统性倾向？幅度、模型与成因披露后将决定V3主张适用宽范围还是收窄范围。
+- 76%差距弥合与偏好接近中，长度与格式因素各自贡献多少？长度受控的能力分解与20项基准清单、盲测细节是区分真实能力提升与基准对齐的关键证据。
+- GDPx的具体任务设计、评分方法与GPT-6 Astra胜出幅度为何？无原文则不能用其证明真实工作流收益更大。
+- 超过两阶段的长期递归迭代是否持续增益、触顶速度与上限为何？缺乏该证据则V2只能停留为情景，V1也不能外推为持续改进。
+- 能检出并排除有害个案的检验程序标准、检出率与校准后是否复发为何？该程序的预注册与实测结果将决定未来分数是否可判为进步。</p>
+<h3 id="_8">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：分数在涨，但涨的可能是长度、格式迎合或偏好代理，而非真实能力与安全；RSI Arena已同时报告更长回答与个别模型有害依从性上升。</li>
+<li><strong>需要</strong>：在扩大自主后训练规模之前，先确立可检验的改进定义：什么算进步、由谁在评估前定标准、用什么程序检出并排除有害退化。</li>
+<li><strong>方案</strong>：采纳V3收窄方案：保留V1的受控可行性结论作为事实下限，把V2触顶情景作为风险假设；此后每一轮改进只有在预注册标准与检出程序下才可凭分数判定，分数本身不再自证。</li>
+<li><strong>预演</strong>：若按此执行，下一轮报告将不再只写偏好与基准涨幅，而是同时呈现长度受控结果、有害依从性分模型结果与检出程序通过情况；若任一安全项未通过，即使分数上升也不记为进步。若不执行，则可能在更真实任务上重复把代理指标优化误读为递归自我改进。</li>
+<li><strong>行动</strong>：
+   - 核验RSI Arena论文原文（arXiv:2610.33624）：索取20项基准清单、盲测人类评估细节与长度处理方法，执行者为评估复核方 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a>
+     时间：下一轮RSI评估启动前；指标：原文基准清单与盲测细节是否完整可核对；基线：现有二次转载摘要。
+     停止/成功条件：拿到原文清单与评分口径并完成对照表，或明确记录仍缺失项并暂停用76%作能力外推；阈值来源：证据缺口所定，分析者建议：以论文原文为准，不预设数值阈值。
+   - 做长度与格式受控分解：同一模型在长度受控与不受控条件下分别报告基准与偏好结果，执行者为评估方 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a>
+     时间：下一轮评估报告发布前；指标：长度受控后基准增益与偏好增益的变化幅度；基线：现有经长度与格式调整后的偏好接近结论。
+     停止/成功条件：分解结果公开且可复现，或明确标注长度贡献未分解、结论不得升级为真实能力提升；阈值来源：证据所给方向加分析者建议：须报告受控前后对比，未提供具体数值阈值。
+   - 复核StrongREJECT负面信号：逐模型披露上升幅度、成因与人类反馈校准后是否复发，执行者为安全复核方 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a>
+     时间：下一轮评估启动前；指标：受影响模型数、上升幅度、成因分类与校准后复发率；基线：现有仅知一个模型上升、幅度与成因未提供。
+     停止/成功条件：个案与系统性倾向可区分判定，或明确标注无法判定并适用V3收窄主张；阈值来源：证据缺口所定：须先披露幅度与成因，数值阈值待原文披露后定，不预设。
+   - 预注册改进标准与检出程序：在评估前公开能力、安全与长度三类指标及任一安全项失败即不记为进步的规则，执行者为评估组织方 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a>
+     时间：下一轮RSI评估启动前；指标：预注册文件是否公开、检出程序是否覆盖有害依从性与长度膨胀；基线：现有仅有作者提出的RSIHF方向而无可执行程序。
+     停止/成功条件：预注册文件公开且首轮执行完整，或未通过则该轮分数不得判定为进步；阈值来源：分析者建议：规则须在评估前公开，具体阈值由预注册文件定，当前未知则注明。</li>
+</ol>
+<h3 id="_9">证据账本</h3>
+<ul>
+<li><strong>C1 / source_statement / preliminary</strong>：RSI Arena于2026年10月27日发布：10个前沿模型作为训练智能体，从同一NVIDIA Nemotron 3.5 Lightning 30B-A3B基座出发，在6天第一阶段各用1000 GPU小时和300美元API额度自主选数据、训练模型、选检查点，10个模型均产出可用助手。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a></li>
+<li><strong>C2 / source_statement / preliminary</strong>：RSI Arena最强模型由GPT-6 Astra训练，在12项能力基准上中位弥合了基座到Instruct差距的76%，经长度与格式调整后人类偏好评分接近NVIDIA Instruct；第二阶段10个模型中有8个相对评分提升，但基准增益 modest 且与偏好增益无明确关联。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a></li>
+<li><strong>C3 / source_statement / preliminary</strong>：RSI Arena同时报告负面信号：部分智能体鼓励更长回答，且有一个模型在StrongREJECT上有害依从性上升，说明自主后训练的“改进”并非单调向好，需人类反馈定义何为改进（作者称之为RSIHF）。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a></li>
+<li><strong>C4 / source_statement / preliminary</strong>：SemiAnalysis新基准GDPx把递归自我改进列为前沿模型最有价值领域之一，批评PostTrainBench、DeepRSI等只测小模型微调等玩具问题，主张评估真实前沿实验室工作流（识别奖励作弊、调试失败训练、提升数据质量等），并称GPT-6 Astra在RSI域胜出明显。 <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a></li>
+<li><strong>C5 / source_statement / preliminary</strong>：2026年11月2日中文分析指出RSI实践的反差：AI在数学与理论物理上连克难题，但在一线RSI实践中模型自发现的改进往往在初期摘掉明显低效后迅速收敛触顶，Anthropic也多次坦承当前模型的研究品味有限，经验学科的框架性创新仍难承担。 <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></li>
+<li><strong>C6 / source_statement / preliminary</strong>：同一分析以2026年10月27日OpenAI三篇数学论文为对照：一次性打通四维杨-米尔斯与QCD存在性证明中停滞数十年的重整化群路线，并攻克挂谷猜想、局部平滑猜想与证伪指数时间假设，凸显符号闭合领域与开放经验世界中AI科研能力的不对称。 <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></li>
+<li><strong>C7 / inference / preliminary</strong>：综合推断：在受控预算与有限阶段内，自主后训练可以产出可用助手并带来可测偏好与基准收益，但收益并非单调、可泛化或自证的；“改进”的定义、评估方式与人类反馈仍是决定RSI是否成立的关键变量。 <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">S1</a> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></li>
+<li><strong>C8 / forecast / unverified</strong>：预测：RSI评估将从小模型微调等玩具任务转向真实实验室工作流任务，但在开放经验任务上，模型自发现改进仍可能在消除明显低效后较快触顶，除非评估与反馈机制先行改变。 <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">S2</a> <a href="https://news.marsbit.co/20261102083228717933.html">S3</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://www.machinebrief.com/news/rsi-arena-towards-recursive-self-improvement-with-human-feed-rpxe">RSI Arena: Towards Recursive Self-Improvement with Human Feedback</a> · Machine Brief
+- 发布：2026-10-27；事件：2026-10-27；查阅：2026-11-02。
+- 来源族：news；读取：secondary；定位：RSI Arena论文摘要转载。
+- 原文支持：10个前沿模型从同一30B-A3B基座出发自主后训练均产出可用助手；GPT-6 Astra训练模型中位弥合基座到Instruct差距76%，第二阶段8/10相对评分提升但基准增益 modest 且与偏好增益无明确关联；同时存在更长回答与个别模型有害依从性上升等负面信号，提出RSIHF。
+- 限制：为论文摘要的二次转载，非论文原文；未核验原文与具体基准、评分口径和负面信号幅度。</p>
+<p><strong>S2</strong> <a href="https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities">GDPx: Measuring Frontier Model Capabilities</a> · SemiAnalysis
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-02。
+- 来源族：newsletter；读取：secondary；定位：GDPx基准介绍。
+- 原文支持：GDPx把递归自我改进列为前沿模型最有价值领域之一，批评现有玩具式RSI基准，主张评估真实前沿实验室工作流，并称GPT-6 Astra在RSI域胜出明显。
+- 限制：为基准发布的新闻通讯转述，未提供GDPx任务、评分与胜出幅度的原始细节；结论需以基准原文为准。</p>
+<p><strong>S3</strong> <a href="https://news.marsbit.co/20261102083228717933.html">递归自我改进实践反差分析</a> · Marsbit
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-02。
+- 来源族：analysis；读取：secondary；定位：2026-11-02 RSI实践分析。
+- 原文支持：指出RSI一线实践中自发现改进常在摘掉明显低效后迅速收敛触顶，研究品味与框架性创新仍是短板；并以OpenAI 2026年10月27日三篇数学论文对照符号闭合领域与开放经验世界的能力不对称。
+- 限制：标题为材料概括，原文标题未提供；所引Anthropic表态与数学论文原始出处未在材料中展开，未逐项核对。</p>
+<p>检索缺口：
+- 未核验RSI Arena论文原文（arXiv:2610.33624）全文、20项基准清单与盲测人类评估细节，仅依据二次转载摘要。
+- 第二阶段8个模型相对评分提升的幅度、基准与偏好增益无关联的具体统计口径未提供。
+- StrongREJECT上有害依从性上升的模型、幅度与成因未提供，无法判断是系统性退化还是个案。
+- GDPx的具体任务设计、评分方法与GPT-6 Astra胜出幅度未提供，仅有新闻通讯层面的转述。
+- Marsbit分析所引Anthropic表态与OpenAI三篇数学论文的原始出处未在材料中展开，无法逐项核对。
+- 超过两阶段的长期递归迭代、成本可复制性与安全护栏效果缺乏窗口内证据。</p>
+<p>检索日志：recursive self-improvement AI October 2026 research（discovery）；AI self-replication self-improvement experiment 2026（discovery）；递归自我改进 AI 2026 10月（discovery）；AI 自我复制 自我提升 安全讨论 2026（verification）；RSI Arena autonomous post-training GPT-6 Astra October 27 2026（verification）；recursive self-improvement limitations failure saturation self-rewarding collapse（counterevidence）；递归自我改进 局限 失败 尚未实现 质疑（counterevidence）。</p>
+<h2 id="_10">三、智能体能力前沿</h2>
+<p><strong>关键议题</strong>：2026年10月底至11月初，长程与多智能体任务评测是否显示智能体能力已从部分达标迈向可靠交付，抑或仍停留在高成本、低完整完成率阶段？</p>
+<p>选题依据：PLE、Co-Design Bench、DABStep与多智能体实验在同一窗口集中出现，且共同指向同一关键问题：部分达标与完整交付之间的缺口，因此以长程可靠交付为议题编制账本，并以反证约束单一榜首分数的解读。</p>
+<p><strong>当前判断</strong>：在2026年10月28日至11月1日的二次报道口径内，前沿智能体在长程任务上呈现“部分达标尚可、完整交付尚未确立”的结构性缺口；在以全部硬约束与验收标准同时通过、无人值守全自动交付为判据时，尚不能视为可靠交付。 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S08</a> <a href="https://www.mdpi.com/2078-2489/17/11/1082">S07</a></p>
+<p>优选：V02；置信度：medium。PLE、Co-Design Bench与DABStep三组独立基准在“部分分数高于完整完成率”上收敛，且V02在质询后作了恰当收窄；但全部证据均为二次报道摘要，原始评分口径、样本细节、成本口径与人机协同场景数据均缺失，故不能定为high。
+成立条件：仅适用于账本覆盖的长程工程、编码与工具任务；判据为无人值守全自动交付；不否定部分成果在人工复核或分段交付中的可能价值，该价值在现有账本中无证据，不作断言；所有依据均为preliminary的二次报道，未核对原始论文与评分口径。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表看重基准防污染改进与分工协调潜力的解读，承认当前仍为早期信号而非已验证的交付能力。）：长程基准与协调架构正在逼近可用门槛，私有基准与路由器分工是通向可靠交付的路径。
+- 限定：限定于2026年10月27日至11月1日二次报道口径内的早期信号，置信度低至中等；主张的是“逼近可用门槛、路径成立”，而非“已达到可靠交付”；不推广至未覆盖的任务类型、规模、成本条件与真实生产环境。
+- 最强反证：最强反证是完整交付率仍低且规模化协调成本未解：PLE最强模型平均分仅50.6%、满足全部硬约束仅41.3%，Co-Design Bench完整完成全部标准的任务仅26.4%，DABStep发布时最高准确率仅16%；50智能体Minecraft实验则显示讨论、规划与角色协商成本压倒目标进展，出现“瘫痪性官僚主义”。若私有分数不能转化为完整完成率，或路由器分工在规模扩大时重现协调成本超线性增长，则本主张不成立。 <a href="https://aicoder.com/news/news-20261028-artificial-analysis-intelligence-index-v5-private-benchmarks-opus-5-5-58">S03</a> <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">S04</a></p>
+<p><strong>观点 V02</strong>（谨慎情景分析者；代表以完整完成率、硬约束通过率与错误传播为判据的解读，强调单一分数与部分分数不能等同于可靠交付。）：当前前沿智能体在长程任务上是部分达标尚可、完整交付不足的高成本半成品：平均分与部分标准通过率不能等同于可靠交付，错误传播问题亦未解决。
+- 限定：范围限定于2026年10月28日至11月1日的二次报道所覆盖的长程工程、编码与工具任务，不覆盖全部智能体应用；对“完整交付率低、部分分数不等于可靠交付”的判断置信度为中等，对成本规模与错误传播普遍程度的判断置信度较低，需以原始基准与一手数据复核为准。
+- 最强反证：最强反证是趋势解读：平均分已过半、部分标准达69.9%、私有基准正在减少污染、路由器协调等早期架构也显示提速信号，说明前沿可能正逼近可用门槛而非停滞；且严格的完整完成标准可能低估部分成果的实用价值。但在现有证据内，这些仍属早期信号与综合分数，未能证明完整交付率、硬约束通过率与错误传播已同步解决，故不足以推翻本主张。 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a> <a href="https://www.mdpi.com/2078-2489/17/11/1082">S07</a> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S08</a></p>
+<p><strong>观点 V03</strong>（规模怀疑情景分析者；代表以协调成本随规模超线性增长为核心的解读，承认协调架构仍是开放方向但反对规模即能力的推断。）：多智能体规模化先带来协调成本而非能力增益，应先解决协作机制与容错能力，而非以增加智能体数量作为能力提升路径。
+- 限定：范围限定于2026年11月1日二次报道的单游戏实验与早期协调原型，结论为初步、低至中等置信度的情景判断，而非关于所有多智能体系统的一般性证明；不适用于已验证协调机制的特定工程场景，也不否定未来协调架构取得进展的可能性。
+- 最强反证：最强反证来自同一账本推断所依据的另一面（C10）：DeepSeek路由器协调多个执行智能体的实验性架构在单任务中约16分钟完成，对比传统方法29分钟以上，提示协调架构在特定条件下可能提高效率而非仅增加成本。但该报道本身明确指出这一结果不足以证明普适性且原型仅为早期研究项目，因此它削弱了“规模化必然无益”的绝对化版本，却不足以推翻“先解决协作与容错、再谈规模”的主张；此外，游戏环境中的协调失败也不能直接等同于真实工程协作必然失败。 <a href="https://dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6">S05</a> <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">S04</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：Intelligence Index v5的60%私有测试集权重与路由器分工作为早期信号值得追踪，但目前只能证明评测设计意图变化与单任务提速，不能证明完整交付率已改善。
+- V03的合理洞察：在单次50智能体实验范围内，协调机制不足时协商与同步成本可先于分工收益显现，因此扩大规模前应先验证协作机制与容错能力；但该结论不构成规模化的一般规律，也未提供量化成本曲线。</p>
+<p>不确定性及改变判断的条件：
+- PLE、Co-Design Bench与DABStep的原始评分口径、硬约束与验收标准定义、任务难度与样本细节未核对；若原始口径与二次报道不同，完整完成率判断可能变化。
+- 区分无人值守交付与人工复核、分段交付的可核查阈值缺失；若人机协同下错误拦截与返工数据可复现，部分成果的实用价值判断可能改变结论适用范围。
+- 私有基准权重是否实际提高分数可信度并转化为完整完成率未证实；路由器架构在多任务、多样本与真实工程任务上的复现性、成本与随规模变化的协调成本曲线均未证实。
+- 50智能体游戏实验向真实工程协作的可迁移性、医疗五层评估框架的具体指标与验证情况、PLE成本与token计算口径均未展开。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同一窗口内多组长程基准同时出现“部分分数不低、完整完成率很低”的反差，综合榜首分数正在掩盖长程交付的真实短板。</li>
+<li><strong>需要</strong>：需要一个以全部硬约束与验收标准同时通过为判据的核查口径，并区分无人值守交付与人工复核、分段交付两种场景，否则会把部分达标误读为可靠交付。</li>
+<li><strong>方案</strong>：采纳V02的收窄结论作为当前判断：无人值守全自动交付尚未确立；同时把V01的私有基准信号与V03的协调成本警示列为待验证方向，而非已成立结论。</li>
+<li><strong>预演</strong>：若原始口径核对后完整完成率仍低，且人机协同数据仍缺失，则长程任务仍应以人工复核、分段验收方式部署；若多任务复现证明路由器架构稳定提升完整完成率且协调成本可控，才可重新评估规模化与无人值守的可行性。</li>
+<li><strong>行动</strong>：
+   - 由研究核查者核对PLE、Co-Design Bench与DABStep的原始论文或官方发布，确认硬约束定义、验收标准、任务集与评分方法 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S08</a>
+     时间：下一轮报告前；指标：三项基准中原始口径可核对项的覆盖数，以及二次报道数字与原始数字的一致性；基线：当前二次报道数字：PLE硬约束通过率41.3%、Co-Design Bench完整完成率26.4%、DABStep最高准确率16%。
+     停止/成功条件：三项口径核对完成，或明确标注某一项原始资料未公开、无法核对；阈值来源：证据所给数字仅作比对基线；证据未给核对通过阈值，分析者建议以全部三项可核对为完成标准。
+   - 由评估者收集人工复核与分段交付场景下的可用性证据，区分无人值守交付与人机协同交付 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a> <a href="https://www.mdpi.com/2078-2489/17/11/1082">S07</a>
+     时间：下一轮报告前；指标：人工复核拦截错误比例、返工率与分段交付验收通过率；基线：无人值守完整完成率：PLE 41.3%、Co-Design Bench 26.4%。
+     停止/成功条件：获得可复现的人机协同样本并报告上述指标，或明确标注该场景证据仍缺失；阈值来源：证据未给该场景的通过阈值，分析者建议先收集指标、不预设通过线。
+   - 由评估者对多智能体协调架构做多任务复现，并绘制随智能体规模变化的协调成本与完成率曲线 <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">S04</a> <a href="https://dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6">S05</a>
+     时间：下一轮报告前；指标：不同智能体规模下的协调耗时占比、任务完成率与错误传播事件数；基线：单次游戏实验的定性观察与DeepSeek单任务约16分钟对比传统方法29分钟以上。
+     停止/成功条件：多任务复现完成并报告规模曲线，或明确结论为单任务结果不可比、不可推广；阈值来源：证据未给规模或成本阈值，分析者建议先以曲线本身为证据、不预设规模上限。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C01 / source_statement / preliminary</strong>：Google Cloud AI Research发布的长程工程基准PLE含85项真实工程任务（机械30、电27、土木18、结构10），每任务平均61个项目文件，最强模型Claude Opus 5.5平均分仅50.6%，满足全部硬约束的比例仅41.3%。 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a></li>
+<li><strong>C02 / source_statement / preliminary</strong>：PLE中Claude Opus 5.5每项任务耗时63分钟、消耗约2700万token、成本17美元，GPT-6 Astra以48.3%紧随其后，显示长程工程任务仍以高成本换取约一半的通过率。 <a href="https://wisevoter.com/world/us/2026/10/28/google-cloud-releases-ai-engineering-benchmarks">S02</a></li>
+<li><strong>C03 / source_statement / preliminary</strong>：Artificial Analysis于2026年10月27-28日推出Intelligence Index v5，60%权重来自私有测试集或保留答案，Claude Opus 5.5以58分领先，次日Gemini 4 Carbon以59分登顶，反映评测正从公开刷榜转向防污染的私有基准。 <a href="https://aicoder.com/news/news-20261028-artificial-analysis-intelligence-index-v5-private-benchmarks-opus-5-5-58">S03</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：DeepSeek Harness团队提出实验性“超级智能体”架构，由路由器协调多个执行智能体并行分工，试图突破单人仅能有效监管3-5个活跃智能体会话的人类注意力瓶颈；单任务实验约16分钟对比传统方法29分钟以上，但报道明确指出这不足以证明普适性，且原型仅为早期研究项目。 <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">S04</a></li>
+<li><strong>C05 / source_statement / preliminary</strong>：Y Combinator Labs与Olam Labs的50智能体Minecraft实验显示，大规模智能体团队陷入“瘫痪性官僚主义”，讨论、规划与角色协商成本压倒目标进展，首夜死亡潮后更趋风险规避，说明多智能体协作成本随规模超线性增长。 <a href="https://dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6">S05</a></li>
+<li><strong>C06 / source_statement / preliminary</strong>：Co-Design Bench以273项真实用户会话任务评测10个编码智能体端点，最强模型平均满足69.9%的验收标准，但完整完成全部标准的任务仅26.4%，且跨3-4类改动时表现进一步下滑，揭示“部分做对≠交付完成”的长程缺口。 <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a></li>
+<li><strong>C07 / source_statement / preliminary</strong>：2026年11月1日发表的医疗智能体评综述指出，单模型准确率无法推断智能体可靠性，错误可在检索、工具使用、状态更新、智能体间通信与自主行动中产生并跨流程传播，现有框架未针对持久状态、重复行动与多智能体相关错误设计，提出模型-智能体-轨迹-系统-临床结局五层评估框架。 <a href="https://www.mdpi.com/2078-2489/17/11/1082">S07</a></li>
+<li><strong>C08 / source_statement / preliminary</strong>：2026年10月29日综述指出，DABStep 450多项任务发布时最高准确率仅16%，推理模型在ReAct提示下为0%，常见失败包括指令遵循差、工具使用不当和无多步推进；Gemini 4 Carbon虽以59分登顶综合指数，其OSWorld行仍落后于Opus 5.5，说明单一榜首分数不能代表长程工具任务能力。 <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S08</a></li>
+<li><strong>C09 / inference / preliminary</strong>：综合PLE、Co-Design Bench与DABStep等线索推断：当前前沿呈现“部分达标尚可、完整交付不足”的结构性缺口，长程任务的可靠交付尚未确立，推断限定于所列二次报道的口径内。 <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">S01</a> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">S06</a> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">S08</a></li>
+<li><strong>C10 / inference / preliminary</strong>：综合DeepSeek协调架构与50智能体实验推断：多智能体规模化并非线性增益，协调架构可能是必要方向，但其普适效果尚未得到证明，推断限定于所列二次报道的单实验与早期原型范围内。 <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">S04</a> <a href="https://dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6">S05</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/">Google PLE长程工程基准报道</a> · Crypto Briefing
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-02。
+- 来源族：长程基准；读取：secondary；定位：cryptobriefing.com/google-ple-benchmark-ai-agents-engineering/。
+- 原文支持：PLE含85项真实工程任务，最强模型Claude Opus 5.5平均分50.6%，满足全部硬约束的比例仅41.3%。
+- 限制：仅为二次报道摘要，未核对PLE原始论文与评分口径；未说明硬约束的具体定义。</p>
+<p><strong>S02</strong> <a href="https://wisevoter.com/world/us/2026/10/28/google-cloud-releases-ai-engineering-benchmarks">Google Cloud发布AI工程基准报道</a> · WiseVoter
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-02。
+- 来源族：长程基准；读取：secondary；定位：wisevoter.com/world/us/2026/10/28/google-cloud-releases-ai-engineering-benchmarks。
+- 原文支持：Claude Opus 5.5每任务63分钟、约2700万token、成本17美元，GPT-6 Astra 48.3%紧随其后。
+- 限制：仅为二次报道摘要，未核对成本与token的计算口径；未说明任务难度分布。</p>
+<p><strong>S03</strong> <a href="https://aicoder.com/news/news-20261028-artificial-analysis-intelligence-index-v5-private-benchmarks-opus-5-5-58">Artificial Analysis Intelligence Index v5报道</a> · AICoder
+- 发布：2026-10-28；事件：2026-10-28；查阅：2026-11-02。
+- 来源族：综合指数；读取：secondary；定位：aicoder.com/news/news-20261028-artificial-analysis-intelligence-index-v5-private-benchmarks-opus-5-5-58。
+- 原文支持：Intelligence Index v5以60%私有测试集或保留答案权重推出，Claude Opus 5.5以58分领先后Gemini 4 Carbon以59分登顶。
+- 限制：仅为二次报道摘要，未核对指数的权重构成与各子项分数；综合分不能直接等同于长程工具任务能力。</p>
+<p><strong>S04</strong> <a href="https://letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380">DeepSeek实验性超级智能体架构报道</a> · LetsDataScience
+- 发布：2026-11-01；事件：2026-11-01；查阅：2026-11-02。
+- 来源族：多智能体协作；读取：secondary；定位：letsdatascience.com/news/deepseek-proposes-experimental-super-agent-to-coordinate-mul-cc3cd380。
+- 原文支持：DeepSeek Harness团队提出路由器协调多个执行智能体的实验性超级智能体架构，单任务实验约16分钟对比传统方法29分钟以上，但报道明确指出不足以证明普适性且仅为早期研究项目。
+- 限制：仅为二次报道摘要，未核对原型技术细节与实验可比性；单任务结果不得推广为普适结论。</p>
+<p><strong>S05</strong> <a href="https://dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6">50智能体Minecraft协作实验报道</a> · DEV Community（转述Tom's Hardware）
+- 发布：2026-11-01；事件：2026-11-01；查阅：2026-11-02。
+- 来源族：多智能体协作；读取：secondary；定位：dev.to/delimitter/50-agent-ai-teams-in-minecraft-show-coordination-limits-of-large-agent-swarms-no6。
+- 原文支持：50智能体Minecraft实验陷入瘫痪性官僚主义，协调成本压倒目标进展，首夜死亡潮后更趋风险规避。
+- 限制：为DEV Community转述Tom's Hardware的二次报道，未核对原始实验方法与评价指标；游戏环境结论向真实工程的可迁移性未证实。</p>
+<p><strong>S06</strong> <a href="https://aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of">Co-Design Bench编码智能体评测报道</a> · AIWeekly
+- 发布：2026-11-01；事件：2026-11-01；查阅：2026-11-02。
+- 来源族：长程基准；读取：secondary；定位：aiweekly.co/editors-blog/found-first-top-coding-agent-passes-69-9-of-criteria-but-completes-only-26-4-of。
+- 原文支持：Co-Design Bench以273项真实用户会话任务评测10个编码智能体端点，最强模型平均满足69.9%验收标准，但完整完成全部标准的任务仅26.4%，跨3-4类改动时进一步下滑。
+- 限制：仅为二次报道摘要，未核对验收标准定义与各端点明细；未说明任务难度与失败分布。</p>
+<p><strong>S07</strong> <a href="https://www.mdpi.com/2078-2489/17/11/1082">医疗智能体评测综述</a> · MDPI
+- 发布：2026-11-01；事件：2026-11-01；查阅：2026-11-02。
+- 来源族：评估方法论；读取：secondary；定位：mdpi.com/2078-2489/17/11/1082。
+- 原文支持：医疗智能体评综述指出单模型准确率无法推断智能体可靠性，错误可跨流程传播，现有框架未针对持久状态、重复行动与多智能体相关错误设计，并提出五层评估框架。
+- 限制：仅为二次报道摘要，未核对综述全文与五层框架的具体指标；医疗领域结论向通用智能体的推广需限定。</p>
+<p><strong>S08</strong> <a href="https://news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get">2026年10月29日基准综述</a> · Agent Community
+- 发布：2026-10-29；事件：2026-10-29；查阅：2026-11-02。
+- 来源族：反证评测；读取：secondary；定位：news.agentcommunity.org/issues/2026-10-29-benchmark-crowns-get。
+- 原文支持：DABStep发布时最高准确率仅16%，推理模型在ReAct提示下为0%；Gemini 4 Carbon综合登顶但OSWorld行仍落后于Opus 5.5。
+- 限制：仅为二次报道摘要，未核对DABStep原始任务集与OSWorld子项分数；综述的归纳口径未展开。</p>
+<p>检索缺口：
+- 未检索PLE、Intelligence Index v5、Co-Design Bench、DABStep的原始论文或官方发布，仅依据二次报道摘要，未核对分数口径、评分方法与样本细节。
+- 搜索日志中提及的Taste-Bench分叉决策、State of AI Report 2026的FrontierChallenge与OSWorld部分分与完整完成率、MCP真实故障导致分数下跌等线索未纳入关键事实，未展开核查。
+- DeepSeek超级智能体原型的技术细节、实验任务类型与样本量缺失，无法判断16分钟对比29分钟以上的可比性。
+- 50智能体Minecraft实验的方法、任务目标与评价指标细节缺失，无法判断结论向真实工程协作的可迁移性。
+- 医疗智能体综述五层框架的具体指标与验证情况未展开，成本与token消耗的计算口径未说明。
+- 未检索中文一手报道与厂商官方声明，厂商宣称与独立实测的对照不足。</p>
+<p>检索日志：AI agent long-horizon task benchmark breakthrough October 2026（discovery）；multi-agent collaboration LLM evaluation November 2026（discovery）；大模型智能体 长程任务 工具使用 评测 进展 2026年10月（discovery）；多智能体协作 能力突破 局限 失败案例 2026（counterevidence）；Google PLE benchmark Claude Opus 50.6% October 28 2026（verification）；AI agents fail limitations tool use long tasks October 2026 benchmark（counterevidence）；DeepSeek 超级智能体 协调多个智能体 11月1日（verification）。</p>
+<h2 id="_15">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>自主进化方法</strong>：优选 V1——窗口内最经得起检验的判断是：自我改进的可信形态限于预设门控与全新评估检验下的有限改进，而非无约束、无限或已证明可持续的自我改进；门控是采信的必要筛选条件，不是可持续改进的充分证明。</li>
+<li><strong>RSI 递归自我改进</strong>：优选 V3——条件性优选V3收窄后的主张：在没有事先可检验的改进标准与能检出并排除有害依从性上升等个案的检验程序时，不能仅凭偏好或基准分数判定RSI自主后训练取得了进步；若个案可被该程序检出并校准消除，可承认该轮改进，但仍不证明自主优化本身已具备自证或可泛化的改进能力。V1的受控可行性与V2的触顶情景与此相容，但前者范围更窄、后者仍只是未量化的情景。</li>
+<li><strong>智能体能力前沿</strong>：优选 V02——在2026年10月28日至11月1日的二次报道口径内，前沿智能体在长程任务上呈现“部分达标尚可、完整交付尚未确立”的结构性缺口；在以全部硬约束与验收标准同时通过、无人值守全自动交付为判据时，尚不能视为可靠交付。</li>
+</ul>
+<h2 id="_16">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+<nav class="bottomnav"><a href="../index.html">← 全部报告</a><a href="#top">回到顶部 ↑</a></nav>
+<script src="../annotate.js" defer></script>
+</body></html>
