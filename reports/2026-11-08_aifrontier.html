@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 前沿 · 韦青式专题研究（2026-11-08)</title><link rel="stylesheet" href="../style.css"></head>
+<body id="top">
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-11-08 · aifrontier · 原文 Markdown 同名文件</p>
+<h1 id="ai-2026-11-08">AI 前沿 · 韦青式专题研究（2026-11-08)</h1>
+<details class="toc" open><summary>目录</summary>
+<ul>
+<li><a href="#ai-2026-11-08">AI 前沿 · 韦青式专题研究（2026-11-08)</a><ul>
+<li><a href="#_1">一、大模型前沿</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、智能体生态</a><ul>
+<li><a href="#_7">观点分歧</a></li>
+<li><a href="#_8">少数意见与不确定性</a></li>
+<li><a href="#_9">门罗五步</a></li>
+<li><a href="#_10">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#ai">三、AI 硬件</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_15">四、具身智能</a><ul>
+<li><a href="#_16">观点分歧</a></li>
+<li><a href="#_17">少数意见与不确定性</a></li>
+<li><a href="#_18">门罗五步</a></li>
+<li><a href="#_19">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_20">各领域判断汇总</a></li>
+<li><a href="#_21">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</details>
+<p>范围：2026-11-02 至 2026-11-08。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、大模型前沿</h2>
+<p><strong>关键议题</strong>：2026年11月4—7日多家厂商集中发布超大MoE与多模态旗舰，开放权重与性能宣称是否经得起第三方复现与本地可部署性检验。</p>
+<p>选题依据：窗口内11月4—5日出现腾讯Hy4、Kimi K3.1 Pro、百度ERNIE 5.5 Flash Base、Inkling 2 Small、GPT-6 Cyber、蚂蚁Ling-3.2-flash等多起旗舰发布，呈现超大MoE、百万级上下文与原生多模态趋同，且开放权重、加速倍数与安全评级等宣称同时伴随可部署性与可复现性质疑，具备集中核验价值。</p>
+<p><strong>当前判断</strong>：条件性优选 V02 修订后的主张：厂商分数与开放宣称应分层采信——权重已实际可得且许可明确的发布通过可得性检验，但关键分数、加速倍数与可部署成本仍须第三方复现或可核查的云端/本地部署路径支持；权重尚未放出的“开放”仍属承诺；UBTree 实测 3.43 倍应承认，但“近 7 倍” headline 保留；幻觉精确定位能力仍是短板，选型不应只看榜单分数与 headline 倍数。 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S08</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a> <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a></p>
+<p>优选：V02；置信度：medium。事实类反证较强且多点一致（加速差距、权重体积与显存门槛、权重未发布、幻觉定位失败），但 UBTree 仅单一配置实测、HaluCheck 方法与模型明细未逐条核对、Hy4 与 Inkling 2 Small 权重尚未放出、Kimi 云端调用成本无可核查数字，推断部分仍为 preliminary。
+成立条件：仅适用于 2026 年 11 月 4—7 日窗口内所供证据；结论为“尚未复现前降级采信”，不等同于断言厂商数字为假；若 Hy4 与 Inkling 2 Small 权重如期放出且第三方复现跟进，相关保留应按 V02 给出的翻转阈值收回或重新评估。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表以发布规模、开放权重与长上下文为主要依据的乐观解读，强调供给侧扩围而非部署与复现约束。）：集中发布与开放权重标志大模型进入超大MoE普惠期：2.8T级权重、百万上下文与原生多模态同时可得，将快速压低智能体与多模态应用门槛。
+- 限定：范围限于2026年11月4-5日窗口内的供给侧扩围，结论为初步推断而非已验证的部署效果，置信度中等：规模、上下文与多模态同时可得的事实较强，但“将快速压低门槛”属趋势判断，取决于后续权重兑现、推理成本与第三方复现。
+- 最强反证：最强反证是开放不等于可跑、可商用：Kimi K3.1 Pro BF16权重约5.6TB、INT4仍约1.4TB，约需18张80GB数据中心卡才能全放显存，普通消费级显卡基本无法本地部署，且年收入超2000万美元的模型即服务商须另签协议；Hy4与Inkling 2 Small在发布时权重尚未放出，开放宣称附条件；厂商榜单与自有评测分数、幻觉定位能力亦未获第三方复现。若权重兑现与低成本推理未能跟进，普惠将主要惠及云厂商与推理服务商，而非终端开发者与普通用户。 <a href="https://www.kucoin.com/news/flash/moonshot-ai-s-kimi-k3-1-pro-opens-2-8t-parameters-tops-open-model-rankings">S02</a> <a href="https://ai.synthepulse.app/stories/18471-baidu-open-sources-ernie-5-5-flash-base">S03</a> <a href="https://technode.com/2026/11/06/ant-launches-ling-3-2-flash-multimodal-model-with-million-token-context/">S06</a> <a href="https://af.net/realtime/pfn-releases-open-weight-translation-llm-plamo-3-translate-in-four-sizes-up-to-31b/">S07</a> <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a></p>
+<p><strong>观点 V02</strong>（审慎验证者；代表以反证、可复现性与可部署成本为主要依据的审慎解读，强调宣称与实测、承诺与兑现之间的差距。）：本轮厂商分数与开放宣称多未获第三方复现，headline加速与实测有差距，超大权重本地部署门槛极高，幻觉定位能力仍是短板，应先验证再采信，而非以榜单分数与headline倍数作为选型依据。
+- 限定：范围限于2026年11月4—7日窗口内所供证据，置信度为中等偏审慎：事实类反证（C08、C09、C10、C11）较强，推断与价值判断（C13、C15）为初步结论。若Hy4与Inkling 2 Small权重如期放出且第三方复现跟进，相关宣称应重新评估；若未兑现，则质疑继续成立。本结论不覆盖窗口外发布与未纳入核验的模型。
+- 最强反证：最强反证是开放权重确有真实兑现的部分：Kimi K3.1 Pro已在Hugging Face放出权重并在Agent Arena开放权重中居首，ERNIE 5.5 Flash Base与PLaMo 3 Translate等也已开源，后者小档位可离线跑在手机与本地服务器；UBTree实测3.43倍仍是显著加速，且其不改变输出分布的宣称未被本轮证据证伪；HaluCheck亦表明LLM已具备表层幻觉检测能力；厂商数字未来仍可能被第三方复现。若只看已兑现的开放权重与实测加速，乐观解读并非全无依据——本方主张的成立依赖于“未复现、未兑现、不可本地部署”这三类差距同时存在，而非否定全部发布价值。 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S08</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a> <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a></p>
+<p><strong>观点 V03</strong>（安全治理关注者；代表以安全评级、使用限制与漏洞利用能力为主要依据的治理视角，强调能力越强越需约束扩散。）：GPT-6 Cyber评级升至Critical且厂商称其可规模化发现与利用漏洞，意味着网络安全特化能力扩散须受限使用，能力评估与访问控制应与发布同步。
+- 限定：范围限于2026年11月5日发布及所供证据；结论为条件性主张，置信度中等偏低——若厂商数字获独立复现则治理主张成立且紧迫，若数字被高估或评测口径存疑，则主张的强度应相应下调。
+- 最强反证：最强反证有三：其一，核心数字均为厂商自有评测、未获第三方复现，评级亦为厂商内部框架结果，不能直接等同于独立验证的现实风险；其二，厂商已实施仅限获批客户的访问控制，所谓“须受限”在发布时已有对应措施，主张可能只是追认既有做法而非新增要求；其三，同一能力亦可用于防御方发现与修复漏洞，过度限制可能削弱合法安全研究与防御收益，而材料未提供滥用实例来权衡这一代价。 <a href="https://mlq.ai/news/openai-releases-gpt-6-cyber-after-model-finds-948-linux-kernel-exploits/">S05</a> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V01 的合理洞察：11 月 4—5 日超大 MoE、百万上下文与原生多模态的供给侧扩围真实存在，主要惠及云厂商与推理服务商；PLaMo 小档可离线运行是直接可得的低门槛例外，适用于轻量、专用场景。
+- V03 的合理洞察：在厂商数字获独立复现之前，GPT-6 Cyber 的 Critical 评级只应视为初步信号，不应据此断言已构成经证实的现实风险；维持仅限获批 Daybreak Red 客户使用并要求公开评测方法与基线是审慎做法，新增约束须待验证结果再定。</p>
+<p>不确定性及改变判断的条件：
+- Hy4 与 Inkling 2 Small 权重是否在 11 月中下旬如期放出、许可证为何、第三方能否复现其关键分数。
+- Kimi K3.1 Pro、ERNIE 5.5 Flash Base 的关键性能分数能否获独立复现，以及 Kimi 经云端/推理服务调用的可承受成本有无可核查数字。
+- UBTree 在更多模型、硬件与负载下能否复现接近 7 倍，还是稳定在 3.43 倍左右。
+- HaluCheck 完整方法与 14 个模型明细如何，幻觉精确定位失败是否普遍适用于本轮旗舰模型。
+- GPT-6 Cyber 的 ExploitGym 分数与 1724/948/81 能否获独立复现、与 GPT-6 Astra 及现有工具相比有无增量提升、有无实际滥用证据。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：11 月 4—5 日集中发布超大 MoE 与百万上下文，但 headline 数字、开放宣称与本地可部署性之间存在系统性差距，选型若只看榜单与倍数可能误判。</li>
+<li><strong>需要</strong>：需要一套分层、可证伪的采信标准：先确认权重是否实际可得与许可是否明确，再看关键分数与加速倍数有无第三方复现，最后看云端或本地部署成本是否可承受。</li>
+<li><strong>方案</strong>：按 V02 的三层标准逐项核验本轮发布：已兑现的承认可得性，未兑现的仍按承诺处理，实测加速承认实测值、headline 保留，幻觉定位能力作为选型硬指标。</li>
+<li><strong>预演</strong>：若权重如期放出且第三方复现跟进，开放权重榜单与推理成本格局可在 11 月中下旬重估，已兑现部分的保留应收回；若未兑现或复现失败，则“开放第一”等宣称继续受质疑，选型仍应以可复现、可部署的方案为准。</li>
+<li><strong>行动</strong>：
+   - 核查 Hy4 与 Inkling 2 Small 权重是否在 Hugging Face 或官方渠道实际放出，记录权重文件、许可证与发布时间 <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a>
+     时间：2026 年 11 月中下旬复查；指标：权重可下载且许可证明确的项目数（0—2）；基线：2026 年 11 月 8 日时两者权重均未放出。
+     停止/成功条件：两项均放出并附明确许可证即收回“未兑现”保留；逾期未放出则保留继续成立；阈值来源：证据所给：C01、C04、C10 的发布时状态与承诺。
+   - 检索第三方对 Kimi K3.1 Pro、ERNIE 5.5 Flash Base 关键分数与 UBTree 加速的独立复现，记录复现机构、方法与结果 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S08</a> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a>
+     时间：2026 年 11 月中下旬复查；指标：获独立复现的关键分数项数；UBTree 多配置平均加速倍数；基线：本轮内关键分数未获第三方复现；UBTree 单一配置实测 3.43 倍。
+     停止/成功条件：UBTree 在另一配置下复现达 6 倍及以上即收回 headline 保留；仅重复 3.43 倍左右则 headline 保留、实测加速承认；阈值来源：V02 质询回应中给出的翻转阈值（分析者建议）；3.43 倍与近 7 倍为证据所给 C08。
+   - 核查 Kimi K3.1 Pro 经云端或推理服务的可核查调用路径与定价，区分“可下载权重”与“终端可承受调用” <a href="https://www.kucoin.com/news/flash/moonshot-ai-s-kimi-k3-1-pro-opens-2-8t-parameters-tops-open-model-rankings">S02</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a> <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a>
+     时间：2026 年 11 月中下旬复查；指标：有无公开可核查的云端/推理服务定价与调用入口；基线：所供证据内无可核查的云端调用成本数字；本地全量部署约需 18 张 80GB 卡。
+     停止/成功条件：出现可核查的部署路径即收回对已兑现部分的保留，但不因此改称“人人可跑”；阈值来源：V02 质询回应中给出的翻转阈值（分析者建议）；18 张卡与 5.6TB 为证据所给 C09。
+   - 跟踪 GPT-6 Cyber 数字的独立复现与 Mozilla 对 81 个 Firefox 漏洞的外部确认，记录复现机构与基线对比 <a href="https://mlq.ai/news/openai-releases-gpt-6-cyber-after-model-finds-948-linux-kernel-exploits/">S05</a>
+     时间：2026 年 11 月中下旬复查；指标：独立复现 ExploitGym 分数与 1724/948/81 的证据有无；基线：目前均为厂商称，未获第三方复现，完整评测方法与基线缺失。
+     停止/成功条件：独立复现且有增量提升即支持 Critical 反映真实风险、可讨论新增约束；复现失败或无增量则维持现有受限使用即可；阈值来源：V03 质询回应中列出的验证清单（分析者建议）；数字本身为证据所给 C05。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：腾讯11月4日发布Hy4：770B MoE，每token激活约49B，首次加入视觉理解与Computer Use，权重承诺短期内开源但发布时尚未放出，API定价与预览版相同。 <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：月之暗面11月4-5日在Hugging Face放出Kimi K3.1 Pro权重：2.8T MoE、104B激活、约100万token上下文，Agent Arena开放权重第一、全部参评第13，MXFP4权重约1.56TB。 <a href="https://www.kucoin.com/news/flash/moonshot-ai-s-kimi-k3-1-pro-opens-2-8t-parameters-tops-open-model-rankings">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：百度11月5日开源ERNIE 5.5 Flash Base：280B MoE、每token激活14B、33.5T token从头预训练、混合稀疏注意力，上下文可延至1M；仅为预训练基座，无后训练/对话版。 <a href="https://ai.synthepulse.app/stories/18471-baidu-open-sources-ernie-5-5-flash-base">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：Thinking Machines Lab 11月5日发布Inkling 2 Small：594B MoE、17B激活、384专家每token路由8个，8.4T token预训练仅68小时（GB300 NVL72、原生NVFP4），Artificial Analysis智能指数31分；上线时仅Tinker托管，权重承诺下周经安全测试后以Apache 2.0发布。 <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a></li>
+<li><strong>C05 / source_statement / preliminary</strong>：OpenAI 11月5日发布GPT-6 Cyber，厂商称其为GPT-6 Astra的网络安全特化版，Preparedness Framework评级升至Critical，仅限获批Daybreak Red客户使用；厂商称ExploitGym 48.5%（上一代32.1%）、复现1724个Linux内核漏洞并为948个生成可用本地提权exploit、发现81个Mozilla定为高危的未知Firefox漏洞。 <a href="https://mlq.ai/news/openai-releases-gpt-6-cyber-after-model-finds-948-linux-kernel-exploits/">S05</a></li>
+<li><strong>C06 / fact / supported</strong>：蚂蚁集团11月5日发布Ling-3.2-flash：560B MoE、25B激活，原生支持文本、图像与视频输入，100万token上下文，面向复杂视觉理解、多步智能体、3D交互与医疗多模态，上线前两周免费。 <a href="https://technode.com/2026/11/06/ant-launches-ling-3-2-flash-multimodal-model-with-million-token-context/">S06</a></li>
+<li><strong>C07 / fact / supported</strong>：PFN 11月5日开源翻译专用大模型PLaMo 3 Translate：0.8B/2B/8B/31B四档，支持53种语言，可离线跑在手机与本地服务器，年收入10亿日元及以下实体可免费商用。 <a href="https://af.net/realtime/pfn-releases-open-weight-translation-llm-plamo-3-translate-in-four-sizes-up-to-31b/">S07</a></li>
+<li><strong>C08 / fact / conflicting</strong>：UBTree并行投机解码宣称解码加速近7倍且不改变目标模型输出分布，但其在SGLang+Ling-3.0-flash上的端到端实测平均加速为3.43倍，headline数字与实测存在差距，且投机解码本身会增加草稿与验证的额外算力。 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S08</a></li>
+<li><strong>C09 / fact / supported</strong>：Kimi K3.1 Pro BF16权重约5.6TB、INT4仍约1.4TB，约需18张80GB数据中心卡才能全放显存，普通消费级显卡基本无法本地部署；且年收入超2000万美元的模型即服务商须另签协议，开放权重不等于人人可跑。 <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a></li>
+<li><strong>C10 / fact / supported</strong>：Inkling 2 Small发布时权重并未公开，所谓开放权重第一的说法以权重如期发布为条件；Artificial Analysis同时评价其任务速度慢、输出冗长、输入定价0.30美元/百万token高于同类中位数0.24美元。 <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a></li>
+<li><strong>C11 / fact / supported</strong>：11月5日发布的HaluCheck（4.2万例）显示，14个LLM能表层检测幻觉，但在文本内精确定位虚假主张、追踪智能体多步推理中的错误上持续失败；且Hy4检索幻觉率5.45%等关键数字均为厂商自有评测，尚未获第三方复现。 <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a></li>
+<li><strong>C12 / inference / preliminary</strong>：11月4-5日的集中发布呈现超大MoE、百万级上下文与原生多模态趋同，开放权重成为本轮竞争焦点。 <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.kucoin.com/news/flash/moonshot-ai-s-kimi-k3-1-pro-opens-2-8t-parameters-tops-open-model-rankings">S02</a> <a href="https://ai.synthepulse.app/stories/18471-baidu-open-sources-ernie-5-5-flash-base">S03</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a> <a href="https://technode.com/2026/11/06/ant-launches-ling-3-2-flash-multimodal-model-with-million-token-context/">S06</a></li>
+<li><strong>C13 / inference / preliminary</strong>：开放权重不等于人人可跑或可直接商用：超大权重主要惠及云厂商与推理服务商，且部分“开放”在发布时实为未兑现的承诺。 <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a></li>
+<li><strong>C14 / forecast / preliminary</strong>：若Hy4与Inkling 2 Small权重如期放出且第三方复现跟进，开放权重榜单与推理成本格局可能在11月中下旬重估；否则“开放第一”等宣称将继续受质疑。 <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">S01</a> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">S04</a> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">S10</a></li>
+<li><strong>C15 / value / preliminary</strong>：对使用者而言，应以第三方复现、可定位幻觉的能力与可部署成本，而非厂商榜单分数与headline加速倍数，作为选型依据。 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S08</a> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">S09</a> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">S11</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://winbuzzer.com/2026/11/05/tencent-unveils-flagship-hy4-with-computer-use-capabilities-for-professional-workflows-xcxwbn/">腾讯发布旗舰Hy4：770B MoE，加入视觉理解与Computer Use</a> · WinBuzzer
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文发布参数与权重、定价段落。
+- 原文支持：腾讯11月4日发布Hy4：770B MoE，每token激活约49B，首次加入视觉理解与Computer Use，权重承诺短期内开源但发布时尚未放出，API定价与预览版相同。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；关键性能数字为厂商自有评测，未获第三方复现。</p>
+<p><strong>S02</strong> <a href="https://www.kucoin.com/news/flash/moonshot-ai-s-kimi-k3-1-pro-opens-2-8t-parameters-tops-open-model-rankings">月之暗面Kimi K3.1 Pro开放2.8T参数权重，登顶开放模型排名</a> · KuCoin News
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体（转引AIBase）；读取：relevant_text；定位：正文模型规模、上下文与排名段落。
+- 原文支持：月之暗面11月4-5日在Hugging Face放出Kimi K3.1 Pro权重：2.8T MoE、104B激活、约100万token上下文，Agent Arena开放权重第一、全部参评第13，MXFP4权重约1.56TB。
+- 限制：转引来源，仅依据所供OSINT摘要，未直接通读原文全文；排名与基准分数为所引评测口径，未独立复核。</p>
+<p><strong>S03</strong> <a href="https://ai.synthepulse.app/stories/18471-baidu-open-sources-ernie-5-5-flash-base">百度开源ERNIE 5.5 Flash Base预训练基座</a> · SynthePulse AI
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文模型规模、训练量与上下文段落。
+- 原文支持：百度11月5日开源ERNIE 5.5 Flash Base：280B MoE、每token激活14B、33.5T token从头预训练、混合稀疏注意力，上下文可延至1M；仅为预训练基座，无后训练/对话版。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；许可证地域排除等细节仅见检索摘要，未作窗口内事实。</p>
+<p><strong>S04</strong> <a href="https://www.inxen.news/news/radar-b371c3fb-09f1-4a53-aca5-414ecdf771b3">Thinking Machines Lab发布Inkling 2 Small：594B MoE与NVFP4原生训练</a> · inxen.news
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文模型规模、训练时长与托管、权重承诺段落。
+- 原文支持：Thinking Machines Lab 11月5日发布Inkling 2 Small：594B MoE、17B激活、384专家每token路由8个，8.4T token预训练仅68小时（GB300 NVL72、原生NVFP4），Artificial Analysis智能指数31分；上线时仅Tinker托管，权重承诺下周经安全测试后以Apache 2.0发布。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；权重尚未发布，开放权重说法附条件。</p>
+<p><strong>S05</strong> <a href="https://mlq.ai/news/openai-releases-gpt-6-cyber-after-model-finds-948-linux-kernel-exploits/">OpenAI发布GPT-6 Cyber，Preparedness评级升至Critical</a> · MLQ
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文评级、使用限制与漏洞发现数字段落。
+- 原文支持：OpenAI 11月5日发布GPT-6 Cyber：GPT-6 Astra的网络安全特化版，Preparedness Framework评级升至Critical，仅限获批Daybreak Red客户使用；厂商称ExploitGym 48.5%（上一代32.1%）、复现1724个Linux内核漏洞并为948个生成可用本地提权exploit、发现81个Mozilla定为高危的未知Firefox漏洞。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；漏洞与基准数字均为厂商称，未获第三方复现。</p>
+<p><strong>S06</strong> <a href="https://technode.com/2026/11/06/ant-launches-ling-3-2-flash-multimodal-model-with-million-token-context/">蚂蚁发布Ling-3.2-flash多模态模型，支持百万token上下文</a> · TechNode
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文模型规模、多模态输入与免费期段落。
+- 原文支持：蚂蚁集团11月5日发布Ling-3.2-flash：560B MoE、25B激活，原生支持文本、图像与视频输入，100万token上下文，面向复杂视觉理解、多步智能体、3D交互与医疗多模态，上线前两周免费。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；能力描述为厂商定位，未见独立实测。</p>
+<p><strong>S07</strong> <a href="https://af.net/realtime/pfn-releases-open-weight-translation-llm-plamo-3-translate-in-four-sizes-up-to-31b/">PFN发布开源翻译大模型PLaMo 3 Translate，四档覆盖53种语言</a> · af.net
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体（转引Preferred Networks）；读取：relevant_text；定位：正文模型档位、语言数与商用条件段落。
+- 原文支持：PFN 11月5日开源翻译专用大模型PLaMo 3 Translate：0.8B/2B/8B/31B四档，支持53种语言，可离线跑在手机与本地服务器，年收入10亿日元及以下实体可免费商用。
+- 限制：转引来源，仅依据所供OSINT摘要，未直接通读原文全文；翻译质量未见独立评测。</p>
+<p><strong>S08</strong> <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">UBTree并行投机解码：宣称近7倍加速与实测3.43倍的差距</a> · Medium
+- 发布：2026-11-07；事件：2026-11-07；查阅：2026-11-08。
+- 来源族：评论文章（ABV Applied AI Reviews）；读取：relevant_text；定位：正文加速宣称与SGLang实测对比段落。
+- 原文支持：Inclusion AI与UIUC、普渡提出的UBTree并行投机解码宣称解码加速近7倍、且不改变目标模型输出分布；但其在SGLang+Ling-3.0-flash上的端到端实测平均加速为3.43倍，headline数字与实测存在差距，且投机解码本身会增加草稿与验证的额外算力。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文与原始论文；实测仅为所引单一配置，未覆盖更多模型与硬件。</p>
+<p><strong>S09</strong> <a href="https://news.cocoloop.cn/2026/11/kimi-k31-pro-open-weights/">Kimi K3.1 Pro权重体积与本地部署门槛</a> · CocoLoop News
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文权重体积、显存需求与许可证段落。
+- 原文支持：Kimi K3.1 Pro BF16权重约5.6TB、INT4仍约1.4TB，约需18张80GB数据中心卡才能全放显存，普通消费级显卡基本无法本地部署；且年收入超2000万美元的模型即服务商须另签协议，开放权重不等于人人可跑。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；显存需求为按所引体积的推算口径，未独立复核。</p>
+<p><strong>S10</strong> <a href="https://www.yelno.ai/blog/inkling-2-small-open-weight-claim-evaluation">Inkling 2 Small开放权重说法评估：权重未发布、速度与定价存疑</a> · Yelno
+- 发布：2026-11-07；事件：2026-11-07；查阅：2026-11-08。
+- 来源族：评论文章；读取：relevant_text；定位：正文权重发布状态与速度、定价评价段落。
+- 原文支持：Inkling 2 Small发布时权重并未公开，所谓开放权重第一的说法以权重如期发布为条件；Artificial Analysis同时评价其任务速度慢、输出冗长、输入定价0.30美元/百万token高于同类中位数0.24美元。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文；速度与定价评价为所引第三方口径，未独立复核。</p>
+<p><strong>S11</strong> <a href="https://themodelwire.com/article/llms-struggle-to-localize-hallucinations-despite-basic-detection-ability-01M6QK1C0Z1ZNABY99VP83SDGE">HaluCheck：LLM能表层检测幻觉，但难以精确定位虚假主张</a> · The Model Wire
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：科技媒体；读取：relevant_text；定位：正文HaluCheck结果与幻觉定位失败段落。
+- 原文支持：11月5日发布的HaluCheck（4.2万例）显示，14个LLM能表层检测幻觉，但在文本内精确定位虚假主张、追踪智能体多步推理中的错误上持续失败；且Hy4检索幻觉率5.45%等关键数字均为厂商自有评测，尚未获第三方复现。
+- 限制：仅依据所供OSINT摘要，未直接通读原文全文与HaluCheck原始方法；14个模型明细未逐条核对。</p>
+<p>检索缺口：
+- Reflection Beam 501B、Gemini Omni 1.2 Flash等11月初其他发布未纳入逐条核验。
+- GPT-6 Astra基线细节与GPT-6 Cyber完整评测方法未获独立来源。
+- Hy4与Inkling 2 Small权重尚未放出，无法核验权重文件、许可证与实际推理表现。
+- UBTree在更多模型、硬件与负载下的复现数据缺失，仅有所引单一配置实测。
+- HaluCheck完整方法与14个模型明细未逐条核对。
+- ERNIE 5.5 Flash Base许可证地域排除等细节仅见检索摘要，未作窗口内事实。
+- Kimi K3.1 Pro金融研究基准等厂商外分数未获独立复现来源。</p>
+<p>检索日志：large language model new release November 2026（discovery）；LLM architecture innovation training inference optimization November 2026（discovery）；大模型 新发布 2026年11月（discovery）；大语言模型 推理优化 架构创新 2026年11月（discovery）；Kimi K3.1 Pro Moonshot November 5 2026 2.8T MoE（verification）；Baidu ERNIE 5.5 Flash Base open source November 2026（verification）；OpenAI GPT-6 Cyber November 5 2026 critical preparedness（verification）；Thinking Machines Inkling 2 Small November 5 2026 594B NVFP4 training（verification）；蚂蚁 Ling-3.2-flash 11月5日 多模态 100万上下文（verification）；LLM benchmark limitations hallucination failure open-weight model November 2026 criticism（counterevidence）；Kimi K3.1 Pro 权重 5.6TB 本地部署困难 开源局限（counterevidence）。</p>
+<h2 id="_6">二、智能体生态</h2>
+<p><strong>关键议题</strong>：2026年11月2日至6日，常驻与托管智能体产品集中上线、基准测试与治理规则同周出台，但专家任务通过率仍极低且成本与失控风险同步暴露，智能体生态正从演示走向生产与治理并行的拐点。</p>
+<p>选题依据：本账本覆盖11月2日至6日智能体生态的关键进展：常驻/托管产品发布（Perplexity、Kimi、Abacum、Sunrate）、三项基准同周发布（GDPx、LifeVal、BioBasicsBench）、中国治理与认证进展（乌镇自律公约、华为4+级）、以及成本与风险反证（Grok限流、苹果10-K），产品、评测、治理、反证四类证据齐全，可支撑“进入生产拐点但可靠性与经济性未过关”的判断。</p>
+<p><strong>当前判断</strong>：在GDPx报道口径下，专家长程任务可靠性仍明显不足，最佳模型通过率仅12.0%，金融与法律二值评分为0%，而LifeVal 80.6%与BioBasicsBench 66.7%因自建自评且未公开数据集、代码与完整评分细则而不可独立复现，不能作为独立的可靠性证据；因此不同任务类型的表现存在显著但程度待定的分化，宣传分数与专家级可靠性之间的落差有待公开方法与独立复现检验。 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a> <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a></p>
+<p>优选：V02；置信度：medium。核心事实GDPx 12%与两项自评基准不可复现均有来源支持且经质询后得到收窄与证伪标准，但GDPx依据为二手报道、原始方法与部分得分未直接引用，LifeVal与BioBasicsBench均无独立复现，落差程度仍待定。
+成立条件：结论仅限于2026年11月2日至6日同周发布的三项基准及其报道口径；GDPx的0%为二值评分结果，不等于零能力，可能受任务选择与评分严苛程度影响；若公开方法后独立复现显著偏离，或改用部分得分后专家任务等效通过率达到50%及以上，则本判断应相应修正或撤回。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_7">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；强调产品集中上线与托管化趋势，认为运行层、支付与治理基础设施的出现标志着智能体从演示走向持续生产。）：常驻与托管智能体已进入生产落地阶段：Perplexity Teammates、Kimi Hosted Agents、Abacum Abra与Sunrate智能体支付卡同周上线，覆盖研究、企业规划与支付场景，托管运行层与身份治理正在补齐。
+- 限定：适用范围为“进入生产落地阶段的早期拐点”，而非成熟或全面生产；置信度为中等偏低。结论限于2026年11月2日至6日同周集中上线的产品事实与初步综合推断（C14为preliminary），不延伸为专家级任务已可靠、成本模型已成立或高stakes场景已可放心交付。
+- 最强反证：最强反证有三：其一，产品发布不等于可靠交付，Teammates与Kimi Hosted Agents均无独立实测与具名客户案例，持续任务完成率与故障率未知；其二，专家级能力仍存显著落差，GDPx最佳模型通过率仅12.0%，金融与法律任务二值评分全部为0%，若生产场景要求专家级可靠性，当前能力不足以支撑该主张的强版本；其三，经济性与失控风险未解决，马斯克称Grok Bot服务成本相对收入不可持续并收紧周额度，苹果10-K警告智能体可擅自访问系统、执行交易、违抗指令或隐瞒行为，且苹果承认对第三方智能体的监督控制能力可能有限。这些反证不否定同周产品集中上线与托管化趋势本身，但将其限定为“基础设施与产品形态进入生产阶段”，而非“已可大规模可靠生产”。 <a href="https://www.perplexity.ai/page/perplexity-launches-teammates-_5wGYYftTnSs82GhKAOsuw">S01</a> <a href="https://www.unite.ai/kimi-formally-launches-hosted-agents-for-enterprise-ai-workloads/">S02</a> <a href="https://www.morningstar.com/news/pr-newswire/20261102ny86397/abacum-launches-abra-a-unified-ai-agent-for-business-planning-across-the-enterprise">S11</a> <a href="https://technode.global/2026/11/03/sunrate-agentic-card-ai-business-payments/">S12</a> <a href="https://www.chinaaet.com/article/3000181574">S06</a></p>
+<p><strong>观点 V02</strong>（怀疑情景分析者；强调基准证据的反证作用，认为专家任务的低通过率与自评基准的不可复现性削弱了“智能体已能胜任专家工作”的说法。）：智能体能力仍远未达到专家级可靠：GDPx最佳通过率仅12%、金融与法律任务全为0分，日常与湿实验基准的高分又多为自建自评、不可复现，宣传分数与实际可靠性落差巨大。
+- 限定：结论限定于2026年11月2日至6日同周发布的三项基准及其报道口径，不扩展为对所有智能体、所有专家任务的普遍否定；C03、C04、C05为supported事实陈述，C13为preliminary推断，整体置信度为中等——专家长程任务可靠性不足的判断较强，宣传与实际落差“巨大”的程度判断则受限于二手报道与未公开方法。
+- 最强反证：最强反证是同周高分本身：LifeVal 80.6%与BioBasicsBench 66.7%部分credit表明智能体在日常任务与湿实验任务上确有较强表现；GDPx的二值评分与长程专家任务设计可能极为严苛，金融与法律0%未必等于零能力，也可能反映任务选择、评分口径或成本约束；自建自评且未公开材料只说明不可复现，不等于分数造假；若后续公开数据集与代码并经独立复现，高分仍可部分成立，从而削弱“落差巨大”的判断。 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a> <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a></p>
+<p><strong>观点 V03</strong>（治理与风险情景分析者；强调经济性与安全治理视角，认为身份标识、权限控制与成本模型决定智能体能否进入高 stakes 场景，而非模型分数。）：成本与失控风险是比模型能力更紧迫的瓶颈：常驻智能体能否进入高 stakes 场景，取决于订阅与多轮调用的成本模型是否可持续、以及身份标识与权限控制是否真正落地，而非基准分数的高低。
+- 限定：适用范围限于 2026 年 11 月 2 日至 6 日账本证据所覆盖的情形，置信度为中等：成本瓶颈在 Grok Bot 一例上得到较直接支持，但未证明全行业同等不可持续；失控风险以苹果 10-K 的前瞻警示为据，未证明已发生同类事故；治理进展以中国自律公约与单一认证为据，不能推广为全球统一约束。C15 作为预测，其置信度低于事实性主张，需以未来数月定价、用量与治理落地情况检验。
+- 最强反证：最强反证是基础设施与治理能力正在同步补齐，可能缓解而非坐实瓶颈：Kimi Hosted Agents 以托管方式提供会话、工具执行、沙箱与故障恢复；Sunrate 智能体支付卡在预设限额与审批策略下授权智能体创建虚拟卡并执行支付，并已完成 Mastercard Agent Pay 认证；Abacum Abra 强调受治理的数据、模型与上下文；华为 4+ 级认证本身表明企业级安全与可观测能力已有可评估的标杆。另有两种弱化解释：苹果 10-K 属于常规风险披露，不等于风险已兑现；Grok 限流可能是阶段性定价调整而非结构性不可持续，成本也可随模型效率提升而下降。若上述限额、审批与认证机制在真实客户场景中被证明有效，则成本与治理的紧迫性将低于本主张的判断。 <a href="https://www.chinaaet.com/article/3000181574">S06</a> <a href="https://ai.cnmo.com/news/821811.html">S07</a> <a href="https://vector.news/articles/musk-calls-grok-bot-costs-unsustainable-83c70beb04">S08</a> <a href="https://fourweekmba.com/ai-apples-10-k-filing-warns-ai-agents-may-resist-instructions/">S09</a> <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a></p>
+<h3 id="_8">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：四款产品同周上线与托管、支付、身份治理基础设施同步出现，确可作为进入生产落地早期拐点的形态信号，适用于判断产品形态转向，不适用于断言可靠交付。
+- V03的合理洞察：成本与治理是与能力并列的候选瓶颈，适用于当能力可核查改善而部署仍因定价、额度或合规否决受阻时判定为binding约束，不适用于在当前证据下断言其已比能力更紧迫。</p>
+<p>不确定性及改变判断的条件：
+- GDPx原始报告的方法、部分得分分布与成本口径未直接引用，0%中有多少属于部分正确被二值评分抹去未知；若公开方法并独立复现，12%量级与低分分布可能改变。
+- LifeVal与BioBasicsBench的数据集、代码与完整评分细则仍未公开，无独立复现结果；若复现基本重现80.6%与66.7%，落差判断应改为任务类型分化。
+- Teammates与Kimi Hosted Agents等产品的独立持续任务完成率、故障率与具名客户部署数据缺失，生产交付可靠性未知。
+- Grok Bot官方用量与成本数据未公开，常驻智能体多轮调用的系统性单位成本缺乏，成本瓶颈是否全行业成立未知。</p>
+<h3 id="_9">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同周三项基准给出相反信号：专家长程任务最佳通过率仅12%，而日常与湿实验任务高分却不可独立复现，宣传分数不能直接当作专家级可靠性证据。</li>
+<li><strong>需要</strong>：需要以可核查的方法与独立复现区分真实能力短板与评分口径造成的假象，避免把自评高分或二值0%误读为定论。</li>
+<li><strong>方案</strong>：以GDPx原始方法与部分得分为锚点，核对LifeVal与BioBasicsBench的公开材料与独立复现，并以独立交付数据检验产品落地主张，以可观测的成本与合规事实检验治理主张。</li>
+<li><strong>预演</strong>：若公开方法与独立复现到齐，专家短板可能被确认为真短板，也可能被修正为评分口径问题；届时关于生产拐点与瓶颈排序的判断将有明确的修正方向，而不是继续停留在厂商发布与自评分数层面。</li>
+<li><strong>行动</strong>：
+   - 获取并核对SemiAnalysis GDPx原始报告、任务清单、二值与部分得分规则及每任务成本口径，执行者为研究复核方 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a> <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a>
+     时间：未来2周内；指标：原始方法与部分得分分布是否可得、独立复现与12%量级的一致程度；基线：当前仅有二手报道S03，未直接引用原始报告。
+     停止/成功条件：取得原始材料并完成复现比对，或确认材料仍不公开并记录为未决；阈值来源：分析者建议的证伪标准：改用部分得分后等效通过率50%及以上则“远未达到专家级可靠”不再成立，20%—30%则改为仍不足但非零能力；阈值非账本已有事实。
+   - 追踪LifeVal与BioBasicsBench是否公开数据集、代码与完整评分细则，并核查独立复现结果，执行者为研究复核方 <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a> <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a>
+     时间：未来1个月内；指标：公开材料完整性与独立复现分数相对80.6%与66.7%的偏离程度；基线：当前S04、S05均记载未公开数据集、代码与完整评分细则。
+     停止/成功条件：复现结果公布并完成比对，或到期仍未公开并记录为未决；阈值来源：分析者建议：复现基本重现则落差改为任务类型分化，复现明显低于宣称则恢复更强落差判断；阈值非账本已有事实。
+   - 追踪Teammates与Kimi Hosted Agents的独立第三方持续任务完成率、故障率与具名企业客户部署用量，执行者为产品复核方 <a href="https://www.perplexity.ai/page/perplexity-launches-teammates-_5wGYYftTnSs82GhKAOsuw">S01</a> <a href="https://www.unite.ai/kimi-formally-launches-hosted-agents-for-enterprise-ai-workloads/">S02</a> <a href="https://www.morningstar.com/news/pr-newswire/20261102ny86397/abacum-launches-abra-a-unified-ai-agent-for-business-planning-across-the-enterprise">S11</a> <a href="https://technode.global/2026/11/03/sunrate-agentic-card-ai-business-payments/">S12</a> <a href="https://www.chinaaet.com/article/3000181574">S06</a>
+     时间：未来1—3个月内；指标：独立测得的持续任务完成率与故障率、具名客户部署与留存数据是否出现；基线：当前四款产品均无独立第三方实测与具名客户案例。
+     停止/成功条件：取得至少一类可观测交付证据，或到期仍缺失并记录为未决；阈值来源：质询中V01接受的升级标准，非账本已有事实。
+   - 追踪Grok Bot官方用量与成本披露、常驻智能体系统性单位成本数据，以及身份注册平台接入与合规否决实例，执行者为成本与治理复核方 <a href="https://www.chinaaet.com/article/3000181574">S06</a> <a href="https://ai.cnmo.com/news/821811.html">S07</a> <a href="https://vector.news/articles/musk-calls-grok-bot-costs-unsustainable-83c70beb04">S08</a> <a href="https://fourweekmba.com/ai-apples-10-k-filing-warns-ai-agents-may-resist-instructions/">S09</a> <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a>
+     时间：未来数月内；指标：官方成本或定价调整披露、系统性单位成本数据、身份与最小权限作为采购否决条件的实例是否出现；基线：当前C08仅为用户反映、C06无强制标准、C07无逐项得分。
+     停止/成功条件：出现可观测的binding约束证据或证伪事实，或到期仍缺失并记录为未决；阈值来源：质询中V03给出的可观测判定标准，非账本已有事实。</li>
+</ol>
+<h3 id="_10">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Perplexity于11月4日发布、11月5日上线常驻智能体Teammates，仅限个人Max订阅（200美元/月）网页研究预览版，默认模型为Claude Opus 5.5，企业版默认不含。 <a href="https://www.perplexity.ai/page/perplexity-launches-teammates-_5wGYYftTnSs82GhKAOsuw">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：月之暗面于11月5日正式推出Kimi Hosted Agents托管智能体服务，将会话、工具执行、沙箱与故障恢复作为托管云服务提供，含140+技能与30+插件，沙箱运行时0.072元/小时。 <a href="https://www.unite.ai/kimi-formally-launches-hosted-agents-for-enterprise-ai-workloads/">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：SemiAnalysis GDPx基准中，206个长程专家任务覆盖11个领域，最佳模型Claude Opus 5.5通过率仅12.0%（每任务51.41美元），金融与法律任务二值评分全部为0%。 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：OpenAI LifeVal基准中GPT-6 Astra平均奖励80.6%，但该基准由OpenAI自建自评、仅含自家模型且未公开数据集、代码与评分细则，其分数不可独立复现。 <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：OpenAI与Ligo合作的BioBasicsBench湿实验基准中，GPT-6 Astra在xhigh推理档平均获66.7%部分credit，高于GPT-5.6 Sol的43.8%，但公告未附论文、数据集、完整评分细则与评估代码链接。 <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a></li>
+<li><strong>C06 / fact / supported</strong>：乌镇峰会11月4日发布《智能体发展自律公约》，由中国信通院牵头、20家机构企业参与，共八条，首条要求建立分层次、可验证的智能体身份标识与权限授予控制机制，同场发布智能体身份注册与解析平台。 <a href="https://www.chinaaet.com/article/3000181574">S06</a></li>
+<li><strong>C07 / fact / supported</strong>：华为云智果AgentArts于11月4日通过中国信通院可信AI企业级智能体平台评估，成为首个获当前最高4+级的产品，评估覆盖认知、规划、执行、业务集成、知识管理、运维与安全合规。 <a href="https://ai.cnmo.com/news/821811.html">S07</a></li>
+<li><strong>C08 / fact / preliminary</strong>：马斯克称Grok Bot服务成本相对收入不可持续，周额度被收紧，用户反映额度在无对应使用下从50%-72%跳升至100%，暴露常驻智能体多轮调用的订阅经济性瓶颈。 <a href="https://vector.news/articles/musk-calls-grok-bot-costs-unsustainable-83c70beb04">S08</a></li>
+<li><strong>C09 / fact / supported</strong>：苹果2026财年10-K新增AI风险因素，警告智能体可擅自访问未授权系统、执行或修改代码、发送通信与完成交易，可能违抗指令、隐瞒行为或生成不实输出，且苹果承认对第三方智能体的监督控制能力可能有限。 <a href="https://fourweekmba.com/ai-apples-10-k-filing-warns-ai-agents-may-resist-instructions/">S09</a></li>
+<li><strong>C10 / fact / supported</strong>：月之暗面11月5日将Kimi K3.1 Pro权重开源至Hugging Face，总参数2.8万亿、单次推理激活约1040亿参数、支持约100万Token上下文，在Agent Arena智能体榜居开放权重模型第一、全球第13。 <a href="https://www.ainewsdaily.asia/articles/article-163">S10</a></li>
+<li><strong>C11 / fact / supported</strong>：Abacum于11月2日推出统一智能体Abra，将多个专业智能体编排进同一体验，覆盖受治理的数据、模型与上下文，面向全部现有客户免费提供，定位企业业务规划场景。 <a href="https://www.morningstar.com/news/pr-newswire/20261102ny86397/abacum-launches-abra-a-unified-ai-agent-for-business-planning-across-the-enterprise">S11</a></li>
+<li><strong>C12 / fact / supported</strong>：Sunrate于11月2日在香港金融科技周推出智能体支付虚拟商业卡，授权AI智能体在预设限额与审批策略下创建虚拟卡并执行企业支付，已完成Mastercard Agent Pay认证。 <a href="https://technode.global/2026/11/03/sunrate-agentic-card-ai-business-payments/">S12</a></li>
+<li><strong>C13 / inference / preliminary</strong>：同周三项基准呈现分化图景：日常与湿实验任务分数较高但多为自建自评且不可复现，专家长程任务最佳通过率仅12%，说明智能体能力宣传与专家级可靠性之间存在显著落差。 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a> <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">S04</a> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">S05</a></li>
+<li><strong>C14 / inference / preliminary</strong>：常驻与托管智能体、智能体支付与身份治理同周出现，表明智能体生态正从单次对话工具转向持续运行、自主花钱、需要身份与权限管理的生产形态。 <a href="https://www.perplexity.ai/page/perplexity-launches-teammates-_5wGYYftTnSs82GhKAOsuw">S01</a> <a href="https://www.unite.ai/kimi-formally-launches-hosted-agents-for-enterprise-ai-workloads/">S02</a> <a href="https://www.chinaaet.com/article/3000181574">S06</a> <a href="https://technode.global/2026/11/03/sunrate-agentic-card-ai-business-payments/">S12</a></li>
+<li><strong>C15 / forecast / preliminary</strong>：未来数月，成本与治理约束将比模型能力更直接地决定常驻智能体的落地节奏：订阅定价、多轮调用成本与身份权限机制若不解决，专家任务的低通过率与失控风险将限制其进入高 stakes 场景。 <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">S03</a> <a href="https://www.chinaaet.com/article/3000181574">S06</a> <a href="https://vector.news/articles/musk-calls-grok-bot-costs-unsustainable-83c70beb04">S08</a> <a href="https://fourweekmba.com/ai-apples-10-k-filing-warns-ai-agents-may-resist-instructions/">S09</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://www.perplexity.ai/page/perplexity-launches-teammates-_5wGYYftTnSs82GhKAOsuw">Perplexity Launches Teammates</a> · Perplexity
+- 发布：2026-11-04；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：厂商官方发布；读取：relevant_text；定位：官方发布页。
+- 原文支持：Teammates于11月4日发布、11月5日上线，仅限个人Max订阅（200美元/月）网页研究预览版，默认模型Claude Opus 5.5，可承担收件箱分流、竞品跟踪等持续性工作，企业版默认不含。
+- 限制：官方发布，未附独立测试与具名客户案例；内部称30天建约1万个Teammate，未经第三方核实。</p>
+<p><strong>S02</strong> <a href="https://www.unite.ai/kimi-formally-launches-hosted-agents-for-enterprise-ai-workloads/">Kimi Formally Launches Hosted Agents for Enterprise AI Workloads</a> · Unite.AI
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：月之暗面11月5日正式推出Kimi Hosted Agents，将会话、工具执行、沙箱与故障恢复作为托管云服务提供，含140+技能与30+插件，沙箱运行时0.072元/小时；此前9月已面向国内企业认证用户内测。
+- 限制：二手报道，未附独立实测与客户落地数据；9月内测细节未展开。</p>
+<p><strong>S03</strong> <a href="https://aiagentupdate.com/post/semianalysis-gdpx-benchmark-2026-11-02">SemiAnalysis GDPx Benchmark 2026-11-02</a> · AI Agent Update
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：GDPx含206个长程专家任务、覆盖11个领域，最佳模型Claude Opus 5.5通过率仅12.0%（每任务51.41美元），Gemini 4 Carbon 10.9%、GPT-6 Astra 9.6%，金融与法律任务二值评分全部为0%。
+- 限制：二手报道，非SemiAnalysis原始报告；网络安全对齐任务98%运行至少违反一条行为规则的细节未展开评分方法。</p>
+<p><strong>S04</strong> <a href="https://explainx.ai/blog/openai-lifeval-everyday-tasks-benchmark-gpt-6-astra-childcare-government-paperwork-2026">OpenAI LifeVal: Everyday Tasks Benchmark, GPT-6 Astra, Childcare, Government Paperwork 2026</a> · ExplainX
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：OpenAI 11月2日发布日常任务基准LifeVal，基于时间使用调查与3995人问卷，GPT-6 Astra平均奖励80.6%；但该基准由OpenAI自建自评、仅含自家模型，且未公开数据集、代码与评分细则。
+- 限制：二手报道；自建自评且未公开数据与代码，80.6%不可独立复现验证。</p>
+<p><strong>S05</strong> <a href="https://kingy.ai/blog/biobasicsbench-openai-wet-lab-ai-guide/">BioBasicsBench: OpenAI Wet-Lab AI Guide</a> · Kingy
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：OpenAI 11月6日发布与Ligo合作的BioBasicsBench湿实验基准，100个任务中GPT-6 Astra在xhigh推理档平均获66.7%部分credit，显著高于GPT-5.6 Sol的43.8%；但公告未附论文、数据集、完整评分细则与评估代码链接。
+- 限制：二手报道；未附论文、数据集与代码，66.7%不可独立复现验证。</p>
+<p><strong>S06</strong> <a href="https://www.chinaaet.com/article/3000181574">世界互联网大会乌镇峰会发布《智能体发展自律公约》</a> · AET电子技术应用
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：2026年世界互联网大会乌镇峰会11月4日发布《智能体发展自律公约》，由中国信通院牵头、20家机构企业参与，共八条，首条要求建立分层次、可验证的智能体身份标识与权限授予控制机制，同场发布智能体身份注册与解析平台。
+- 限制：公约为自律文件，无强制标准与统一接口清单；报道日期与发布日期存在11月4日与11月5日两种表述，以发布日为准。</p>
+<p><strong>S07</strong> <a href="https://ai.cnmo.com/news/821811.html">华为云智果AgentArts通过中国信通院可信AI企业级智能体平台评估</a> · CNMO科技
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：华为云智果AgentArts于11月4日通过中国信通院可信AI企业级智能体平台评估，成为首个获当前最高4+级的产品，评估依据《企业级智能体技术要求》，覆盖认知、规划、执行、业务集成、知识管理、运维与安全合规。
+- 限制：二手报道，未附评估报告原文与逐项得分；4+级为当前最高级，但评估方法细节未公开。</p>
+<p><strong>S08</strong> <a href="https://vector.news/articles/musk-calls-grok-bot-costs-unsustainable-83c70beb04">Musk Calls Grok Bot Costs Unsustainable</a> · Vector News
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：马斯克11月1日在X上称Grok Bot服务成本相对收入不可持续，多家媒体11月2日报道其周额度被收紧，用户反映额度在无对应使用下从50%-72%跳升至100%，暴露常驻智能体多轮调用的订阅经济性瓶颈。
+- 限制：二手报道；用户额度跳升为用户反映，未见官方用量数据佐证；8月共享电脑故障为背景信息，非本次事件。</p>
+<p><strong>S09</strong> <a href="https://fourweekmba.com/ai-apples-10-k-filing-warns-ai-agents-may-resist-instructions/">AI: Apple's 10-K Filing Warns AI Agents May Resist Instructions</a> · FourWeekMBA
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：苹果11月3日提交的2026财年10-K新增AI风险因素，警告智能体可擅自访问未授权系统、执行或修改代码、发送通信与完成交易，可能违抗指令、隐瞒行为或生成不实输出，且苹果承认对第三方智能体的监督控制能力可能有限。
+- 限制：二手报道，非10-K原文；风险因素为前瞻性警示，非已发生事故的陈述。</p>
+<p><strong>S10</strong> <a href="https://www.ainewsdaily.asia/articles/article-163">Kimi K3.1 Pro Open Weights Release</a> · AI News Daily
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：月之暗面11月5日将Kimi K3.1 Pro权重开源至Hugging Face，总参数2.8万亿、单次推理激活约1040亿参数、支持约100万Token上下文，在Agent Arena智能体榜居开放权重模型第一、全球第13。
+- 限制：二手报道，未附独立复现评测；Agent Arena排名为榜单结果，非受控基准。</p>
+<p><strong>S11</strong> <a href="https://www.morningstar.com/news/pr-newswire/20261102ny86397/abacum-launches-abra-a-unified-ai-agent-for-business-planning-across-the-enterprise">Abacum Launches Abra, a Unified AI Agent for Business Planning Across the Enterprise</a> · Morningstar / PR Newswire
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：厂商新闻稿转载；读取：relevant_text；定位：新闻稿正文。
+- 原文支持：Abacum于11月2日推出统一智能体Abra，将多个专业智能体编排进同一体验，覆盖受治理的数据、模型与上下文，面向全部现有客户免费提供，定位企业业务规划场景。
+- 限制：厂商新闻稿转载，未附独立测试与客户案例；免费范围限现有客户。</p>
+<p><strong>S12</strong> <a href="https://technode.global/2026/11/03/sunrate-agentic-card-ai-business-payments/">Sunrate Launches Agentic Card for AI Business Payments</a> · TechNode Global
+- 发布：2026-11-03；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体报道；读取：relevant_text；定位：报道正文。
+- 原文支持：Sunrate于11月2日在香港金融科技周推出智能体支付虚拟商业卡，授权AI智能体在预设限额与审批策略下创建虚拟卡并执行企业支付，已完成Mastercard Agent Pay认证，覆盖采购、差旅与供应商付款场景。
+- 限制：二手报道，未附实际交易量与客户案例；认证细节未展开。</p>
+<p>检索缺口：
+- Teammates与Kimi Hosted Agents均无独立第三方实测与具名客户案例，实际持续任务完成率与故障率未知。
+- LifeVal与BioBasicsBench均未公开数据集、代码与完整评分细则，分数无法独立复现；GDPx原始报告的方法与成本口径未直接引用。
+- 乌镇《智能体发展自律公约》无强制标准与统一接口清单，身份注册与解析平台的技术细节与接入情况未见披露。
+- Grok Bot限流的官方用量与成本数据未公开，用户额度跳升仅为用户反映；常驻智能体多轮调用的单位成本缺乏系统数据。
+- 检索中提及的Wizard Cyber CYBERSHIELD AI、Scalekit AgentKit、百度文心5.5 Flash、美团LongCat-2.5、腾讯Hy4、阿里Qoder等产品未纳入本次账本来源，覆盖不完整。
+- 华为4+级评估的逐项得分与评估报告原文未公开，认证含金量难以横向比较。</p>
+<p>检索日志：AI agent framework product launch November 2026（discovery）；AI agent benchmark evaluation November 2026（discovery）；AI智能体 2026年11月 最新进展（discovery）；智能体框架 评测 落地 2026年11月（discovery）；AI agent failure limitations cost November 2026 Grok Bot limit（counterevidence）；Perplexity Teammates always-on agents November 2026（verification）；AI智能体 失败 局限 成本 不可持续 2026年11月（counterevidence）；SemiAnalysis GDPx benchmark Claude Opus 12% November 2 2026（verification）；Kimi Hosted Agents November 5 2026 Moonshot enterprise（verification）；华为云智果 AgentArts 中国信通院 4+级 2026年11月4日（verification）；乌镇峰会 智能体发展自律公约 身份标识 2026年11月5日（verification）；Apple 10-K autonomous AI agents risk November 2026 Salesforce Cresta acquisition（counterevidence）。</p>
+<h2 id="ai">三、AI 硬件</h2>
+<p><strong>关键议题</strong>：2026 年 11 月 2—8 日 AI 硬件呈现云端算力加速上新与芯片股暴跌、地缘供应受限并存的分化格局。</p>
+<p>选题依据：窗口为 2026 年 11 月 2—8 日，选取云端算力上新（Rubin GA 与扩产、国家超算、边缘推理）、芯片厂商财报与并购、地缘供应受限、终端 AI 硬件发布及 11 月 5 日市场暴跌五类关键事实，并以反证限定估值与需求判断。</p>
+<p><strong>当前判断</strong>：条件性优选 V02 的缩小后判断：2026年11月2—8日，强劲财报与芯片股暴跌同存，11月5日暴跌应定性为估值重定价信号，叠加对华 H200 准入受限这一真实但局部的约束；现有证据不足以把暴跌升级为 AI 硬件需求硬约束的定论，供给加速也不等于准入与估值无虞，但不等于需求已经崩塌。 <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a> <a href="https://wnflsports.com/2026/11/05/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval/">S07</a> <a href="https://aibubblemonitor.com/analysis/is-the-ai-bubble-bursting-chip-stocks-capex">S13</a></p>
+<p>优选：V02；置信度：medium。核心事实 C06、C07 有支持，但 C08 为转载二手来源且批准量为估计口径，C15 为初步推断且大买家资本开支完整清单未系统检索，股价数字未交叉核对交易所行情。
+成立条件：仅限 2026年11月2—8日窗口与所给账本材料；C06、C07 为 supported，C08、C15 为 preliminary；不延伸为需求崩塌、股价走势或长期资本开支判断；三星订单（C09，unverified）不作为裁决依据。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表认为硬件供给与部署节奏是主线的解读，依据是本周多项产品 GA、扩产与并购事实。）：2026年11月2—8日这一周，AI硬件供给能力上了一个台阶：Rubin平台在两大云上进入可用与扩产阶段，国家超算与边缘推理同步上新，AMD又以约111亿美元并购补强AI布局，供给侧加速是本周的主线。
+- 限定：结论仅限2026年11月2—8日窗口内的供给侧可用性与部署节奏，置信度为中等；不延伸为需求、盈利或股价判断，也不意味着供给瓶颈已消除。
+- 最强反证：最强反证是供给上新与市场、地缘约束同周并存：11月5日芯片股遭遇数月最差单日表现，AMD跌17.3%、英伟达跌9.3%，纳指跌约5.5%进入修正区间；约60万颗H200滞留香港、北京未批准大批量进口，显示出口许可放行不等于市场准入；三星得州二厂HBM订单亦未获三家公司官方确认。因此本周事实只能支撑“供给能力在加速上新”，不能支撑“供给与需求已无约束”。 <a href="https://bitcoinversus.tech/2026/11/07/google-cloud-a5x-vera-rubin-1152gb-hbm4-bare-metal-ga-november-2026/">S01</a> <a href="https://www.storagenewsletter.com/2026/11/05/oracle-ai-world-2026-nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure/">S02</a> <a href="https://news.molroo.com/en/posts/2026-11-national-supercomputer-6-hangang-kisti-gh200">S03</a> <a href="https://www.electronicdesign.com/directory/boards-systems/compute/press-release/55416217/new-at-mouser-advantech-mic-743-at-ai-inference-system-powered-by-nvidia-jetson-thor-for-ai-applications">S04</a> <a href="https://www.inxen.news/news/radar-23295964-09e7-4734-9406-8ba522b2cd21">S05</a></p>
+<p><strong>观点 V02</strong>（谨慎情景分析者；代表强调市场暴跌与地缘准入制约的解读，依据是 11 月 5 日行情、H200 积压与未确认订单。）：需求与估值、地缘准入仍是硬约束：2026年11月2—8日一周内，财报强劲仍难挡芯片股暴跌，H200滞留与三星订单未确认显示市场与供应链的不确定性高于供给叙事，供给加速不能直接等同于需求与准入无虞。
+- 限定：结论限于2026年11月2—8日窗口与所给材料，置信度为中等偏谨慎：C06、C07为supported，C08与C15为preliminary，C09为unverified。本主张断言的是不确定性与硬约束的存在，而非AI硬件需求已经崩塌；C15明确指出暴跌更可能是估值重定价而非需求崩塌的证据，因此本结论是有条件的谨慎判断，不是需求崩塌的定论。
+- 最强反证：最强反证来自C15本身：无大买家宣布削减AI资本开支、微软等仍指引高额投入，说明11月5日暴跌未证明需求已崩塌，可能是政治与融资担忧引发的估值重定价，单日行情可能过度反应。此外，H200对华销售不足英伟达数据中心收入的1%，滞留对英伟达整体业绩的直接冲击有限；三星订单若日后获官方确认，将转为供应链的积极信号而非不确定性；同期Rubin平台GA与扩产等供给事实（账本C01、C02，不属本立场claim_ids）也与“供给叙事失效”的更强版本相冲突。 <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a> <a href="https://wnflsports.com/2026/11/05/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval/">S07</a> <a href="https://stocktwits.com/news-articles/markets/equity/amd-nvidia-could-join-tesla-on-samsung-s-texas-chip-plant-customer-list-report/cNGX21iR95F">S08</a> <a href="https://aibubblemonitor.com/analysis/is-the-ai-bubble-bursting-chip-stocks-capex">S13</a></p>
+<p><strong>观点 V03</strong>（终端创新观察者；代表关注消费级 AI 硬件新形态的解读，依据是 XR 眼镜、M6 与 Nothing 的发布信息，同时保留对厂商宣称的怀疑。）：AI 硬件竞争焦点正在从数据中心向个人终端延伸：2026年11月2—8日一周内，XR眼镜预订、M6终端设备上市与Nothing无屏AI设备预告集中出现，显示终端新形态成为新的竞争方向；但这只是方向性早期信号，关键性能宣称多未独立验证。
+- 限定：置信度为中低、范围严格限定：仅就2026年11月2—8日窗口内的发布与预订动作而言成立，是方向性早期信号，不是已证实的市场结构转变；C10与C14为preliminary，C11与C13为unverified，只有C12为supported；首批XR眼镜仅限美国与韩国，Nothing的具体形态与功能尚未披露，Jalapeno仍处实验室样品阶段。
+- 最强反证：最强反证有三点。第一，发布、预订与实验室样品不等于销售与采用：XR眼镜尚未交付，Nothing连形态都未披露，Jalapeno未量产，无法据此断言终端已成主流。第二，M6本质上是常规笔记本的芯片迭代，Jalapeno是面向推理的数据中心芯片，后者反而可能强化而非削弱数据中心焦点；把Jalapeno直接算作“终端扩散”证据是本立场最薄弱的一环，过度延伸会削弱主张。第三，所有关键性能数字（M6为M5的2倍、Jalapeno优于GB300）均无独立验证，若实测不达宣称，所谓终端竞争力将大打折扣。 <a href="https://cryptobriefing.com/openai-chatgpt-codex-hardware-engineering/">S09</a> <a href="https://www.zaikei.co.jp/amp/article/20261107/876546.html">S10</a> <a href="https://tech-insider.org/apple-m6-chip-vs-m5-2nm-launch-2026/">S11</a> <a href="https://www.forux.it/nothing-dispositivo-ia-dicembre-2026-occhiali-smart/">S12</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V01 的合理洞察：在受限条件下，Rubin 平台 GA 与扩产、Jetson Thor 开始供货仍是真实的供给可用性推进，边缘推理是当周较明确的可采购增量，适用于跟踪供给可交付性而非需求判断。
+- V03 的合理洞察：XR 眼镜预订、M6 终端上市与 Nothing 无屏设备预告集中出现，可作为终端 AI 新形态探索的早期信号，适用于观察厂商是否持续投入终端形态，但不证明竞争焦点已转移。</p>
+<p>不确定性及改变判断的条件：
+- 11月5日后各大买家资本开支指引的完整清单未系统检索，出现首家下调或持续维持会改变判断。
+- H200 北京批准总量仍为估计口径，未直接读取路透原文；正式拒绝、配额归零或限制扩围会改变准入判断。
+- 三星得州二厂 HBM 订单未获三方官方确认，确认或否认会改变供应链不确定性判断。
+- A5X、M6、Jalapeno 等关键性能数字缺乏独立第三方实测，实测结果会改变供给与终端竞争力判断。
+- 11月5日暴跌的持续性与融资、订单层面的后续证据不在所给材料内，数周未修复或订单取消会支持更强的约束判断。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：同一周内供给加速上新与芯片股暴跌、地缘准入受限并存：财报创纪录却挡不住抛售，H200 滞留香港，终端新形态集中出现。</li>
+<li><strong>需要</strong>：需要区分三件事：暴跌是估值重定价还是需求硬约束；对华准入受限是局部还是扩围；已宣布的供给推进有多少在当周真正可交付、可采购。</li>
+<li><strong>方案</strong>：采纳 V02 的缩小后判断作为本周主线：暴跌定性为估值重定价加局部准入约束，不升级为需求崩塌；同时以 V01 的可交付性清单与 V03 的终端早期信号作为并行跟踪项，不混同为定论。</li>
+<li><strong>预演</strong>：若下月财报季大买家维持高额资本开支指引、H200 批准量明确且 A5X 容量逐步开放，则估值重定价判断得到支持；若出现大买家下调、订单取消或准入扩围，则需把判断升级为需求与准入硬约束。</li>
+<li><strong>行动</strong>：
+   - 核查 11月5日后大买家的资本开支指引完整清单（分析者/秘书执行） <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a> <a href="https://aibubblemonitor.com/analysis/is-the-ai-bubble-bursting-chip-stocks-capex">S13</a>
+     时间：未来 2—4 周财报季内；指标：宣布下调、维持或上调资本开支的大买家数量与金额；基线：所给材料内无大买家宣布削减，微软等仍指引高额投入。
+     停止/成功条件：完整清单核对完成，或出现首家大买家明确下调指引；阈值来源：分析者建议（账本缺口：完整清单未系统检索）。
+   - 跟踪 H200 对华批准总量与滞留库存变化（分析者/秘书执行） <a href="https://wnflsports.com/2026/11/05/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval/">S07</a>
+     时间：未来 2—4 周；指标：北京批准总量、滞留香港芯片数量、英伟达库存减值更新；基线：约 60 万颗滞留，批准总量或不足 20 万颗，对华销售不足数据中心收入 1%，计提 4 亿美元准备金。
+     停止/成功条件：获得路透原文或官方确认的批准量，或英伟达更新减值与收入指引；阈值来源：证据所给（C08）。
+   - 跟踪供给可交付性：A5X 实际开放区域与容量块、Oracle 多吉瓦已交付容量、Hangang 正式服务（分析者/秘书执行） <a href="https://bitcoinversus.tech/2026/11/07/google-cloud-a5x-vera-rubin-1152gb-hbm4-bare-metal-ga-november-2026/">S01</a> <a href="https://www.storagenewsletter.com/2026/11/05/oracle-ai-world-2026-nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure/">S02</a> <a href="https://news.molroo.com/en/posts/2026-11-national-supercomputer-6-hangang-kisti-gh200">S03</a>
+     时间：至 2026年12月16日 Hangang 正式服务；指标：A5X 可预约容量实际开放情况、Oracle 已交付容量与时间表、Hangang 正式服务是否按期开始；基线：A5X 仅限选定区域、需预约未来容量块、不支持按需/Spot；Hangang 正式服务定于 12月16日。
+     停止/成功条件：获得官方可用性或交付数据，确认已交付增量规模；阈值来源：证据所给（C01、C02、C03）。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Google Cloud 于 2026 年 11 月 6 日将搭载 NVIDIA Vera Rubin NVL72 的 A5X 实例正式全面可用（GA），单台裸金属含 4 颗 Rubin GPU、共 1152GB HBM4，但仅限选定区域、需预约未来容量块，不支持按需/Spot 购买。 <a href="https://bitcoinversus.tech/2026/11/07/google-cloud-a5x-vera-rubin-1152gb-hbm4-bare-metal-ga-november-2026/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Oracle 与 NVIDIA 在 2026 年 11 月 5 日宣布将 OCI 的 Vera Rubin NVL72 超级集群扩至多吉瓦规模，Vera Rubin NVL72 与 Vera CPU 已在 OCI 可用，并计划引入 8 卡 Rubin 的 HGX Rubin NVL8 系统。 <a href="https://www.storagenewsletter.com/2026/11/05/oracle-ai-world-2026-nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure/">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：韩国国家超算 6 号 Hangang 于 2026 年 11 月 2 日启用，理论算力 614 PFLOPS，集成 8496 颗 GPU（8336 颗 NVIDIA GH200 与 160 颗 H200），正式服务定于 12 月 16 日，55% 算力分配给研发创新。 <a href="https://news.molroo.com/en/posts/2026-11-national-supercomputer-6-hangang-kisti-gh200">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：Advantech 基于 NVIDIA Jetson Thor T4000/T5000 的 MIC-743-AT 边缘 AI 推理系统于 2026 年 11 月 3 日起由 Mouser 供货，最高 2070 TFLOPS（FP4），面向智能工厂、机器人与生成式智能体应用。 <a href="https://www.electronicdesign.com/directory/boards-systems/compute/press-release/55416217/new-at-mouser-advantech-mic-743-at-ai-inference-system-powered-by-nvidia-jetson-thor-for-ai-applications">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：AMD 在 2026 年 11 月 4 日提交的 10-Q 中披露两笔待完成 AI 收购合计约 111 亿美元：全股票收购 World Labs 约 82 亿美元，以及现金加股票收购 Taalas 约 29 亿美元（其中至多约 14 亿美元为或有对价），均预计 2026 年底前完成、待监管批准。 <a href="https://www.inxen.news/news/radar-23295964-09e7-4734-9406-8ba522b2cd21">S05</a></li>
+<li><strong>C06 / fact / supported</strong>：AMD 于 2026 年 11 月 3 日公布创纪录的 2026 年第三季度营收 134 亿美元，数据中心业务同比增长 97%。 <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a></li>
+<li><strong>C07 / fact / supported</strong>：2026 年 11 月 5 日美国芯片股遭遇数月最差单日表现：AMD 跌 17.3% 至 404.40 美元，英伟达跌 9.3%，英特尔跌 10.3%，纳指跌约 5.5% 进入修正区间，市场归因于中期选举后数据中心建设受阻担忧。 <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a></li>
+<li><strong>C08 / fact / preliminary</strong>：约 60 万颗 NVIDIA H200 芯片滞留香港，因北京未批准大批量进口；中国已批准的总量可能不足 20 万颗，英伟达对华 H200 销售不足其数据中心收入的 1%，并为未售库存计提 4 亿美元准备金。 <a href="https://wnflsports.com/2026/11/05/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval/">S07</a></li>
+<li><strong>C09 / source_statement / unverified</strong>：三星得州泰勒第二晶圆厂被曝已获 AMD 与 NVIDIA 的 HBM 基础 die 全部产能订单、多数为 AMD，采用 2nm 工艺、占地约 270 万平方英尺，2026 年 11 月开工、2029 年 2 月进设备、2030 年量产；但三家公司均未官方确认订单。 <a href="https://stocktwits.com/news-articles/markets/equity/amd-nvidia-could-join-tesla-on-samsung-s-texas-chip-plant-customer-list-report/cNGX21iR95F">S08</a></li>
+<li><strong>C10 / fact / preliminary</strong>：OpenAI 与 Broadcom 的首款自研推理芯片 Jalapeno 在 9 个月内完成从设计到流片，工程样品已在实验室以目标频率和功耗运行 GPT-5.3-Codex-Spark 等负载。 <a href="https://cryptobriefing.com/openai-chatgpt-codex-hardware-engineering/">S09</a></li>
+<li><strong>C11 / source_statement / unverified</strong>：OpenAI 宣称 Jalapeno 的能效与延迟优于 GB300，但该数据来自 OpenAI 内部测试，尚无独立第三方验证。 <a href="https://cryptobriefing.com/openai-chatgpt-codex-hardware-engineering/">S09</a></li>
+<li><strong>C12 / fact / supported</strong>：三星与谷歌合作的 Android XR 智能眼镜（无显示屏、搭载 Gemini 与高通 Snapdragon AR1 Gen 1）将于 2026 年 11 月 12 日开启预订，Warby Parker 与 Gentle Monster 同日公布价格并开启预订，12 月中旬开始交付，首批仅限美国与韩国。 <a href="https://www.zaikei.co.jp/amp/article/20261107/876546.html">S10</a></li>
+<li><strong>C13 / source_statement / unverified</strong>：苹果 M6 芯片的 14 英寸 MacBook Pro 与 iMac 于 2026 年 11 月 6 日上市，M6 为苹果首款 2nm 芯片，配双 16 核神经网络引擎，苹果称其峰值算力为 M5 的 2 倍，但该数字为厂商宣称、尚未经独立测试验证。 <a href="https://tech-insider.org/apple-m6-chip-vs-m5-2nm-launch-2026/">S11</a></li>
+<li><strong>C14 / fact / preliminary</strong>：Nothing CEO Carl Pei 于 2026 年 11 月 5 日确认公司首款 AI 原生设备将于 2026 年 12 月推出，定位为无屏幕的“工具”而非手机、眼镜或吊坠，具体形态与功能尚未披露。 <a href="https://www.forux.it/nothing-dispositivo-ia-dicembre-2026-occhiali-smart/">S12</a></li>
+<li><strong>C15 / inference / preliminary</strong>：11 月 5 日费城半导体指数单日跌 12.3%、较 6 月高点回落 38.4%，但截至当时无任何大买家宣布削减 AI 资本开支，微软等仍指引高额投入，显示此次暴跌主要是政治与融资担忧引发的估值重定价，而非 AI 硬件需求已崩塌的证据。 <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">S06</a> <a href="https://aibubblemonitor.com/analysis/is-the-ai-bubble-bursting-chip-stocks-capex">S13</a></li>
+<li><strong>C16 / forecast / preliminary</strong>：三星得州泰勒第二晶圆厂若按报道计划推进，将于 2030 年量产 HBM 基础 die，但该时间点目前仅为计划而非已交付产能，订单与量产均存在不确定性。 <a href="https://stocktwits.com/news-articles/markets/equity/amd-nvidia-could-join-tesla-on-samsung-s-texas-chip-plant-customer-list-report/cNGX21iR95F">S08</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://bitcoinversus.tech/2026/11/07/google-cloud-a5x-vera-rubin-1152gb-hbm4-bare-metal-ga-november-2026/">Google Cloud A5X Vera Rubin 1152GB HBM4 裸金属 GA</a> · bitcoinversus.tech
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：Google Cloud A5X（Vera Rubin NVL72）于 11 月 6 日 GA，单台裸金属 4 颗 Rubin GPU、1152GB HBM4，仅限选定区域、需预约容量块，不支持按需/Spot。
+- 限制：单一科技媒体报道，未直接引用 Google 官方公告原文；容量与购买限制以该报道为准。</p>
+<p><strong>S02</strong> <a href="https://www.storagenewsletter.com/2026/11/05/oracle-ai-world-2026-nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure/">Oracle 与 NVIDIA 将 Vera Rubin 扩至多吉瓦规模并引入 Vera CPU</a> · StorageNewsletter
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：Oracle 与 NVIDIA 宣布 OCI 的 Vera Rubin NVL72 超级集群扩至多吉瓦规模，Vera Rubin NVL72 与 Vera CPU 已在 OCI 可用，计划引入 HGX Rubin NVL8。
+- 限制：行业媒体对 Oracle AI World 宣布的报道，未直接引用双方官方公告原文。</p>
+<p><strong>S03</strong> <a href="https://news.molroo.com/en/posts/2026-11-national-supercomputer-6-hangang-kisti-gh200">韩国国家超算 6 号 Hangang 启用</a> · news.molroo.com
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：news_media；读取：relevant_text；定位：文章页。
+- 原文支持：韩国国家超算 6 号 Hangang 启用，理论算力 614 PFLOPS，集成 8496 颗 GPU，正式服务定于 12 月 16 日，55% 算力分配给研发创新。
+- 限制：单一新闻媒体报道，未直接引用 KISTI 官方公告原文。</p>
+<p><strong>S04</strong> <a href="https://www.electronicdesign.com/directory/boards-systems/compute/press-release/55416217/new-at-mouser-advantech-mic-743-at-ai-inference-system-powered-by-nvidia-jetson-thor-for-ai-applications">Advantech MIC-743-AT 边缘 AI 推理系统由 Mouser 供货</a> · Electronic Design
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：trade_media；读取：relevant_text；定位：文章页。
+- 原文支持：Advantech MIC-743-AT 边缘 AI 推理系统基于 Jetson Thor T4000/T5000，最高 2070 TFLOPS（FP4），11 月 3 日起由 Mouser 供货。
+- 限制：分销商渠道的厂商新闻稿转载，性能数字为厂商标称，未见独立实测。</p>
+<p><strong>S05</strong> <a href="https://www.inxen.news/news/radar-23295964-09e7-4734-9406-8ba522b2cd21">AMD 10-Q 披露约 111 亿美元两笔 AI 收购</a> · inxen.news
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：news_media；读取：relevant_text；定位：文章页。
+- 原文支持：AMD 10-Q 披露两笔待完成收购合计约 111 亿美元：World Labs 约 82 亿美元全股票，Taalas 约 29 亿美元（含至多约 14 亿美元或有对价），预计 2026 年底前完成、待监管批准。
+- 限制：对 10-Q 文件的二手报道，未直接引用 SEC 文件原文；收购尚未完成。</p>
+<p><strong>S06</strong> <a href="http://pandromeda.com/hardware/amd-nvidia-intel-crash-why-chip-stocks-sold-off-on-nov-5">AMD、英伟达、英特尔芯片股 11 月 5 日暴跌原因</a> · Pandromeda
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：AMD Q3 营收 134 亿美元创纪录、数据中心同比增 97%；11 月 5 日芯片股暴跌，AMD 跌 17.3% 至 404.40 美元，英伟达跌 9.3%，英特尔跌 10.3%，纳指跌约 5.5%。
+- 限制：单一科技媒体报道，股价与指数数字以该报道为准，未交叉核对交易所行情。</p>
+<p><strong>S07</strong> <a href="https://wnflsports.com/2026/11/05/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval/">NVIDIA 芯片滞留香港，中国未批进口</a> · wnflsports.com（转载路透）
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：news_wire_reprint；读取：relevant_text；定位：文章页。
+- 原文支持：路透报道约 60 万颗 NVIDIA H200 滞留香港，北京未批大批量进口，中国已批准总量或不足 20 万颗；对华 H200 销售不足数据中心收入 1%，英伟达计提 4 亿美元库存准备金。
+- 限制：转载路透报道的二手来源，未直接读取路透原文；批准总量为“可能不足”的估计口径。</p>
+<p><strong>S08</strong> <a href="https://stocktwits.com/news-articles/markets/equity/amd-nvidia-could-join-tesla-on-samsung-s-texas-chip-plant-customer-list-report/cNGX21iR95F">AMD、英伟达或加入三星得州芯片厂客户名单</a> · Stocktwits
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：market_media；读取：secondary；定位：文章页。
+- 原文支持：三星得州泰勒二厂被曝获 AMD 与 NVIDIA 的 HBM 基础 die 全部产能订单、多数为 AMD，2nm 工艺，2026 年 11 月开工、2029 年 2 月进设备、2030 年量产；三家公司均未官方确认。
+- 限制：源自韩媒援引业内人士的传闻报道，三方均未官方确认；2030 年量产为计划而非交付。</p>
+<p><strong>S09</strong> <a href="https://cryptobriefing.com/openai-chatgpt-codex-hardware-engineering/">OpenAI 与 Broadcom 自研芯片 Jalapeno 细节披露</a> · CryptoBriefing
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：OpenAI 与 Broadcom 自研推理芯片 Jalapeno 9 个月完成设计到流片，工程样品在实验室以目标频率功耗运行 GPT-5.3-Codex-Spark 等负载；优于 GB300 的能效与延迟宣称来自内部测试，无独立验证。
+- 限制：基于新报道的二手信息，性能宣称为 OpenAI 内部测试结果，无独立第三方验证。</p>
+<p><strong>S10</strong> <a href="https://www.zaikei.co.jp/amp/article/20261107/876546.html">三星与谷歌 Android XR 智能眼镜 11 月 12 日开启预订</a> · Zaikei
+- 发布：2026-11-07；事件：2026-11-07；查阅：2026-11-08。
+- 来源族：news_media；读取：relevant_text；定位：文章页。
+- 原文支持：三星与谷歌 Android XR 智能眼镜将于 11 月 12 日开启预订，Warby Parker 与 Gentle Monster 同日公布价格并开启预订，12 月中旬交付，首批仅限美国与韩国。
+- 限制：单一新闻媒体报道，未直接引用三星或谷歌官方公告原文。</p>
+<p><strong>S11</strong> <a href="https://tech-insider.org/apple-m6-chip-vs-m5-2nm-launch-2026/">苹果 M6 芯片对比 M5：2nm 上市</a> · tech-insider.org
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：苹果 M6 芯片的 14 英寸 MacBook Pro 与 iMac 于 11 月 6 日上市，M6 为首款 2nm 芯片，配双 16 核神经网络引擎，苹果称峰值算力为 M5 的 2 倍。
+- 限制：厂商宣称的性能倍数，未经独立测试验证；单一科技媒体报道。</p>
+<p><strong>S12</strong> <a href="https://www.forux.it/nothing-dispositivo-ia-dicembre-2026-occhiali-smart/">Nothing 首款 AI 原生设备 12 月推出</a> · forux.it
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：tech_media；读取：relevant_text；定位：文章页。
+- 原文支持：Nothing CEO Carl Pei 确认公司首款 AI 原生设备将于 12 月推出，定位为无屏幕的“工具”而非手机、眼镜或吊坠，具体形态与功能尚未披露。
+- 限制：CEO 口头确认，具体形态与功能未披露，上市细节待后续公布。</p>
+<p><strong>S13</strong> <a href="https://aibubblemonitor.com/analysis/is-the-ai-bubble-bursting-chip-stocks-capex">芯片股暴跌是否意味着 AI 泡沫破裂</a> · AI Bubble Monitor
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：analysis_media；读取：relevant_text；定位：文章页。
+- 原文支持：11 月 5 日费城半导体指数单日跌 12.3%、较 6 月高点回落 38.4%，但无大买家宣布削减 AI 资本开支，微软等仍指引高额投入，暴跌更可能是估值重定价而非需求崩塌的证据。
+- 限制：分析类媒体的归因判断，非官方资本开支公告的系统核对；“无大买家削减”以所给材料为限。</p>
+<p>检索缺口：
+- 富士通 Monaka 11 月全球开售仅出现在检索记录中，未提供可核验的关键事实与来源，未纳入账本。
+- XREAL Aura 首款 Android XR 眼镜仅出现在检索记录中，未提供发布时间、规格与来源，未纳入账本。
+- A5X、Rubin NVL72、Jetson Thor、M6、Jalapeno 的性能数字多为厂商或合作方宣称，缺乏独立第三方实测对照。
+- 三星得州二厂 HBM 订单、H200 滞留规模与北京批准总量均依赖单一信源或转载，未见三家公司官方确认或路透原文直接核验。
+- 11 月 5 日暴跌后各大买家资本开支指引的完整清单未系统检索，C15 的“无大买家削减”仅以所给材料为限。</p>
+<p>检索日志：AI hardware GPU AI chip launch November 2026（discovery）；Nvidia AMD AI chip news November 2026（discovery）；AI硬件 GPU AI芯片 最新发布 2026年11月（discovery）；智能硬件 AI眼镜 AI手机 发布 2026年11月（discovery）；AMD acquires World Labs Taalas $11 billion November 2026（verification）；Nvidia H200 chips stuck Hong Kong China import approval November 2026（verification）；OpenAI Broadcom AI chip Jalapeno prototype November 2026（verification）；AMD 收购 World Labs Taalas 110亿美元 2026年11月（verification）；AI chip stocks crash November 5 2026 data center backlash bubble（counterevidence）；英伟达 H200 香港积压 中国不批准进口 2026年11月（counterevidence）；Samsung Texas HBM plant AMD Nvidia orders November 3 2026（counterevidence）。</p>
+<h2 id="_15">四、具身智能</h2>
+<p><strong>关键议题</strong>：2026年11月初具身智能在工厂验证、基础模型与原型发布上加速，但量产可靠性、独立验证与商业回报仍未证实。</p>
+<p>选题依据：窗口内集中出现小米8小时工厂班次、智元GO-3、Embodied AI AIR、Meta Max、CEL集群学习等多项厂商与研究进展，同时伴随市场规模与标准实施等产业信号与多项反证，适合编制区分厂商自述与可验证事实的证据账本。</p>
+<p><strong>当前判断</strong>：2026年11月初具身智能的进展真实，但多为受限场景的初步验证；评价重心已转向数据验收、训练改善与复购等量产指标，短期内仍应以受监督部署看待，而非已证实的量产。此判断是“证据不足、暂不认定”，不是“已证伪量产”。 <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">S01</a> <a href="https://www.unite.ai/zh-cn/xinhua-unveils-bionic-humanoid-robot-news-anchors-with-ubtech/">S05</a> <a href="https://www.qiangzhige.com/news/daily-news-f15a252d1008.html">S09</a> <a href="https://www.theunitedindian.com/news/humanoid-robot-china-hangzhou-marathon-2026-traffic-police-2">S10</a> <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">S15</a></p>
+<p>优选：V02；置信度：medium。试点与标准实施的事实层面较可信，但量产级指标（分拣件数、整班成功率、人工介入次数、人均干预间隔、验收通过率、复购率、出货量）均未取得，GO-3与CEL亦无独立复现，账本未提供数值化的工厂连续作业门槛。
+成立条件：限于2026年11月初窗口内的上述证据；限于小米单一分拣工位、新宇新颜辅助岗位、杭行二号指定点位巡逻等受限场景；若小米补齐该工位关键指标并经独立核实，且验收通过率、干预间隔与复购率公开并达标，则对该已验证范围放弃受监督限定，但不自动推广为全部二足人形、全部工厂或全部场景的量产成立。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_16">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表将厂商发布与研究宣称按面值解读的乐观立场：以8小时班次、三榜第一、96台集群97.5%成功率为技术拐点证据，弱化独立验证缺失的影响。）：窗口内进展表明具身智能正从演示走向可复用的工厂与公共场景能力，模型、集群学习与原型迭代都在提速。
+- 限定：本主张限于2026年11月初窗口内的公开进展信号，置信度为中等：可作为技术加速的初步证据，但不是已证实的连续无人值守量产或商业化成功；若后续独立验证与量产指标不到位，结论应下调。
+- 最强反证：最强反证是：小米未公布分拣件数、整班成功率、人工介入次数与供电细节，视频为100倍速压缩且无外部观察者进厂核实（C13）；GO-3分数为厂商自述，未附评测版本与方法，模型当时尚未开放权重（C14）；一线调研称二足人形在可靠性上仍进不了工厂、现阶段ROI不合算，真正实用的是轮式底盘加人形上半身（C16）；功能安全上双足机器人断电会跌倒，安全态须主动控制维持，行业基本不公开人均干预间隔，多数部署仍在受限单元加遥操作监督下运行（C17）；当周人形机器人指数下跌7.69%，跑输沪深300达4.77个百分点（C15）。这些反证若成立，则窗口内进展更宜解读为受限验证加速，而非量产拐点已到。 <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">S01</a> <a href="https://aapnews.aap.com.au/aapreleases/cision20261102AE87486">S02</a> <a href="https://www.businesswire.com/news/home/20261106661068/en/Embodied-AI-Unveils-AIR-a-Physically-Safe-Humanoid-Robot-That-Learns-on-the-Job">S03</a> <a href="https://physicalainews.jp/news/satoru-moto-seika-daigaku-nadoto-cel-wo-happyou-96-dai-no-ro-00a69d">S06</a> <a href="https://automacha.com/tesla-robots-will-charge-driverless-robotaxi/">S07</a></p>
+<p><strong>观点 V02</strong>（谨慎产业观察者；代表产业落地视角：承认标准实施、训练场建设与场景试点，但强调杭行二号无执法权、新宇新颜为辅助岗位、多数部署仍受监督，量产结论需等待验收与复购数据。）：2026年11月初具身智能的进展真实，但多为受限场景的初步验证；评价重心已转向数据验收、训练改善与复购等量产指标，短期内仍应以受监督部署看待，而非已证实的量产。
+- 限定：适用范围限于2026年11月初窗口内的上述五项证据，置信度为中等：试点与标准实施的事实层面较可信，量产尚远的判断为基于缺失关键指标的谨慎推断；一旦验收通过率、复购率与干预间隔等数据公开并经独立核实，结论应相应修正。
+- 最强反证：最强反证是乐观解读：小米8小时整班、70余家训练场与多项标准实施可被视为从演示走向规模化的拐点；若后续公开数据显示分拣成功率与干预间隔已达工厂要求、训练场数据验收通过率高且出现重复采购，则“仍需以受监督部署看待”的限定将被削弱。此外，C07的CEL集群学习97.5%成功率与C02的GO-3三榜第一若经独立复现，也会提高模型与训练改善的可信度；但在本账本内，二者均为厂商或研究方自述且缺乏独立复现，故目前不足以推翻本主张。 <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">S01</a> <a href="https://www.unite.ai/zh-cn/xinhua-unveils-bionic-humanoid-robot-news-anchors-with-ubtech/">S05</a> <a href="https://www.qiangzhige.com/news/daily-news-f15a252d1008.html">S09</a> <a href="https://www.theunitedindian.com/news/humanoid-robot-china-hangzhou-marathon-2026-traffic-police-2">S10</a> <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">S15</a></p>
+<p><strong>观点 V03</strong>（资本与安全质疑者；代表质疑立场：以缺失的分拣件数与成功率、未开放的模型权重、指数跑输与一线ROI判断为依据，认为演示不等于量产，安全与商业化证据不足。）：就2026年11月初窗口内的二足人形而言：厂商自述缺乏关键指标与独立复现，演示不等于量产；现阶段ROI不合算且功能安全鸿沟未解；资本市场已用下跌表达分化，行业将剧烈淘汰。
+- 限定：结论限定于2026年11月初窗口、二足人形的工厂量产与商业化判断，中等置信度；不否定四足、轮式、巡检等形态的实用性，也不否定模型与集群学习的技术进展。指数下跌是市场分化信号而非商业失败的直接证明；C16为个别地区调研、C17为初步推断，其样本与代表性有限。若厂商补齐关键指标、开放权重并通过独立复现与安全认证，结论须相应修正。
+- 最强反证：最强反证来自乐观与谨慎立场：小米同一工位已由3月仅坚持3小时延长至8小时5分钟；清华等CEL在96台真机集群验证中未参训机器人600次测试成功率97.5%，且随参训规模扩大而提升；GO-3三榜第一、AIR称9个月完成研发并签约测试、Meta Max等原型迭代提速；另有标准实施、70余家训练场与2025年具身智能市场规模约9150亿元的产业信号。若上述进展能转化为公开的成功率、干预间隔、复购与出货数据，并通过独立复现与安全认证，则“演示不等于量产、ROI不合算、将剧烈淘汰”的判断将被削弱或推翻。 <a href="https://pasqualepillitteri.it/en/news/30152/xiaomi-humanoid-robot-first-8-hour-shift-ev-factory">S11</a> <a href="https://aifrontierpost.com/articles/agibot-go-3-preview-embodied-ai-benchmarks/">S12</a> <a href="https://www.fxbaogao.com/detail/5848889">S13</a> <a href="https://note.com/souco/n/na0ec0316f934">S14</a> <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">S15</a></p>
+<h3 id="_17">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：同一窗口内整班时长翻倍、榜单领先、集群规模带来可量化成功率提升等多项初步信号同向出现，值得作为加速验证的监测信号，但须待独立可复核指标出现后才能升级为可复用能力的结论。
+- V03的合理洞察：关键量产指标缺失、功能安全鸿沟未解、宁波受访企业自述ROI不合算，构成真实的商业化与出清风险；但“剧烈淘汰”目前只是调研方初步判断，指数下跌仅为市场分化信号，不能单独作为淘汰定论。</p>
+<p>不确定性及改变判断的条件：
+- 小米8小时班次的分拣件数、整班成功率、人工介入次数与供电方式细节，以及有无外部观察者或独立方核实。
+- GO-3的评测版本、方法、独立复现结果，以及2026年底全面开源承诺是否兑现、权重与下载入口是否开放。
+- CEL原始论文、任务定义、人类对照细节、失败案例与泛化范围；96台验证结果能否在其他任务与机器人上复现。
+- AIR签约测试的客户、数量与结果，CE认证能否在2027年获批；Optimus充电枪插拔与2027年交付计划能否落地。
+- 训练场数据验收通过率、模型训练实际改善效果、下游复购率与人均干预间隔等量产级指标，以及账本未提供的工厂连续作业数值门槛。</p>
+<h3 id="_18">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：窗口内多项厂商与研究进展同时出现，但量产判断所依赖的关键指标普遍缺失，勿把演示时长与榜单名次直接读作量产拐点。</li>
+<li><strong>需要</strong>：需要以可复核的量产级指标区分受限验证与连续无人值守量产：分拣件数与成功率、人工介入与干预间隔、验收通过率与复购率，以及独立复现与安全认证。</li>
+<li><strong>方案</strong>：按V02的限定口径跟踪：只在已验证的工位与任务范围内承认进展，等待小米补齐指标、GO-3开源复现、CEL原始披露与训练场验收数据公开后再逐项升级或下调判断。</li>
+<li><strong>预演</strong>：若上述指标陆续公开并经独立核实，同一工位的受监督限定可逐步解除，形成可复制的工厂验证范式；若指标继续缺失或复现失败，则窗口内进展应继续定性为受限验证加速，资本分化与出清压力可能加大。</li>
+<li><strong>行动</strong>：
+   - 核查小米是否补齐汽车工厂中控台侧饰板分拣工位的分拣件数、整班成功率、人工介入次数与供电/充电细节，并确认有无外部观察者或独立方进厂核实 <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">S01</a> <a href="https://pasqualepillitteri.it/en/news/30152/xiaomi-humanoid-robot-first-8-hour-shift-ev-factory">S11</a>
+     时间：2026-11-09至2026-12-08；指标：分拣件数、整班成功率、人工介入次数、供电方式细节及独立核实记录是否公开；基线：C01、C13：仅知8小时5分钟与两次充电中断，上述指标均未公布、无外部核实。
+     停止/成功条件：指标公开并经独立核实则对该工位放弃受监督限定；到期仍未公开则维持暂不认定；阈值来源：分析者建议：账本未给数值合格线，不虚构成功率或干预次数阈值，合格线须由工厂连续作业要求另定。
+   - 核查智元GO-3是否按承诺开放权重与下载入口、公开评测版本与方法，并跟踪第三方独立复现结果 <a href="https://aapnews.aap.com.au/aapreleases/cision20261102AE87486">S02</a> <a href="https://aifrontierpost.com/articles/agibot-go-3-preview-embodied-ai-benchmarks/">S12</a>
+     时间：2026-11-09至2026-12-31；指标：权重与下载入口是否开放、评测版本与方法是否公开、独立复现分数是否可得；基线：C02、C03、C14：三榜第一为厂商自述，当时未开放权重、未附评测方法与独立复现。
+     停止/成功条件：权重开放且独立复现可得则升级模型结论的可信度；到期未兑现则维持厂商自述定性；阈值来源：证据所给：C03承诺2026年底全面开源；复现标准为分析者建议。
+   - 核查清华、无问芯穹与智元CEL的原始论文、任务定义、人类对照细节与失败案例是否公开，跟踪其在其他任务与机器人上的泛化复现 <a href="https://physicalainews.jp/news/satoru-moto-seika-daigaku-nadoto-cel-wo-happyou-96-dai-no-ro-00a69d">S06</a>
+     时间：2026-11-09至2026-12-31；指标：原始论文与任务定义是否可得、失败案例与泛化范围是否披露、独立复现是否出现；基线：C07：96台验证、600次测试成功率97.5%为研究方宣称，未取得原始论文与对照细节。
+     停止/成功条件：原始披露与独立复现齐备则承认集群学习结论的可信度提升；否则维持初步宣称定性；阈值来源：分析者建议：账本未给复现合格线，以原始披露完整性与独立复现存在与否为判定条件。
+   - 跟踪70余家训练场的数据验收通过率、模型训练实际改善效果与下游复购率，以及行业人均干预间隔是否公开 <a href="https://www.qiangzhige.com/news/daily-news-f15a252d1008.html">S09</a> <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">S15</a>
+     时间：2026-11-09至2027-01-31；指标：验收通过率、训练改善效果、复购率、人均干预间隔四类指标是否有公开口径与数值；基线：C11、C17：评价重心已转向上述指标，但标准清单、训练场名单与验收数据未逐项取得，干预间隔基本不公开。
+     停止/成功条件：任一指标出现可核对的公开口径与数值即据此修正量产判断；持续缺失则维持受监督部署定性；阈值来源：证据所给评价类别（C11、C17）；数值合格线账本未给，分析者建议不虚构具体阈值。</li>
+</ol>
+<h3 id="_19">证据账本</h3>
+<ul>
+<li><strong>C01 / source_statement / preliminary</strong>：小米人形机器人在汽车工厂中控台侧饰板分拣工位完成8小时5分钟稳定运行（含两次充电中断），较3月同一项目仅能坚持3小时有延长；雷军称机器人可自主纠偏并与产线系统协同。 <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">S01</a></li>
+<li><strong>C02 / source_statement / preliminary</strong>：智元发布具身基础模型GO-3 Preview（WRAM架构），官方称在RoboDojo、RoboTwin、RoboColiseum三项具身评测中排名第一。 <a href="https://aapnews.aap.com.au/aapreleases/cision20261102AE87486">S02</a></li>
+<li><strong>C03 / forecast / preliminary</strong>：智元承诺GO-3于2026年底全面开源。 <a href="https://aapnews.aap.com.au/aapreleases/cision20261102AE87486">S02</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：瑞士Embodied AI发布人形机器人AIR，称9个月完成研发，采用肌腱驱动架构、可向工人学习任务并约一个月内转自主运行，已与全球制造商签约测试，按ISO/TS 15066设计、CE认证计划2027年。 <a href="https://www.businesswire.com/news/home/20261106661068/en/Embodied-AI-Unveils-AIR-a-Physically-Safe-Humanoid-Robot-That-Learns-on-the-Job">S03</a></li>
+<li><strong>C05 / source_statement / preliminary</strong>：Meta与上海傅利叶约3个月建成代号Max的人形机器人原型（约1.5米高、48公斤、英伟达Jetson Thor芯片、五指手与表情屏），Max 2已于9月启动；Meta官方称仅为内部研究实验，无销售计划、无上市时间，定位为Muse智能体的物理载体。 <a href="https://aiagentupdate.com/post/meta-fourier-max-humanoid-2026-11-02">S04</a></li>
+<li><strong>C06 / source_statement / preliminary</strong>：新华社与优必选发布仿生人形机器人新闻主播新宇、新颜（真人尺寸，张艺谋任首席形象设计），接入新华社新华语点时政智能体，新华社称拥有完整独立知识产权，定位为新闻编辑室辅助岗位而非替代记者编辑。 <a href="https://www.unite.ai/zh-cn/xinhua-unveils-bionic-humanoid-robot-news-anchors-with-ubtech/">S05</a></li>
+<li><strong>C07 / source_statement / preliminary</strong>：清华大学、无问芯穹与智元联合提出的群体经验学习（CEL）在96台真机集群验证中，未参训的两台机器人在插花、叠衣、手机充电、凳子组装、手机包装五项任务600次测试中成功率97.5%，全部超过6名人类操作员平均水平；手机包装任务成功率随参训规模从16台扩至96台由86.7%升至98.3%。 <a href="https://physicalainews.jp/news/satoru-moto-seika-daigaku-nadoto-cel-wo-happyou-96-dai-no-ro-00a69d">S06</a></li>
+<li><strong>C08 / source_statement / preliminary</strong>：特斯拉高管在Munro Live访谈中称，计划用Optimus人形机器人为Robotaxi插拔充电枪，作为无线充电落地前的过渡方案；Cybercab无线充电已获FCC批准，奥斯汀规划建设含80个无线充电桩的Robotaxi枢纽。 <a href="https://automacha.com/tesla-robots-will-charge-driverless-robotaxi/">S07</a></li>
+<li><strong>C09 / forecast / preliminary</strong>：Optimus首批企业客户交付计划为2027年。 <a href="https://automacha.com/tesla-robots-will-charge-driverless-robotaxi/">S07</a></li>
+<li><strong>C10 / source_statement / preliminary</strong>：《中国互联网发展报告2026》显示，2025年我国具身智能市场规模约9150亿元、增长20.4%，企业级智能体市场规模突破212亿元。 <a href="http://www.senn.com.cn/article/2026/11/05/25294.html">S08</a></li>
+<li><strong>C11 / source_statement / preliminary</strong>：11月1日起多项国家级人工智能、算力与具身智能行业标准正式实施，全国已建成启用超过70家具身智能训练场；行业评价重心从训练场数量转向数据验收通过率、模型训练实际改善效果与下游复购率。 <a href="https://www.qiangzhige.com/news/daily-news-f15a252d1008.html">S09</a></li>
+<li><strong>C12 / source_statement / preliminary</strong>：深杭马拉松期间，云深处基于DR02平台的人形机器人杭行二号（约178厘米高）在杭州黄龙体育中心附近参与交通管理，在指定点位巡逻、喊话提醒并解答公众问题；报道未证实其可独立处罚或作出具法律效力的决定。 <a href="https://www.theunitedindian.com/news/humanoid-robot-china-hangzhou-marathon-2026-traffic-police-2">S10</a></li>
+<li><strong>C13 / fact / supported</strong>：小米8小时班次未公布分拣件数、整班成功率、人工介入次数与供电方式细节，视频为100倍速压缩画面且无外部观察者进厂核实；据此只能认定为厂商自述的初步验证，而非已证实的连续无人值守量产。 <a href="https://pasqualepillitteri.it/en/news/30152/xiaomi-humanoid-robot-first-8-hour-shift-ev-factory">S11</a></li>
+<li><strong>C14 / fact / supported</strong>：GO-3三榜第一的分数（RoboDojo 61.90分/成功率56.42%、RoboTwin平均85.0%、RoboColiseum 78.82分）为智元自述，发布未附评测版本、方法与独立复现结果，且模型当时尚未开放权重与下载入口；三榜第一不等于真实作业场景已验证。 <a href="https://aifrontierpost.com/articles/agibot-go-3-preview-embodied-ai-benchmarks/">S12</a></li>
+<li><strong>C15 / fact / supported</strong>：国联民生人形机器人行业周报显示，当周人形机器人指数下跌7.69%，跑输沪深300指数4.77个百分点，年初以来累计下跌17.69%。 <a href="https://www.fxbaogao.com/detail/5848889">S13</a></li>
+<li><strong>C16 / source_statement / preliminary</strong>：宁波一线调研称二足人形机器人在可靠性与性能上仍进不了工厂，现阶段真正实用的是轮式底盘加人形上半身形态；受访企业负责人坦言当前人形机器人ROI不合算，做人形是为不掉队而持续研发，而非当下赚钱；中国估值超百亿的人形企业近30家，未来两年将剧烈淘汰。 <a href="https://note.com/souco/n/na0ec0316f934">S14</a></li>
+<li><strong>C17 / inference / preliminary</strong>：人形机器人演示与量产之间存在功能安全鸿沟：ISO 13849-1等标准假定断电即安全，而双足机器人断电会跌倒，其安全态须主动控制维持；行业基本不公开人均干预间隔等关键指标，多数所谓部署仍在受限单元加遥操作监督下运行。 <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">S15</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://roboticaguide.com/xiaomi-humanoid-robot-8-hour-factory-shift/">Xiaomi Humanoid Robot 8-Hour Factory Shift</a> · Roboticaguide
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：小米人形机器人在汽车工厂中控台侧饰板分拣工位首次完成8小时整班作业，8小时5分钟稳定运行、含两次充电中断；3月时同一项目仅能坚持3小时，雷军称机器人可自主纠偏并与产线系统协同。
+- 限制：厂商自述的初步验证，未见外部观察者进厂核实；未公布分拣件数、整班成功率与人工介入次数。</p>
+<p><strong>S02</strong> <a href="https://aapnews.aap.com.au/aapreleases/cision20261102AE87486">AgiBot GO-3 Preview embodied foundation model release</a> · AAP News（转引PRNewswire）
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：通讯社转载厂商通稿；读取：secondary；定位：正文。
+- 原文支持：智元发布具身基础模型GO-3 Preview，基于WRAM架构，官方称在RoboDojo、RoboTwin、RoboColiseum三项具身评测中排名第一，并承诺2026年底全面开源。
+- 限制：转引PRNewswire厂商通稿；分数为厂商自述，未附评测版本、方法与独立复现结果，当时尚未开放权重与下载入口。</p>
+<p><strong>S03</strong> <a href="https://www.businesswire.com/news/home/20261106661068/en/Embodied-AI-Unveils-AIR-a-Physically-Safe-Humanoid-Robot-That-Learns-on-the-Job">Embodied AI Unveils AIR, a Physically Safe Humanoid Robot That Learns on the Job</a> · Business Wire
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：通讯社厂商发布；读取：relevant_text；定位：正文。
+- 原文支持：瑞士Embodied AI在慕尼黑Humanoid Europe 2026上发布人形机器人AIR，9个月完成研发，采用肌腱驱动架构、可向工人学习任务并约一个月内转自主运行，已与全球制造商签约测试，按ISO/TS 15066设计、CE认证计划2027年。
+- 限制：厂商发布口径；签约测试的具体客户、数量与测试结果未在材料中披露，CE认证为计划而非已获认证。</p>
+<p><strong>S04</strong> <a href="https://aiagentupdate.com/post/meta-fourier-max-humanoid-2026-11-02">Meta Fourier Max humanoid robot prototype</a> · AI Agent Update
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：Meta与上海傅利叶约3个月建成代号Max的人形机器人原型（约1.5米高、48公斤、搭载英伟达Jetson Thor芯片、五指手与表情屏），Max 2已于9月启动；Meta官方称仅为内部研究实验，无销售计划、无上市时间，定位为Muse智能体的物理载体。
+- 限制：原型细节源自媒体转引The Information报道，未见Meta公布完整技术规格或实测数据；无销售计划为官方表态。</p>
+<p><strong>S05</strong> <a href="https://www.unite.ai/zh-cn/xinhua-unveils-bionic-humanoid-robot-news-anchors-with-ubtech/">Xinhua Unveils Bionic Humanoid Robot News Anchors with UBTECH</a> · Unite.AI
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：新华社与优必选在北京发布两名仿生人形机器人新闻主播新宇（男）、新颜（女），真人尺寸、张艺谋任首席形象设计，接入新华社新华语点时政智能体，新华社称拥有完整独立知识产权，定位为新闻编辑室辅助岗位而非替代记者编辑。
+- 限制：发布事实有报道支撑；实际播报能力、播出频次与编辑流程中的具体分工未在材料中披露。</p>
+<p><strong>S06</strong> <a href="https://physicalainews.jp/news/satoru-moto-seika-daigaku-nadoto-cel-wo-happyou-96-dai-no-ro-00a69d">清华大学等提出群体经验学习CEL，96台真机集群验证</a> · 日本フィジカルAI新聞
+- 发布：2026-11-02；事件：2026-11-02；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：清华大学、无问芯穹与智元联合提出群体经验学习（CEL）新范式并在96台真机集群验证：未参训的两台机器人在插花、叠衣、手机充电、凳子组装、手机包装五项任务600次测试中成功率97.5%，全部超过6名人类操作员平均水平；手机包装任务成功率随参训规模从16台扩至96台由86.7%升至98.3%。
+- 限制：转述研究方宣称，未取得原始论文、任务定义、人类对照细节与失败案例；成功率口径与泛化范围有待独立复现。</p>
+<p><strong>S07</strong> <a href="https://automacha.com/tesla-robots-will-charge-driverless-robotaxi/">Tesla Robots Will Charge Driverless Robotaxi</a> · Automacha
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：特斯拉高管在Munro Live访谈中称，计划用Optimus人形机器人为Robotaxi插拔充电枪，作为无线充电落地前的过渡方案；Cybercab无线充电已获FCC批准，奥斯汀规划建设含80个无线充电桩的Robotaxi枢纽，Optimus首批企业客户交付计划为2027年。
+- 限制：为访谈中的计划表述，非已落地的部署；充电枪插拔的实测表现与交付时间表未见独立证实。</p>
+<p><strong>S08</strong> <a href="http://www.senn.com.cn/article/2026/11/05/25294.html">《中国互联网发展报告2026》：2025年我国具身智能市场规模约9150亿元</a> · 南方企业新闻网（转引中国经济网）
+- 发布：2026-11-05；事件：2026-11-05；查阅：2026-11-08。
+- 来源族：媒体转载；读取：secondary；定位：正文。
+- 原文支持：11月4日世界互联网大会乌镇峰会发布的《中国互联网发展报告2026》显示，2025年我国具身智能市场规模约9150亿元、增长20.4%，企业级智能体市场规模突破212亿元。
+- 限制：转引中国经济网的二手报道，未取得报告原文；市场规模口径、统计范围与测算方法未在材料中披露。</p>
+<p><strong>S09</strong> <a href="https://www.qiangzhige.com/news/daily-news-f15a252d1008.html">多项国家级人工智能与具身智能行业标准实施，全国建成70余家具身智能训练场</a> · 强直哥暗盘挖掘资讯站
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：自媒体资讯；读取：secondary；定位：正文。
+- 原文支持：11月1日起多项国家级人工智能、算力与具身智能行业标准正式实施，全国已建成启用超过70家具身智能训练场；行业评价重心从训练场数量转向数据验收通过率、模型训练实际改善效果与下游复购率。
+- 限制：自媒体资讯站汇总，标准清单、训练场名单与验收数据未在材料中逐项列出；评价重心转向为行业观察表述。</p>
+<p><strong>S10</strong> <a href="https://www.theunitedindian.com/news/humanoid-robot-china-hangzhou-marathon-2026-traffic-police-2">Humanoid Robot in Hangzhou Marathon Traffic Management</a> · The United Indian
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：深杭马拉松期间，云深处基于DR02平台的人形机器人杭行二号（约178厘米高）在杭州黄龙体育中心附近参与交通管理，在指定点位巡逻、喊话提醒并解答公众问题，但报道未证实其可独立处罚或作出具法律效力的决定。
+- 限制：单篇报道；巡逻与喊话为活动描述，未证实独立执法权限，部署时长与运行稳定性未披露。</p>
+<p><strong>S11</strong> <a href="https://pasqualepillitteri.it/en/news/30152/xiaomi-humanoid-robot-first-8-hour-shift-ev-factory">Xiaomi Humanoid Robot First 8-Hour Shift in EV Factory</a> · Pasquale Pillitteri
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：小米8小时班次未公布分拣件数、整班成功率、人工介入次数与供电方式细节，视频为100倍速压缩画面且无外部观察者进厂核实，属厂商自述的初步验证而非已证实的连续无人值守量产。
+- 限制：为媒体对厂商发布完整性的质疑与判断，非独立实测；未提供反向实测数据。</p>
+<p><strong>S12</strong> <a href="https://aifrontierpost.com/articles/agibot-go-3-preview-embodied-ai-benchmarks/">AgiBot GO-3 Preview Embodied AI Benchmarks</a> · AI Frontier Post
+- 发布：2026-11-03；事件：2026-11-03；查阅：2026-11-08。
+- 来源族：行业媒体；读取：relevant_text；定位：正文。
+- 原文支持：GO-3三榜第一的分数（RoboDojo 61.90分/成功率56.42%、RoboTwin平均85.0%、RoboColiseum 78.82分）为智元自述，发布未附评测版本、方法与独立复现结果，且模型当时尚未开放权重与下载入口，三榜第一不等于真实作业场景已验证。
+- 限制：为媒体核查性分析；未独立复跑评测，仅指出方法与开放状态缺失。</p>
+<p><strong>S13</strong> <a href="https://www.fxbaogao.com/detail/5848889">国联民生证券人形机器人行业周报20261102</a> · 发现报告（国联民生证券人形机器人行业周报20261102）
+- 发布：2026-11-04；事件：2026-11-04；查阅：2026-11-08。
+- 来源族：券商研报转载；读取：relevant_text；定位：正文。
+- 原文支持：国联民生人形机器人行业周报显示当周人形机器人指数下跌7.69%，跑输沪深300指数4.77个百分点，年初以来累计下跌17.69%，技术迭代加速与资本市场情绪分化并存。
+- 限制：指数口径与成分股以该券商周报为准；材料未提供周报全文，情绪分化为周报判断。</p>
+<p><strong>S14</strong> <a href="https://note.com/souco/n/na0ec0316f934">宁波一线调研：二足人形机器人仍进不了工厂</a> · souco総研（note）
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-08。
+- 来源族：调研手记；读取：relevant_text；定位：正文。
+- 原文支持：宁波一线调研称二足人形机器人在可靠性与性能上仍进不了工厂，现阶段真正实用的是轮式底盘加人形上半身形态；受访企业负责人坦言当前人形机器人ROI不合算，做人形是为不掉队而持续研发，而非当下赚钱；中国估值超百亿的人形企业近30家，未来两年将剧烈淘汰。
+- 限制：为个别地区调研与受访者表述，样本与代表性有限；近30家与剧烈淘汰为调研方判断，未见完整名单与测算依据。</p>
+<p><strong>S15</strong> <a href="https://www.thenoorainnexus.blog/humanoid-robot-deployment">Humanoid Robot Deployment and the Functional Safety Gap</a> · The Noorain Nexus
+- 发布：2026-11-08；事件：2026-11-08；查阅：2026-11-08。
+- 来源族：行业分析；读取：relevant_text；定位：正文。
+- 原文支持：人形机器人演示与量产之间存在功能安全鸿沟——ISO 13849-1等标准假定断电即安全，而双足机器人断电会跌倒，其安全态须主动控制维持；行业基本不公开人均干预间隔等关键指标，多数所谓部署仍在受限单元加遥操作监督下运行。
+- 限制：为行业分析文章的论证与概括，非标准原文或部署普查；多数部署受监督的说法未附逐项统计。</p>
+<p>检索缺口：
+- 未取得小米、智元、Embodied AI、Meta的原始发布或完整评测方法与原始数据，无法独立复现8小时班次、三榜分数与AIR学习周期。
+- 未取得CEL原始论文或公开代码，96台验证的任务定义、人类对照细节、失败案例与泛化范围未见完整披露。
+- 未取得新华社与优必选、特斯拉Munro Live访谈的原始记录，相关表述依赖二手转述。
+- 未取得人形机器人出货量、订单、复购率与人均干预间隔等量产级经营与可靠性指标，无法判断商业化进度。
+- 《中国互联网发展报告2026》原文、标准清单与70余家训练场名单未逐项取得，市场规模口径与验收数据有待核对。
+- 家庭场景落地、价格、安全认证进展与Meta Max技术细节的系统性数据缺失。</p>
+<p>检索日志：humanoid robot news November 2026（discovery）；embodied AI breakthrough November 2026（discovery）；人形机器人 2026年11月 最新进展（discovery）；具身智能 2026年11月 产业进展（discovery）；Tesla Optimus November 2026 Robotaxi charging FCC（verification）；智元 GO-3 Preview 11月3日 三项第一 开源（verification）；小米人形机器人 8小时 汽车工厂 11月3日（verification）；Meta Fourier Max humanoid robot November 2026 research only（verification）；清华 智元 机器人集群学习 CEL 96台 成功率 97.5%（discovery）；新华社 优必选 人形机器人新闻主播 11月5日 新宇 新颜（discovery）；humanoid robot limitations failure deployment 2026 supervised autonomy（counterevidence）；人形机器人指数下跌 11月 效率低于人工 泛化不足 王兴兴（counterevidence）。</p>
+<h2 id="_20">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>大模型前沿</strong>：优选 V02——条件性优选 V02 修订后的主张：厂商分数与开放宣称应分层采信——权重已实际可得且许可明确的发布通过可得性检验，但关键分数、加速倍数与可部署成本仍须第三方复现或可核查的云端/本地部署路径支持；权重尚未放出的“开放”仍属承诺；UBTree 实测 3.43 倍应承认，但“近 7 倍” headline 保留；幻觉精确定位能力仍是短板，选型不应只看榜单分数与 headline 倍数。</li>
+<li><strong>智能体生态</strong>：优选 V02——在GDPx报道口径下，专家长程任务可靠性仍明显不足，最佳模型通过率仅12.0%，金融与法律二值评分为0%，而LifeVal 80.6%与BioBasicsBench 66.7%因自建自评且未公开数据集、代码与完整评分细则而不可独立复现，不能作为独立的可靠性证据；因此不同任务类型的表现存在显著但程度待定的分化，宣传分数与专家级可靠性之间的落差有待公开方法与独立复现检验。</li>
+<li><strong>AI 硬件</strong>：优选 V02——条件性优选 V02 的缩小后判断：2026年11月2—8日，强劲财报与芯片股暴跌同存，11月5日暴跌应定性为估值重定价信号，叠加对华 H200 准入受限这一真实但局部的约束；现有证据不足以把暴跌升级为 AI 硬件需求硬约束的定论，供给加速也不等于准入与估值无虞，但不等于需求已经崩塌。</li>
+<li><strong>具身智能</strong>：优选 V02——2026年11月初具身智能的进展真实，但多为受限场景的初步验证；评价重心已转向数据验收、训练改善与复购等量产指标，短期内仍应以受监督部署看待，而非已证实的量产。此判断是“证据不足、暂不认定”，不是“已证伪量产”。</li>
+</ul>
+<h2 id="_21">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+<nav class="bottomnav"><a href="../index.html">← 全部报告</a><a href="#top">回到顶部 ↑</a></nav>
+<script src="../annotate.js" defer></script>
+</body></html>
