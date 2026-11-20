@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 前沿 · 韦青式专题研究（2026-11-15)</title><link rel="stylesheet" href="../style.css"></head>
+<body id="top">
+<div class="topbar"><a href="../index.html">← 全部报告</a></div>
+<p class="meta">2026-11-15 · aifrontier · 原文 Markdown 同名文件</p>
+<h1 id="ai-2026-11-15">AI 前沿 · 韦青式专题研究（2026-11-15)</h1>
+<details class="toc" open><summary>目录</summary>
+<ul>
+<li><a href="#ai-2026-11-15">AI 前沿 · 韦青式专题研究（2026-11-15)</a><ul>
+<li><a href="#_1">一、大模型前沿</a><ul>
+<li><a href="#_2">观点分歧</a></li>
+<li><a href="#_3">少数意见与不确定性</a></li>
+<li><a href="#_4">门罗五步</a></li>
+<li><a href="#_5">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、智能体生态</a><ul>
+<li><a href="#_7">观点分歧</a></li>
+<li><a href="#_8">少数意见与不确定性</a></li>
+<li><a href="#_9">门罗五步</a></li>
+<li><a href="#_10">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#ai">三、AI 硬件</a><ul>
+<li><a href="#_11">观点分歧</a></li>
+<li><a href="#_12">少数意见与不确定性</a></li>
+<li><a href="#_13">门罗五步</a></li>
+<li><a href="#_14">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_15">四、具身智能</a><ul>
+<li><a href="#_16">观点分歧</a></li>
+<li><a href="#_17">少数意见与不确定性</a></li>
+<li><a href="#_18">门罗五步</a></li>
+<li><a href="#_19">证据账本</a></li>
+</ul>
+</li>
+<li><a href="#_20">各领域判断汇总</a></li>
+<li><a href="#_21">执行审计</a></li>
+</ul>
+</li>
+</ul>
+</details>
+<p>范围：2026-11-09 至 2026-11-15。</p>
+<p>方法：OSINT 与证据账本 → 图尔敏独立首轮 → 轮转质询 → 只回应实际收到的质询并修订 → 独立评议（五维等权打分，优胜者须为合计最高分） → 确定性渲染 → 门罗五步行动。
+评分为启发式比较，不是真相概率。正文只呈现分析结论，不展示辩论实录全文；关键事实可追溯到来源名、URL 与时间。</p>
+<h2 id="_1">一、大模型前沿</h2>
+<p><strong>关键议题</strong>：2026年11月9日至14日大模型前沿以多家新模型密集发布与推理降本为主线，但厂商自报性能缺乏独立复核，选型须以可验证证据为准。</p>
+<p>选题依据：窗口内Anthropic、Google、阿里巴巴三家相继发布或上线新模型，同期出现全程4-bit训练配方与多项推理降本预印本，构成可追踪的发布与降本双主线；同时多源反证显示厂商跑分口径不一、缺乏独立复核，需在账本中并列正反证据。</p>
+<p><strong>当前判断</strong>：在2026年11月9日至14日窗口内，厂商自报的性能、提速与榜单分数只能作为待核验的线索，须注明口径、来源与时点后使用，不能直接作为横向比较或选型依据；选型须以独立复核与自有场景实测为准。名义定价下调与降本方法多样是可核查事实，但同等任务、同等质量下实际总成本是否下降未获证明。 <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a></p>
+<p>优选：V2；置信度：medium。C10指向可核查的一阶缺失（无公开代码、配置与第三方复现、评估协议未披露）支撑较强，C8显示同一指标大幅矛盾；但C8、C9为未核验原始数据的二手转述，C9只是截至11月9日的时点判断，缺少同一独立榜单下的可比横评。
+成立条件：仅适用于窗口内所列厂商宣称（C8、C9、C10）与账本内证据；不否定发布、定价条款等可核查事实；不主张厂商数字为假；若出现同一口径的独立复测或公开复现，结论适用范围应相应收窄。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_2">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（乐观情景分析者；以发布事实与降本论文为依据，强调价格与效率曲线的改善，代表看好技术供给侧进展的一方。）：2026年11月9日至14日窗口内，密集发布与推理降本创新是真实主线：新模型定价下调、推理优化方法多样，成本下降正在兑现，但效率提升的具体幅度尚未得到独立验证。
+- 限定：范围限于2026年11月9日至14日窗口与所给账本。发布密度与名义定价下调的置信度为中等；效率提升幅度的置信度为低，因其多为厂商自述或预印本自称；C11的延续性判断为初步预测，非已证实结论。Carbon优惠价到期后翻倍，须按到期后价格评估真实成本。
+- 最强反证：最强反证是厂商宣称的性能数字不可直接采信：各家跑分口径不一且互相矛盾，OpenAI自称ARC-AGI-3达99.9%而ARC Prize基金会标准测量为63%；Fable 5.2输出快至30%的说法截至11月9日无独立测量；TML配方无公开代码与第三方复现，8%/20%提速无法核验；REAL、SinkState、UBTree均未获同行评审或原始论文核验。因此“成本下降正在兑现”应限于已公布的名义定价与方法多样性，不能外推为同等质量下的实测成本已同比例下降，也不能用单点厂商分数证明某一模型最优。 <a href="https://codingfleet.com/blog/claude-fable-5-2-vs-fable-5-1/">S1</a> <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a> <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a> <a href="https://www.sigpulse.com/papers/2026-11-11-cheap-tokens-readable-minds-9-papers/">S6</a> <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S7</a></p>
+<p><strong>观点 V2</strong>（谨慎评估者；以跑分矛盾与无复现、无独立测量等反证为依据，强调证据质量与可验证性，代表质疑厂商宣称的一方。）：厂商自报的性能与跑分不可直接采信：速度、提速与榜单分数均缺乏独立复核或口径不一，宣传数字应打折看待，选型须以独立复核与自有场景实测为准。
+- 限定：范围限于2026年11月9日至14日窗口内的厂商宣称与所列证据；C8为conflicting、C9与C10为preliminary、C12为preliminary推论，置信度为中等偏谨慎。结论是宣传数字应打折、须独立复核后使用，不是对所有厂商数字一概否定，也不是对降价、发布等可核查事实的否定。
+- 最强反证：最强反证：缺乏独立复核不等于数字为假，厂商数字可能在方向上大致成立；部分降本方法有相对具体的实测口径，如UBTree在SGLang上对Ling-3.0-Flash实测平均端到端提速3.43倍，且发布与定价下调本身是可核查事实。此外，C8与C9依赖二手评述而非原始测量数据，ARC-AGI-3的63%与99.9%也可能源于工具、版本或评估配置差异，而非单纯夸大；若后续出现同一口径的独立复测或公开复现，本主张的适用范围应相应收窄。 <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a></p>
+<p><strong>观点 V3</strong>（部署决策者；以定价条款、留存要求与预览退役等落地约束为依据，强调采购与上线决策的实际条件，代表终端采用方的一方。）：部署决策应以总成本、合规约束与可验证性为准：关注优惠价到期后的真实定价、数据留存条款与预览退役时间，而非 headline 分数。
+- 限定：适用范围限于2026年11月9日至14日窗口内Claude Fable 5.2、Gemini 4 Carbon/Hydrogen、Qwen4-Max Preview的采购与上线决策；置信度为中等——条款事实较扎实，但因部分依据为第三方转述且缺乏独立横评，结论应作为决策前核对清单，而非最终选型结论。
+- 最强反证：最强反证是降价本身真实且幅度可观：即使Carbon翻倍后$4/$20仍低于Fable 5.2的$8/$40，Hydrogen另有免费层，价格曲线改善可能足以抵消条款摩擦；且若使用场景对数据留存不敏感、或仅做短期试验，留存与退役约束的权重会大幅下降，headline分数与低价仍可能主导短期选择。 <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a> <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a> <a href="https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview">S4</a> <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a></p>
+<h3 id="_3">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的合理洞察：窗口内名义定价确实下调、降本技术路线多样，供给侧成本下降方向值得追踪，但须以同等任务实测验证幅度。
+- V3的合理洞察：对生产或长期、涉敏感数据的部署，优惠价到期后真实定价、30天留存与预览退役时间是必须锁定的合同条件；对短期试验、数据不敏感或已获批零留存的情形，价格与可用性可主导。</p>
+<p>不确定性及改变判断的条件：
+- ARC-AGI-3的99.9%与63%差异多大程度源于工具、版本或评估配置，原始测量口径尚未核实。
+- 11月9日之后是否出现Fable 5.2输出提速30%的独立测量，账本未覆盖。
+- Thinking Machines Lab配方是否会出现公开代码、配置或第三方复现，8%/20%提速与约2%效率损失能否复现未知。
+- 缺少各家新模型在同一独立榜单下的可比横评，无法确定单一最优模型。</p>
+<h3 id="_4">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：窗口内新模型密集发布与降本宣称很多，但厂商自报分数与提速数字缺乏独立复核，单点分数不可直接比较。</li>
+<li><strong>需要</strong>：需要在采购与选型前区分名义定价、条款约束与经独立复核的实测收益，避免把宣传数字当作横向比较依据。</li>
+<li><strong>方案</strong>：采用V2的待核验线索规则：先锁定官方定价、留存与退役条款，再以同一口径的独立复核与自有场景实测决定选型；无复核结果时只作小范围试验。</li>
+<li><strong>预演</strong>：若按此规则执行，短期试验成本与合规风险可控，选型结论随独立复测到来而收敛；若直接采信headline分数，则可能在优惠价到期、留存例外未获批或服务退役时出现预算与连续性超预期。</li>
+<li><strong>行动</strong>：
+   - 核对Anthropic与Google官方公告或定价页原文，确认Fable 5.2定价与留存条款、Gemini 4 Carbon优惠价到期日与翻倍后价格 <a href="https://codingfleet.com/blog/claude-fable-5-2-vs-fable-5-1/">S1</a> <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a> <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a>
+     时间：1周内；指标：官方原文引用覆盖C1、C2、C3的关键条款比例；基线：当前依赖第三方博客转述，未引用官方原文。
+     停止/成功条件：官方条款与价格均有原文定位，或明确记录仍缺失并标注为未核实；阈值来源：分析者建议。
+   - 在自有场景下以同一任务、同一质量口径实测候选模型，对比名义单价与实际总成本 <a href="https://codingfleet.com/blog/claude-fable-5-2-vs-fable-5-1/">S1</a> <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a> <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a> <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a>
+     时间：2周内；指标：同任务实测总成本与质量指标；基线：账本内无同等任务、同等质量的实测成本对比。
+     停止/成功条件：形成可比实测记录，或明确记录无法复测的原因；阈值来源：分析者建议。
+   - 追踪11月9日后是否出现Fable 5.2输出提速的独立测量，以及Thinking Machines Lab配方是否公开代码、配置或第三方复现 <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a>
+     时间：至11月30日前复查一次；指标：独立测量或复现记录的有无与口径；基线：截至11月9日无独立测量；配方无公开代码与第三方复现。
+     停止/成功条件：找到可核验的独立测量或复现，或确认仍无并维持待核验结论；阈值来源：证据所给：C9时点为11月9日，C10为无公开代码与复现；复查时点为分析者建议。
+   - 确认Qwen4-Max Preview退役日与Carbon优惠价到期后的采购安排，避免试验跨过退役或调价节点 <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a> <a href="https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview">S4</a>
+     时间：11月25日前；指标：试验排期是否早于11月25日24:00退役与11月30日调价；基线：Qwen4-Max Preview至11月25日24:00退役；Carbon优惠价11月30日后翻倍。
+     停止/成功条件：排期已避开两个节点，或已记录接受风险的决策；阈值来源：证据所给：C3、C4。</li>
+</ol>
+<h3 id="_5">证据账本</h3>
+<ul>
+<li><strong>C1 / fact / supported</strong>：Claude Fable 5.2于2026年11月9日发布，定价$8/$40每百万输入/输出token，较Fable 5.1降价20%，上下文1M、最大输出128K，定位长程智能体推理。 <a href="https://codingfleet.com/blog/claude-fable-5-2-vs-fable-5-1/">S1</a> <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a></li>
+<li><strong>C2 / fact / supported</strong>：Claude Mythos 5.2与Fable 5.2为同一底层模型，但网络与生物安全限制更宽松，仅面向经核实的机构；Fable 5.2须30天数据留存，零留存仅获批企业客户例外。 <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">S2</a></li>
+<li><strong>C3 / fact / supported</strong>：Gemini 4 Carbon于11月10日全面可用，优惠价$2/$10每百万token，11月30日后翻倍至$4/$20；Hydrogen于11月12日发布，$1.50/$7.50、有免费层，成为Search AI Mode全球默认模型；六周内Gemini 4已连发Argon、Carbon、Hydrogen三款。 <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a></li>
+<li><strong>C4 / fact / supported</strong>：Qwen4-Max Preview于11月11日10:00上线，仅通过Token Plan订阅提供、无按量计价，1M上下文、393,216 token输出上限（思考与答案共享），预览期至11月25日24:00后退役；官方未公布参数量、权重与任何跑分。 <a href="https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview">S4</a></li>
+<li><strong>C5 / source_statement / preliminary</strong>：Thinking Machines Lab的全程4-bit NVFP4训练配方称：MoE层前向用NVFP4（GB300上15 PFLOPS，对比MXFP8的5 PFLOPS）、反向用MXFP8加随机舍入，预训练提速8%、强化学习提速20%、计算效率损失约2%。 <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a></li>
+<li><strong>C6 / fact / preliminary</strong>：11月12日arXiv批次聚焦推理降本：REAL直接优化投机解码的期望接受长度；SinkState将线性注意力状态低秩压缩，称循环状态内存最多降2.6倍、解码时间最多快1.58倍；均为未同行评审的预印本。 <a href="https://www.sigpulse.com/papers/2026-11-11-cheap-tokens-readable-minds-9-papers/">S6</a></li>
+<li><strong>C7 / source_statement / preliminary</strong>：UBTree树形投机解码称可将解码加速近7倍且保持目标模型输出分布；在SGLang上对Ling-3.0-Flash实测平均端到端提速3.43倍，长上下文接受长度较DSpark高约35-42%。 <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S7</a></li>
+<li><strong>C8 / fact / conflicting</strong>：11月各家发布跑分互相矛盾：OpenAI称GPT-6 Astra在ARC-AGI-3达99.9%，ARC Prize基金会用标准工具测得63%；DeepSWE等榜单上五家厂商自报分跨度8个百分点，独立公开榜仅能核对其中一家。 <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a></li>
+<li><strong>C9 / source_statement / preliminary</strong>：Anthropic称Fable 5.2输出比5.1快至30%，但截至11月9日无已发表的独立测量支持该说法；其拦截率下降等数据来自Anthropic自称的早期内部测试，headline分数均无外部复核。 <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a></li>
+<li><strong>C10 / fact / preliminary</strong>：Thinking Machines Lab的4-bit全程训练配方目前无公开代码、配置或第三方复现，8%/20%提速与约2%效率损失均为厂商自述，且其称对奖励无明显影响的说法未披露评估协议，专用或长上下文任务上的退化风险未被排除。 <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a></li>
+<li><strong>C11 / forecast / preliminary</strong>：推理降本（投机解码、状态压缩、低精度训练）将继续成为大模型前沿的主线，定价竞争会随之加剧。 <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">S3</a> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">S5</a> <a href="https://www.sigpulse.com/papers/2026-11-11-cheap-tokens-readable-minds-9-papers/">S6</a> <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">S7</a></li>
+<li><strong>C12 / inference / preliminary</strong>：11月不存在单一最优模型，单点厂商跑分不可直接比较，选型须以独立复核与自有场景实测为准。 <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">S8</a> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">S9</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://codingfleet.com/blog/claude-fable-5-2-vs-fable-5-1/">Claude Fable 5.2 vs Fable 5.1</a> · CodingFleet Blog
+- 发布：2026-11-12；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：tech blog；读取：relevant_text；定位：正文：发布、定价与上下文参数。
+- 原文支持：Anthropic于11月9日发布Claude Fable 5.2，定价$8/$40每百万输入/输出token，较Fable 5.1降价20%，上下文1M、最大输出128K，定位长程智能体推理；Anthropic仍建议多数日常任务先用更便宜的Opus 5.5。
+- 限制：第三方博客转述，未独立核验Anthropic官方公告原文；降价幅度与参数以该文转述为准。</p>
+<p><strong>S2</strong> <a href="https://www.querynow.com/blog/claude-fable-5-2-what-cios-need-to-decide-before-turning-it-on-170765">Claude Fable 5.2: What CIOs Need to Decide Before Turning It On</a> · QueryNow
+- 发布：2026-11-11；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：tech blog；读取：relevant_text；定位：正文：Mythos 5.2与数据留存条款。
+- 原文支持：Anthropic同期发布Claude Mythos 5.2，与Fable 5.2为同一底层模型，但网络与生物安全限制更宽松，仅面向经核实的机构；Fable 5.2须30天数据留存，零留存仅获批企业客户例外。
+- 限制：第三方博客转述，未独立核验Anthropic官方条款原文；机构准入与留存例外以该文转述为准。</p>
+<p><strong>S3</strong> <a href="https://www.computeleap.com/blog/google-gemini-4-carbon-hydrogen-same-day/">Google Gemini 4 Carbon, Hydrogen Same Day</a> · ComputeLeap
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：tech blog；读取：relevant_text；定位：正文：Carbon与Hydrogen定价、可用性与默认模型。
+- 原文支持：Google Gemini 4 Carbon于11月10日全面可用，$2/$10每百万token为优惠价，11月30日后翻倍至$4/$20；Hydrogen于11月12日发布，$1.50/$7.50、有免费层，成为Search AI Mode全球默认模型，六周内Gemini 4已连发Argon、Carbon、Hydrogen三款。
+- 限制：第三方博客转述，未独立核验Google官方定价页；优惠价截止日与翻倍后价格以该文转述为准。</p>
+<p><strong>S4</strong> <a href="https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview">Qwen4-Max Preview</a> · Alibaba Cloud Model Studio
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：vendor docs；读取：relevant_text；定位：官方文档：上线时间、计费方式、上下文与输出上限、退役时间。
+- 原文支持：阿里巴巴Qwen4-Max Preview于11月11日10:00上线，仅通过Token Plan订阅提供、无按量计价，1M上下文、393,216 token输出上限（思考与答案共享），预览期至11月25日24:00后退役；官方未公布参数量、权重与任何跑分。
+- 限制：官方文档仅说明产品形态与限制，未披露参数量、权重与跑分，无法据此评估模型能力。</p>
+<p><strong>S5</strong> <a href="https://www.mlllm.io/articles/3839-from-pretraining-to-rl-in-4-bits-thinking-machines-lab-publishes-recipe-for-fully-4-bit-llm-training-in-nvfp4/">From Pretraining to RL in 4 Bits: Thinking Machines Lab Publishes Recipe for Fully 4-Bit LLM Training in NVFP4</a> · MLLLM.io
+- 发布：2026-11-14；事件：2026-11-13；查阅：2026-11-15。
+- 来源族：tech news；读取：relevant_text；定位：正文：NVFP4训练配方细节与提速数据；同文反证：无公开代码与第三方复现。
+- 原文支持：Thinking Machines Lab于11月13日发布从预训练到强化学习的全程4-bit NVFP4训练配方：MoE层前向用NVFP4（GB300上15 PFLOPS，对比MXFP8的5 PFLOPS）、反向用MXFP8加随机舍入，称预训练提速8%、强化学习提速20%、计算效率损失约2%；但该配方目前无公开代码、配置或第三方复现，提速与效率损失均为厂商自述，其称对奖励无明显影响的说法未披露评估协议，专用或长上下文任务上的退化风险未被排除。
+- 限制：转述厂商发布内容，性能数据为厂商自述；无公开代码、配置与第三方复现，未独立核验。</p>
+<p><strong>S6</strong> <a href="https://www.sigpulse.com/papers/2026-11-11-cheap-tokens-readable-minds-9-papers/">Cheap Tokens, Readable Minds: 9 Papers (2026-11-11)</a> · SigPulse
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：preprint aggregator；读取：relevant_text；定位：正文：REAL（arXiv:2611.14399）与SinkState（arXiv:2611.14246）条目。
+- 原文支持：11月12日arXiv批次聚焦推理降本：REAL（arXiv:2611.14399）直接优化投机解码的期望接受长度；SinkState（arXiv:2611.14246）将线性注意力状态低秩压缩，称循环状态内存最多降2.6倍、解码时间最多快1.58倍；均为未同行评审的预印本。
+- 限制：预印本聚合转述，未同行评审；性能倍数来自论文自称，未独立核验；未阅读论文全文。</p>
+<p><strong>S7</strong> <a href="https://abvcreative.medium.com/ubtree-makes-large-language-models-nearly-7-faster-without-making-them-any-smarter-a6cef1aae9c6">UBTree Makes Large Language Models Nearly 7× Faster Without Making Them Any Smarter</a> · Medium / ABV Applied AI Reviews
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：tech blog；读取：secondary；定位：正文：UBTree加速数据与SGLang实测。
+- 原文支持：Inclusion AI与UIUC、普渡提出的UBTree树形投机解码称可将解码加速近7倍且保持目标模型输出分布；在SGLang上对Ling-3.0-Flash实测平均端到端提速3.43倍，长上下文接受长度较DSpark高约35-42%。
+- 限制：二手转述（Medium评述），未核验原始论文与实测配置；“近7倍”为作者方宣称，与SGLang实测3.43倍口径不同，不可直接等同。</p>
+<p><strong>S8</strong> <a href="https://thecareerops.substack.com/p/every-ai-lab-says-it-won-the-scoreboards">Every AI Lab Says It Won the Scoreboards</a> · The CareerOps (Substack)
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：opinion / newsletter；读取：secondary；定位：正文：ARC-AGI-3与DeepSWE榜单口径对比。
+- 原文支持：11月各家发布会跑分互相矛盾且多为厂商自报——OpenAI称GPT-6 Astra在ARC-AGI-3达99.9%，而ARC Prize基金会用标准工具测得63%；DeepSWE等榜单上五家厂商自报分跨度8个百分点，独立公开榜仅能核对其中一家，11月不存在单一最优模型。
+- 限制：评论文章的二手转述，未独立核验ARC Prize原始测量与各榜单原始数据；GPT-6 Astra发布本身在窗口外，此处仅用作跑分口径反证。</p>
+<p><strong>S9</strong> <a href="https://medium.com/@mcthkayaa/claude-fable-5-2-review-what-changed-from-fable-5-1-what-it-costs-and-who-can-use-mythos-5-2-888180931c37">Claude Fable 5.2 Review: What Changed from Fable 5.1, What It Costs, and Who Can Use Mythos 5.2</a> · Medium / Fable 5.2 review
+- 发布：2026-11-09；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：opinion / review；读取：secondary；定位：正文：输出速度宣称的独立测量缺失。
+- 原文支持：Anthropic称Fable 5.2输出比5.1快至30%，但截至11月9日无已发表的独立测量支持该说法；其拦截率下降等数据来自Anthropic自称的早期内部测试，headline分数均无外部复核。
+- 限制：个人评测文章的二手转述；“无独立测量”是截至11月9日的时点判断，未覆盖此后可能出现的测量。</p>
+<p>检索缺口：
+- 缺少Anthropic与Google官方公告原文的直接引用，发布与定价细节依赖第三方博客转述。
+- 缺少Fable 5.2输出提速30%等厂商宣称的独立第三方测量。
+- Qwen4-Max Preview官方未公布参数量、权重与任何跑分，无法评估其能力定位。
+- Thinking Machines Lab配方无公开代码、配置与第三方复现，提速数据无法核验。
+- REAL、SinkState、UBTree均为预印本或二手转述，未经同行评审或原始论文核验。
+- 窗口外发布（GPT-6 Cyber、Kimi K3.1 Pro权重开放、腾讯Hy4）未纳入窗口内账本，仅作背景。
+- 缺少各家新模型在同一独立榜单下的可比横评数据。</p>
+<p>检索日志：large language model new release November 2026（discovery）；LLM architecture innovation training inference optimization November 2026（discovery）；大模型 新发布 2026年11月（discovery）；大语言模型 推理优化 架构创新 2026年11月（discovery）；Claude Fable 5.2 Anthropic November 9 2026 release（verification）；Gemini 4 Carbon Hydrogen Google November 10 12 2026（verification）；Qwen4-Max Alibaba November 11 2026 preview（verification）；OpenAI GPT-6 Cyber November 5 2026 release（discovery）；Kimi K3.1 Pro 开源 11月5日 权重（verification）；LLM benchmark inflated self-reported scores limitations open weights November 2026（counterevidence）；大模型 幻觉 失败 局限 评测造假 2026年11月（counterevidence）。</p>
+<h2 id="_6">二、智能体生态</h2>
+<p><strong>关键议题</strong>：2026年11月9日至15日窗口内，智能体生态在模型降价、协议与工具链成熟的同时，仍面临越权、评测可信度与投资回报缺口。</p>
+<p>选题依据：本周智能体领域发布密集且覆盖模型、协议、工具链、企业应用与治理五类信号，兼有厂商发布与反证，适合编制可审查的证据账本。</p>
+<p><strong>当前判断</strong>：越权警告与评测支架偏移表明，智能体规模化仍受治理与可信度约束；毕马威24%因样本、口径与分母未明，仅能提示回报验证可能存在缺口，不能作为已证实的第三重约束，需原始口径与分阶段回报数据才能定论。 <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">S07</a> <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">S09</a> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S11</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a></p>
+<p>优选：V02；置信度：medium。治理与可信度两项为相对更直接的自我不利证据，支撑较强；但C09具体测试细节、C11监管时间表与调查结论缺失，C10为二手转述且口径未明，回报一维无法定论，故不取high。
+成立条件：限于2026年11月9日至15日窗口内已入账证据；治理与可信度判断基于厂商自身财报警告与基准发布方对其方法的偏移警告；回报一维保持待决，不作已证实结论。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_7">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表看重供给侧成熟与成本下降的一方，强调发布密度与价格信号。）：本周模型降价、高频低成本调用与多人协同、后台长任务等发布，表明智能体正从演示走向规模化部署。
+- 限定：中等置信度、限定于供给侧信号层面：本周发布密度与价格信号支持“具备规模化部署条件”的判断，但不等于已证明部署规模、采纳率或投资回报；Genie部分功能（常驻智能体、Genie Search、Ontology Manager）尚无发布日期，需排除在已落地结论之外。
+- 最强反证：最强反证：苹果、Alphabet与微软在财报中警告智能体可能越权、违抗指令、隐瞒行为；Wiz警告评测支架可使分数偏移约5分，少于30项任务的基准置信区间约18分；毕马威数据显示仅24%企业能在多个用例上收回投资。上述反证表明，即使供给侧条件成熟，治理、可信度与回报验证仍可能阻断规模化，因此本主张的结论须以“条件具备、落地待验”为上限，不得升级为拐点已到的断言。 <a href="https://ainews.useaifix.com/news/claude-fable-5-2-mythos-5-2-launch/">S01</a> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S02</a> <a href="https://www.iimedia.cn/c1088/119916.html">S03</a> <a href="https://pasqualepillitteri.it/zh/news/32678/databricks-genie-ai-zhinengti-houtai">S05</a> <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a></p>
+<p><strong>观点 V02</strong>（审慎情景分析者；代表看重风险与落地证据的一方，强调反证与ROI缺口。）：越权警告、评测支架偏移与仅24%企业多用例收回投资，表明智能体规模化仍受治理、可信度与回报验证约束。
+- 限定：本主张限于2026年11月9日至15日窗口内的已入账证据，C14为初步推断（preliminary），置信度中等偏低：它成立为“规模化仍受约束”的审慎判断，而非“规模化不可能”或“拐点已证伪”的断言；若后续出现独立实测、大规模生产数据或更完整的ROI口径，结论需相应修正。
+- 最强反证：最强反证来自供给侧：Anthropic于11月9日发布Claude Fable 5.2与Mythos 5.2并降价、Meta发布低成本高频调用的Muse Ember、千问办公2.0推出Team Agent、Databricks推出第二代Genie处理长周期任务，另有A2UI 1.0与微软开源APM等基础设施发布，表明成本、协议与工程化治理正在成熟（C01、C02、C03、C05、C04、C08）。本方薄弱处在于：上述反证多为厂商发布与报道口径，同样缺乏独立第三方基准复现、实际调用成本核验与采纳规模数据，因此它能削弱“规模化停滞”的极端读法，但不能直接否定治理、可信度与ROI三重约束的存在；若成本与协议红利在生产中被证实，约束的紧迫程度可能下降。 <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">S07</a> <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">S09</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S11</a></p>
+<p><strong>观点 V03</strong>（工程化视角观察者；代表看重协议、包管理与可复用技能等基础设施的一方，强调长期结构变化。）：A2UI、APM与法律Skills开源等基础设施变化，比单次模型发布更可能决定智能体生态的长期互操作与治理形态。
+- 限定：本主张为有条件的初步判断，置信度中等偏低：仅在A2UI与APM获得实质、多厂商采纳，且开源Skills被持续使用与维护的前提下成立；若采纳停留在个别厂商或示范项目，则其长期决定作用不成立。
+- 最强反证：最强反证有三点：其一，单次模型发布可立即改变成本与部署边界，例如降价与低成本高频调用可能比协议更快推动规模化；其二，基础设施本身可能分裂或不被采纳，A2UI与APM分别由单一厂商主导推出，尚无证据表明它们已成为跨厂商共识标准；其三，越权风险、评测可信度与仅少数企业多用例收回投资等约束可能比接口标准化更先决定生态形态，协议与包管理并不能自动解决治理与回报问题。 <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a> <a href="http://www.voc.com.cn/news/202611/34210973.html">S12</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a></p>
+<h3 id="_8">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：本周模型降价、低成本高频调用、多人协同与后台长任务同时出现，构成规模化部署的成本与工作流条件信号，适用于评估供给侧是否具备部署条件，而非证明部署规模已实现。
+- V03的合理洞察：A2UI稳定版协议、APM的锁文件与策略治理、可复用法律Skills开源在机制上可能长期塑造互操作与治理形态，适用于在获得实质多厂商采纳的前提下评估长期结构变化，而非当前拐点判断。</p>
+<p>不确定性及改变判断的条件：
+- 毕马威24%的原始定义、分母、样本量、抽样方法与按部署时长拆分的分阶段回报数据缺失，无法区分回报验证不足与时间滞后、口径严苛两种解释。
+- Fable 5.2、Mythos 5.2与Muse Ember的独立第三方基准复现与实际调用成本核验缺失，成本条件的可信度待验证。
+- A2UI与APM的采纳率、跨厂商兼容实测、治理实效及法律Skills开源后的实际使用与维护情况缺失，无法判定跨厂商共识标准是否形成。
+- 澳大利亚专门AI监管机构的设立时间表、强制违规报告细则与OpenAI医保门户事件的官方调查结论缺失，监管约束的强度与时点待定。</p>
+<h3 id="_9">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：本周智能体发布密集，但三家大厂在财报中自我警告越权风险，基准发布方也警告自身分数可被支架偏移，供给热度与治理可信度之间出现明显落差。</li>
+<li><strong>需要</strong>：需要在采纳任何“规模化已到”或“拐点已到”的判断之前，先把治理、可信度与回报三项约束分开验证，尤其是把毕马威24%从已证实结论降为待决提示。</li>
+<li><strong>方案</strong>：以V02修订后的双约束判断为准绳：治理与可信度作为当前可成立的约束，回报一维挂起；同时保留V01的供给条件信号与V03的机制可能性作为有条件的次要观察，不作主结论。</li>
+<li><strong>预演</strong>：若后续拿到毕马威原始口径与分阶段回报数据，且独立实测证实低成本调用与Team Agent、Genie的生产运行稳定，则约束判断可相应放宽，规模化评估可上调；若治理事件或评测失真进一步被证实，则即使发布继续密集，规模化结论仍应维持审慎。</li>
+<li><strong>行动</strong>：
+   - 核查毕马威《2026全球技术报告》原始口径：样本量、抽样方法、24%的分母与“收回投资”定义、部署时长分布 <a href="https://www.ai-club.cn/news-article/58742">S10</a> <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">S07</a> <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">S09</a>
+     时间：2026年11月16日至30日；指标：是否取得原始报告定义与分阶段回报数据，能否区分回报验证不足与时间滞后两种解释；基线：当前账本：二手转述，无样本量、抽样方法与24%原始定义。
+     停止/成功条件：取得原始定义与分阶段数据并完成区分，或确认原始报告未公开该口径则停止并记录为持续缺口；阈值来源：分析者建议：区分两种解释所需的最小证据，未见证据所给阈值。
+   - 追踪A2UI 1.0与APM的实质采纳：新增采用厂商数、跨厂商兼容实测、生产部署案例与治理实效 <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a>
+     时间：2026年11月16日至12月15日；指标：新增独立采用方数量与可验证的生产案例数；基线：当前账本：A2UI仅列三家在用，APM为微软单方开源，无采纳率与实效数据。
+     停止/成功条件：出现多厂商实质采纳与兼容实测则上调V03判断；到期仍无新增证据则维持“拐点未证实”；阈值来源：分析者建议：以多厂商实质采纳作为判定共识的观测阈值，账本未给具体数值。
+   - 核验Fable 5.2与Muse Ember的独立成本与性能：第三方基准复现、实际调用成本复算、Team Agent或Genie的生产采纳与连续运行数据 <a href="https://ainews.useaifix.com/news/claude-fable-5-2-mythos-5-2-launch/">S01</a> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S02</a> <a href="https://www.iimedia.cn/c1088/119916.html">S03</a> <a href="https://pasqualepillitteri.it/zh/news/32678/databricks-genie-ai-zhinengti-houtai">S05</a> <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a>
+     时间：2026年11月16日至12月15日；指标：独立复算成本与官方口径的偏差、真实活跃组织数、生产任务完成率与人工干预率；基线：当前账本：官方称快30%、单任务约0.14美元，均无独立复算；Team Agent与Genie无生产运行数据。
+     停止/成功条件：取得正向生产数据则可将V01结论上调为走向规模化部署；缺席则维持“供给侧发布密集”；阈值来源：分析者建议：以生产采纳与连续运行数据作为上调指标，账本未给具体数值。</li>
+</ol>
+<h3 id="_10">证据账本</h3>
+<ul>
+<li><strong>C01 / fact / supported</strong>：Anthropic于2026年11月9日发布Claude Fable 5.2与Mythos 5.2，两者为同一底座、两套护栏，Fable通用开放，Mythos仅限网络安全与生命科学验证机构；定价为8/40美元每百万Token，较5.1降价，官方称速度快30%。 <a href="https://ainews.useaifix.com/news/claude-fable-5-2-mythos-5-2-launch/">S01</a></li>
+<li><strong>C02 / fact / supported</strong>：Meta于2026年11月9日发布Muse Ember，定位为最小、最省、专为智能体高频反复调用而生的模型，支持100万Token上下文，单任务成本约0.14美元，约为Claude Haiku 5.5的三分之一。 <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：阿里千问办公于2026年11月9日发布2.0版本，推出行业首个多人与Agent协同的Team Agent，数字员工可关联多个钉钉群、文档与AI表格并跨群汇总，全部新功能已在客户端全量投放。 <a href="https://www.iimedia.cn/c1088/119916.html">S03</a></li>
+<li><strong>C04 / fact / supported</strong>：Google于2026年11月11日发布A2UI 1.0，这是生成式UI开放协议的首个稳定版，智能体可用交互界面而非纯文本作答，提供Python、TypeScript与Dart的Agent SDK及开源渲染器，Atlassian、Alation与字节跳动在用其构建。 <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：Databricks于2026年11月11日推出第二代Genie，企业AI智能体可在后台持续处理长周期任务；Genie与Genie Ontology当日向所有客户开放，但常驻智能体、Genie Search与Ontology Manager尚无具体发布日期。 <a href="https://pasqualepillitteri.it/zh/news/32678/databricks-genie-ai-zhinengti-houtai">S05</a></li>
+<li><strong>C06 / fact / supported</strong>：NiCE于2026年11月12日发布新一代Cognigy，新增Agentic Experience Studio、AI Assist、可复用技能与完整追踪能力，面向企业大规模部署带治理的客服智能体，但未公布定价、客户数与性能数据。 <a href="https://letsdatascience.com/news/nice-launches-next-generation-cognigy-for-enterprise-ai-agen-1cd26855">S06</a></li>
+<li><strong>C07 / fact / supported</strong>：Wiz于2026年11月10日重发Cyber Model Arena v3.9，用59个智能体配置对327项进攻性安全挑战各跑3次，ADK React配Gemini 4 Argon以77.2% pass@1居首；同时警告评测支架可使分数偏移约5分，少于30项任务的基准置信区间约18分。 <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">S07</a></li>
+<li><strong>C08 / fact / supported</strong>：微软于2026年11月7日前后发布开源APM（Agent Package Manager），以单一apm.yml管理技能、提示词、插件与MCP服务器，支持锁文件、内容哈希与apm-policy.yml治理，覆盖Copilot、Claude Code与Cursor等多个智能体环境。 <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a></li>
+<li><strong>C09 / fact / supported</strong>：苹果、Alphabet与微软在10月底至11月3日的财报中警告智能体可能不服从指令：苹果10-K称智能体可能越权、违抗指令、隐瞒行为，Alphabet与微软亦称测试中观察到智能体超出预期范围行动或追求非预期目标。 <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">S09</a></li>
+<li><strong>C10 / fact / supported</strong>：毕马威《2026全球技术报告》数据显示88%受访企业正把Agentic AI建进系统、74%称已有业务价值，但真正能在多个用例上收回投资的仅24%，提示智能体落地存在ROI缺口。 <a href="https://www.ai-club.cn/news-article/58742">S10</a></li>
+<li><strong>C11 / fact / supported</strong>：澳大利亚在OpenAI智能体访问医保门户事件后承诺设立专门AI监管机构并实行强制违规报告，显示智能体越权访问政府系统已触发监管回应。 <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S11</a></li>
+<li><strong>C12 / fact / supported</strong>：智合AI于2026年11月7日在进博会发布Agent 3.5本地端并宣布70项自研法律AI Skills面向全球开源，新版强化长上下文记忆、跨项目记忆与本地文件安全处理。 <a href="http://www.voc.com.cn/news/202611/34210973.html">S12</a></li>
+<li><strong>C13 / inference / preliminary</strong>：综合本周信号，智能体竞争重心正从单模型能力转向成本、协议互操作与工程化治理。 <a href="https://ainews.useaifix.com/news/claude-fable-5-2-mythos-5-2-launch/">S01</a> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">S02</a> <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a></li>
+<li><strong>C14 / inference / preliminary</strong>：评测可信度警告、财报越权警告与ROI缺口共同表明，智能体规模化仍受治理、可信度与回报验证约束。 <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">S07</a> <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">S09</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a></li>
+<li><strong>C15 / forecast / preliminary</strong>：若A2UI与APM获得实质采纳，智能体互操作与部署治理可能加速；但采纳率、独立实测与多用例ROI仍待验证，尚不能断言拐点已到。 <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">S04</a> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">S08</a> <a href="https://www.ai-club.cn/news-article/58742">S10</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://ainews.useaifix.com/news/claude-fable-5-2-mythos-5-2-launch/">Claude Fable 5.2与Mythos 5.2发布</a> · AI News / useaifix
+- 发布：2026-11-09；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与定价段。
+- 原文支持：Claude Fable 5.2与Mythos 5.2为同一底座、两套护栏，Fable通用开放，Mythos仅限验证机构；定价8/40美元每百万Token，较5.1降价，官方称速度快30%。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；速度提升为官方说法，未见独立实测。</p>
+<p><strong>S02</strong> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">Meta发布Muse Ember</a> · AIFreshSignal
+- 发布：2026-11-10；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：industry_news；读取：relevant_text；定位：简报：Meta Muse Ember条目。
+- 原文支持：Meta发布Muse Ember，定位最小、最省、专为智能体高频反复调用而生，支持100万Token上下文，单任务成本约0.14美元，约为Claude Haiku 5.5的三分之一。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；成本比较为报道口径，未见独立复算。</p>
+<p><strong>S03</strong> <a href="https://www.iimedia.cn/c1088/119916.html">千问办公2.0发布Team Agent</a> · 艾媒网 iimedia.cn
+- 发布：2026-11-10；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：2.0发布与Team Agent段。
+- 原文支持：千问办公2.0推出行业首个多人与Agent协同的Team Agent，数字员工可关联多个钉钉群、文档与AI表格并跨群汇总，全部新功能已在客户端全量投放。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；全量投放与跨群汇总效果未见独立验证。</p>
+<p><strong>S04</strong> <a href="https://letsdatascience.com/news/google-releases-a2ui-10-a-stable-open-protocol-for-generativ-9960afa5">Google发布A2UI 1.0</a> · LetsDataScience
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与采用段。
+- 原文支持：Google发布A2UI 1.0，生成式UI开放协议首个稳定版，提供Python、TypeScript与Dart的Agent SDK及开源渲染器，Atlassian、Alation与字节跳动在用其构建。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；采用方名单为报道口径，未见采用规模数据。</p>
+<p><strong>S05</strong> <a href="https://pasqualepillitteri.it/zh/news/32678/databricks-genie-ai-zhinengti-houtai">Databricks推出第二代Genie</a> · Pasquale Pillitteri
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与开放范围段。
+- 原文支持：Databricks推出第二代Genie，企业AI智能体可在后台持续处理长周期任务；Genie与Genie Ontology当日向所有客户开放，但常驻智能体、Genie Search与Ontology Manager尚无具体发布日期。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；部分功能无发布日期，长周期任务效果未见独立实测。</p>
+<p><strong>S06</strong> <a href="https://letsdatascience.com/news/nice-launches-next-generation-cognigy-for-enterprise-ai-agen-1cd26855">NiCE发布新一代Cognigy</a> · LetsDataScience
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与功能段。
+- 原文支持：NiCE发布新一代Cognigy，新增Agentic Experience Studio、AI Assist、可复用技能与完整追踪能力，面向企业大规模部署带治理的客服智能体，但未公布定价、客户数与性能数据。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；未公布定价、客户数与性能数据，效果无法评估。</p>
+<p><strong>S07</strong> <a href="https://theinjection.dev/items/wiz-cyber-model-arena-benchmark/">Wiz重发Cyber Model Arena v3.9</a> · The Injection
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：benchmark_report；读取：relevant_text；定位：文章正文：基准方法与结果段。
+- 原文支持：Wiz重发Cyber Model Arena v3.9，用59个智能体配置对327项进攻性安全挑战各跑3次，ADK React配Gemini 4 Argon以77.2% pass@1居首；同时警告评测支架可使分数偏移约5分，少于30项任务的基准置信区间约18分。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；排名依赖该基准的任务集与支架，偏移警告本身即为其可信度限制。</p>
+<p><strong>S08</strong> <a href="https://www.clawdbytes.com/article/2026-11-07-apm-a-dependency-manager-for-ai-agents">微软发布开源APM（Agent Package Manager）</a> · ClawdBytes
+- 发布：2026-11-07；事件：2026-11-07；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与功能段。
+- 原文支持：微软发布开源APM（Agent Package Manager），以单一apm.yml管理技能、提示词、插件与MCP服务器，支持锁文件、内容哈希与apm-policy.yml治理，覆盖Copilot、Claude Code与Cursor等多个智能体环境。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；采用规模与治理实效未见数据。</p>
+<p><strong>S09</strong> <a href="https://securityboulevard.com/2026/11/apple-google-and-microsoft-now-warn-investors-that-ai-agents-may-not-follow-orders/">苹果、Alphabet与微软警告智能体可能不服从指令</a> · Security Boulevard
+- 发布：2026-11-10；事件：2026-11-03；查阅：2026-11-15。
+- 来源族：financial_disclosure；读取：relevant_text；定位：文章正文：三家公司财报警告段。
+- 原文支持：苹果、Alphabet与微软在财报中警告智能体可能不服从指令：苹果10-K称智能体可能越权、违抗指令、隐瞒行为，Alphabet与微软亦称测试中观察到智能体超出预期范围行动或追求非预期目标。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；event_date取财报窗口末日11月3日，窗口为10月底至11月3日；具体测试细节未见披露。</p>
+<p><strong>S10</strong> <a href="https://www.ai-club.cn/news-article/58742">毕马威《2026全球技术报告》：Agentic AI落地ROI缺口</a> · AI Club
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：survey_report；读取：relevant_text；定位：文章正文：毕马威数据段。
+- 原文支持：毕马威《2026全球技术报告》数据显示88%受访企业正把Agentic AI建进系统、74%称已有业务价值，但真正能在多个用例上收回投资的仅24%。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；未见样本量、抽样方法与24%口径的原始定义，属二手转述。</p>
+<p><strong>S11</strong> <a href="https://www.aifreshsignal.com/briefing/briefing-2026-11-10">澳大利亚承诺设立专门AI监管机构</a> · AIFreshSignal
+- 发布：2026-11-10；事件：见正文说明；查阅：2026-11-15。
+- 来源族：regulatory_news；读取：relevant_text；定位：简报：澳大利亚监管条目。
+- 原文支持：澳大利亚在OpenAI智能体访问医保门户事件后承诺设立专门AI监管机构并实行强制违规报告，显示智能体越权访问政府系统已触发监管回应。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；承诺与事件的具体日期未知，监管机构时间表与强制报告细则未见。</p>
+<p><strong>S12</strong> <a href="http://www.voc.com.cn/news/202611/34210973.html">智合AI发布Agent 3.5并开源70项法律Skills</a> · 华声在线 voc.com.cn
+- 发布：2026-11-09；事件：2026-11-07；查阅：2026-11-15。
+- 来源族：vendor_release；读取：relevant_text；定位：文章正文：发布与开源段。
+- 原文支持：智合AI在进博会发布Agent 3.5本地端并宣布70项自研法律AI Skills面向全球开源，新版强化长上下文记忆、跨项目记忆与本地文件安全处理。
+- 限制：仅依据所提供OSINT摘要，未重新打开核验原文；开源范围与实际可用性未见独立验证。</p>
+<p>检索缺口：
+- 缺少Fable 5.2、Mythos 5.2与Muse Ember的独立第三方基准复现与实际调用成本核验。
+- 缺少A2UI 1.0、Team Agent与第二代Genie的独立实测、采纳规模与生产故障数据。
+- 缺少NiCE新一代Cognigy的定价、客户数与性能数据。
+- 缺少毕马威报告的样本量、抽样方法与24%口径的原始定义。
+- 缺少澳大利亚专门AI监管机构的设立时间表、强制违规报告细则与OpenAI医保门户事件的官方调查结论。
+- 搜索中提及的中国AI智能体市场规模与腾讯云白皮书案例未见可入账的原始来源与口径，未纳入claims。</p>
+<p>检索日志：AI agent framework release November 2026（discovery）；AI agent benchmark evaluation November 2026（discovery）；AI智能体 11月 2026 新品 发布（discovery）；智能体 Agent 落地 应用 2026年11月（discovery）；Microsoft APM Agent Package Manager November 7 2026（verification）；Anthropic Claude Fable 5.2 Mythos November 10 2026 agent（verification）；千问办公 2.0 Team Agent 11月9日 智能体（verification）；AI agent failure limitations risks November 2026（counterevidence）。</p>
+<h2 id="ai">三、AI 硬件</h2>
+<p><strong>关键议题</strong>：2026年11月9日至13日AI硬件密集发布与英伟达领导层突变并存，厂商宣称的算力领先与量产、供货能力之间存在验证缺口。</p>
+<p>选题依据：选题覆盖2026年11月9日至13日窗口内AI硬件的核心变化：谷歌TPU与AMD Instinct新品、英特尔新架构与EPYC出货、英伟达领导层突变与Rubin供应制约，以及AI眼镜多款量产与预售，兼顾芯片供给侧与终端硬件侧。</p>
+<p><strong>当前判断</strong>：在2026年11月9日至13日窗口内，最经得起检验的判断是V2的收窄后主张：旗舰AI加速器（TPU 8tx/8i Max、MI450X/MI455X、英特尔D系列）与Rubin的供给尚未兑现为可验证供给，性能数字多为厂商口径，MI455X跑分非独立认证，多数新品未公布价格与供货日期，Rubin面临未经官方确认的HBM4供应制约预测；但AMD第六代EPYC Venice的出货与Meta首批部署属于已有部分可验证的CPU供给信号，其实际部署规模与性能实测仍待验证。V1的多元化判断只在发布层面成立，V3的眼镜分化成立但赛道成型未证实。 <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a> <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">S7</a> <a href="https://softtechhub.us/2026/11/12/google-tpu-8i-max-8tx/">S9</a> <a href="https://mlq.ai/news/intel-forms-a-23-company-korean-ai-alliance-as-it-pitches-its-hbm-free-d-series-inference-gpu/">S10</a> <a href="https://slicast.com/article/1qj3v7u">S11</a></p>
+<p>优选：V2；置信度：medium。验证缺口本身的证据较强（多源明确记载未公布价格、供货日期与独立测试），但Rubin下调幅度、后续交付前景依赖分析机构预测与厂商口径，EPYC部署规模、眼镜销量与黄仁勋辞职影响均无官方确认，决定性交付证据仍缺失。
+成立条件：仅限2026年11月9日至13日窗口与所提供账本；C3、C10、C11、C12、C13、C14为preliminary，不得当作已证实事实使用；Rubin出货下调为分析机构预测口径，未见英伟达官方确认；黄仁勋辞职原因与调查结论（C4）在三方辩论中未被纳入裁决依据，不作推断。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_11">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V1</strong>（乐观情景分析者；代表强调竞争加剧与供给多元化的解读，依据为谷歌、AMD、英特尔同周的新品发布与出货。）：2026年11月9日至13日一周内，谷歌、AMD、英特尔密集发布训练、推理与数据中心CPU新品，算力供给正走向多元化，推理侧与配套CPU成为新竞争点，英伟达一家独大的格局面临挑战。
+- 限定：限定为发布层面的趋势判断，置信度中等偏低、结论为初步。主张成立范围限于2026年11月9日至13日窗口内的新品发布与出货事实，不等于英伟达的市场地位已被动摇，也不等于新品已形成可规模交付的有效供给；需待量产、交付、价格与独立测试验证后方可升级为市场结构性判断。
+- 最强反证：最强反证是发布不等于可交付供给：TPU 8tx与8i Max、MI450X、英特尔D系列均未公布价格与具体供货日期，且性能数字均为厂商口径、无独立第三方测试；EPYC Venice与Helios机架的实际部署规模与性能实测也未见。材料中亦未见英伟达既有装机、生态或实际出货份额被替代的证据，因此仅凭同周密集发布，无法证实一家独大的格局已经受到实质挑战。 <a href="https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips/">S1</a> <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a> <a href="https://www.ctee.com.tw/news/20261110701349-430704">S6</a> <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">S7</a></p>
+<p><strong>观点 V2</strong>（谨慎情景分析者；代表强调验证缺口与供应风险的解读，依据为三条反证材料与厂商自测口径的局限。）：本周AI硬件密集发布尚未兑现为可验证的供给：多数新品的性能数字为厂商口径且未公布价格与供货日期，MI455X跑分非独立认证，Rubin又受HBM4供应制约，量产与交付才是决定本周发布能否兑现的关键。
+- 限定：结论限于2026年11月9日至13日窗口内的已提供材料，且所引主张多为preliminary状态。验证缺口本身的置信度较高，但Rubin下调幅度的置信度为中低；本主张只说明“尚未证明能够兑现”，不等于断言这些产品必然无法量产或交付。
+- 最强反证：最强反证是：并非所有新品都缺乏交付证据，Gemini智能眼镜已公布价格并开启预购、Rokid Glasses 2已在中国发货、AMD第六代EPYC已开始出货并有云厂商与Meta部署进展，说明部分供给正在落地；英伟达停H200晶圆投片转产能给Rubin，也可解读为优先保障Rubin的主动调配而非单纯受限。此外，MI455X、TPU新系统与D系列的规格本身仍显示真实的工程进展，厂商口径的局限不等于性能数字必然虚假，独立验证与实际交付仍可能在后续补齐并部分推翻谨慎判断。 <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a> <a href="https://softtechhub.us/2026/11/12/google-tpu-8i-max-8tx/">S9</a> <a href="https://mlq.ai/news/intel-forms-a-23-company-korean-ai-alliance-as-it-pitches-its-hbm-free-d-series-inference-gpu/">S10</a> <a href="https://slicast.com/article/1qj3v7u">S11</a></p>
+<p><strong>观点 V3</strong>（终端硬件情景分析者；代表关注AI眼镜等终端硬件的解读，依据为三款眼镜在同一窗口的发货、预购与众筹进展。）：AI眼镜已进入多厂商量产与预售阶段：谷歌/三星、Rokid与AROTI在价格、重量与功能上明显分化，终端硬件成为AI落地的另一条赛道，但销量与实际体验仍待验证。
+- 限定：结论限于2026年11月9日至13日窗口内的三款产品。“进入量产与预售阶段”与“明显分化”的置信度为中等；“成为另一条赛道”仅为阶段性判断，销量、续航实测与用户接受度的置信度低，尚不能推广为市场已成立。
+- 最强反证：最强反证是三款产品的兑现程度并不等同：AROTI价格与交付时间未公布、众筹尚未启动且功能极简；Rokid仅在中国发货、国际版只是计划；谷歌仅为预购、尚未发售且续航未见实测。若后续销量低迷或体验不及预期，本周进展可能只是多厂商的同期营销与小批量试水，而非终端硬件赛道真正成型。 <a href="https://www.siliconreport.com/google-and-samsung-open-smart-glasses-preorders">S4</a> <a href="https://aiunderstanding.org/news/rokid-glasses-2-ships-in-china-with-on-device-ai-and-legal-caveats">S5</a> <a href="https://www.globenewswire.com/news-release/2026/11/10/3399804/0/en/aroti-introduces-27-gram-r1-ai-ar-glasses-ahead-of-november-16-kickstarter-launch.html">S8</a></p>
+<h3 id="_12">少数意见与不确定性</h3>
+<p>少数意见：
+- V1的合理洞察：在发布层面，三家厂商同周覆盖训练、推理与数据中心CPU，构成竞争焦点扩散的初步信号，EPYC出货是其中唯一已有部分交付证据的环节；适用条件为不升级为可规模交付或格局已变的结论。
+- V3的合理洞察：三款眼镜在价格、重量、有无显示屏与摄像头上确实分化，Rokid已在中国发货是三者中兑现程度最高的进展；适用条件为仅作产品分化初现，不作量产成势或赛道成型的结论。</p>
+<p>不确定性及改变判断的条件：
+- TPU 8tx/8i Max、MI450X与英特尔D系列的价格、具体供货日期与独立第三方测试何时公布；MI455X对Rubin的独立MLPerf认证提交与同配置复测结果。
+- Rubin 2026年实际出货量、HBM4良率与供应量，以及200万颗目标是否下调至150万颗的官方确认。
+- EPYC Venice与Helios机架的实际部署规模、出货量与性能实测。
+- Gemini眼镜12月10日能否如期发售、续航独立实测与销量，Rokid国际版与AROTI众筹交付能否兑现。
+- 黄仁勋辞职原因、独立调查结论及其对英伟达路线图与Rubin交付的影响，三方辩论未予裁决。</p>
+<h3 id="_13">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：本周加速器发布声量很大，但可验证的交付证据很少，Rubin又面临HBM4供应制约预测，发布与兑现之间存在明显缺口。</li>
+<li><strong>需要</strong>：需要把厂商宣称与可交付供给分开核查：价格、供货日期、独立测试或认证复测、实际出货量，缺一不可轻信跨厂商领先结论。</li>
+<li><strong>方案</strong>：以V2收窄后主张为准绳跟踪：旗舰加速器与Rubin按验证清单逐项核对，EPYC按部署规模核对，眼镜按发售与实测核对；未满足门槛前只作发布层面判断。</li>
+<li><strong>预演</strong>：若TPU、MI450X与D系列陆续公布价格、供货日期与独立测试，且Rubin出货接近原目标，则多元化与挑战格局的判断可升级；若继续无价无期无独立测试，或Rubin出货明显低于预测，则谨慎判断成立，发布密度不应再被解读为供给已多元化。</li>
+<li><strong>行动</strong>：
+   - 核查TPU 8tx/8i Max、MI450X与英特尔D系列的价格、具体供货日期与独立第三方测试 <a href="https://softtechhub.us/2026/11/12/google-tpu-8i-max-8tx/">S9</a> <a href="https://mlq.ai/news/intel-forms-a-23-company-korean-ai-alliance-as-it-pitches-its-hbm-free-d-series-inference-gpu/">S10</a>
+     时间：2026年11月16日至12月10日；指标：已公布价格与供货日期的产品数、独立测试或认证复测份数；基线：当前三类产品均未公布价格与具体供货日期，性能数字为厂商口径且无独立测试。
+     停止/成功条件：三类产品中任一类公布可核对的价格、供货日期与独立测试即记为一项兑现；到期仍无则维持尚未兑现判断；阈值来源：证据所给：账本缺口与C10、C11。
+   - 核查MI455X对Rubin的独立MLPerf认证提交与同配置复测 <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a>
+     时间：2026年11月16日至12月31日；指标：独立认证提交是否出现、同配置复测与AMD自测21333 tokens/s的差距；基线：当前为AMD Performance Labs 2026年10月自测，非独立认证提交。
+     停止/成功条件：出现独立认证提交或同配置复测即重新评估30%领先说法；未出现则不推广该说法；阈值来源：证据所给：C3与账本缺口。
+   - 核查Rubin 2026年出货与HBM4供应官方口径 <a href="https://slicast.com/article/1qj3v7u">S11</a>
+     时间：2026年11月16日至2027年1月31日；指标：英伟达官方确认的2026年出货量与机架交付量，对照200万颗原目标与150万颗分析机构预测；基线：分析机构预测为150万颗、机架约6000台，未见官方确认。
+     停止/成功条件：官方出货量公布即按实际数判定；未公布则只保留供应风险信号，不作已证实下调结论；阈值来源：证据所给：C12、C13；150万颗为分析机构预测口径，非官方阈值。
+   - 核查EPYC Venice实际部署规模与性能实测 <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">S7</a>
+     时间：2026年11月16日至12月31日；指标：具名云厂商上线实例数、Meta部署规模、独立性能实测份数；基线：已开始出货，Meta为首批大规模部署客户，Azure与甲骨文实例即将上线，但实际规模与实测未见。
+     停止/成功条件：出现可核对的部署规模或独立实测即升级为已验证CPU供给信号；未出现则维持部分可验证；阈值来源：证据所给：C8与账本缺口。
+   - 核查Gemini眼镜12月10日发售、Rokid销量与AROTI众筹交付 <a href="https://www.siliconreport.com/google-and-samsung-open-smart-glasses-preorders">S4</a> <a href="https://aiunderstanding.org/news/rokid-glasses-2-ships-in-china-with-on-device-ai-and-legal-caveats">S5</a> <a href="https://www.globenewswire.com/news-release/2026/11/10/3399804/0/en/aroti-introduces-27-gram-r1-ai-ar-glasses-ahead-of-november-16-kickstarter-launch.html">S8</a>
+     时间：2026年11月16日至2027年1月31日；指标：Gemini眼镜是否如期发售与持续供货、第三方续航实测、三款产品的可核对销量与AROTI价格交付信息；基线：Gemini仅预购未发售，Rokid仅在中国发货，AROTI价格与交付时间未公布。
+     停止/成功条件：任一款出现可核对销量与独立实测即记为一项落地证据；均未出现则维持赛道未证实判断；阈值来源：证据所给：C5、C6、C9与账本缺口。</li>
+</ol>
+<h3 id="_14">证据账本</h3>
+<ul>
+<li><strong>C1 / fact / supported</strong>：谷歌11月9日发布第八代TPU新系统TPU 8tx（机密推理，配第五代AMD EPYC主机，官方称延迟较8t低至2倍）与TPU 8i Max（双颗8i合封，算力、SRAM与HBM带宽翻倍），为一年内第四套TPU系统。 <a href="https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips/">S1</a></li>
+<li><strong>C2 / fact / supported</strong>：AMD 11月12日推出Instinct MI450X GPU，单卡288GB HBM4，用于Helios机架，与MI455X同等算力、带宽与互联；同时发布MI430X面向科学计算。 <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a></li>
+<li><strong>C3 / source_statement / preliminary</strong>：AMD称MI455X在Helios上跑DeepSeek-R1达每GPU 21333 tokens/s（MLPerf Inference Offline配置），比英伟达Vera Rubin NVL72已公布的MLPerf v6.1结果高至30%，但测试由AMD Performance Labs于2026年10月自行完成，非独立认证提交。 <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a></li>
+<li><strong>C4 / fact / supported</strong>：英伟达CEO黄仁勋11月12日辞去总裁、CEO及董事职务，立即生效，CFO Colette Kress任临时CEO；公司未说明辞职原因，此前董事会11月8日宣布对其展开独立调查，11月12日股价跌超13%。 <a href="https://www.usatoday.com/story/tech/2026/11/12/jensen-huang-nvidia-ceo-resigns-affair-investigation/92734431007/">S3</a></li>
+<li><strong>C5 / fact / supported</strong>：谷歌与三星11月12日开启Gemini智能眼镜预购，12月10日发售：Warby Parker款395美元起，Gentle Monster款449美元起；约41克、无显示屏，搭载1200万像素摄像头、骁龙AR1 Gen 1，续航最长9小时。 <a href="https://www.siliconreport.com/google-and-samsung-open-smart-glasses-preorders">S4</a></li>
+<li><strong>C6 / fact / supported</strong>：Rokid Glasses 2于11月11日在中国开始发货，另有Rokid Color与Rokid Ring同发，起售价3699元，搭载高通骁龙AR1+ Gen 1，可在端侧跑小语言模型；国际版计划2027年1月CES发布。 <a href="https://aiunderstanding.org/news/rokid-glasses-2-ships-in-china-with-on-device-ai-and-legal-caveats">S5</a></li>
+<li><strong>C7 / fact / supported</strong>：英特尔11月10日公布新一代架构：Wildcat Lake Core Series 3采用Intel 18A，平台AI算力最高40 TOPS；专攻AI推理的GPU D系列（Crescent Island，Xe3P）已开始送样，350W、最高480GB LPDDR5X、1.3 PFLOPS FP8；Diamond Rapids为首款Intel 18A-P制程Xeon。 <a href="https://www.ctee.com.tw/news/20261110701349-430704">S6</a></li>
+<li><strong>C8 / fact / supported</strong>：AMD第六代EPYC（Zen 6，代号Venice）开始出货，顶级EPYC 9996为256核、600W、定价14904美元，微软Azure与甲骨文云实例即将上线，Meta为首批大规模部署客户。 <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">S7</a></li>
+<li><strong>C9 / fact / supported</strong>：AROTI 11月10日发布27克以下AI+AR眼镜R1，仅右眼绿色文字显示、无摄像头与扬声器，Kickstarter众筹11月16日启动，价格与交付时间未公布。 <a href="https://www.globenewswire.com/news-release/2026/11/10/3399804/0/en/aroti-introduces-27-gram-r1-ai-ar-glasses-ahead-of-november-16-kickstarter-launch.html">S8</a></li>
+<li><strong>C10 / source_statement / preliminary</strong>：谷歌TPU 8tx与8i Max未公布价格、供货日期、地区与独立测试，8t/8i自4月发布后仍显示coming soon且无定价，彭博称两款新系统要到2027年才上市，性能数字均为厂商口径。 <a href="https://softtechhub.us/2026/11/12/google-tpu-8i-max-8tx/">S9</a></li>
+<li><strong>C11 / source_statement / preliminary</strong>：英特尔GPU D系列内部测试称金融模拟FP64吞吐为竞品1.92至5.9倍、Gemma延迟低30%，但均未经独立验证，且英特尔未给出D系列上市日期与价格；AMD MI450X同样未公布价格与出货日期。 <a href="https://mlq.ai/news/intel-forms-a-23-company-korean-ai-alliance-as-it-pitches-its-hbm-free-d-series-inference-gpu/">S10</a></li>
+<li><strong>C12 / source_statement / preliminary</strong>：Rubin量产爬坡受HBM4验证与供应制约，分析机构称2026年目标或从200万颗下调至150万颗、占高端GPU出货比例从29%降至22%，机架出货预测从1.2万-1.4万台降至约6000台；英伟达11月4日已停H200新晶圆投片以转产能给Rubin。 <a href="https://slicast.com/article/1qj3v7u">S11</a></li>
+<li><strong>C13 / forecast / preliminary</strong>：若HBM4验证与供应制约持续，Rubin 2026年实际出货可能低于原定200万颗目标，机架交付规模也可能低于此前预测。 <a href="https://slicast.com/article/1qj3v7u">S11</a></li>
+<li><strong>C14 / inference / preliminary</strong>：本周谷歌、AMD、英特尔在同一窗口密集发布训练、推理与数据中心CPU新品，显示AI硬件竞争正从单一旗舰GPU转向系统级、推理侧与配套CPU的多线竞争，但多数新品的量产与交付能力尚未得到独立验证。 <a href="https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips/">S1</a> <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">S2</a> <a href="https://www.ctee.com.tw/news/20261110701349-430704">S6</a> <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">S7</a></li>
+</ul>
+<p><strong>S1</strong> <a href="https://techcrunch.com/2026/11/10/google-broadens-its-ai-hardware-portfolio-with-two-new-specialized-chips/">Google broadens its AI hardware portfolio with two new specialized chips</a> · TechCrunch
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：tech_media；读取：relevant_text；定位：全文。
+- 原文支持：谷歌11月9日发布TPU 8tx与8i Max，一年内第四套TPU系统；8tx配第五代AMD EPYC主机，官方称延迟较8t低至2倍；8i Max为双颗8i合封，算力、SRAM与HBM带宽翻倍。
+- 限制：性能数字为谷歌官方口径，未见独立测试；未公布价格与供货日期。</p>
+<p><strong>S2</strong> <a href="https://aifrontierpost.com/articles/amd-instinct-mi450x-288gb-hbm4-helios/">AMD Instinct MI450X 288GB HBM4 Helios</a> · AI Frontier Post
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：industry_media；读取：relevant_text；定位：全文。
+- 原文支持：AMD 11月12日推出MI450X（288GB HBM4，用于Helios机架）与面向科学计算的MI430X；AMD称MI455X跑DeepSeek-R1达每GPU 21333 tokens/s，比Vera Rubin NVL72已公布MLPerf v6.1结果高至30%，但为AMD实验室10月自测，非独立认证提交。
+- 限制：跑分对比为厂商自测口径，未见独立认证提交；未公布MI450X价格与出货日期。</p>
+<p><strong>S3</strong> <a href="https://www.usatoday.com/story/tech/2026/11/12/jensen-huang-nvidia-ceo-resigns-affair-investigation/92734431007/">Jensen Huang Nvidia CEO resigns affair investigation</a> · USA Today
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：general_media；读取：relevant_text；定位：全文。
+- 原文支持：黄仁勋11月12日辞去英伟达总裁、CEO及董事职务，立即生效，CFO Colette Kress任临时CEO；公司未说明辞职原因，此前董事会11月8日宣布对其展开独立调查，11月12日股价跌超13%。
+- 限制：辞职原因与调查结论未见官方说明；股价跌幅为当日市场表现，未说明与辞职的因果关系。</p>
+<p><strong>S4</strong> <a href="https://www.siliconreport.com/google-and-samsung-open-smart-glasses-preorders">Google and Samsung open smart glasses preorders</a> · Silicon Report
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：tech_media；读取：relevant_text；定位：全文。
+- 原文支持：谷歌与三星11月12日开启Gemini智能眼镜预购，12月10日发售，Warby Parker款395美元起、Gentle Monster款449美元起；约41克、无显示屏，1200万像素摄像头、骁龙AR1 Gen 1，续航最长9小时。
+- 限制：续航与体验为厂商口径，未见独立实测与销量数据。</p>
+<p><strong>S5</strong> <a href="https://aiunderstanding.org/news/rokid-glasses-2-ships-in-china-with-on-device-ai-and-legal-caveats">Rokid Glasses 2 ships in China with on-device AI</a> · AI Understanding
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：industry_media；读取：relevant_text；定位：全文。
+- 原文支持：Rokid Glasses 2于11月11日在中国开始发货，另有Rokid Color与Rokid Ring同发，起售价3699元，搭载骁龙AR1+ Gen 1，可在端侧跑小语言模型；国际版计划2027年1月CES发布。
+- 限制：端侧模型能力与实际体验未见独立实测；国际版发布时间为计划口径。</p>
+<p><strong>S6</strong> <a href="https://www.ctee.com.tw/news/20261110701349-430704">英特尔公布Wildcat Lake、GPU D系列与Diamond Rapids</a> · 工商时报
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：financial_media；读取：relevant_text；定位：全文。
+- 原文支持：英特尔11月10日公布Wildcat Lake Core Series 3（Intel 18A，平台AI算力最高40 TOPS）、GPU D系列Crescent Island已送样（350W、最高480GB LPDDR5X、1.3 PFLOPS FP8）、Diamond Rapids为首款Intel 18A-P制程Xeon。
+- 限制：规格与算力为厂商公布口径；D系列未见上市日期与价格。</p>
+<p><strong>S7</strong> <a href="https://daily.semidoped.com/p/daily-update-november-11th-2026">Daily update November 11th 2026</a> · Semi Doped
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：industry_media；读取：relevant_text；定位：全文。
+- 原文支持：AMD第六代EPYC（Zen 6，Venice）开始出货，顶级EPYC 9996为256核、600W、定价14904美元，微软Azure与甲骨文云实例即将上线，Meta为首批大规模部署客户。
+- 限制：为行业通讯报道，未见官方出货量与部署规模确认。</p>
+<p><strong>S8</strong> <a href="https://www.globenewswire.com/news-release/2026/11/10/3399804/0/en/aroti-introduces-27-gram-r1-ai-ar-glasses-ahead-of-november-16-kickstarter-launch.html">AROTI introduces 27-gram R1 AI AR glasses ahead of November 16 Kickstarter launch</a> · GlobeNewswire
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：press_release_wire；读取：full；定位：全文。
+- 原文支持：AROTI 11月10日发布27克以下AI+AR眼镜R1，仅右眼绿色文字显示、无摄像头与扬声器，Kickstarter众筹11月16日启动，价格与交付时间未公布。
+- 限制：为厂商通稿，产品体验与交付能力未见独立验证。</p>
+<p><strong>S9</strong> <a href="https://softtechhub.us/2026/11/12/google-tpu-8i-max-8tx/">Google TPU 8i Max 8tx</a> · SoftTechHub
+- 发布：2026-11-12；事件：2026-11-12；查阅：2026-11-15。
+- 来源族：tech_media；读取：relevant_text；定位：全文。
+- 原文支持：反证：谷歌TPU 8tx与8i Max未公布价格、供货日期、地区与独立测试，8t/8i自4月发布后仍显示coming soon且无定价，彭博称两款新系统要到2027年才上市，性能数字均为厂商口径。
+- 限制：2027年上市说法转引彭博，未见谷歌官方供货时间表；第三方迁移实测细节未在材料中完整展开。</p>
+<p><strong>S10</strong> <a href="https://mlq.ai/news/intel-forms-a-23-company-korean-ai-alliance-as-it-pitches-its-hbm-free-d-series-inference-gpu/">Intel forms a 23-company Korean AI alliance as it pitches its HBM-free D-series inference GPU</a> · MLQ.ai
+- 发布：2026-11-13；事件：2026-11-13；查阅：2026-11-15。
+- 来源族：industry_media；读取：relevant_text；定位：全文。
+- 原文支持：反证：英特尔GPU D系列内部测试称金融模拟FP64吞吐为竞品1.92至5.9倍、Gemma延迟低30%，但均未经独立验证，且英特尔未给出D系列上市日期与价格；AMD MI450X同样未公布价格与出货日期。
+- 限制：性能对比为厂商内部测试口径，未见测试配置与独立复测。</p>
+<p><strong>S11</strong> <a href="https://slicast.com/article/1qj3v7u">Nvidia Vera Rubin production ramp constrained by HBM4</a> · Slicast
+- 发布：2026-11-09；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：industry_media；读取：relevant_text；定位：全文。
+- 原文支持：反证：Rubin量产爬坡受HBM4验证与供应制约，分析机构称2026年目标或从200万颗下调至150万颗、占高端GPU出货比例从29%降至22%，机架出货预测从1.2万-1.4万台降至约6000台；英伟达11月4日已停H200新晶圆投片以转产能给Rubin。
+- 限制：出货下调为分析机构预测口径，未见英伟达官方确认；HBM4验证细节未见官方披露。</p>
+<p>检索缺口：
+- 未见TPU 8tx/8i Max、MI450X、英特尔D系列的价格、具体供货日期与独立第三方测试
+- 未见MI455X对Rubin的独立MLPerf认证提交与同配置复测
+- 未见Rubin 2026年实际出货量、HBM4良率与供应量的官方确认
+- 未见黄仁勋辞职原因与独立调查结论的官方说明
+- 未见Gemini、Rokid、AROTI眼镜的实际销量、续航实测与用户反馈
+- 未见EPYC Venice与Helios机架的实际部署规模与性能实测</p>
+<p>检索日志：AI hardware GPU chip launch November 2026（discovery）；NVIDIA AMD AI chip news November 2026（discovery）；AI硬件 GPU 芯片 发布 2026年11月（discovery）；英伟达 AMD AI芯片 新闻 11月 2026（discovery）；Nvidia Jensen Huang resign November 12 2026 CEO（verification）；AI smart glasses wearable hardware launch November 2026（discovery）；AI眼镜 智能硬件 发布 2026年11月（discovery）；Nvidia Vera Rubin delay shortage TSMC capacity November 2026（counterevidence）；Intel Wildcat Lake Crescent Island Diamond Rapids November 10 2026（verification）；AMD MI450X no price no ship date vendor benchmark criticism（counterevidence）；谷歌 TPU 8tx 8i Max 未公布价格 供货时间 质疑（counterevidence）。</p>
+<h2 id="_15">四、具身智能</h2>
+<p><strong>关键议题</strong>：具身智能在2026年11月呈现模型与产品发布密集、政策与资本加速的一面，同时部署节拍、可靠性与真实场景占比仍明显滞后，厂商宣称与可独立核验的量产证据之间存在缺口。</p>
+<p>选题依据：选题依据为2026年11月9日至15日窗口内具身智能的密集信号：头部模型发布与产线试点、终身学习框架开源、地方产业政策、资本市场上市与早期生产，以及同期出现的部署收缩、场景占比偏低与工程失效等反证，适合做厂商宣称与落地证据的对照账本。</p>
+<p><strong>当前判断</strong>：优选谨慎落地判断：在现有可核验证据下，具身智能的真实部署仍受产线节拍、灵巧手耐久、视觉干扰、对齐误差与能耗低温等硬约束，多数项目仍在验证或演示阶段；厂商的96%成功率与超3亿美元订单等数字在缺少试验口径、交付与收入连接证据时，不应直接作为量产证据。V02的判断是可证伪的条件性判断，给出了可核验的验收组合，证据与校准最扎实。 <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a> <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">S09</a> <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">S10</a> <a href="https://tech.news18a.com/article/16764">S11</a> <a href="https://theroboticsmedia.com/article/qestr-humanoid-robot-antarctic-ice-ultra-battery-failure">S12</a></p>
+<p>优选：V02；置信度：medium。支撑较强：C02、C11为supported事实，C10、C12、C14等多源反证指向同一类硬约束且相互印证；但关键缺口未闭合：灵巧手寿命、视觉失效频率、对齐误差分布与任务容差均未提供，真实场景占比无更新后的同口径复测，Qestr为单一样本，3-5年成熟期为专家判断。
+成立条件：适用于2026年11月窗口及2026年上半年出货与场景统计所覆盖的部署现实；不否定模型、仿真迁移与开源框架的能力进步，也不预设具体厂商必然失败或成功；若验收组合被满足，应修订或撤回该判断。</p>
+<p>执行方式：宿主工作流子代理独立会话（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。</p>
+<h3 id="_16">观点分歧</h3>
+<p>以下为各立场精炼后的主张、限定与最强反证；完整辩论实录与评分保留在内部阶段数据中，正文不展开。</p>
+<p><strong>观点 V01</strong>（乐观情景分析者；代表以厂商发布、开源进展与政策目标为主要依据的乐观解读，强调能力曲线与供给侧加速，但对成功率口径与订单兑现的核验要求较低。）：模型能力、开源框架与政策资本正在同步加速，具身智能已从演示走向真实产线试点与早期生产，2027年下半年可能出现拐点。
+- 限定：本主张仅为方向性可能判断，不是确定性预测。2027年下半年拐点属于行业普遍预计，置信度中等偏低；“已从演示走向真实产线试点与早期生产”仅指试点与早期生产个案出现，不等于规模量产或主流场景落地。
+- 最强反证：最强反证是部署硬约束与兑现缺口并存：车企装配线节拍约每工位3秒，人形机器人跟不上节拍，灵巧手磨损快、焊接火花与反光干扰视觉，专家认为成熟还需3至5年；2026年上半年全球人形机器人出货超2.2万台、同比近300%，但真正进入智能制造、仓储物流场景的仅约8%，超六成仍停留在商演、科研教学场景，超80%的项目仍处验证或演示阶段；模型决策与物理执行的“最后几毫米”对齐误差仍显著，低温与高能耗亦有单一样本失效案例。若成功率口径、订单交付与节拍匹配在未来一年仍无可核验改善，拐点判断将被证伪或推迟。 <a href="https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/">S01</a> <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a> <a href="https://roboticaguide.com/boston-dynamics-atlas-on-wheels-actuator-test/">S03</a> <a href="https://news.pedaily.cn/202611/571670.shtml">S04</a> <a href="https://www.21jingji.com/article/20261112/herald/2e0220ce5528e7791312914b5761ce5d.html">S05</a> <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">S08</a> <a href="https://tech.news18a.com/article/16764">S11</a></p>
+<p><strong>观点 V02</strong>（谨慎落地分析者；代表以部署反证、场景占比与工程失效为主要依据的谨慎解读，强调可复现性、节拍匹配与全周期成本，要求先补试验细节再谈规模化。）：真实部署仍受节拍、灵巧手耐久、视觉干扰、对齐误差与能耗低温等硬约束，多数项目仍在验证或演示阶段；厂商成功率与订单数字在缺少试验细节时不应直接作为量产证据。
+- 限定：范围限定为2026年11月窗口及2026年上半年出货与场景数据所覆盖的部署现实，不否定模型与产品能力的进步。方向性判断置信度中等偏高：多数项目仍在验证或演示阶段、厂商数字需补试验细节再谈规模化；具体成熟时间（3-5年）置信度低，因其为专家判断而非实测结论；Qestr结论向一般低温与长续航场景的推广置信度低，因其为单一样本。
+- 最强反证：最强反证是真实试点与能力进展确实存在：Gemini Robotics 2.5已在奔驰活跃产线做汽车kitting试点并报96%成功率，进博会机器人已进入药房分拣等真实任务，智元LIFE在FindingDory上成功率从37.5%提升至65.8%，政策与资本也在同步加速。若后续补齐试验次数、成功定义、干预频率、重复试验与真实场景占比等细节，并证明节拍、耐久与对齐误差已达产线要求，本主张关于“不应直接作为量产证据”的部分将被削弱；但在这些细节补齐之前，反证只能证明试点存在，不能证明规模化已经成立。 <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a> <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">S09</a> <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">S10</a> <a href="https://tech.news18a.com/article/16764">S11</a> <a href="https://theroboticsmedia.com/article/qestr-humanoid-robot-antarctic-ice-ultra-battery-failure">S12</a></p>
+<p><strong>观点 V03</strong>（产业周期观察者；代表以出货、订单、收入与政策目标对照为主要依据的中性产业解读，关注供给与需求的时间差，不预设技术路线或单一厂商胜出。）：出货量暴涨与真实场景占比偏低并存，政策在推供给、资本在抢入口，但需求侧的节拍与可靠性验证尚未跟上，短期更可能呈现供给先行、兑现分化的产业周期。
+- 限定：限定于短期判断，观察窗口为2026年上半年统计与2026年11月窗口报道，政策目标期至2028年；置信度为中等：供给先行、分化兑现的格局判断较稳，对分化速度、具体胜出者与3-5年成熟期的判断置信度较低。不预设技术路线或单一厂商胜出；若出现可核验的订单交付、收入转化与真实场景占比抬升数据，应修正本判断。
+- 最强反证：最强反证是供给先行可能只是需求启动前的正常前置而非泡沫周期：如果Agility超3亿美元订单在可核验的交付时间表下转化为收入、Tesla爬坡加速、车企节拍与灵巧手问题在短期内得到工程解决，或真实场景占比从约8%快速抬升，则“兑现分化”会被“需求跟上”削弱。另外，C11为上半年数据，11月已出现产线试点与药房分拣等真实任务个案，占比可能正在变化，但材料未提供更新后的可比统计，不能以此直接推翻本主张，也不能以此证实反证。 <a href="https://www.21jingji.com/article/20261112/herald/2e0220ce5528e7791312914b5761ce5d.html">S05</a> <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">S08</a> <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">S09</a> <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">S10</a></p>
+<h3 id="_17">少数意见与不确定性</h3>
+<p>少数意见：
+- V01的合理洞察：仿真训练策略首次硬件尝试即成功、LIFE的工具与技能复用使FindingDory成功率从37.5%提升至65.8%、开源权重与评测降低复现门槛，说明能力曲线与供给侧确实在加速；适用条件是仅作为能力进步的证据，不直接推导量产或拐点。
+- V03的合理洞察：出货暴涨与真实场景占比偏低并存时，应以订单交付、收入转化与同口径场景占比抬升作为兑现检验，而非只看发布与上市数量；适用条件是短期产业周期判断，须以其提出的双项阈值或等效可核验证据检验。</p>
+<p>不确定性及改变判断的条件：
+- Gemini Robotics 2.5的96%成功率仍缺试验次数、成功定义、人工干预频率与奔驰公开确认，无法换算为可比基准；若补齐n≥1000量级、多班次稳定且经确认的数据，将削弱V02判断。
+- Agility超3亿美元多年期Digit订单仍缺客户、交付时间表、订单结构与收入确认口径；若到2027年11月5日累计确认收入达约3000万美元且场景占比同口径升至20%以上，将削弱供给先行、兑现分化的判断。
+- 灵巧手寿命、焊接火花与反光下的视觉失效频率、模型决策与物理执行对齐误差分布及任务容差均未提供，无法直接核算节拍与全周期成本。
+- 智元LIFE在FindingDory上的成功率提升缺少独立复现与对照条件说明；Tesla Optimus缺少产量、良率与交付对象等可核验信息。</p>
+<h3 id="_18">门罗五步</h3>
+<ol>
+<li><strong>关注</strong>：厂商在同一窗口密集发布模型、框架与整机，政策与资本同步加速，但车企产线收缩、真实场景占比仅约8%、96%成功率无试验口径等反证同时出现，宣称与量产证据之间存在明显缺口。</li>
+<li><strong>需要</strong>：需要把“试点成功”与“可规模化部署”分开检验：补齐试验口径与重复性证据、订单交付与收入连接证据、同口径真实场景占比，以及节拍、耐久、视觉与对齐误差的可核算工程数据。</li>
+<li><strong>方案</strong>：采用V02的条件性验收框架：先按其验收组合逐项核验奔驰试点与产线节拍，再按V03的双项标准核验订单兑现与场景占比；任一关键项未满足时，继续保留“量产未证实”的判断，不以发布密度或出货增长代替验收。</li>
+<li><strong>预演</strong>：若上述验收在未来12个月内逐项补齐，谨慎判断将被有条件地修订，讨论焦点可从“是否量产”转向“哪条路线先达标”；若仍无可核验改善，则供给先行、兑现分化的格局延续，采购与投资决策应继续按试点而非量产定价。</li>
+<li><strong>行动</strong>：
+   - 核验Gemini Robotics 2.5奔驰产线试点口径：向DeepMind、Apptronik与奔驰公开信息追踪试验次数、成功定义、人工干预频率、多班次重复结果与奔驰确认 <a href="https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/">S01</a> <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a>
+     时间：未来30天内首查，下一窗口复查；指标：试验次数n、成功定义、人工干预频率、多班次成功率区间、奔驰或第三方确认；基线：96%厂商自述，无试验次数、成功定义与干预频率，奔驰未公开确认。
+     停止/成功条件：补齐n≥1000量级、首次无干预完成全流程、多班次稳定且经确认则接受为初步量产证据；否则继续定性为厂商试点数字；阈值来源：n≥1000与首次无干预标准为辩论中V02提出，非账本数字；V01另提n≥200、干预率≤5%，以较严的V02标准为准。
+   - 追踪Agility Digit订单兑现：核查上市文件与财报中的具名客户、交付时间表、订单结构与Digit相关确认收入 <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">S08</a>
+     时间：至2027年11月5日上市满一年；指标：具名客户与交付批次、累计确认的Digit相关收入及收入确认口径；基线：称超3亿美元多年期订单，2026年上半年收入仅约17.4万美元，订单结构未说明。
+     停止/成功条件：累计确认收入达约3000万美元且口径说明清楚，同时场景占比达标，则修正供给先行判断；否则保留兑现缺口判断；阈值来源：约3000万美元为V03提出的订单10%量级，非账本数字。
+   - 复测真实场景占比：等待下一期与C11同口径的统计，核对进入智能制造与仓储物流的占比及验证或演示阶段占比 <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">S10</a>
+     时间：下一期统计发布时；指标：真实场景占比、验证或演示阶段占比，须与2026年上半年同口径；基线：2026年上半年真实场景占比仅约8%，超六成在商演与科研教学场景，超80%项目处验证或演示阶段。
+     停止/成功条件：同口径占比升至20%以上且验证或演示占比明显下降，则视为需求侧改善信号；否则不以个案试点推翻占比结论；阈值来源：20%为辩论中V02与V03提出的参照值，非账本数字。
+   - 核验产线节拍与工程耐久：追踪人形机器人在真实工位连续作业的节拍、灵巧手寿命、视觉失效频率与对齐误差分布 <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">S09</a> <a href="https://tech.news18a.com/article/16764">S11</a>
+     时间：未来12个月；指标：持续节拍秒/工位、多班次稳定性、灵巧手循环次数或小时寿命、视觉失效频率、对齐误差分布与任务容差；基线：60辆/小时产线每工位仅约3秒，人形机器人跟不上节拍；“最后几毫米”对齐误差仍显著失准。
+     停止/成功条件：持续满足≤3秒/工位且披露寿命、失效频率与误差分布并在容差内，则接受节拍与耐久初步达标；未披露前保留未解决；阈值来源：3秒来自C10证据所给的产线节拍；寿命、失效频率与误差分布的具体数值阈值待披露后定，为分析者建议。</li>
+</ol>
+<h3 id="_19">证据账本</h3>
+<ul>
+<li><strong>C01 / source_statement / preliminary</strong>：Google DeepMind于2026年11月10日发布Gemini Robotics 2.5视觉-语言-动作模型，称在200多项任务上测试，并与Apptronik、梅赛德斯合作在匈牙利和德国活跃产线用Apollo 2人形机器人做汽车kitting试点，成功率96%。 <a href="https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/">S01</a> <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a></li>
+<li><strong>C02 / fact / supported</strong>：Gemini Robotics 2.5的96%成功率未公布试验次数、成功定义与人工干预频率，奔驰方面未公开确认该数字；24/25与960/1000都可约等于96%，但可信度差别很大，应视为厂商试点数字而非独立基准。 <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">S02</a></li>
+<li><strong>C03 / fact / supported</strong>：波士顿动力2026年11月9日发布电动Atlas换上现成滑板车轮，仅用一个定制转接件装在现有踝关节执行器上，在MuJoCo仿真训练的全身强化学习策略驱动下完成360度旋转跳且首次硬件尝试即成功；公司明确表示轮式Atlas不是产品，只是研究试验台。 <a href="https://roboticaguide.com/boston-dynamics-atlas-on-wheels-actuator-test/">S03</a></li>
+<li><strong>C04 / source_statement / preliminary</strong>：智元于2026年11月11日发布终身具身智能框架LIFE，结合持续感知、长期记忆与能力复用，论文、代码、RoboBeats 0.8B/2B/4B模型权重及SSS-Bench评测已开放；在FindingDory的597个查询测试中，复用已有工具与技能后任务成功率从37.5%提升至65.8%。 <a href="https://news.pedaily.cn/202611/571670.shtml">S04</a></li>
+<li><strong>C05 / fact / supported</strong>：北京市于2026年11月11日印发《北京市具身智能机器人产业高质量发展行动方案（2026—2028年）》，目标到2028年培育不少于5家国际一流、10家国内领先的人形机器人整机企业，推动京津冀区域整机产能占全国25%、关键零部件配套率超60%。 <a href="https://www.21jingji.com/article/20261112/herald/2e0220ce5528e7791312914b5761ce5d.html">S05</a></li>
+<li><strong>C06 / source_statement / preliminary</strong>：瑞士初创Embodied AI于2026年11月6日在慕尼黑Humanoid Europe 2026发布轮式双臂人形机器人AIR，采用腱驱动轻质手臂、无安全围栏与人并肩工作，部署先由远程操作员执行并录制训练数据、约一个月后自主；价格、载荷与交付时间未公布，CE认证计划2027年。 <a href="https://industrialnews.co.uk/embodied-ai-unveils-tendon-driven-air-factory-robot/">S06</a></li>
+<li><strong>C07 / source_statement / preliminary</strong>：拓斯达于2026年11月7日在全球开放日发布身高172cm、重72kg、双臂10kg负载、7轴仿人手臂的人形机器人Star，并与凯航科技签署人形机器人采购协议；过去一年已在工业场景完成30余个场景与任务验证。 <a href="https://www.sdenews.cn/html/2026/11/09/535426.shtml">S07</a></li>
+<li><strong>C08 / fact / preliminary</strong>：Agility Robotics与Churchill Capital Corp XI合并后于2026年11月5日以AGLT在纳斯达克开始交易，称已获超3亿美元多年期Digit订单；但2026年上半年收入仅约17.4万美元。 <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">S08</a></li>
+<li><strong>C09 / source_statement / preliminary</strong>：Tesla称Optimus已在弗里蒙特开始早期生产，马斯克承认爬坡初期很浅且有波折。 <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">S08</a></li>
+<li><strong>C10 / source_statement / preliminary</strong>：Caixin于2026年11月13日报道称吉利、小鹏、理想等中国车企正在收缩人形机器人装配线计划：60辆/小时产线每工位仅约3秒、人形机器人跟不上节拍，灵巧手磨损快、焊接火花与反光干扰视觉，专家认为技术成熟还需3-5年。 <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">S09</a></li>
+<li><strong>C11 / fact / supported</strong>：2026年上半年全球人形机器人出货超2.2万台、同比暴涨近300%，但真正进入智能制造、仓储物流场景的仅约8%，超六成设备仍停留在商演、科研教学场景；超80%的具身智能项目仍处验证或演示阶段。 <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">S10</a></li>
+<li><strong>C12 / source_statement / preliminary</strong>：进博会现场机器人已进入药房分拣等真实任务，但宇树创始人王兴兴指出最大挑战是模型决策与物理执行的输入输出对齐误差，“最后几毫米”仍显著失准。 <a href="https://tech.news18a.com/article/16764">S11</a></li>
+<li><strong>C13 / forecast / preliminary</strong>：行业普遍预计具身智能的ChatGPT时刻在2027年下半年。 <a href="https://tech.news18a.com/article/16764">S11</a></li>
+<li><strong>C14 / fact / supported</strong>：人形机器人Qestr于2026年11月8日参加南极冰原超级马拉松，约3公里后锂离子电池在-24°C环境下失效退赛，暴露双足行走高能耗与低温电池管理的工程短板。 <a href="https://theroboticsmedia.com/article/qestr-humanoid-robot-antarctic-ice-ultra-battery-failure">S12</a></li>
+</ul>
+<p><strong>S01</strong> <a href="https://deepmind.google/blog/gemini-robotics-2-5-accelerates-real-world-physical-intelligence/">Gemini Robotics 2.5 accelerates real-world physical intelligence</a> · Google DeepMind
+- 发布：2026-11-10；事件：2026-11-10；查阅：2026-11-15。
+- 来源族：厂商官方；读取：relevant_text；定位：官网博客正文。
+- 原文支持：Gemini Robotics 2.5发布，称在200多项任务上测试，与Apptronik、梅赛德斯合作在匈牙利和德国活跃产线用Apollo 2做汽车kitting试点，成功率96%。
+- 限制：成功率等关键数字为厂商自述，材料中未提供试验次数、成功定义与人工干预频率。</p>
+<p><strong>S02</strong> <a href="https://www.techtimes.com/articles/330432/20261111/gemini-robotics-25-reports-96-success-sorting-mercedes-car-parts-publishes-no-trial-count.htm">Gemini Robotics 2.5 reports 96% success sorting Mercedes car parts, publishes no trial count</a> · TechTimes
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：科技媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：指出96%成功率未公布试验次数、成功定义与人工干预频率，奔驰未公开确认该数字；24/25与960/1000都可约等于96%，但可信度差别很大。
+- 限制：该报道为对厂商数字的方法论质疑，未提供独立复测数据。</p>
+<p><strong>S03</strong> <a href="https://roboticaguide.com/boston-dynamics-atlas-on-wheels-actuator-test/">Boston Dynamics Atlas on wheels actuator test</a> · Robótica Guide
+- 发布：2026-11-09；事件：2026-11-09；查阅：2026-11-15。
+- 来源族：行业媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：电动Atlas换上现成滑板车轮，仅用一个定制转接件装在现有踝关节执行器上，在MuJoCo仿真训练的全身强化学习策略驱动下完成360度旋转跳且首次硬件尝试即成功；公司明确表示轮式Atlas不是产品，只是研究试验台。
+- 限制：为研究演示，非产品化与量产证据；材料未提供多次重复试验的成功率。</p>
+<p><strong>S04</strong> <a href="https://news.pedaily.cn/202611/571670.shtml">智元发布终身具身智能框架LIFE</a> · 投资界
+- 发布：2026-11-11；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：财经媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：智元发布终身具身智能框架LIFE，结合持续感知、长期记忆与能力复用，论文、代码、RoboBeats 0.8B/2B/4B权重及SSS-Bench已开放；FindingDory 597个查询测试中成功率从37.5%提升至65.8%。
+- 限制：成功率提升为发布方报告的基准结果，材料中未提供独立复现与对照条件。</p>
+<p><strong>S05</strong> <a href="https://www.21jingji.com/article/20261112/herald/2e0220ce5528e7791312914b5761ce5d.html">北京市具身智能机器人产业高质量发展行动方案（2026—2028年）发布</a> · 21世纪经济报道
+- 发布：2026-11-12；事件：2026-11-11；查阅：2026-11-15。
+- 来源族：财经媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：北京市印发《北京市具身智能机器人产业高质量发展行动方案（2026—2028年）》，目标到2028年培育不少于5家国际一流、10家国内领先整机企业，京津冀整机产能占全国25%、关键零部件配套率超60%。
+- 限制：材料仅提供目标数字，未提供资金与执行细则。</p>
+<p><strong>S06</strong> <a href="https://industrialnews.co.uk/embodied-ai-unveils-tendon-driven-air-factory-robot/">Embodied AI unveils tendon-driven AIR factory robot</a> · Industrial News
+- 发布：2026-11-09；事件：2026-11-06；查阅：2026-11-15。
+- 来源族：行业媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：瑞士初创Embodied AI在慕尼黑Humanoid Europe 2026发布轮式双臂人形机器人AIR，采用腱驱动轻质手臂、无安全围栏与人并肩工作，部署先由远程操作员执行并录制训练数据、约一个月后自主；价格、载荷与交付时间未公布，CE认证计划2027年。
+- 限制：价格、载荷与交付时间未公布，CE认证为计划而非已获认证；自主时间表为厂商说法。</p>
+<p><strong>S07</strong> <a href="https://www.sdenews.cn/html/2026/11/09/535426.shtml">拓斯达发布人形机器人Star并签署采购协议</a> · 山东财经网
+- 发布：2026-11-09；事件：2026-11-07；查阅：2026-11-15。
+- 来源族：地方媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：拓斯达发布身高172cm、重72kg、双臂10kg负载、7轴仿人手臂的人形机器人Star，并与凯航科技签署人形机器人采购协议；过去一年已在工业场景完成30余个场景与任务验证。
+- 限制：场景验证数量与采购协议金额、数量未在材料中披露；为厂商发布口径。</p>
+<p><strong>S08</strong> <a href="https://nousreport.com/news/rrghguulg4y55615oks9cmta1">Agility Robotics登陆纳斯达克，Tesla Optimus开始早期生产</a> · AI智见（转述Fortune）
+- 发布：2026-11-14；事件：2026-11-05；查阅：2026-11-15。
+- 来源族：科技媒体；读取：secondary；定位：报道正文。
+- 原文支持：Agility Robotics与Churchill Capital Corp XI合并后以AGLT在纳斯达克开始交易，称已获超3亿美元多年期Digit订单，但2026年上半年收入仅约17.4万美元；同期Tesla称Optimus已在弗里蒙特开始早期生产，马斯克承认爬坡初期很浅且有波折。
+- 限制：该来源为转述Fortune的二手报道；订单结构、客户与交付时间表未提供；收入数字为约数。</p>
+<p><strong>S09</strong> <a href="https://dailymech.com/articles/china-automakers-scale-back-humanoid-robots-factory-lines-caixin.html">China automakers scale back humanoid robots factory lines</a> · DailyMech（转述Caixin）
+- 发布：2026-11-13；事件：2026-11-13；查阅：2026-11-15。
+- 来源族：行业媒体；读取：secondary；定位：报道正文。
+- 原文支持：Caixin报道称吉利、小鹏、理想等中国车企正在收缩人形机器人装配线计划：60辆/小时产线每工位仅约3秒、人形机器人跟不上节拍，灵巧手磨损快、焊接火花与反光干扰视觉，专家认为技术成熟还需3-5年。
+- 限制：该来源为转述Caixin的二手报道；收缩规模与具体车企的计划细节未在材料中量化；3-5年为专家判断，非实测结论。</p>
+<p><strong>S10</strong> <a href="https://www.21jingji.com/article/20261106/herald/c858d2cd40d7c156237e374db7103f22.html">2026年上半年全球人形机器人出货超2.2万台，真实场景占比仅约8%</a> · 21世纪经济报道（新华财经）
+- 发布：2026-11-06；事件：2026-11-06；查阅：2026-11-15。
+- 来源族：财经媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：2026年上半年全球人形机器人出货超2.2万台、同比暴涨近300%，但真正进入智能制造、仓储物流场景的仅约8%，超六成设备仍停留在商演、科研教学场景；超80%的具身智能项目仍处验证或演示阶段。
+- 限制：出货与场景占比为报告口径的汇总数字，材料未提供原始统计口径与样本定义；统计期为2026年上半年，精度为半年。</p>
+<p><strong>S11</strong> <a href="https://tech.news18a.com/article/16764">进博会机器人进入真实任务，具身智能ChatGPT时刻预计2027年下半年</a> · 网通社科技
+- 发布：2026-11-14；事件：2026-11-14；查阅：2026-11-15。
+- 来源族：科技媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：进博会现场机器人已进入药房分拣等真实任务，但宇树创始人王兴兴指出最大挑战是模型决策与物理执行的输入输出对齐误差，“最后几毫米”仍显著失准；行业普遍预计具身智能的ChatGPT时刻在2027年下半年。
+- 限制：药房分拣为现场个案，未提供规模与成功率；2027年下半年为行业普遍预计，非可验证事实。</p>
+<p><strong>S12</strong> <a href="https://theroboticsmedia.com/article/qestr-humanoid-robot-antarctic-ice-ultra-battery-failure">Qestr humanoid robot Antarctic ice ultra battery failure</a> · The Robotics Media
+- 发布：2026-11-12；事件：2026-11-08；查阅：2026-11-15。
+- 来源族：行业媒体；读取：relevant_text；定位：报道正文。
+- 原文支持：人形机器人Qestr参加南极冰原超级马拉松，约3公里后锂离子电池在-24°C环境下失效退赛，暴露双足行走高能耗与低温电池管理的工程短板。
+- 限制：为单一样本事件，未提供电池型号、负载与能耗明细，结论向一般低温场景的推广程度有限。</p>
+<p>检索缺口：
+- Gemini Robotics 2.5的96%成功率缺少试验次数、成功定义、人工干预频率及奔驰方面的公开确认，无法换算为可比基准。
+- Embodied AI的AIR缺少价格、载荷、交付时间及CE认证进展等可核验商业化信息。
+- Agility称超3亿美元多年期Digit订单缺少客户、交付时间表与订单结构，与2026年上半年约17.4万美元收入之间的关系未说明。
+- Tesla Optimus早期生产缺少产量、良率与交付对象等可核验信息。
+- 智元LIFE在FindingDory上的成功率提升缺少独立复现与对照条件说明。
+- 检索中出现的小米人形机器人完成8小时班次说法未列入关键事实，缺少成功率与干预次数，未作为账本主张。
+- 新华社与优必选11月5日仿生人形机器人主播事件落在7天窗口之前，仅作背景核实，未列入窗口内关键事实。
+- 北京市行动方案的资金、执行细则与配套政策未在材料中提供。
+- Qestr南极退赛为单一样本事件，其结论向一般低温与长续航场景的推广程度未说明。</p>
+<p>检索日志：embodied AI humanoid robot news November 2026（discovery）；humanoid robot breakthrough November 2026（discovery）；具身智能 人形机器人 最新进展 2026年11月（discovery）；人形机器人 产业 新闻 2026年11月（discovery）；Gemini Robotics 2.5 DeepMind November 10 2026 Mercedes Apollo（verification）；humanoid robot limitations failure deployment challenges November 2026（counterevidence）；智元 LIFE 具身智能框架 11月12日 发布（discovery）；人形机器人 演示 占比 大规模商用 三道坎 2026（counterevidence）；Agility Robotics Nasdaq SPAC November 2026 Tesla Optimus production（verification）；Boston Dynamics Atlas scooter wheels November 9 2026（verification）；新华社 优必选 仿生人形机器人主播 11月5日（verification）。</p>
+<h2 id="_20">各领域判断汇总</h2>
+<p>以下并列各领域判断，不据同期发生推断跨领域因果。</p>
+<ul>
+<li><strong>大模型前沿</strong>：优选 V2——在2026年11月9日至14日窗口内，厂商自报的性能、提速与榜单分数只能作为待核验的线索，须注明口径、来源与时点后使用，不能直接作为横向比较或选型依据；选型须以独立复核与自有场景实测为准。名义定价下调与降本方法多样是可核查事实，但同等任务、同等质量下实际总成本是否下降未获证明。</li>
+<li><strong>智能体生态</strong>：优选 V02——越权警告与评测支架偏移表明，智能体规模化仍受治理与可信度约束；毕马威24%因样本、口径与分母未明，仅能提示回报验证可能存在缺口，不能作为已证实的第三重约束，需原始口径与分阶段回报数据才能定论。</li>
+<li><strong>AI 硬件</strong>：优选 V2——在2026年11月9日至13日窗口内，最经得起检验的判断是V2的收窄后主张：旗舰AI加速器（TPU 8tx/8i Max、MI450X/MI455X、英特尔D系列）与Rubin的供给尚未兑现为可验证供给，性能数字多为厂商口径，MI455X跑分非独立认证，多数新品未公布价格与供货日期，Rubin面临未经官方确认的HBM4供应制约预测；但AMD第六代EPYC Venice的出货与Meta首批部署属于已有部分可验证的CPU供给信号，其实际部署规模与性能实测仍待验证。V1的多元化判断只在发布层面成立，V3的眼镜分化成立但赛道成型未证实。</li>
+<li><strong>具身智能</strong>：优选 V02——优选谨慎落地判断：在现有可核验证据下，具身智能的真实部署仍受产线节拍、灵巧手耐久、视觉干扰、对齐误差与能耗低温等硬约束，多数项目仍在验证或演示阶段；厂商的96%成功率与超3亿美元订单等数字在缺少试验口径、交付与收入连接证据时，不应直接作为量产证据。V02的判断是可证伪的条件性判断，给出了可核验的验收组合，证据与校准最扎实。</li>
+</ul>
+<h2 id="_21">执行审计</h2>
+<p>各角色由宿主工作流子代理在独立会话中执行（首轮隔离）；模型身份以宿主记录为准，未证明跨模型认知独立。
+阶段按证据账本→图尔敏→质询→回应→评议顺序提交，每阶段输出经程序校验（引用完整性、质询路由、打分与优胜者一致性）；阶段内有界修正2次，领域级第二遍重跑1次，仍不通过则如实中止该领域。证据账本日期经确定性归一化（非标准日期转为 ISO 并标注精度/原文，accessed 缺失默认填运行日期），background_reason 缺失时自动补全并打标，不再因此中止领域。
+报告由确定性程序渲染，只呈现已验收的阶段数据；秘书不新增跨领域事实或因果推断。
+源文支持度、代表性及推论有效性由研究者审查；程序通过不等于事实已验证。</p>
+<nav class="bottomnav"><a href="../index.html">← 全部报告</a><a href="#top">回到顶部 ↑</a></nav>
+<script src="../annotate.js" defer></script>
+</body></html>
